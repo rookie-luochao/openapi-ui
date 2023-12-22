@@ -1,0 +1,384 @@
+{
+  "components": {
+    "schemas": {
+      "controller.ListUserResp": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/model.User"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "hello.HelloPostParam": {
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "hello.HelloResp": {
+        "properties": {
+          "data": {
+            "description": "结果",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "model.User": {
+        "properties": {
+          "createdAt": {
+            "type": "string"
+          },
+          "key": {
+            "type": "integer"
+          },
+          "mobile": {
+            "description": "电话",
+            "type": "string"
+          },
+          "mobileType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/types.MobileType"
+              }
+            ],
+            "description": "电话运营商",
+            "type": "object"
+          },
+          "nickName": {
+            "description": "昵称",
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "userID": {
+            "type": "integer"
+          },
+          "userType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/types.UserType"
+              }
+            ],
+            "description": "用户角色",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "types.MobileType": {
+        "type": "string",
+        "x-enum-comments": {
+          "USER_TYPE_D": "管理员"
+        },
+        "x-enum-varnames": ["USER_TYPE_Y", "USER_TYPE_D"]
+      },
+      "types.UserType": {
+        "enum": ["ADMIN", "USER"],
+        "type": "string",
+        "x-enum-comments": {
+          "USER_TYPE__ADMIN": "管理员",
+          "USER_TYPE__USER": "用户"
+        },
+        "x-enum-varnames": ["USER_TYPE_UNKNOWN", "USER_TYPE__ADMIN", "USER_TYPE__USER"]
+      },
+      "user.CreateOrUpdateUserBody": {
+        "properties": {
+          "mobile": {
+            "description": "手机号",
+            "type": "string"
+          },
+          "name": {
+            "description": "用户名",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "utils.ErrorResp": {
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "",
+    "version": "",
+    "contact": {}
+  },
+  "openapi": "3.0.1",
+  "paths": {
+    "/demo-docker/api/v1/hello": {
+      "get": {
+        "description": "HelloGet",
+        "operationId": "HelloGet",
+        "parameters": [
+          {
+            "description": "Authorization Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Name",
+            "in": "query",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hello.HelloResp"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "HelloGet",
+        "tags": ["hello"]
+      },
+      "post": {
+        "description": "HelloPost",
+        "operationId": "HelloPost",
+        "parameters": [
+          {
+            "description": "Authorization Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/hello.HelloPostParam"
+              }
+            }
+          },
+          "description": "body",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hello.HelloResp"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "HelloPost",
+        "tags": ["hello"],
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/demo-docker/api/v1/users": {
+      "get": {
+        "description": "获取用户",
+        "operationId": "ListUser",
+        "parameters": [
+          {
+            "description": "Bearer token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "手机号",
+            "in": "query",
+            "name": "mobile",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "姓名",
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "页数1开始",
+            "in": "query",
+            "name": "pageOffset",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "每页数量",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/controller.ListUserResp"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "ListUser",
+        "tags": ["user"]
+      },
+      "post": {
+        "description": "创建用户",
+        "operationId": "CreateOrUpdateUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user.CreateOrUpdateUserBody"
+              }
+            }
+          },
+          "description": "活动",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/utils.ErrorResp"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "CreateOrUpdateUser",
+        "tags": ["user"],
+        "x-codegen-request-body-name": "Body"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ]
+}
