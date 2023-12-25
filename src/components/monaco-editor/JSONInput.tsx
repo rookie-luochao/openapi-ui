@@ -1,5 +1,8 @@
-import { Editor } from "@monaco-editor/react";
+import { Editor, loader } from "@monaco-editor/react";
+import * as monaco from "monaco-editor";
 import { ISchema } from "../../openapi/type";
+
+loader.config({ monaco });
 
 export interface IJSONInputProps {
   value: any;
