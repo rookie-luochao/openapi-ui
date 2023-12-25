@@ -1,3 +1,5 @@
+English · [中文](./README-zh_CN.md)
+
 # openAPI UI
 a simpler and more beautiful openapi document than swagger-ui, quickly generate mock params and call api request
 
@@ -42,7 +44,7 @@ make docker-build-run
 * supports configure request timeout
 
 #### about unable to connect intranet api
-* if unable to connect intranet api, you can run this project locally or use docker to deploy this project locally
+* if unable to connect intranet api, you can run this project locally or use docker to deploy this project locally or on the server
 
 #### about share URL
 * in order to keep the URL simple, the sharing URL needs to be generated through the button in the upper right corner of the page
