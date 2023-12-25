@@ -1,4 +1,4 @@
-import { Button, Dropdown, Form, InputNumber, Modal, message } from "antd";
+import { Button, Dropdown, Form, Input, InputNumber, Modal, message } from "antd";
 import copy from "copy-to-clipboard";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -94,6 +94,9 @@ function UpdateConfigInfoModalComp({ onSuccess }: { onSuccess: () => void }) {
           rules={[{ required: true, message: "please enter request timeout" }]}
         >
           <InputNumber css={{ width: "100%" }} min={1} max={3600} placeholder="please enter request timeout" />
+        </FormItem>
+        <FormItem name="authorization" label="Authorization">
+          <Input css={{ width: "100%" }} placeholder="please enter Authorization" />
         </FormItem>
         <FormItem>
           <Button type="primary" htmlType="submit" style={{ width: "100%" }}>

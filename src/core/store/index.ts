@@ -6,6 +6,7 @@ import { logger } from "./loggerMiddleware";
 
 export interface IConfigInfo {
   timeout: number;
+  authorization?: string;
 }
 
 interface IConfigInfoState {

@@ -150,6 +150,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
     <Form
       form={form}
       name="request-control-form"
+      initialValues={{ Authorization: configInfo?.authorization }}
       onFinish={() => {
         sumbit(
           Object.assign(
