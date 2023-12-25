@@ -1,8 +1,21 @@
 import { Editor, loader } from "@monaco-editor/react";
 import * as monaco from "monaco-editor";
+import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
+import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker";
 import { ISchema } from "../../openapi/type";
 
+self.MonacoEnvironment = {
+  getWorker(_, label) {
+    if (label === "json") {
+      return new jsonWorker();
+    }
+
+    return new editorWorker();
+  },
+};
+
 loader.config({ monaco });
+loader.init().then();
 
 export interface IJSONInputProps {
   value: any;
