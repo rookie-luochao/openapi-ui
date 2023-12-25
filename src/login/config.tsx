@@ -24,6 +24,6 @@ export const displayImportModeTypeIcon = (field: IImportModeType) => {
   }[field];
 };
 
-export const serviceURLLabel = "service url, for example: https://www.google.com";
+export const serviceURLLabel = "service url, for example: https://srv-demo-docker.onrender.com";
 export const serviceURLPlaceholder = "please enter service url";
 export const requiredFieldPlaceholder = "please enter required field";
