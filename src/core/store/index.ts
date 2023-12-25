@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { StorageValue, devtools, persist } from "zustand/middleware";
+import { StorageValue, createJSONStorage, devtools, persist } from "zustand/middleware";
 import { IImportModeType } from "../../login/config";
 import { IOpenAPI, IOperationEnhanceMap } from "../../openapi/type";
 import { logger } from "./loggerMiddleware";
@@ -29,6 +29,7 @@ export const useConfigInfoStore = create<IConfigInfoState>()(
         }),
         {
           name: configInfoStorageKey,
+          storage: createJSONStorage(() => sessionStorage),
         },
       ),
     ),
@@ -62,6 +63,7 @@ export const useOpenapiWithServiceInfoStore = create<IOpenapiWithServiceInfoStat
         }),
         {
           name: openapiWithServiceInfoStorageKey,
+          storage: createJSONStorage(() => sessionStorage),
         },
       ),
     ),
