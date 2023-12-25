@@ -85,7 +85,7 @@ function UpdateConfigInfoModalComp({ onSuccess }: { onSuccess: () => void }) {
         name="config"
         form={form}
         layout="vertical"
-        initialValues={{ timeout: configInfo?.timeout || defaultTimeout }}
+        initialValues={{ timeout: configInfo?.timeout || defaultTimeout, authorization: configInfo?.authorization }}
         onFinish={onFinish}
       >
         <FormItem
