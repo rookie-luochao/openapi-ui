@@ -49,5 +49,8 @@ make docker-build-run
 #### 关于分享url
 * 为了保持url的简洁性, 如果想要分享url供他人快速访问，则需要点击页面右上角的 分享url按钮 生成分享链接，然后再进行分享
 
+#### 关于同时查看多个api网关
+* 默认的缓存策略是session storage, 可以同时打开多个页面去查看多个 api 网关
+
 #### 关于node版本
 node >= 18

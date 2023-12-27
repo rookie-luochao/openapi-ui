@@ -49,5 +49,8 @@ make docker-build-run
 #### about share URL
 * in order to keep the URL simple, the sharing URL needs to be generated through the button in the upper right corner of the page
 
+#### about support multiple api gateway URL
+* the caching strategy used is session storage, so you can open multiple pages at the same time
+
 #### about node version
 node >= 18
