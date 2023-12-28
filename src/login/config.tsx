@@ -10,9 +10,9 @@ export type IImportModeType = keyof typeof ImportModeType;
 
 export const displayImportModeType = (field: IImportModeType) => {
   return {
-    url: "url mode import",
-    file: "file mode import",
-    text: "text mode import",
+    url: "login.urlModeImport",
+    file: "login.fileModeImport",
+    text: "login.textModeImport",
   }[field];
 };
 
@@ -23,7 +23,3 @@ export const displayImportModeTypeIcon = (field: IImportModeType) => {
     text: <FileTextOutlined />,
   }[field];
 };
-
-export const serviceURLLabel = "service url, for example: https://srv-demo-docker.onrender.com";
-export const serviceURLPlaceholder = "please enter service url";
-export const requiredFieldPlaceholder = "please enter required field";

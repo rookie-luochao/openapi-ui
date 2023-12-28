@@ -6,6 +6,7 @@ import ReactDOM from "react-dom/client";
 import { CreateBrowserRouter } from "./core/router/CreateBrowserRouter";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
 import { dsc } from "./core/style/defaultStyleConfig";
+import "./i18n";
 import { appRoutes } from "./rootRoutes";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

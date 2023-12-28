@@ -8,6 +8,7 @@ import { dsc } from "../core/style/defaultStyleConfig";
 import { mainLayoutPath } from "../main/routes";
 import { IMethodType, IOperationEnhance, IOperationEnhanceMap, MethodType } from "./type";
 // import { useOpenapiInfo } from "./useOpenapiInfo";
+import { useTranslation } from "react-i18next";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ICollapsed } from "../main";
 import { getMethodColor } from "./util";
@@ -139,6 +140,7 @@ function GroupedOperationList({
 
 export function OperationList(props: ICollapsed) {
   const { operationId } = useParams();
+  const { t } = useTranslation();
   // const openapiWithServiceInfo = useOpenapiInfo();
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const operations = openapiWithServiceInfo?.operations || ({} as IOperationEnhanceMap);
@@ -173,7 +175,7 @@ export function OperationList(props: ICollapsed) {
     <div css={{ position: "relative" }}>
       <div css={{ fontSize: dsc.fontSize.xs, padding: "0.5em 0.8em" }}>
         <Input
-          placeholder="please enter operationID to search"
+          placeholder={t("openapi.searchPlaceholder")}
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
         />

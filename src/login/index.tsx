@@ -1,6 +1,8 @@
 import { map } from "lodash-es";
+import { useTranslation } from "react-i18next";
 import { ParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
 import LogoIcon from "../assets/images/logo.png";
+import { ChangeLangComp } from "../components/head";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { flexCenterOpts, flexOpts } from "../core/style/utils";
 import { FileImportView } from "./ImportByFileView";
@@ -14,6 +16,7 @@ interface ILoginQuery extends ParsedUrlQuery {
 
 export default function Login() {
   const [{ activeImportModeType = ImportModeType.url }, setQuery] = useRouterQuery<ILoginQuery>();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -26,6 +29,9 @@ export default function Login() {
       }}
     >
       <img css={{ width: 128, position: "absolute", top: "2%", left: "2%" }} src={LogoIcon} alt="openapi-ui" />
+      <div css={{ position: "absolute", top: "3%", right: "2%" }}>
+        <ChangeLangComp />
+      </div>
       <div css={{ width: 1200, margin: "0px auto", padding: "128px 0px" }}>
         <div
           css={[
@@ -67,7 +73,7 @@ export default function Login() {
               }}
             >
               {displayImportModeTypeIcon(item)}
-              <span css={{ marginLeft: 10 }}>{displayImportModeType(item)}</span>
+              <span css={{ marginLeft: 10 }}>{t(displayImportModeType(item))}</span>
             </a>
           ))}
         </div>

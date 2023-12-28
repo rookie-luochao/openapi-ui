@@ -1,11 +1,12 @@
 import { request } from "@request";
 import { Button, Form, Input, message } from "antd";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
-import { ImportModeType, requiredFieldPlaceholder, serviceURLLabel, serviceURLPlaceholder } from "./config";
+import { ImportModeType } from "./config";
 import { IURLImport } from "./type";
 import { parseOpenapi } from "./util";
 
@@ -15,6 +16,7 @@ export function URLImportView() {
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const [form] = Form.useForm<IURLImport>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   async function onFinish(values: IURLImport) {
@@ -22,8 +24,8 @@ export function URLImportView() {
     let serviceURL = values.serviceURL;
     let url = serviceURL;
 
-    if (!url) {
-      return message.warning(requiredFieldPlaceholder);
+    if (!url.trim()) {
+      return message.warning(t("login.requiredFieldPlaceholder"));
     }
 
     if (serviceURL.endsWith("/")) {
@@ -65,15 +67,19 @@ export function URLImportView() {
       initialValues={{ serviceURL: "", servicePath: "" }}
       onFinish={onFinish}
     >
-      <FormItem name="serviceURL" label={serviceURLLabel} rules={[{ required: true, message: serviceURLPlaceholder }]}>
-        <Input placeholder={serviceURLPlaceholder} />
+      <FormItem
+        name="serviceURL"
+        label={t("login.serviceURLLabel")}
+        rules={[{ required: true, message: t("login.serviceURLPlaceholder") }]}
+      >
+        <Input placeholder={t("login.serviceURLPlaceholder")} />
       </FormItem>
-      <FormItem name="servicePath" label="dosc service path, for example: /openapi or openapi">
-        <Input placeholder="please enter your service path" />
+      <FormItem name="servicePath" label={t("login.servicePathLabel")}>
+        <Input placeholder={t("login.servicePathPlaceholder")} />
       </FormItem>
       <Form.Item>
         <Button type="primary" htmlType="submit" style={{ width: "100%" }} loading={loading}>
-          import
+          {t("login.importBtn")}
         </Button>
       </Form.Item>
     </Form>

@@ -1,12 +1,13 @@
 import { Button, Form, Input, message } from "antd";
 import * as yaml from "js-yaml";
 import { isEmpty, isObject } from "lodash-es";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
 import { IOpenAPI, IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
-import { ImportModeType, requiredFieldPlaceholder, serviceURLLabel, serviceURLPlaceholder } from "./config";
+import { ImportModeType } from "./config";
 import { ITextImport } from "./type";
 import { isJSONString } from "./util";
 
@@ -16,8 +17,7 @@ export function TextImportView() {
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const [form] = Form.useForm<ITextImport>();
   const navigate = useNavigate();
-  const placeholder = "please enter openapi.json/openapi.yml text";
-  const warnPlaceholder = "parse failed, please check openapi.json/openapi.yml text format correctness";
+  const { t } = useTranslation();
 
   async function onFinish(values: ITextImport) {
     let url = values.serviceURL;
@@ -25,7 +25,7 @@ export function TextImportView() {
     const content = values.openapiTextContent;
 
     if (!url?.trim() || !content) {
-      return message.warning(requiredFieldPlaceholder);
+      return message.warning(t("login.requiredFieldPlaceholder"));
     }
 
     if (url.endsWith("/")) {
@@ -39,8 +39,8 @@ export function TextImportView() {
         openapiMap = yaml.load(content) as IOpenAPI;
       }
 
-      if (!isObject(openapiMap) || !isEmpty(openapiMap.paths)) {
-        return message.warning(warnPlaceholder);
+      if (!isObject(openapiMap) || isEmpty(openapiMap.paths)) {
+        return message.warning(t("login.parseTextWarn"));
       }
 
       const openapiInfo = {
@@ -54,7 +54,7 @@ export function TextImportView() {
       updateOpenapiWithServiceInfo(openapiInfo);
       navigate(`/${mainLayoutPath}`);
     } catch (e) {
-      message.warning(warnPlaceholder);
+      message.warning(t("login.parseTextWarn"));
     }
   }
 
@@ -66,19 +66,23 @@ export function TextImportView() {
       initialValues={{ serviceURL: "", file: [] }}
       onFinish={onFinish}
     >
-      <FormItem name="serviceURL" label={serviceURLLabel} rules={[{ required: true, message: serviceURLPlaceholder }]}>
-        <Input placeholder={`${serviceURLPlaceholder}`} />
+      <FormItem
+        name="serviceURL"
+        label={t("login.serviceURLLabel")}
+        rules={[{ required: true, message: t("login.serviceURLPlaceholder") }]}
+      >
+        <Input placeholder={t("login.serviceURLPlaceholder")} />
       </FormItem>
       <FormItem
         name="openapiTextContent"
-        label="openapi.json/openapi.yml text"
-        rules={[{ required: true, message: placeholder }]}
+        label={t("login.openapiTextContentLabel")}
+        rules={[{ required: true, message: t("login.openapiTextContentPlaceholder") }]}
       >
-        <Input.TextArea placeholder={placeholder} rows={12} />
+        <Input.TextArea placeholder={t("login.openapiTextContentPlaceholder")} rows={12} />
       </FormItem>
       <Form.Item>
         <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-          import
+          {t("login.importBtn")}
         </Button>
       </Form.Item>
     </Form>

@@ -9,8 +9,8 @@ export function getConfig(): IConfig {
     env: mateEnv?.VITE_env || "",
   };
 
-  // 本地开发环境直接从根目录config文件读取, ci环境直接从mate标签读取, 通过容器环境变量写入html的mate标签
-  // mate标签name为：app_config, content格式为：appName=webapp,baseURL=https://api.com,env=,version=
+  // dev mode get env var by src/config.ts file, prod mode get env var by mate, write the mate tag of HTML through docker arg var
+  // mate tag name is：app_config, content format is：appName=webapp,baseURL=https://api.com,env=,version=
   if (import.meta.env.DEV) {
     return appConfig;
   } else {

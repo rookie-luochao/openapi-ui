@@ -1,4 +1,5 @@
 import { map } from "lodash-es";
+import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
 import { Section } from "../components/Section";
@@ -11,6 +12,7 @@ import { getMethodColor } from "./util";
 
 export function OpenapiView() {
   const { operationId } = useParams();
+  const { t } = useTranslation();
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
 
   if (!openapiWithServiceInfo?.operations || !operationId) {
@@ -75,14 +77,14 @@ export function OpenapiView() {
         </div>
         <div css={{ padding: 16 }}>
           {operation.description && (
-            <Section title={<span css={commonColorStyle}>Description</span>}>
+            <Section title={<span css={commonColorStyle}>{t("openapi.description")}</span>}>
               <ReactMarkdown>{operation.description}</ReactMarkdown>
             </Section>
           )}
           <Section
             title={
               <span>
-                <span css={commonColorStyle}>Parameters</span>
+                <span css={commonColorStyle}>{t("openapi.parameters")}</span>
                 <small
                   css={{
                     lineHeight: 1.4,
@@ -114,7 +116,7 @@ export function OpenapiView() {
               }}
             />
           </Section>
-          <Section title={<span css={commonColorStyle}>Responses</span>}>
+          <Section title={<span css={commonColorStyle}>{t("openapi.responses")}</span>}>
             <Responses operation={operation} />
           </Section>
         </div>

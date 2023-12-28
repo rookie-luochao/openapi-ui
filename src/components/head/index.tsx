@@ -1,8 +1,10 @@
 import { Button, Dropdown, Form, Input, InputNumber, Modal, message } from "antd";
 import copy from "copy-to-clipboard";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ParsedUrlQuery, toQueryString, useRouterQuery } from "react-router-toolkit";
+import langIcon from "../../assets/images/lang.svg";
 import { defaultTimeout, request } from "../../core/http";
 import {
   IConfigInfo,
@@ -12,6 +14,7 @@ import {
 } from "../../core/store";
 import { dsc } from "../../core/style/defaultStyleConfig";
 import { flexCenterOpts } from "../../core/style/utils";
+import { LangType } from "../../i18n/config";
 import { ImportModeType } from "../../login/config";
 import { loginModuleName } from "../../login/routes";
 import { parseOpenapi } from "../../login/util";
@@ -24,11 +27,7 @@ function UserName() {
     openapiWithServiceInfo?.servicePath ? `/${openapiWithServiceInfo?.servicePath}` : ""
   }`;
 
-  return (
-    <div css={{ color: dsc.color.text, opacity: 0.6, fontWeight: 500, fontSize: dsc.fontSize.xs, marginRight: 6 }}>
-      {service}
-    </div>
-  );
+  return <div css={{ color: dsc.color.text, opacity: 0.6, fontWeight: 500, fontSize: dsc.fontSize.xs }}>{service}</div>;
 }
 
 function IconDown() {
@@ -72,15 +71,16 @@ const FormItem = Form.Item<IConfigInfo>;
 function UpdateConfigInfoModalComp({ onSuccess }: { onSuccess: () => void }) {
   const [form] = Form.useForm<IConfigInfo>();
   const { configInfo, updateConfigInfo } = useConfigInfoStore();
+  const { t } = useTranslation();
 
   function onFinish(values: IConfigInfo) {
     updateConfigInfo(values);
-    message.success("change config successful");
+    message.success(t("head.updateConfigSuccess"));
     onSuccess();
   }
 
   return (
-    <Modal title="update config" open={true} footer={null} onCancel={onSuccess}>
+    <Modal title={t("head.updateConfig")} open={true} footer={null} onCancel={onSuccess}>
       <Form
         name="config"
         form={form}
@@ -90,21 +90,52 @@ function UpdateConfigInfoModalComp({ onSuccess }: { onSuccess: () => void }) {
       >
         <FormItem
           name="timeout"
-          label="request timeout(unit: second)"
-          rules={[{ required: true, message: "please enter request timeout" }]}
+          label={t("head.requestTimeoutLabel")}
+          rules={[{ required: true, message: t("head.requestTimeoutPlaceholder") }]}
         >
-          <InputNumber css={{ width: "100%" }} min={1} max={3600} placeholder="please enter request timeout" />
+          <InputNumber css={{ width: "100%" }} min={1} max={3600} placeholder={t("head.requestTimeoutPlaceholder")} />
         </FormItem>
-        <FormItem name="authorization" label="Authorization">
-          <Input css={{ width: "100%" }} placeholder="please enter Authorization" />
+        <FormItem name="authorization" label={t("head.authorizationLabel")}>
+          <Input css={{ width: "100%" }} placeholder={t("head.authorizationPlaceholder")} />
         </FormItem>
         <FormItem>
           <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-            submit
+            {t("head.submit")}
           </Button>
         </FormItem>
       </Form>
     </Modal>
+  );
+}
+
+export function ChangeLangComp() {
+  const { t, i18n } = useTranslation();
+
+  return (
+    <Dropdown
+      menu={{
+        items: [
+          {
+            key: "0",
+            label: t("head.en"),
+            onClick() {
+              i18n.changeLanguage(LangType.en);
+            },
+          },
+          {
+            key: "1",
+            label: t("head.zh"),
+            onClick() {
+              i18n.changeLanguage(LangType.zh);
+            },
+          },
+        ],
+      }}
+    >
+      <a css={{ lineHeight: "10px", cursor: "pointer" }} onClick={(e) => e.preventDefault()}>
+        <img src={langIcon} css={{ width: 16, height: 16, opacity: 0.6 }} alt="lang" />
+      </a>
+    </Dropdown>
   );
 }
 
@@ -117,7 +148,8 @@ interface IQuery extends ParsedUrlQuery {
 
 export function Head() {
   const navigate = useNavigate();
-  const { openapiWithServiceInfo, updateOpenapiWithServiceInfo, clear } = useOpenapiWithServiceInfoStore();
+  const { t } = useTranslation();
+  const { openapiWithServiceInfo, updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const { importModeType, serviceURL, servicePath } = openapiWithServiceInfo || ({} as IOpenapiWithServiceInfo);
   const { configInfo } = useConfigInfoStore();
   const [{ share, serviceURL: shareServiceURL, servicePath: shareServicePath, logon }, setQuery] =
@@ -170,21 +202,21 @@ export function Head() {
           },
         ]}
       >
-        <div css={flexCenterOpts()}>
+        <div css={[flexCenterOpts(), { "& > * + *": { marginLeft: 8 } }]}>
           <UserName />
           <Dropdown
             menu={{
               items: [
                 {
                   key: "0",
-                  label: "change config",
+                  label: t("head.updateConfig"),
                   onClick() {
                     setIsModalOpen(true);
                   },
                 },
                 {
                   key: "1",
-                  label: "share url",
+                  label: t("head.shareUrl"),
                   disabled: openapiWithServiceInfo?.importModeType !== ImportModeType.url,
                   onClick() {
                     if (openapiWithServiceInfo?.serviceURL) {
@@ -194,15 +226,14 @@ export function Head() {
                         servicePath: openapiWithServiceInfo?.servicePath,
                       } as IQuery)}`;
                       copy(url);
-                      message.info("copy share url successful, please forward it to those who need it");
+                      message.success(t("head.shareUrlSuccess"));
                     }
                   },
                 },
                 {
                   key: "2",
-                  label: "reselect service",
+                  label: t("head.reselectService"),
                   onClick() {
-                    clear();
                     navigate(loginModuleName);
                   },
                 },
@@ -213,6 +244,7 @@ export function Head() {
               <IconDown />
             </a>
           </Dropdown>
+          <ChangeLangComp />
         </div>
       </div>
     </>

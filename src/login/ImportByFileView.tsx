@@ -3,12 +3,13 @@ import { Button, Form, Input, Upload, message } from "antd";
 import { UploadChangeParam } from "antd/es/upload/interface";
 import * as yaml from "js-yaml";
 import { isEmpty, isObject } from "lodash-es";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
 import { IOpenAPI, IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
-import { ImportModeType, requiredFieldPlaceholder, serviceURLLabel, serviceURLPlaceholder } from "./config";
+import { ImportModeType } from "./config";
 import { IFileImport } from "./type";
 import { isJSONString, readFileContent } from "./util";
 
@@ -18,13 +19,13 @@ export function FileImportView() {
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const [form] = Form.useForm<IFileImport>();
   const navigate = useNavigate();
-  const warnPlaceholder = "parse failed, please upload correct format openapi.json/openapi.yml file";
+  const { t } = useTranslation();
 
   async function onFinish(values: IFileImport) {
     let url = values.serviceURL;
 
     if (!url?.trim() || !values.file[0]?.originFileObj) {
-      return message.warning(requiredFieldPlaceholder);
+      return message.warning(t("login.requiredFieldPlaceholder"));
     }
 
     if (url.endsWith("/")) {
@@ -41,8 +42,8 @@ export function FileImportView() {
         openapiMap = yaml.load(content) as IOpenAPI;
       }
 
-      if (!isObject(openapiMap) || !isEmpty(openapiMap.paths)) {
-        return message.warning(warnPlaceholder);
+      if (!isObject(openapiMap) || isEmpty(openapiMap.paths)) {
+        return message.warning(t("login.parseWarn"));
       }
 
       const openapiInfo = {
@@ -56,7 +57,7 @@ export function FileImportView() {
       updateOpenapiWithServiceInfo(openapiInfo);
       navigate(`/${mainLayoutPath}`);
     } catch (e) {
-      message.warning(warnPlaceholder);
+      message.warning(t("login.parseWarn"));
     }
   }
 
@@ -68,25 +69,29 @@ export function FileImportView() {
       initialValues={{ serviceURL: "", file: [] }}
       onFinish={onFinish}
     >
-      <FormItem name="serviceURL" label={serviceURLLabel} rules={[{ required: true, message: serviceURLPlaceholder }]}>
-        <Input placeholder={serviceURLPlaceholder} />
+      <FormItem
+        name="serviceURL"
+        label={t("login.serviceURLLabel")}
+        rules={[{ required: true, message: t("login.serviceURLPlaceholder") }]}
+      >
+        <Input placeholder={t("login.serviceURLPlaceholder")} />
       </FormItem>
       <FormItem
         name="file"
-        label="openapi.json/openapi.yml"
+        label={t("login.uploadLabel")}
         valuePropName="fileList"
-        rules={[{ required: true, message: "please select openapi.json/openapi.yml to upload" }]}
+        rules={[{ required: true, message: t("login.uploadPlaceholder") }]}
         getValueFromEvent={(e: UploadChangeParam) => {
           return e.fileList || [];
         }}
       >
         <Upload maxCount={1} beforeUpload={() => false} accept=".json,.yml">
-          <Button icon={<UploadOutlined />}>click to upload</Button>
+          <Button icon={<UploadOutlined />}>{t("login.uploadBtn")}</Button>
         </Upload>
       </FormItem>
       <Form.Item>
         <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-          import
+          {t("login.importBtn")}
         </Button>
       </Form.Item>
     </Form>
