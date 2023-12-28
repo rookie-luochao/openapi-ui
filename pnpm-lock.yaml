@@ -66,8 +66,8 @@ dependencies:
     specifier: ^6.21.1
     version: 6.21.1(react-dom@18.2.0)(react@18.2.0)
   react-router-toolkit:
-    specifier: ^1.0.0
-    version: 1.0.0
+    specifier: ^1.1.0
+    version: 1.1.0
   rxjs:
     specifier: ^7.8.1
     version: 7.8.1
@@ -4362,8 +4362,8 @@ packages:
       react-router: 6.21.1(react@18.2.0)
     dev: false
 
-  /react-router-toolkit@1.0.0:
-    resolution: {integrity: sha512-OIUWpRaOBadnE3kKWSu5fDRsFbTBRoPkkRaC7LITb11rsNPlLypc291HLOtNhB4LzOu5EqJCqq6pIobAQ3mW/g==}
+  /react-router-toolkit@1.1.0:
+    resolution: {integrity: sha512-/2rTf2nFC3dGtt6I5T0bAdpqnSmfUtT5CqIHw1RB3ecS7l4Oph58keRKvLZLuvr231vYOIFAK9gSoYNBQL4Wug==}
     dependencies:
       lodash-es: 4.17.21
       react: 18.2.0
