@@ -3,7 +3,7 @@ import copy from "copy-to-clipboard";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ParsedUrlQuery, toQueryString, useRouterQuery } from "react-router-toolkit";
+import { PartialParsedUrlQuery, toQueryString, useRouterQuery } from "react-router-toolkit";
 import langIcon from "../../assets/images/lang.svg";
 import { defaultTimeout, request } from "../../core/http";
 import {
@@ -139,11 +139,11 @@ export function ChangeLangComp() {
   );
 }
 
-interface IQuery extends ParsedUrlQuery {
-  share: string; // "yes"
-  serviceURL: string;
-  servicePath: string;
-  logon: string; // "yes"
+interface IQuery extends PartialParsedUrlQuery {
+  share?: string; // "yes"
+  serviceURL?: string;
+  servicePath?: string;
+  logon?: string; // "yes"
 }
 
 export function Head() {
@@ -152,7 +152,7 @@ export function Head() {
   const { openapiWithServiceInfo, updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const { importModeType, serviceURL, servicePath } = openapiWithServiceInfo || ({} as IOpenapiWithServiceInfo);
   const { configInfo } = useConfigInfoStore();
-  const [{ share, serviceURL: shareServiceURL, servicePath: shareServicePath, logon }, setQuery] =
+  const [{ share, serviceURL: shareServiceURL = "", servicePath: shareServicePath, logon }, setQuery] =
     useRouterQuery<IQuery>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isShare = share === "yes";
@@ -163,7 +163,7 @@ export function Head() {
     } else if (importModeType === ImportModeType.url && serviceURL && !logon) {
       fetchOpenapiInfoByShareURL(`${serviceURL}/${servicePath}`);
     } else {
-      setQuery(() => ({}) as IQuery);
+      setQuery(() => ({}));
     }
   }, []);
 
@@ -184,7 +184,7 @@ export function Head() {
       updateOpenapiWithServiceInfo(openapiInfo);
 
       if (isShare) {
-        setQuery(() => ({}) as IQuery);
+        setQuery(() => ({}));
       }
     }
   }
@@ -223,8 +223,8 @@ export function Head() {
                       const url = `${globalThis.location.href}${toQueryString({
                         share: "yes",
                         serviceURL: openapiWithServiceInfo?.serviceURL,
-                        servicePath: openapiWithServiceInfo?.servicePath,
-                      } as IQuery)}`;
+                        servicePath: openapiWithServiceInfo?.servicePath || "",
+                      })}`;
                       copy(url);
                       message.success(t("head.shareUrlSuccess"));
                     }
