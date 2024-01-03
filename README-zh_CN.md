@@ -31,10 +31,14 @@ make docker-run
 make docker-build-run
 ```
 
+#### 关于支持的数据格式
+* swagger2.json/swagger2.yml
+* openapi3.json/openapi3.yml
+
 #### 关于使用方法
-* 输入openapi的网关地址
-* 上传 openapi.json 或者 openapi.yml 文件
-* 输入 openapi.json 或者 openapi.yml 文本
+* 输入 swagger2/openapi3 的网关地址
+* 上传 swagger2/openapi3 文件
+* 输入 swagger2/openapi3 文本
 
 #### 关于模拟接口请求数据
 * 如果 openapi 接口请求参数 schema 定义了 format 字段，则使用[openapi-sampler](https://github.com/Redocly/openapi-sampler) 去生成模拟请求参数
@@ -42,6 +46,7 @@ make docker-build-run
 
 #### 关于全局配置
 * 支持配置接口请求超时时间
+* 支持配置接口请求Authorization
 
 #### 关于不能连接内网api
 * 如果不能连接内网api, 你可以在本地运行此项目或者使用 docker 在本地或者服务器部署此项目
