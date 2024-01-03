@@ -1,5 +1,7 @@
+import { message } from "antd";
 import * as yaml from "js-yaml";
-import { isObject } from "lodash-es";
+import { isEmpty, isObject } from "lodash-es";
+import { Dictionary } from "react-router-toolkit";
 import { IOpenAPI } from "../openapi/type";
 
 export function readFileContent(file: File): Promise<string> {
@@ -20,7 +22,7 @@ export function readFileContent(file: File): Promise<string> {
   });
 }
 
-export function isJSONString(str: string) {
+function isJSONString(str: string) {
   try {
     JSON.parse(str);
     return true;
@@ -29,17 +31,75 @@ export function isJSONString(str: string) {
   }
 }
 
-export function parseOpenapi(openapiInfo: IOpenAPI) {
+async function convertSwaggerToOpenApi(swagger: Dictionary<any>) {
+  if (!swagger.swagger) {
+    return swagger;
+  }
+  console.log("swagger: ", swagger);
+  const converter = (globalThis as any).APISpecConverter;
+
+  if (!converter) {
+    message.warning("the cdn converting swagger2 to openapi3 was not loaded successfully, please check!");
+    return;
+  }
+
+  return new Promise<{ openapi: IOpenAPI }>((resolve, reject) => {
+    converter.convert(
+      {
+        from: "swagger_2",
+        to: "openapi_3",
+        source: swagger,
+      },
+      function (err: any, converted: Dictionary<any>) {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve({
+          openapi: converted.spec || {},
+        });
+      },
+    );
+  });
+}
+
+export async function parseSwaggerOrOpenapi(content: string | IOpenAPI) {
   let openapi = {} as IOpenAPI;
 
-  try {
-    if (isObject(openapiInfo)) {
-      openapi = openapiInfo;
-    } else {
-      openapi = yaml.load(openapiInfo) as IOpenAPI;
+  if (isObject(content)) {
+    openapi = content;
+
+    // if is swagger2.0 json, covert swagger2.0 to openapi3.0
+    if (!openapi.openapi) {
+      const converted = (await convertSwaggerToOpenApi(openapi)) || {};
+
+      if (!isEmpty(converted.openapi)) {
+        openapi = converted.openapi;
+      }
     }
-  } catch (e) {
-    console.log("parse failed, please check api response openapi.json/openapi.yml text format correctness");
+  } else {
+    if (isJSONString(content)) {
+      openapi = JSON.parse(content);
+
+      if (!openapi.openapi) {
+        const converted = (await convertSwaggerToOpenApi(openapi)) || {};
+
+        if (!isEmpty(converted.openapi)) {
+          openapi = converted.openapi;
+        }
+      }
+    } else {
+      openapi = yaml.load(content) as IOpenAPI;
+
+      if (!openapi.openapi) {
+        const converted = (await convertSwaggerToOpenApi(openapi)) || {};
+
+        if (!isEmpty(converted.openapi)) {
+          openapi = converted.openapi;
+        }
+      }
+    }
   }
 
   return openapi;

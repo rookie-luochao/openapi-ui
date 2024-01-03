@@ -33,6 +33,7 @@
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.21.1",
     "react-router-toolkit": "^1.1.0",
+    "regenerator-runtime": "^0.14.1",
     "rxjs": "^7.8.1",
     "zustand": "^4.4.7"
   },

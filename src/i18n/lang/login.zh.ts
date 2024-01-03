@@ -9,12 +9,12 @@ const translation = {
   servicePathPlaceholder: "请输入服务网关路径",
   importBtn: "导入",
   uploadBtn: "点击上传",
-  uploadLabel: "openapi.json/openapi.yml",
-  uploadPlaceholder: "请选择 openapi.json/openapi.yml 文件上传",
-  parseWarn: "解析失败, 请上传正确格式的 openapi.json/openapi.yml 文件",
-  openapiTextContentLabel: "openapi.json/openapi.yml 格式文本",
-  openapiTextContentPlaceholder: "请输入 openapi.json/openapi.yml 格式文本",
-  parseTextWarn: "解析失败, 请检查 openapi.json/openapi.yml 格式文本正确性",
+  uploadLabel: "swagger/openapi",
+  uploadPlaceholder: "请选择 swagger/openapi 文件上传",
+  parseWarn: "解析失败, 请上传正确格式的 swagger/openapi 文件",
+  openapiTextContentLabel: "swagger/openapi 格式文本",
+  openapiTextContentPlaceholder: "请输入 swagger/openapi 格式文本",
+  parseTextWarn: "解析失败, 请检查 swagger/openapi 格式文本正确性",
 };
 
 export default translation;

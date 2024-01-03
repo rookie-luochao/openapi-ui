@@ -17,8 +17,9 @@ import { flexCenterOpts } from "../../core/style/utils";
 import { LangType } from "../../i18n/config";
 import { ImportModeType } from "../../login/config";
 import { loginModuleName } from "../../login/routes";
-import { parseOpenapi } from "../../login/util";
+import { parseSwaggerOrOpenapi } from "../../login/util";
 import { defaultMenuTitleHeight } from "../../main";
+import { IPaths } from "../../openapi/type";
 import { flattenOperations } from "../../openapi/useOpenapiInfo";
 
 function UserName() {
@@ -171,13 +172,13 @@ export function Head() {
     const res = await request(Object.assign({ url: url }, configInfo?.timeout ? { timeout: configInfo?.timeout } : {}));
 
     if (res.status >= 200 && res.status < 300) {
-      const openapi = parseOpenapi(res.data);
+      const openapi = await parseSwaggerOrOpenapi(res.data);
 
       const openapiInfo = {
         serviceURL: isShare ? shareServiceURL : serviceURL,
         servicePath: isShare ? shareServicePath : servicePath,
         openapi: openapi,
-        operations: flattenOperations(res.data.paths),
+        operations: flattenOperations((openapi.paths || {}) as IPaths),
         importModeType: ImportModeType.url,
       };
 

@@ -9,12 +9,12 @@ const translation = {
   servicePathPlaceholder: "please enter service path",
   importBtn: "import",
   uploadBtn: "click to upload",
-  uploadLabel: "openapi.json/openapi.yml",
-  uploadPlaceholder: "please select openapi.json/openapi.yml to upload",
-  parseWarn: "parse failed, please upload correct format openapi.json/openapi.yml file",
-  openapiTextContentLabel: "openapi.json/openapi.yml text",
-  openapiTextContentPlaceholder: "please enter openapi.json/openapi.yml text",
-  parseTextWarn: "parse failed, please check openapi.json/openapi.yml format text correctness",
+  uploadLabel: "swagger/openapi",
+  uploadPlaceholder: "please select swagger/openapi to upload",
+  parseWarn: "parse failed, please upload correct format swagger/openapi file",
+  openapiTextContentLabel: "swagger/openapi text",
+  openapiTextContentPlaceholder: "please enter swagger/openapi text",
+  parseTextWarn: "parse failed, please check swagger/openapi format text correctness",
 };
 
 export default translation;

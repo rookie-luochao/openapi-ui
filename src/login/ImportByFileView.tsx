@@ -1,17 +1,16 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload, message } from "antd";
 import { UploadChangeParam } from "antd/es/upload/interface";
-import * as yaml from "js-yaml";
 import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
-import { IOpenAPI, IPaths } from "../openapi/type";
+import { IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
 import { ImportModeType } from "./config";
 import { IFileImport } from "./type";
-import { isJSONString, readFileContent } from "./util";
+import { parseSwaggerOrOpenapi, readFileContent } from "./util";
 
 const FormItem = Form.Item<IFileImport>;
 
@@ -33,24 +32,19 @@ export function FileImportView() {
     }
 
     const content = await readFileContent(values.file[0].originFileObj);
-    let openapiMap = {} as IOpenAPI;
 
     try {
-      if (isJSONString(content)) {
-        openapiMap = JSON.parse(content);
-      } else {
-        openapiMap = yaml.load(content) as IOpenAPI;
-      }
+      const openapi = await parseSwaggerOrOpenapi(content);
 
-      if (!isObject(openapiMap) || isEmpty(openapiMap.paths)) {
-        return message.warning(t("login.parseWarn"));
+      if (!isObject(openapi) || isEmpty(openapi.paths)) {
+        return message.warning(t("login.parseTextWarn"));
       }
 
       const openapiInfo = {
         serviceURL: url,
         servicePath: "",
-        openapi: openapiMap,
-        operations: flattenOperations(openapiMap.paths as IPaths),
+        openapi: openapi,
+        operations: flattenOperations(openapi.paths as IPaths),
         importModeType: ImportModeType.file,
       };
 

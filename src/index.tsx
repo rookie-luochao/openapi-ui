@@ -3,6 +3,7 @@ import { ConfigProvider } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+import "regenerator-runtime/runtime.js";
 import { CreateBrowserRouter } from "./core/router/CreateBrowserRouter";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
 import { dsc } from "./core/style/defaultStyleConfig";

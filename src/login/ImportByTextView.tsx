@@ -1,15 +1,14 @@
 import { Button, Form, Input, message } from "antd";
-import * as yaml from "js-yaml";
 import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
-import { IOpenAPI, IPaths } from "../openapi/type";
+import { IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
 import { ImportModeType } from "./config";
 import { ITextImport } from "./type";
-import { isJSONString } from "./util";
+import { parseSwaggerOrOpenapi } from "./util";
 
 const FormItem = Form.Item<ITextImport>;
 
@@ -21,7 +20,6 @@ export function TextImportView() {
 
   async function onFinish(values: ITextImport) {
     let url = values.serviceURL;
-    let openapiMap = {} as IOpenAPI;
     const content = values.openapiTextContent;
 
     if (!url?.trim() || !content) {
@@ -33,21 +31,17 @@ export function TextImportView() {
     }
 
     try {
-      if (isJSONString(content)) {
-        openapiMap = JSON.parse(content);
-      } else {
-        openapiMap = yaml.load(content) as IOpenAPI;
-      }
+      const openapi = await parseSwaggerOrOpenapi(content);
 
-      if (!isObject(openapiMap) || isEmpty(openapiMap.paths)) {
+      if (!isObject(openapi) || isEmpty(openapi.paths)) {
         return message.warning(t("login.parseTextWarn"));
       }
 
       const openapiInfo = {
         serviceURL: url,
         servicePath: "",
-        openapi: openapiMap,
-        operations: flattenOperations(openapiMap.paths as IPaths),
+        openapi: openapi,
+        operations: flattenOperations(openapi.paths as IPaths),
         importModeType: ImportModeType.text,
       };
 
