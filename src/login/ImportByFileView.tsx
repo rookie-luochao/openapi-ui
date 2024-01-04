@@ -47,7 +47,6 @@ export function FileImportView() {
         operations: flattenOperations(openapi.paths as IPaths),
         importModeType: ImportModeType.file,
       };
-
       updateOpenapiWithServiceInfo(openapiInfo);
       navigate(`/${mainLayoutPath}`);
     } catch (e) {

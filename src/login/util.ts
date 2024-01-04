@@ -31,7 +31,7 @@ function isJSONString(str: string) {
   }
 }
 
-async function convertSwaggerToOpenApi(swagger: Dictionary<any>) {
+function convertSwaggerToOpenApi(swagger: Dictionary<any>) {
   if (!swagger.swagger) {
     return swagger;
   }

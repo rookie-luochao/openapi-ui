@@ -29,6 +29,3 @@ lintfix:
 
 prepare: 
 	npm run prepare
-
-openapi: 
-	npm run openapi

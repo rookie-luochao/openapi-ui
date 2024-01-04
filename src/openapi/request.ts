@@ -48,6 +48,7 @@ export const getHeadContentType = (operation: Partial<IOperationEnhance>) => {
   if (operation.requestBody) {
     return first(keys(operation.requestBody.content)) || "";
   }
+
   return first<string>(operation.produces || []) || "";
 };
 

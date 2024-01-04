@@ -206,7 +206,6 @@ export const RequestParameterInput = ({
   ...otherProps
 }: TParamInputProps & Partial<IJSONInputProps>) => {
   const schema = patchSchema<TParameter>(parameter.schema || parameter, schemas);
-
   const isArray = isArraySchema(schema as any);
   const commonProps = {
     value: isArray ? (otherProps.value ? [].concat(otherProps.value) : []) : otherProps.value,

@@ -173,7 +173,6 @@ export function Head() {
 
     if (res.status >= 200 && res.status < 300) {
       const openapi = await parseSwaggerOrOpenapi(res.data);
-
       const openapiInfo = {
         serviceURL: isShare ? shareServiceURL : serviceURL,
         servicePath: isShare ? shareServicePath : servicePath,
@@ -181,7 +180,6 @@ export function Head() {
         operations: flattenOperations((openapi.paths || {}) as IPaths),
         importModeType: ImportModeType.url,
       };
-
       updateOpenapiWithServiceInfo(openapiInfo);
 
       if (isShare) {

@@ -37,7 +37,6 @@ export function displayType(schema: any, id?: string): string {
 
 export function toEnumMap(schema: any) {
   const options = (schema["x-enum-options"] as any[]) || [];
-
   const enumMap: { [key: string]: string } = {};
 
   forEach(options, (option) => {
@@ -85,12 +84,15 @@ function getMin(schema: any) {
   if (has(schema, "minProperties")) {
     return schema.minProperties;
   }
+
   if (has(schema, "minItems")) {
     return schema.minItems;
   }
+
   if (has(schema, "minimum")) {
     return schema.minimum;
   }
+
   if (has(schema, "minLength")) {
     return schema.minLength;
   }
@@ -110,12 +112,15 @@ function getMax(schema: any) {
   if (has(schema, "maxProperties")) {
     return schema.maxProperties;
   }
+
   if (has(schema, "maxItems")) {
     return schema.maxItems;
   }
+
   if (has(schema, "maximum")) {
     return schema.maximum;
   }
+
   if (has(schema, "maxLength")) {
     return schema.maxLength;
   }

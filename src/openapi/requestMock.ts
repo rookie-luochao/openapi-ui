@@ -121,6 +121,7 @@ function getMockValueByFieldName(fieldName: string) {
 
 export function getMockQueryDataBySchema(parameters?: TParameter[], isRequired?: boolean) {
   const mockData = {} as any;
+
   if (isRequired) {
     parameters = filter(parameters, (item) => toLower(item.name) !== "authorization" && !!item.required);
   } else {

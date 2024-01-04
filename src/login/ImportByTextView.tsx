@@ -44,7 +44,6 @@ export function TextImportView() {
         operations: flattenOperations(openapi.paths as IPaths),
         importModeType: ImportModeType.text,
       };
-
       updateOpenapiWithServiceInfo(openapiInfo);
       navigate(`/${mainLayoutPath}`);
     } catch (e) {

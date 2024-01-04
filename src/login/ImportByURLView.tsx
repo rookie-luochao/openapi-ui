@@ -60,7 +60,6 @@ export function URLImportView() {
           operations: flattenOperations((openapi.paths || {}) as IPaths),
           importModeType: ImportModeType.url,
         };
-
         updateOpenapiWithServiceInfo(openapiInfo);
         navigate(`/${mainLayoutPath}?logon=yes`);
       } catch (e) {

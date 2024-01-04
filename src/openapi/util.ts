@@ -56,6 +56,7 @@ export const getCodeColor = (code: number) => {
   if (code >= 400) {
     return dsc.color.danger;
   }
+
   if (code >= 300) {
     return dsc.color.warning;
   }
@@ -69,6 +70,7 @@ export function withoutBubble(callback: () => void) {
       e.preventDefault();
       e.stopPropagation();
     }
+
     callback();
   };
 }

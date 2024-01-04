@@ -103,12 +103,10 @@ function stringifyBody(request: any) {
 
   if (isMultipartFormData(contentType)) {
     const boundary = "----WebKitFormBoundarymnBNxgHqBJhLVZSw";
-
     request.headers = {
       ...request.headers,
       "Content-Type": `multipart/form-data; boundary=${boundary}`,
     };
-
     data = displayMultipart(boundary, request.data);
   }
 
