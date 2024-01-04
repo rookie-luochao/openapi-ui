@@ -3,6 +3,10 @@
 # openAPI UI
 一个简单轻量、比 swagger-ui 更美观的 openapi 接口文档，可以快速的生成模拟请求参数并调用 api 请求
 
+### 网站域名
+* CN: [www.openapi-ui.com](https://www.openapi-ui.com)
+* US: [docs.openapi-ui.com](https://docs.openapi-ui.com)
+
 ### 快速开始
 ```bash
 // node version >= 18

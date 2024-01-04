@@ -37,6 +37,7 @@ function OperationDescStyleWrap({ deprecated, children }: { deprecated?: boolean
   return (
     <div
       css={{
+        // height: 30,
         padding: "0 8px",
         textDecoration: deprecated ? "line-through" : "none",
         "& > *": {
@@ -88,6 +89,7 @@ function GroupedOperationList({
             }}
             css={[
               {
+                height: 46,
                 borderBottom: `1px solid ${dsc.color.border}`,
                 position: "relative",
                 fontSize: dsc.fontSize.xxs,
@@ -129,7 +131,7 @@ function GroupedOperationList({
                 </div>
               </OperationDescStyleWrap>
             ) : (
-              <div style={{ height: 30 }} />
+              <div style={{ height: 46 }} />
             )}
           </a>
         ))}

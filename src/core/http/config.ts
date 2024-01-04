@@ -4,6 +4,7 @@ export function getConfig(): IConfig {
   const mateEnv = import.meta.env;
   const defaultAppConfig = {
     appName: mateEnv?.VITE_appName || "",
+    appNameZH: mateEnv?.VITE_appNameZH || "",
     baseURL: mateEnv?.VITE_baseURL || "",
     version: mateEnv?.VITE_version || "",
     env: mateEnv?.VITE_env || "",

@@ -4,6 +4,7 @@ import zhCN from "antd/locale/zh_CN";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "regenerator-runtime/runtime.js";
+import { ModifyAppTitle } from "./components/app-title";
 import { CreateBrowserRouter } from "./core/router/CreateBrowserRouter";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
 import { dsc } from "./core/style/defaultStyleConfig";
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         },
       }}
     />
+    <ModifyAppTitle />
     <ConfigProvider
       locale={zhCN}
       theme={{

@@ -19,7 +19,7 @@ export function OpenapiView() {
     return null;
   }
 
-  const operation = openapiWithServiceInfo.operations[operationId];
+  const operation = openapiWithServiceInfo.operations[operationId] || {};
   const methodStyle = operation.method ? { color: getMethodColor(operation.method) } : {};
   const commonColorStyle = { color: dsc.color.primary };
 

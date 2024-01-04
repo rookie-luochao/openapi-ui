@@ -3,6 +3,10 @@ English · [中文](./README-zh_CN.md)
 # openAPI UI
 a simpler and more beautiful openapi document than swagger-ui, quickly generate mock params and call api request
 
+### website domain
+* CN: [www.openapi-ui.com](https://www.openapi-ui.com)
+* US: [docs.openapi-ui.com](https://docs.openapi-ui.com)
+
 ### quick start
 ```bash
 // node version >= 18

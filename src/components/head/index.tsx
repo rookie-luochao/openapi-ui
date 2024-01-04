@@ -21,6 +21,7 @@ import { parseSwaggerOrOpenapi } from "../../login/util";
 import { defaultMenuTitleHeight } from "../../main";
 import { IPaths } from "../../openapi/type";
 import { flattenOperations } from "../../openapi/useOpenapiInfo";
+import GithubStar from "../github-star";
 
 function UserName() {
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
@@ -201,7 +202,7 @@ export function Head() {
           },
         ]}
       >
-        <div css={[flexCenterOpts(), { "& > * + *": { marginLeft: 8 } }]}>
+        <div css={[flexCenterOpts(), { "& > * + *": { marginLeft: 6 } }]}>
           <UserName />
           <Dropdown
             menu={{
@@ -244,6 +245,7 @@ export function Head() {
             </a>
           </Dropdown>
           <ChangeLangComp />
+          <GithubStar />
         </div>
       </div>
     </>

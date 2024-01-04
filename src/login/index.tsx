@@ -2,6 +2,7 @@ import { map } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { ParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
 import LogoIcon from "../assets/images/logo.png";
+import GithubStar from "../components/github-star";
 import { ChangeLangComp } from "../components/head";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { flexCenterOpts, flexOpts } from "../core/style/utils";
@@ -29,8 +30,9 @@ export default function Login() {
       }}
     >
       <img css={{ width: 128, position: "absolute", top: "2%", left: "2%" }} src={LogoIcon} alt="openapi-ui" />
-      <div css={{ position: "absolute", top: "3%", right: "2%" }}>
+      <div css={{ position: "absolute", top: "3%", right: "2%", "& > * + *": { marginLeft: 6 } }}>
         <ChangeLangComp />
+        <GithubStar />
       </div>
       <div css={{ width: 1200, margin: "0px auto", padding: "128px 0px" }}>
         <div
