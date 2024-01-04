@@ -273,5 +273,5 @@ export function SchemaView({ schema, schemas }: ISchemaProps & { schemas: Dictio
 
   const patchedSchema = patchSchema(schema, schemas);
 
-  return <div css={{ padding: "1em 2em" }}>{renderSchema(patchedSchema)}</div>;
+  return <div css={{ padding: "1.4em 1em", overflowX: "auto" }}>{renderSchema(patchedSchema)}</div>;
 }
