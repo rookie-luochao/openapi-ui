@@ -5,7 +5,8 @@ import LogoIcon from "../assets/images/logo.png";
 import GithubStar from "../components/github-star";
 import { ChangeLangComp } from "../components/head";
 import { dsc } from "../core/style/defaultStyleConfig";
-import { flexCenterOpts, flexOpts } from "../core/style/utils";
+import { flexBetweenCenterOpts, flexCenterOpts, flexOpts } from "../core/style/utils";
+import { defaultMenuTitleHeight } from "../main";
 import { FileImportView } from "./ImportByFileView";
 import { TextImportView } from "./ImportByTextView";
 import { URLImportView } from "./ImportByURLView";
@@ -26,13 +27,14 @@ export default function Login() {
         backgroundImage: "url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg)",
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
-        position: "relative",
       }}
     >
-      <img css={{ width: 128, position: "absolute", top: "2%", left: "2%" }} src={LogoIcon} alt="openapi-ui" />
-      <div css={{ position: "absolute", top: "3%", right: "2%", "& > * + *": { marginLeft: 6 } }}>
-        <ChangeLangComp />
-        <GithubStar />
+      <div css={[flexBetweenCenterOpts(), { minWidth: 1200, height: defaultMenuTitleHeight, padding: "0px 30px" }]}>
+        <img css={{ width: 128 }} src={LogoIcon} alt="openapi-ui" />
+        <div css={{ "& > * + *": { marginLeft: 6 } }}>
+          <ChangeLangComp />
+          <GithubStar />
+        </div>
       </div>
       <div css={{ width: 1200, margin: "0px auto", padding: "128px 0px" }}>
         <div

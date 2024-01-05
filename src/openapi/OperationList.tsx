@@ -37,7 +37,6 @@ function OperationDescStyleWrap({ deprecated, children }: { deprecated?: boolean
   return (
     <div
       css={{
-        // height: 30,
         padding: "0 8px",
         textDecoration: deprecated ? "line-through" : "none",
         "& > *": {
