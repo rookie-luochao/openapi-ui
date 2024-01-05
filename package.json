@@ -21,7 +21,7 @@
     "axios": "^1.6.4",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.10",
-    "i18next": "^23.7.14",
+    "i18next": "^23.7.16",
     "js-yaml": "^4.1.0",
     "lodash-es": "^4.17.21",
     "monaco-editor": "^0.45.0",
