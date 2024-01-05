@@ -18,7 +18,7 @@
     "@monaco-editor/react": "^4.6.0",
     "ahooks": "^3.7.8",
     "antd": "^5.12.7",
-    "axios": "^1.6.3",
+    "axios": "^1.6.4",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.10",
     "i18next": "^23.7.14",
