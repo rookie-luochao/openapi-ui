@@ -40,7 +40,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
     "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.4",
     "@emotion/babel-plugin": "^11.11.0",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash-es": "^4.17.8",
