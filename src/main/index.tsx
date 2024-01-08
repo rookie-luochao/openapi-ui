@@ -6,6 +6,9 @@ import { fromEvent, throttleTime } from "rxjs";
 import LogoIcon from "../assets/images/logo.png";
 import LogoMiniIcon from "../assets/images/logo_mini.svg";
 import { Head } from "../components/head";
+import { ICPRegistration } from "../components/icp-registration";
+import { Env } from "../config";
+import { getConfig } from "../core/http/config";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { OperationList } from "../openapi/OperationList";
 
@@ -40,6 +43,7 @@ export function MainLayout() {
   const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
   const defaultMenuHeight = defaultContentHeight - 48; // 48px为展开收缩图表高度
+  const isZh = getConfig().env === Env.zh;
 
   useEffect(() => {
     const subscription = fromEvent(window, "resize")
@@ -69,15 +73,21 @@ export function MainLayout() {
       <Layout className="site-layout" css={{ backgroundColor: dsc.color.bg }}>
         <Head />
         <div
-          css={{
-            height: defaultContentHeight,
-            overflow: "auto",
-            padding: 12,
-            backgroundColor: dsc.color.bgGray,
-            borderRadius: "10px 0 0",
-          }}
+          css={[
+            {
+              height: defaultContentHeight,
+              overflow: "auto",
+              padding: 12,
+              backgroundColor: dsc.color.bgGray,
+              borderRadius: "10px 0 0",
+            },
+            isZh ? { paddingBottom: 0 } : {},
+          ]}
         >
-          <Outlet />
+          <div css={isZh ? { minHeight: defaultContentHeight - 32 - 12 } : {}}>
+            <Outlet />
+          </div>
+          {isZh && <ICPRegistration />}
         </div>
       </Layout>
     </Layout>

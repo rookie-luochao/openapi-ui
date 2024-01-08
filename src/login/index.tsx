@@ -4,6 +4,9 @@ import { ParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
 import LogoIcon from "../assets/images/logo.png";
 import GithubStar from "../components/github-star";
 import { ChangeLangComp } from "../components/head";
+import { ICPRegistration } from "../components/icp-registration";
+import { Env } from "../config";
+import { getConfig } from "../core/http/config";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { flexBetweenCenterOpts, flexCenterOpts, flexOpts } from "../core/style/utils";
 import { defaultMenuTitleHeight } from "../main";
@@ -19,6 +22,7 @@ interface ILoginQuery extends ParsedUrlQuery {
 export default function Login() {
   const [{ activeImportModeType = ImportModeType.url }, setQuery] = useRouterQuery<ILoginQuery>();
   const { t } = useTranslation();
+  const isZh = getConfig().env === Env.zh;
 
   return (
     <div
@@ -27,6 +31,7 @@ export default function Login() {
         backgroundImage: "url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg)",
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
+        position: "relative",
       }}
     >
       <div css={[flexBetweenCenterOpts(), { minWidth: 1200, height: defaultMenuTitleHeight, padding: "0px 30px" }]}>
@@ -89,6 +94,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      {isZh && <ICPRegistration css={{ position: "absolute", bottom: 0 }} />}
     </div>
   );
 }
