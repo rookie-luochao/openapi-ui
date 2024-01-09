@@ -38,7 +38,7 @@ const Logo = ({ isCollapsed }: ICollapsed) => {
   );
 };
 
-export function MainLayout() {
+export default function MainLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;

@@ -10,7 +10,7 @@ import { RequestBuilder } from "./RequestBuilder";
 import { ParameterPositionIconComp, parameterPositionMap } from "./config";
 import { getMethodColor } from "./util";
 
-export function OpenapiView() {
+export default function OpenapiView() {
   const { operationId } = useParams();
   const { t } = useTranslation();
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
