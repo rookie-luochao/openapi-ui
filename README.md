@@ -35,31 +35,31 @@ make docker-run
 make docker-build-run
 ```
 
-### about support data format
+### support data format
 * swagger2.json/swagger2.yml
 * openapi3.json/openapi3.yml
 
-### about how to use
+### how to use
 * enter swagger2/openapi3 api gateway URL
 * upload swagger2/openapi3 file
 * enter swagger2/openapi3 text
 
-### about mock request params
+### mock request params
 * if the schema contains the format field, then use [openapi-sampler](https://github.com/Redocly/openapi-sampler) to mock request params
 * if the schema does not contain the format field, then use faker to mock request params
 
-### about config
+### config
 * supports configure request timeout
 * supports configure request Authorization
 
-### about unable to connect intranet api
+### unable to connect intranet api
 * if unable to connect intranet api, you can run this project locally or use docker to deploy this project locally or on the server
 
-### about share URL
+### share URL
 * in order to keep the URL simple, the sharing URL needs to be generated through the button in the upper right corner of the page
 
-### about support multiple api gateway URL
+### support multiple api gateway URL
 * the caching strategy used is session storage, so you can open multiple pages at the same time
 
-### about node version
+### node version
 node >= 18
