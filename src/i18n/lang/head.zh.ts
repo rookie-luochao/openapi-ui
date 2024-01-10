@@ -6,8 +6,6 @@ const translation = {
   authorizationLabel: "Authorization",
   authorizationPlaceholder: "请输入Authorization",
   submit: "提交",
-  shareUrl: "分享URL",
-  shareUrlSuccess: "复制分享URL成功, 请发送链接给需要的人",
   reselectService: "重选服务",
   en: "英语",
   zh: "简体中文",

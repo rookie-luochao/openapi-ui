@@ -56,7 +56,8 @@ make docker-build-run
 * if unable to connect intranet api, you can run this project locally or use docker to deploy this project locally or on the server
 
 ### share URL
-* in order to keep the URL simple, the sharing URL needs to be generated through the button in the upper right corner of the page
+* url can only be shared when imported through url mode
+* copy the url and share it with those who need it, they can echo the url to the specified interface.
 
 ### support multiple api gateway URL
 * the caching strategy used is session storage, so you can open multiple pages at the same time

@@ -1,21 +1,15 @@
 import { Button, Dropdown, Form, Input, InputNumber, Modal, message } from "antd";
-import copy from "copy-to-clipboard";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { PartialParsedUrlQuery, toQueryString, useRouterQuery } from "react-router-toolkit";
+import { PartialParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
 import langIcon from "../../assets/images/lang.svg";
 import { defaultTimeout, request } from "../../core/http";
-import {
-  IConfigInfo,
-  IOpenapiWithServiceInfo,
-  useConfigInfoStore,
-  useOpenapiWithServiceInfoStore,
-} from "../../core/store";
+import { IConfigInfo, useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../../core/store";
 import { dsc } from "../../core/style/defaultStyleConfig";
 import { flexCenterOpts } from "../../core/style/utils";
 import { LangType } from "../../i18n/config";
-import { ImportModeType } from "../../login/config";
+import { IImportModeType, ImportModeType } from "../../login/config";
 import { loginModuleName } from "../../login/routes";
 import { parseSwaggerOrOpenapi } from "../../login/util";
 import { defaultMenuTitleHeight } from "../../main";
@@ -142,50 +136,44 @@ export function ChangeLangComp() {
 }
 
 interface IQuery extends PartialParsedUrlQuery {
-  share?: string; // "yes"
   serviceURL?: string;
   servicePath?: string;
+  importModeType?: IImportModeType;
   logon?: string; // "yes"
 }
 
 export function Head() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { openapiWithServiceInfo, updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
-  const { importModeType, serviceURL, servicePath } = openapiWithServiceInfo || ({} as IOpenapiWithServiceInfo);
+  const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const { configInfo } = useConfigInfoStore();
-  const [{ share, serviceURL: shareServiceURL = "", servicePath: shareServicePath, logon }, setQuery] =
-    useRouterQuery<IQuery>();
+  const [{ serviceURL, servicePath, importModeType, logon }, setQuery] = useRouterQuery<IQuery>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isShare = share === "yes";
 
   useEffect(() => {
-    if (share === "yes" && shareServiceURL) {
-      fetchOpenapiInfoByShareURL(`${shareServiceURL}/${shareServicePath}`);
-    } else if (importModeType === ImportModeType.url && serviceURL && !logon) {
-      fetchOpenapiInfoByShareURL(`${serviceURL}/${servicePath}`);
+    if (importModeType === ImportModeType.url && serviceURL && !logon) {
+      refetchOpenapiInfo(`${serviceURL}/${servicePath}`);
     } else {
-      setQuery(() => ({}));
+      setQuery((preState) => ({
+        ...preState,
+        logon: "",
+      }));
     }
   }, []);
 
-  async function fetchOpenapiInfoByShareURL(url: string) {
+  async function refetchOpenapiInfo(url: string) {
     const res = await request(Object.assign({ url: url }, configInfo?.timeout ? { timeout: configInfo?.timeout } : {}));
 
     if (res.status >= 200 && res.status < 300) {
       const openapi = await parseSwaggerOrOpenapi(res.data);
       const openapiInfo = {
-        serviceURL: isShare ? shareServiceURL : serviceURL,
-        servicePath: isShare ? shareServicePath : servicePath,
+        serviceURL: serviceURL || "",
+        servicePath: servicePath,
+        importModeType: ImportModeType.url,
         openapi: openapi,
         operations: flattenOperations((openapi.paths || {}) as IPaths),
-        importModeType: ImportModeType.url,
       };
       updateOpenapiWithServiceInfo(openapiInfo);
-
-      if (isShare) {
-        setQuery(() => ({}));
-      }
     }
   }
 
@@ -216,22 +204,6 @@ export function Head() {
                 },
                 {
                   key: "1",
-                  label: t("head.shareUrl"),
-                  disabled: openapiWithServiceInfo?.importModeType !== ImportModeType.url,
-                  onClick() {
-                    if (openapiWithServiceInfo?.serviceURL) {
-                      const url = `${globalThis.location.href}${toQueryString({
-                        share: "yes",
-                        serviceURL: openapiWithServiceInfo?.serviceURL,
-                        servicePath: openapiWithServiceInfo?.servicePath || "",
-                      })}`;
-                      copy(url);
-                      message.success(t("head.shareUrlSuccess"));
-                    }
-                  },
-                },
-                {
-                  key: "2",
                   label: t("head.reselectService"),
                   onClick() {
                     navigate(loginModuleName);

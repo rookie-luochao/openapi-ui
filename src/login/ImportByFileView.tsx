@@ -4,6 +4,7 @@ import { UploadChangeParam } from "antd/es/upload/interface";
 import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toQueryString } from "react-router-toolkit";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
@@ -40,15 +41,18 @@ export function FileImportView() {
         return message.warning(t("login.parseTextWarn"));
       }
 
-      const openapiInfo = {
+      const basicInfo = {
         serviceURL: url,
         servicePath: "",
-        openapi: openapi,
-        operations: flattenOperations(openapi.paths as IPaths),
         importModeType: ImportModeType.file,
       };
+      const openapiInfo = {
+        ...basicInfo,
+        openapi: openapi,
+        operations: flattenOperations(openapi.paths as IPaths),
+      };
       updateOpenapiWithServiceInfo(openapiInfo);
-      navigate(`/${mainLayoutPath}`);
+      navigate(`/${mainLayoutPath}${toQueryString(basicInfo)}`);
     } catch (e) {
       message.warning(t("login.parseWarn"));
     }

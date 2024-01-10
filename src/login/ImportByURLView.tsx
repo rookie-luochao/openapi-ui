@@ -4,6 +4,7 @@ import { isEmpty, isObject } from "lodash-es";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toQueryString } from "react-router-toolkit";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
@@ -53,15 +54,18 @@ export function URLImportView() {
           return message.warning(t("login.parseTextWarn"));
         }
 
-        const openapiInfo = {
+        const basicInfo = {
           serviceURL: values.serviceURL,
-          servicePath: values.servicePath,
-          openapi: openapi,
-          operations: flattenOperations((openapi.paths || {}) as IPaths),
+          servicePath: values.servicePath || "",
           importModeType: ImportModeType.url,
         };
+        const openapiInfo = {
+          ...basicInfo,
+          openapi: openapi,
+          operations: flattenOperations((openapi.paths || {}) as IPaths),
+        };
         updateOpenapiWithServiceInfo(openapiInfo);
-        navigate(`/${mainLayoutPath}?logon=yes`);
+        navigate(`/${mainLayoutPath}${toQueryString(Object.assign(basicInfo, { logon: "yes" }))}`);
       } catch (e) {
         message.warning(t("login.parseTextWarn"));
       }
