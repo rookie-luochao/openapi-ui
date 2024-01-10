@@ -2,7 +2,7 @@ import { useDebounceEffect } from "ahooks";
 import { Input } from "antd";
 import { filter, groupBy, includes, isEmpty, map, toLower } from "lodash-es";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { mainLayoutPath } from "../main/routes";
@@ -63,6 +63,7 @@ function GroupedOperationList({
   activeOperationId?: string;
 } & ICollapsed) {
   const nav = useNavigate();
+  const location = useLocation();
 
   return (
     <div css={{ position: "relative" }}>
@@ -84,7 +85,7 @@ function GroupedOperationList({
           <a
             key={key}
             onClick={() => {
-              nav(`/${mainLayoutPath}/${operation.operationId}`);
+              nav(`/${mainLayoutPath}/${operation.operationId}${location.search}`);
             }}
             css={[
               {
