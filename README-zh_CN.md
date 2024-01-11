@@ -45,12 +45,19 @@ make docker-build-run
 * 输入 swagger2/openapi3 文本
 
 ### 模拟接口请求数据
-* 如果 openapi 接口请求参数 schema 定义了 format 字段，则使用[openapi-sampler](https://github.com/Redocly/openapi-sampler) 去生成模拟请求参数
-* 如果 openapi 接口请求参数 schema 没有定义 format 字段, 则使用 faker 去生成模拟请求参数
+1. 如果 openapi 接口请求参数 schema 定义了 format 字段，则使用 [openapi-sampler](https://github.com/Redocly/openapi-sampler) 去生成模拟请求参数
+2. 如果 openapi 接口请求参数 schema 没有定义 format 字段, 则使用 faker 去生成模拟请求参数
+
+### 接口请求错误信息展示规则
+1. 如果返回的结构体含有 message 字段，则展示 message 字段
+2. 如果返回的结构体含有 msg 字段，则展示 msg 字段
+3. 如果返回的结果是字符串，则展示字符串
+4. 展示 AxiosResponse.statusText 类型对应的字段
+5. 展示 AxiosError.message 类型对应的字段
 
 ### 全局配置
-* 支持配置接口请求超时时间
-* 支持配置接口请求Authorization
+* 支持配置接口请求超时时间，默认的接口请求超时时间为 2 分钟
+* 支持配置接口请求Authorization，可以在当前接口覆写Authorization
 
 ### 不能连接内网api
 * 如果不能连接内网api, 你可以在本地运行此项目或者使用 docker 在本地或者服务器部署此项目

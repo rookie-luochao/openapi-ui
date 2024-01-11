@@ -25,7 +25,12 @@ function renderParameters(parameters: TParameter[], schemas: Dictionary<ISchema>
     const name = parameter.name;
 
     return (
-      <Form.Item key={name} name={name} style={{ marginBottom: 10 }}>
+      <Form.Item
+        key={name}
+        name={name}
+        rules={parameter.required ? [{ required: true, pattern: (parameter.schema as any)?.pattern }] : undefined}
+        style={{ marginBottom: 10 }}
+      >
         <RequestParameterInput parameter={parameter} schemas={schemas} />
       </Form.Item>
     );
@@ -58,7 +63,7 @@ function renderRequestBody(requestBody: any = {}, schemas: Dictionary<ISchema> =
                 <Section title="body">
                   {map((schema || ({} as any)).properties, (propSchema: any, key: string) => {
                     return (
-                      <Form.Item key={key} name={key}>
+                      <Form.Item key={key} name={key} rules={requestBody.required ? [{ required: true }] : undefined}>
                         <RequestParameterInput
                           parameter={
                             {
@@ -75,7 +80,7 @@ function renderRequestBody(requestBody: any = {}, schemas: Dictionary<ISchema> =
                 </Section>
               </div>
             ) : (
-              <Form.Item name="body">
+              <Form.Item name="body" rules={requestBody.required ? [{ required: true }] : undefined}>
                 <RequestParameterInput
                   parameter={
                     {

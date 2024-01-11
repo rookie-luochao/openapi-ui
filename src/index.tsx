@@ -30,6 +30,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           Input: { fontSize: dsc.fontSize.xs },
           Upload: { fontSize: dsc.fontSize.xs },
           Dropdown: { fontSize: dsc.fontSize.xs },
+          Form: { fontSize: dsc.fontSize.xs },
         },
       }}
     >

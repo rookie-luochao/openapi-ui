@@ -45,12 +45,19 @@ make docker-build-run
 * enter swagger2/openapi3 text
 
 ### mock request params
-* if the schema contains the format field, then use [openapi-sampler](https://github.com/Redocly/openapi-sampler) to mock request params
-* if the schema does not contain the format field, then use faker to mock request params
+1. if the schema contains the format field, then use [openapi-sampler](https://github.com/Redocly/openapi-sampler) to mock request params
+2. if the schema does not contain the format field, then use faker to mock request params
 
-### config
-* supports configure request timeout
-* supports configure request Authorization
+### request error message display rules
+1. if the returned structure contains a message field, display the message field
+2. if the returned structure contains a msg field, display the msg field
+3. if the returned result is a string, display the string
+4. display AxiosResponse.statusText field
+5. display AxiosError.message field
+
+### global config
+* supports configure request timeout, the default request timeout is 2 minutes
+* supports configure request Authorization, Authorization can be overridden in the current request
 
 ### unable to connect intranet api
 * if unable to connect intranet api, you can run this project locally or use docker to deploy this project locally or on the server

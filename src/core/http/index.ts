@@ -30,8 +30,15 @@ export function request(axiosConfig: AxiosRequestConfig) {
     },
     ...axiosConfig,
   }).catch((reason) => {
+    const resData = reason?.response?.data;
     notification.error({
-      message: reason?.response?.statusText || reason?.message || "api request is error, please check",
+      message:
+        resData?.message ||
+        resData?.msg ||
+        resData ||
+        reason?.response?.statusText ||
+        reason?.message ||
+        "api request is error, please check",
       duration: 2,
     });
 
