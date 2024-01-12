@@ -117,6 +117,10 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
     setAxiosResponse({} as AxiosResponse);
   }, [location.pathname]);
 
+  useEffect(() => {
+    form.setFieldValue("Authorization", configInfo?.authorization || "");
+  }, [configInfo?.authorization]);
+
   async function sumbit(axiosConfig: AxiosRequestConfig) {
     setLoading(true);
     const res = await request(axiosConfig).finally(() => setLoading(false));
@@ -155,7 +159,6 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
     <Form
       form={form}
       name="request-control-form"
-      initialValues={{ Authorization: configInfo?.authorization }}
       onFinish={() => {
         sumbit(
           Object.assign(
