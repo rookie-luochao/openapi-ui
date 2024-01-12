@@ -146,13 +146,13 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
       const schema = values(operation.requestBody.content)?.[0]?.schema;
 
       if (schema) {
-        mockBodyData = getMockBodyDataBySchema(schema, openapiWithServiceInfo?.openapi);
+        mockBodyData = getMockBodyDataBySchema(schema, openapiWithServiceInfo?.openapi, isRequired);
       }
     }
 
     form.setFieldsValue({
       ...(mockQueryData || {}),
-      body: mockBodyData,
+      body: isEmpty(mockBodyData) ? undefined : mockBodyData, // this is antd form setFieldsValue hack
     });
     setCount(count + 1);
   }

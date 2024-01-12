@@ -156,12 +156,12 @@ export function getMockQueryDataBySchema(parameters?: TParameter[], isRequired?:
   return mockData;
 }
 
-export function getMockBodyDataBySchema(bodySchema: ISchema, spec?: IOpenAPI) {
+export function getMockBodyDataBySchema(bodySchema: ISchema, spec?: IOpenAPI, isRequired?: boolean) {
   if (isEmpty(bodySchema)) {
     return;
   }
 
-  const mockData = sample(bodySchema as any, { skipReadOnly: true }, spec);
+  const mockData = sample(bodySchema as any, { skipReadOnly: true, skipNonRequired: isRequired }, spec);
 
   return mockData;
 }

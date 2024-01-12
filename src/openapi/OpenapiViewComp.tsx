@@ -114,8 +114,8 @@ export function HttpCode({ code }: { code: number }) {
 function HttpErrorList({ httpErrorList }: { httpErrorList: IStatusError[] }): React.ReactNode {
   return (
     <div>
-      {map(sortBy(httpErrorList, "name"), (httpError) => (
-        <div key={httpError.code}>
+      {map(sortBy(httpErrorList, "name"), (httpError, index) => (
+        <div key={`${httpError.code}${index}`}>
           <div
             css={{
               fontWeight: "bold",
