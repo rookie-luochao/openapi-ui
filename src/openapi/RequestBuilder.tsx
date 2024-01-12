@@ -3,6 +3,7 @@ import { Button, Form } from "antd";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { filter, isEmpty, map, values } from "lodash-es";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
 import { Section } from "../components/Section";
@@ -106,6 +107,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
   const location = useLocation();
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const { configInfo } = useConfigInfoStore();
+  const { t } = useTranslation();
   const getRequestByValues = setAxiosConfigFromOperation(operation);
   const pickParametersBy = createParametersPicker(operation.parameters || ([] as any));
   const [axiosResponse, setAxiosResponse] = useState({} as AxiosResponse);
@@ -195,21 +197,21 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
               disabled={loading}
               style={{ fontSize: dsc.fontSize.xxs }}
             >
-              {loading ? "requesting" : "request"}
+              {loading ? t("openapi.requesting") : t("openapi.request")}
             </Button>
             <Button
               size="small"
               style={{ fontSize: dsc.fontSize.xxs, marginLeft: 4 }}
               onClick={() => handleMockData(true)}
             >
-              mock(required)
+              {t("openapi.mockRequired")}
             </Button>
             <Button
               size="small"
               style={{ fontSize: dsc.fontSize.xxs, marginLeft: 4 }}
               onClick={() => handleMockData(false)}
             >
-              mock(all)
+              {t("openapi.mockAll")}
             </Button>
           </div>
           {!isEmpty(axiosResponse) && <HttpResponseView {...axiosResponse} />}
