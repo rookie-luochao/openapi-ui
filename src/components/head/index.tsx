@@ -19,11 +19,12 @@ import GithubStar from "../github-star";
 
 function UserName() {
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
-  const service = `${openapiWithServiceInfo?.serviceURL || ""}${
-    openapiWithServiceInfo?.servicePath ? `/${openapiWithServiceInfo?.servicePath}` : ""
-  }`;
 
-  return <div css={{ color: dsc.color.text, opacity: 0.6, fontWeight: 500, fontSize: dsc.fontSize.xs }}>{service}</div>;
+  return (
+    <div css={{ color: dsc.color.text, opacity: 0.6, fontWeight: 500, fontSize: dsc.fontSize.xs }}>
+      {openapiWithServiceInfo?.serviceURL}
+    </div>
+  );
 }
 
 function IconDown() {
@@ -137,7 +138,6 @@ export function ChangeLangComp() {
 
 interface IQuery extends PartialParsedUrlQuery {
   serviceURL?: string;
-  servicePath?: string;
   importModeType?: IImportModeType;
   logon?: string; // "yes"
 }
@@ -147,12 +147,12 @@ export function Head() {
   const { t } = useTranslation();
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const { configInfo } = useConfigInfoStore();
-  const [{ serviceURL, servicePath, importModeType, logon }, setQuery] = useRouterQuery<IQuery>();
+  const [{ serviceURL, importModeType, logon }, setQuery] = useRouterQuery<IQuery>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (importModeType === ImportModeType.url && serviceURL && !logon) {
-      refetchOpenapiInfo(`${serviceURL}/${servicePath}`);
+      refetchOpenapiInfo(serviceURL);
     } else {
       setQuery((preState) => ({
         ...preState,
@@ -168,7 +168,6 @@ export function Head() {
       const openapi = await parseSwaggerOrOpenapi(res.data);
       const openapiInfo = {
         serviceURL: serviceURL || "",
-        servicePath: servicePath,
         importModeType: ImportModeType.url,
         openapi: openapi,
         operations: flattenOperations((openapi.paths || {}) as IPaths),
@@ -182,7 +181,7 @@ export function Head() {
       {isModalOpen && <UpdateConfigInfoModalComp onSuccess={() => setIsModalOpen(false)} />}
       <div
         css={[
-          flexCenterOpts({ justifyContent: "flex-end " }),
+          flexCenterOpts({ justifyContent: "flex-end" }),
           {
             height: defaultMenuTitleHeight,
             backgroundColor: dsc.color.bg,

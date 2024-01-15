@@ -127,7 +127,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
     setLoading(true);
     const res = await request(axiosConfig).finally(() => setLoading(false));
 
-    if (res.status >= 200 && res.status < 300) {
+    if (res?.status >= 200 && res?.status < 300) {
       setAxiosResponse(res);
     }
 

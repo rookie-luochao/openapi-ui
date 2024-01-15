@@ -39,7 +39,6 @@ export const useConfigInfoStore = create<IConfigInfoState>()(
 
 export interface IOpenapiWithServiceInfo {
   serviceURL: string;
-  servicePath?: string;
   openapi: IOpenAPI;
   operations?: IOperationEnhanceMap;
   importModeType: IImportModeType;

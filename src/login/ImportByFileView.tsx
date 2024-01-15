@@ -5,6 +5,7 @@ import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toQueryString } from "react-router-toolkit";
+import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
@@ -28,8 +29,8 @@ export function FileImportView() {
       return message.warning(t("login.requiredFieldPlaceholder"));
     }
 
-    if (url.endsWith("/")) {
-      url = url.slice(0, url.length - 1);
+    if (!urlRegex.test(url)) {
+      url = `http://${url}`;
     }
 
     const content = await readFileContent(values.file[0].originFileObj);
@@ -43,7 +44,6 @@ export function FileImportView() {
 
       const basicInfo = {
         serviceURL: url,
-        servicePath: "",
         importModeType: ImportModeType.file,
       };
       const openapiInfo = {
@@ -68,7 +68,7 @@ export function FileImportView() {
     >
       <FormItem
         name="serviceURL"
-        label={t("login.serviceURLLabel")}
+        label={t("login.serviceURLLabel2")}
         rules={[{ required: true, message: t("login.serviceURLPlaceholder") }]}
       >
         <Input placeholder={t("login.serviceURLPlaceholder")} />

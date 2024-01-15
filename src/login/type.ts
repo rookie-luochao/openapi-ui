@@ -2,7 +2,6 @@ import { UploadFile } from "antd/es/upload/interface";
 
 export interface IBasicImport {
   serviceURL: string;
-  servicePath?: string;
 }
 
 export type IURLImport = IBasicImport;

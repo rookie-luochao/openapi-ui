@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toQueryString } from "react-router-toolkit";
+import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
@@ -30,23 +31,17 @@ export function URLImportView() {
       return message.warning(t("login.requiredFieldPlaceholder"));
     }
 
-    if (url.endsWith("/")) {
-      url = url.slice(0, url.length - 1);
-      values.serviceURL = url;
-    }
-
-    if (values.servicePath) {
-      if (values.servicePath.startsWith("/")) {
-        url = `${url}${values.servicePath}`;
-        values.servicePath = values.servicePath.slice(1);
-      } else {
-        url = `${url}/${values.servicePath}`;
-      }
+    if (urlRegex.test(url)) {
+      const tmpStrs = url.split("//");
+      values.serviceURL = `${tmpStrs[0]}//${tmpStrs[1].split("/")[0]}`;
+    } else {
+      values.serviceURL = `http://${url.split("/")[0]}`;
+      url = `http://${url}`;
     }
 
     const res = await request({ url: url });
 
-    if (res.status >= 200 && res.status < 300) {
+    if (res?.status >= 200 && res?.status < 300) {
       try {
         const openapi = await parseSwaggerOrOpenapi(res.data);
 
@@ -56,7 +51,6 @@ export function URLImportView() {
 
         const basicInfo = {
           serviceURL: values.serviceURL,
-          servicePath: values.servicePath || "",
           importModeType: ImportModeType.url,
         };
         const openapiInfo = {
@@ -75,22 +69,13 @@ export function URLImportView() {
   }
 
   return (
-    <Form
-      name="urlImportForm"
-      form={form}
-      layout="vertical"
-      initialValues={{ serviceURL: "", servicePath: "" }}
-      onFinish={onFinish}
-    >
+    <Form name="urlImportForm" form={form} layout="vertical" initialValues={{ serviceURL: "" }} onFinish={onFinish}>
       <FormItem
         name="serviceURL"
         label={t("login.serviceURLLabel")}
         rules={[{ required: true, message: t("login.serviceURLPlaceholder") }]}
       >
         <Input placeholder={t("login.serviceURLPlaceholder")} />
-      </FormItem>
-      <FormItem name="servicePath" label={t("login.servicePathLabel")}>
-        <Input placeholder={t("login.servicePathPlaceholder")} />
       </FormItem>
       <Form.Item>
         <Button type="primary" htmlType="submit" style={{ width: "100%" }} loading={loading}>
