@@ -167,7 +167,7 @@ export function Head() {
     if (res.status >= 200 && res.status < 300) {
       const openapi = await parseSwaggerOrOpenapi(res.data);
       const openapiInfo = {
-        serviceURL: serviceURL || "",
+        serviceURL: url,
         importModeType: ImportModeType.url,
         openapi: openapi,
         operations: flattenOperations((openapi.paths || {}) as IPaths),

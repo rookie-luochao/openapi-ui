@@ -74,3 +74,14 @@ export function withoutBubble(callback: () => void) {
     callback();
   };
 }
+
+export function getAxiosBasePathByUrl(url: string) {
+  if (!url) {
+    return "//serviceURL";
+  }
+
+  const tmpStrs = url.split("//");
+  const basePath = `${tmpStrs[0]}//${tmpStrs[1].split("/")[0]}`;
+
+  return basePath;
+}

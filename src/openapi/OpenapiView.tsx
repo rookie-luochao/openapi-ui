@@ -8,7 +8,7 @@ import { dsc } from "../core/style/defaultStyleConfig";
 import { Responses } from "./OpenapiViewComp";
 import { RequestBuilder } from "./RequestBuilder";
 import { ParameterPositionIconComp, parameterPositionMap } from "./config";
-import { getMethodColor } from "./util";
+import { getAxiosBasePathByUrl, getMethodColor } from "./util";
 
 export default function OpenapiView() {
   const { operationId } = useParams();
@@ -112,7 +112,7 @@ export default function OpenapiView() {
               schemas={openapiWithServiceInfo.openapi.components!.schemas || {}}
               operation={{
                 ...operation,
-                basePath: openapiWithServiceInfo.serviceURL ? `${openapiWithServiceInfo.serviceURL}` : "//serviceURL",
+                basePath: getAxiosBasePathByUrl(openapiWithServiceInfo.serviceURL),
               }}
             />
           </Section>

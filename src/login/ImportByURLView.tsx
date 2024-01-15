@@ -31,11 +31,7 @@ export function URLImportView() {
       return message.warning(t("login.requiredFieldPlaceholder"));
     }
 
-    if (urlRegex.test(url)) {
-      const tmpStrs = url.split("//");
-      values.serviceURL = `${tmpStrs[0]}//${tmpStrs[1].split("/")[0]}`;
-    } else {
-      values.serviceURL = `http://${url.split("/")[0]}`;
+    if (!urlRegex.test(url)) {
       url = `http://${url}`;
     }
 
@@ -50,7 +46,7 @@ export function URLImportView() {
         }
 
         const basicInfo = {
-          serviceURL: values.serviceURL,
+          serviceURL: url,
           importModeType: ImportModeType.url,
         };
         const openapiInfo = {
