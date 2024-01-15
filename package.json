@@ -44,10 +44,10 @@
     "@emotion/babel-plugin": "^11.11.0",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash-es": "^4.17.8",
-    "@types/react": "^18.2.46",
+    "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "^6.17.0",
-    "@typescript-eslint/parser": "^6.17.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
     "@vitejs/plugin-react": "^4.2.1",
     "csstype": "^3.1.3",
     "eslint": "^8.56.0",
@@ -59,7 +59,7 @@
     "prettier": "^3.1.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
-    "vite": "^5.0.10"
+    "vite": "^5.0.11"
   },
   "commitlint": {
     "extends": [
