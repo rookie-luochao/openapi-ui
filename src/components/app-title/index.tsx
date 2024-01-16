@@ -8,7 +8,7 @@ export function ModifyAppTitle() {
   useEffect(() => {
     if (isFlagRef.current) {
       initAppTitle();
-      initAppCDN();
+      // initAppCDN();
       isFlagRef.current = false;
     }
   }, []);
@@ -22,11 +22,11 @@ export function ModifyAppTitle() {
     }
   }
 
-  function initAppCDN() {
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/api-spec-converter@2.12.0/dist/api-spec-converter.js";
-    document.body.appendChild(script);
-  }
+  // function initAppCDN() {
+  //   const script = document.createElement("script");
+  //   script.src = "https://cdn.jsdelivr.net/npm/api-spec-converter@2.12.0/dist/api-spec-converter.js";
+  //   document.body.appendChild(script);
+  // }
 
   return null;
 }
