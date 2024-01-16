@@ -69,9 +69,9 @@ export function FileImportView() {
       <FormItem
         name="serviceURL"
         label={t("login.serviceURLLabel2")}
-        rules={[{ required: true, message: t("login.serviceURLPlaceholder") }]}
+        rules={[{ required: true, message: t("login.serviceURLPlaceholder2") }]}
       >
-        <Input placeholder={t("login.serviceURLPlaceholder")} />
+        <Input placeholder={t("login.serviceURLPlaceholder2")} />
       </FormItem>
       <FormItem
         name="file"
