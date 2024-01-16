@@ -10,7 +10,7 @@ dependencies:
     version: 5.2.6(react-dom@18.2.0)(react@18.2.0)
   '@emotion/react':
     specifier: ^11.11.3
-    version: 11.11.3(@types/react@18.2.47)(react@18.2.0)
+    version: 11.11.3(@types/react@18.2.48)(react@18.2.0)
   '@faker-js/faker':
     specifier: ^8.3.1
     version: 8.3.1
@@ -61,7 +61,7 @@ dependencies:
     version: 14.0.0(i18next@23.7.16)(react-dom@18.2.0)(react@18.2.0)
   react-markdown:
     specifier: ^9.0.1
-    version: 9.0.1(@types/react@18.2.47)(react@18.2.0)
+    version: 9.0.1(@types/react@18.2.48)(react@18.2.0)
   react-router-dom:
     specifier: ^6.21.2
     version: 6.21.2(react-dom@18.2.0)(react@18.2.0)
@@ -76,7 +76,7 @@ dependencies:
     version: 7.8.1
   zustand:
     specifier: ^4.4.7
-    version: 4.4.7(@types/react@18.2.47)(react@18.2.0)
+    version: 4.4.7(@types/react@18.2.48)(react@18.2.0)
 
 devDependencies:
   '@babel/preset-react':
@@ -98,8 +98,8 @@ devDependencies:
     specifier: ^4.17.8
     version: 4.17.12
   '@types/react':
-    specifier: ^18.2.47
-    version: 18.2.47
+    specifier: ^18.2.48
+    version: 18.2.48
   '@types/react-dom':
     specifier: ^18.2.18
     version: 18.2.18
@@ -732,7 +732,7 @@ packages:
   /@emotion/memoize@0.8.1:
     resolution: {integrity: sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==}
 
-  /@emotion/react@11.11.3(@types/react@18.2.47)(react@18.2.0):
+  /@emotion/react@11.11.3(@types/react@18.2.48)(react@18.2.0):
     resolution: {integrity: sha512-Cnn0kuq4DoONOMcnoVsTOR8E+AdnKFf//6kUWc4LCdnxj31pZWn7rIULd6Y7/Js1PiPHzn7SKCM9vB/jBni8eA==}
     peerDependencies:
       '@types/react': '*'
@@ -748,7 +748,7 @@ packages:
       '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
       '@emotion/utils': 1.2.1
       '@emotion/weak-memoize': 0.3.1
-      '@types/react': 18.2.47
+      '@types/react': 18.2.48
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
     dev: false
@@ -1461,11 +1461,11 @@ packages:
   /@types/react-dom@18.2.18:
     resolution: {integrity: sha512-TJxDm6OfAX2KJWJdMEVTwWke5Sc/E/RlnPGvGfS0W7+6ocy2xhDVQVh/KvC2Uf7kACs+gDytdusDSdWfWkaNzw==}
     dependencies:
-      '@types/react': 18.2.47
+      '@types/react': 18.2.48
     dev: true
 
-  /@types/react@18.2.47:
-    resolution: {integrity: sha512-xquNkkOirwyCgoClNk85BjP+aqnIS+ckAJ8i37gAbDs14jfW/J23f2GItAf33oiUPQnqNMALiFeoM9Y5mbjpVQ==}
+  /@types/react@18.2.48:
+    resolution: {integrity: sha512-qboRCl6Ie70DQQG9hhNREz81jqC1cs9EVNcjQ1AU+jH6NFfSAhVVbrrY/+nSF+Bsk4AOwm9Qa61InvMCyV+H3w==}
     dependencies:
       '@types/prop-types': 15.7.11
       '@types/scheduler': 0.16.8
@@ -4294,14 +4294,14 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: false
 
-  /react-markdown@9.0.1(@types/react@18.2.47)(react@18.2.0):
+  /react-markdown@9.0.1(@types/react@18.2.48)(react@18.2.0):
     resolution: {integrity: sha512-186Gw/vF1uRkydbsOIkcGXw7aHq0sZOCRFFjGrr7b9+nVZg4UfA4enXCaxm4fUzecU38sWfrNDitGhshuU7rdg==}
     peerDependencies:
       '@types/react': '>=18'
       react: '>=18'
     dependencies:
       '@types/hast': 3.0.3
-      '@types/react': 18.2.47
+      '@types/react': 18.2.48
       devlop: 1.1.0
       hast-util-to-jsx-runtime: 2.3.0
       html-url-attributes: 3.0.0
@@ -5123,7 +5123,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zustand@4.4.7(@types/react@18.2.47)(react@18.2.0):
+  /zustand@4.4.7(@types/react@18.2.48)(react@18.2.0):
     resolution: {integrity: sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -5138,7 +5138,7 @@ packages:
       react:
         optional: true
     dependencies:
-      '@types/react': 18.2.47
+      '@types/react': 18.2.48
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
