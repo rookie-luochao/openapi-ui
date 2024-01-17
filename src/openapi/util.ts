@@ -1,6 +1,6 @@
-import { map, replace } from "lodash-es";
+import { keys, map, replace } from "lodash-es";
 import { dsc } from "../core/style/defaultStyleConfig";
-import { IMethodType, MethodType } from "./type";
+import { IMethodType, IRequestBody, MethodType } from "./type";
 
 export function getMethodColor(method: IMethodType) {
   const cyanBlueColor = "#00EEEE";
@@ -84,4 +84,23 @@ export function getAxiosBasePathByUrl(url: string) {
   const basePath = `${tmpStrs[0]}//${tmpStrs[1].split("/")[0]}`;
 
   return basePath;
+}
+
+export function getRequestBodyContent(requestBody: IRequestBody) {
+  const contentKeys = keys(requestBody.content);
+  let content = requestBody.content;
+
+  if (contentKeys.length > 1) {
+    if (contentKeys.includes("application/json")) {
+      content = { "application/json": content["application/json"] };
+    } else if (contentKeys.includes("multipart/form-data")) {
+      content = { "multipart/form-data": content["multipart/form-data"] };
+    } else if (contentKeys.includes("application/x-www-form-urlencoded")) {
+      content = { "application/x-www-form-urlencoded": content["application/x-www-form-urlencoded"] };
+    } else {
+      content = { [contentKeys[0]]: content[contentKeys[0]] };
+    }
+  }
+
+  return content || {};
 }

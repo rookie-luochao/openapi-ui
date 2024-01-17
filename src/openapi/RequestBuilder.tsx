@@ -6,16 +6,16 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
-import { Section } from "../components/Section";
 import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../core/store";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { HttpRequestView } from "./HttpRequestView";
 import { HttpResponseView } from "./HttpResponseView";
 import { RequestParameterInput } from "./RequestParameterInput";
 import { patchSchema } from "./patchSchema";
-import { isMultipartFormData, setAxiosConfigFromOperation } from "./request";
+import { isFormURLEncoded, isMultipartFormData, setAxiosConfigFromOperation } from "./request";
 import { getMockBodyDataBySchema, getMockQueryDataBySchema } from "./requestMock";
-import { IMediaType, IOperationEnhance, ISchema, TParameter } from "./type";
+import { IMediaType, IOperationEnhance, IRequestBody, ISchema, TParameter } from "./type";
+import { getRequestBodyContent } from "./util";
 
 function createParametersPicker(parameters: TParameter[]) {
   return (position: string): TParameter[] => filter<TParameter>(parameters, (parameter) => parameter.in === position);
@@ -38,15 +38,17 @@ function renderParameters(parameters: TParameter[], schemas: Dictionary<ISchema>
   });
 }
 
-function renderRequestBody(requestBody: any = {}, schemas: Dictionary<ISchema> = {}) {
+function renderRequestBody(requestBody: IRequestBody, schemas: Dictionary<ISchema> = {}) {
+  const content = getRequestBodyContent(requestBody);
+
   return (
     <div key="requestBody">
-      {map(requestBody.content, (mediaType: IMediaType, contentType: string) => {
+      {map(content, (mediaType: IMediaType, contentType: string) => {
         const schema = mediaType.schema ? patchSchema(mediaType.schema, schemas) : ({} as IMediaType["schema"]);
 
         return (
           <div key={contentType}>
-            {isMultipartFormData(contentType) ? (
+            {isMultipartFormData(contentType) || isFormURLEncoded(contentType) ? (
               <div
                 css={{
                   backgroundColor: dsc.color.bg,
@@ -61,24 +63,23 @@ function renderRequestBody(requestBody: any = {}, schemas: Dictionary<ISchema> =
                 >
                   {contentType}
                 </div>
-                <Section title="body">
-                  {map((schema || ({} as any)).properties, (propSchema: any, key: string) => {
-                    return (
-                      <Form.Item key={key} name={key} rules={requestBody.required ? [{ required: true }] : undefined}>
-                        <RequestParameterInput
-                          parameter={
-                            {
-                              in: "formData",
-                              name: key,
-                              schema: propSchema,
-                            } as any
-                          }
-                          schemas={schemas}
-                        />
-                      </Form.Item>
-                    );
-                  })}
-                </Section>
+                <div css={{ height: 1, backgroundColor: dsc.color.border, marginBottom: 10 }} />
+                {map((schema || ({} as any)).properties, (propSchema: any, key: string) => {
+                  return (
+                    <Form.Item key={key} name={key}>
+                      <RequestParameterInput
+                        parameter={
+                          {
+                            in: "formData",
+                            name: key,
+                            schema: propSchema,
+                          } as any
+                        }
+                        schemas={schemas}
+                      />
+                    </Form.Item>
+                  );
+                })}
               </div>
             ) : (
               <Form.Item name="body" rules={requestBody.required ? [{ required: true }] : undefined}>
@@ -108,7 +109,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const { configInfo } = useConfigInfoStore();
   const { t } = useTranslation();
-  const getRequestByValues = setAxiosConfigFromOperation(operation);
+  const getRequestByValues = setAxiosConfigFromOperation(operation, (openapiWithServiceInfo || ({} as any))?.openapi);
   const pickParametersBy = createParametersPicker(operation.parameters || ([] as any));
   const [axiosResponse, setAxiosResponse] = useState({} as AxiosResponse);
   const [loading, setLoading] = useState(false);
@@ -121,6 +122,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
 
   useEffect(() => {
     form.setFieldValue("Authorization", configInfo?.authorization || "");
+    form.setFieldValue("authorization", configInfo?.authorization || "");
   }, [configInfo?.authorization]);
 
   async function sumbit(axiosConfig: AxiosRequestConfig) {
@@ -162,12 +164,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
       form={form}
       name="request-control-form"
       onFinish={() => {
-        sumbit(
-          Object.assign(
-            getRequestByValues({ ...(form.getFieldsValue() || {}) }),
-            configInfo?.timeout ? { timeout: configInfo?.timeout * 1000 } : {},
-          ),
-        );
+        sumbit(getRequestByValues({ ...(form.getFieldsValue() || {}) }));
       }}
       onValuesChange={() => {
         setCount(count + 1);

@@ -1,8 +1,9 @@
-import { defaultTimeout } from "@request";
 import { AxiosRequestConfig } from "axios";
 import { filter, first, isUndefined, keys, map, pick, pickBy, reduce, replace } from "lodash-es";
 import { Dictionary } from "react-router-toolkit";
-import { IOperationEnhance, ISchema, TParameter } from "./type";
+import { patchSchema } from "./patchSchema";
+import { IOpenAPI, IOperationEnhance, ISchema, TParameter } from "./type";
+import { getRequestBodyContent } from "./util";
 
 function compilePath(path: string, params: Dictionary<any> = {}): string {
   return replace(path, /{([\s\S]+?)}/g, (target: string, key: string) =>
@@ -46,21 +47,20 @@ export const isFormURLEncoded = (contentType = "") => contentType.includes("appl
 
 export const getHeadContentType = (operation: Partial<IOperationEnhance>) => {
   if (operation.requestBody) {
-    return first(keys(operation.requestBody.content)) || "";
+    return first(keys(getRequestBodyContent(operation.requestBody))) || "";
   }
 
   return first<string>(operation.produces || []) || "";
 };
 
 export const setAxiosConfigFromOperation =
-  (operation: Partial<IOperationEnhance>) =>
+  (operation: Partial<IOperationEnhance>, openapi: IOpenAPI) =>
   (values: any = {}): AxiosRequestConfig => {
     const req: AxiosRequestConfig = {
       method: operation.method,
       url: operation.basePath + compilePath(operation.path || "", values),
       params: pickValuesIn("query", operation.parameters || ([] as any), values),
       headers: pickBy(pickValuesIn("header", operation.parameters || ([] as any), values), (v: any) => !isUndefined(v)),
-      timeout: defaultTimeout * 1000,
     };
 
     req.headers?.["Referer"] && delete req.headers["Referer"];
@@ -69,7 +69,17 @@ export const setAxiosConfigFromOperation =
       req.data = values.body;
     }
 
-    const contentType = getHeadContentType(operation) || "application/json";
+    let contentType = getHeadContentType(operation) || "application/json";
+
+    if (isFormURLEncoded(contentType) || isMultipartFormData(contentType)) {
+      const schema = patchSchema(operation.requestBody?.content?.[contentType]?.schema, openapi?.components?.schemas);
+      req.data = pick(values, keys((schema as any)?.properties));
+
+      // TODO: this is hack for swagger2openapi tool convert "in formData" to application/x-www-form-urlencoded
+      if (openapi?.["x-original-swagger-version"]) {
+        contentType = "multipart/form-data";
+      }
+    }
 
     if ((req as any).data) {
       req.headers = {

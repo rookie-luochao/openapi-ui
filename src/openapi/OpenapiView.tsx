@@ -109,7 +109,7 @@ export default function OpenapiView() {
             }
           >
             <RequestBuilder
-              schemas={openapiWithServiceInfo.openapi.components!.schemas || {}}
+              schemas={openapiWithServiceInfo.openapi.components?.schemas || {}}
               operation={{
                 ...operation,
                 basePath: getAxiosBasePathByUrl(openapiWithServiceInfo.serviceURL),

@@ -1,5 +1,5 @@
 import { Button, Dropdown, Form, Input, InputNumber, Modal, message } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { PartialParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
@@ -146,11 +146,13 @@ export function Head() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
-  const { configInfo } = useConfigInfoStore();
   const [{ serviceURL, importModeType, logon }, setQuery] = useRouterQuery<IQuery>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isFlagRef = useRef(true);
 
   useEffect(() => {
+    if (!isFlagRef.current) return;
+
     if (importModeType === ImportModeType.url && serviceURL && !logon) {
       refetchOpenapiInfo(serviceURL);
     } else {
@@ -159,12 +161,14 @@ export function Head() {
         logon: "",
       }));
     }
+
+    isFlagRef.current = false;
   }, []);
 
   async function refetchOpenapiInfo(url: string) {
-    const res = await request(Object.assign({ url: url }, configInfo?.timeout ? { timeout: configInfo?.timeout } : {}));
+    const res = await request(Object.assign({ url: url }));
 
-    if (res.status >= 200 && res.status < 300) {
+    if (res?.status >= 200 && res?.status < 300) {
       const openapi = await parseSwaggerOrOpenapi(res.data);
       const openapiInfo = {
         serviceURL: url,

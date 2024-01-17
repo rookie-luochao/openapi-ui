@@ -151,7 +151,7 @@ export function HttpRequestView({ request }: IHttpViewProps) {
           <HeadRow key={key} field={key} value={value} />
         ))}
       </div>
-      {request.data && (
+      {!isEmpty(pickBy(request.data, (v) => !!v)) && (
         <pre>
           <code>{stringifyBody(request)}</code>
         </pre>

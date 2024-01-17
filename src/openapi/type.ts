@@ -50,11 +50,14 @@ interface IOperationExtra {
   group?: string;
 }
 
+export type IRequestBody = {
+  content: Dictionary<IMediaType>;
+  required: boolean;
+};
+
 export type IOperationEnhance = IOperationExtra &
   IOperation & {
-    requestBody?: {
-      content: Dictionary<IMediaType>;
-    };
+    requestBody?: IRequestBody;
   };
 
 export type IOperationEnhanceMap = Dictionary<IOperationEnhance>;

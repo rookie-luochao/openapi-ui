@@ -4,7 +4,7 @@ import { MethodType } from "../../openapi/type";
 import { IConfigInfoStorageState, configInfoStorageKey, defaultConfigInfoStorage } from "../store";
 
 export function getConfigInfo() {
-  const configInfoStorageStr = globalThis.localStorage.getItem(configInfoStorageKey);
+  const configInfoStorageStr = globalThis.sessionStorage.getItem(configInfoStorageKey);
   const configInfoStorage = configInfoStorageStr
     ? (JSON.parse(configInfoStorageStr) as IConfigInfoStorageState)
     : defaultConfigInfoStorage;
@@ -22,14 +22,17 @@ export function request(axiosConfig: AxiosRequestConfig) {
     timeout = configInfo.timeout * 1000;
   }
 
-  return axios({
+  axiosConfig = {
     method: MethodType.get,
     timeout: timeout,
     headers: {
       "Content-Type": "application/json",
     },
     ...axiosConfig,
-  }).catch((reason) => {
+  };
+  console.log("axiosConfig", axiosConfig);
+
+  return axios(axiosConfig).catch((reason) => {
     const resData = reason?.response?.data;
     notification.error({
       message:

@@ -1,7 +1,7 @@
-import { message } from "antd";
 import * as yaml from "js-yaml";
 import { isEmpty, isObject } from "lodash-es";
 import { Dictionary } from "react-router-toolkit";
+import * as converter from "swagger2openapi";
 import { IOpenAPI } from "../openapi/type";
 
 export function readFileContent(file: File): Promise<string> {
@@ -35,32 +35,23 @@ function convertSwaggerToOpenApi(swagger: Dictionary<any>) {
   if (!swagger.swagger) {
     return swagger;
   }
-  console.log("swagger: ", swagger);
-  const converter = (globalThis as any).APISpecConverter;
-
-  if (!converter) {
-    message.warning("the cdn converting swagger2 to openapi3 was not loaded successfully, please check!");
-    return;
-  }
 
   return new Promise<{ openapi: IOpenAPI }>((resolve, reject) => {
-    converter.convert(
-      {
-        from: "swagger_2",
-        to: "openapi_3",
-        source: swagger,
-      },
-      function (err: any, converted: Dictionary<any>) {
-        if (err) {
-          reject(err);
-          return;
-        }
+    const options = { patch: true, warnOnly: true, resolveInternal: true };
+    // options.patch = true; // fix up small errors in the source definition
+    // options.warnOnly = true; // Do not throw on non-patchable errors
+    // options.warnOnly = true; // enable resolution of internal $refs, also disables deduplication of requestBodies
+    converter.convertObj(swagger as any, options, function (err: any, options: any) {
+      // options.openapi contains the converted definition
+      if (err) {
+        reject(err);
+        return;
+      }
 
-        resolve({
-          openapi: converted.spec || {},
-        });
-      },
-    );
+      console.log("openapi", options);
+      options.openapi["x-original-swagger-version"] = options.original.swagger;
+      resolve({ openapi: options.openapi });
+    });
   });
 }
 

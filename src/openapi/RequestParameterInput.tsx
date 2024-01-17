@@ -1,5 +1,5 @@
 import { MinusOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, Input, Select, Upload } from "antd";
+import { Button, Input, InputNumber, Select, Upload } from "antd";
 import { filter, map } from "lodash-es";
 import React, { ReactNode, useState } from "react";
 import { Dictionary } from "react-router-toolkit";
@@ -132,6 +132,10 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
         ]}
       />
     );
+  }
+
+  if (schema.type === "integer" || schema.type === "number") {
+    return <InputNumber css={{ width: "100%" }} {...commonProps} placeholder={placeholder} />;
   }
 
   if (isFile(schema) || (isArray && isFile(schema.items))) {
