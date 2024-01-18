@@ -169,6 +169,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
       onValuesChange={() => {
         setCount(count + 1);
       }}
+      initialValues={{ Authorization: configInfo?.authorization, authorization: configInfo?.authorization }}
     >
       <div css={{ display: "flex", fontSize: dsc.fontSize.xxs }}>
         <div css={{ flex: 1, maxWidth: "50%" }}>
