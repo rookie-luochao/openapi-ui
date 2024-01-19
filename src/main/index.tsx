@@ -1,8 +1,7 @@
 import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { fromEvent, throttleTime } from "rxjs";
 import LogoIcon from "../assets/images/logo.png";
 import LogoMiniIcon from "../assets/images/logo_mini.svg";
 import { Head } from "../components/head";
@@ -40,27 +39,10 @@ const Logo = ({ isCollapsed }: ICollapsed) => {
 
 export default function MainLayout() {
   const [collapsed, setCollapsed] = useState(false);
-  const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
+  const menuHeight = document.documentElement.clientHeight;
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
   const defaultMenuHeight = defaultContentHeight - 48; // 48px为展开收缩图表高度
   const isZh = getConfig().env === Env.zh;
-
-  useEffect(() => {
-    const subscription = fromEvent(window, "resize")
-      .pipe(throttleTime(1000))
-      .subscribe(() => {
-        const timeoutId = globalThis.setTimeout(() => {
-          setMenuHeight(document.documentElement.clientHeight);
-        }, 100);
-        return () => {
-          globalThis.clearTimeout(timeoutId);
-        };
-      });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
 
   return (
     <Layout>

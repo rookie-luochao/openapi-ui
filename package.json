@@ -37,7 +37,6 @@
     "react-router-dom": "^6.21.2",
     "react-router-toolkit": "^1.1.1",
     "regenerator-runtime": "^0.14.1",
-    "rxjs": "^7.8.1",
     "swagger2openapi": "^7.0.8",
     "zustand": "^4.4.7"
   },
