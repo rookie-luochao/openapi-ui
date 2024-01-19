@@ -1,7 +1,7 @@
 {
   "name": "openapi-ui",
   "private": true,
-  "version": "1.8.2",
+  "version": "1.8.3",
   "type": "module",
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
