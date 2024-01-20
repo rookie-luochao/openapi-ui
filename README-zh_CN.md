@@ -62,7 +62,7 @@ make docker-build-run
 * openapi3.json/openapi3.yml
 
 ## 使用方法
-* 输入 swagger2/openapi3 的网关地址
+* 输入 swagger2/openapi3 的网关地址, 重新刷新页面就可以更新接口
 * 上传 swagger2/openapi3 文件
 * 输入 swagger2/openapi3 文本
 

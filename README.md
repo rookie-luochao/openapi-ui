@@ -62,7 +62,7 @@ make docker-build-run
 * openapi3.json/openapi3.yml
 
 ## How to use
-* enter swagger2/openapi3 api gateway URL
+* enter swagger2/openapi3 api gateway URL, refresh the page to update the interface
 * upload swagger2/openapi3 file
 * enter swagger2/openapi3 text
 
