@@ -1,7 +1,29 @@
-[English](./README.md) · 中文
-
-# openAPI UI
-一个简单轻量、比 swagger-ui 更美观的 openapi 接口文档，可以快速的生成模拟请求参数并调用 api 请求
+<h1 align="center">
+  OpenAPI UI
+</h1>
+<p align="center">
+一个简单轻量、比 Swagger-UI 更美观的 OpenAPI 接口文档，可以快速的生成模拟请求参数并调用 API 请求
+</p>
+<p align="center">
+  <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/rookie-luochao/openapi-ui?color=brightgreen&style=flat-square">
+  </a>
+  <a href="https://github.com/rookie-luochao/openapi-ui/releases">
+    <img alt="Release (latest by date)" src="https://img.shields.io/github/v/release/rookie-luochao/openapi-ui?color=brightgreen&style=flat-square">
+  </a>
+  <a href="https://github.com/rookie-luochao/openapi-ui/actions/workflows/release.yml">
+    <img alt="build" src="https://img.shields.io/github/actions/workflow/status/rookie-luochao/openapi-ui/release.yml?style=flat-square&label=build">
+  </a>
+  <a href="https://react.dev">
+    <img alt="framework" src="https://img.shields.io/badge/framework-react-brightgreen">
+  </a>
+</p>
+<h4 align="center">
+  <p>
+    <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/README.md">English</a> |
+    <b>简体中文</b>
+  </p>
+</h4>
 
 ## 网站域名
 * CN: [www.openapi-ui.com](https://www.openapi-ui.com)
