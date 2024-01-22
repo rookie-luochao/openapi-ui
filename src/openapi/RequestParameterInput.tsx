@@ -155,10 +155,10 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
     );
   }
 
-  return <Input {...commonProps} placeholder={placeholder} />;
+  return <Input {...commonProps} onChange={(e) => commonProps.onChange(e.target.value)} placeholder={placeholder} />;
 }
 
-export function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
+function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
   const [value, setValue] = useState(commonProps.value);
 
   const commit = () => {
@@ -182,8 +182,8 @@ export function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
           {...commonProps}
           schema={schema as any}
           value={value}
-          onChange={(nextV) => {
-            setValue(nextV);
+          onChange={(nextValue) => {
+            setValue(nextValue);
           }}
         />
       </span>

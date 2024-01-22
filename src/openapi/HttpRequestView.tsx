@@ -67,7 +67,7 @@ function HttpFirstLine({ method, url, baseURL, params }: AxiosRequestConfig) {
       {toUpper(method)}
       &nbsp;&nbsp;
       <span css={{ fontWeight: "normal" }}>{buildOriginalUrl((baseURL || "") + url, params)}</span>
-      &nbsp;&nbsp;HTTP/1.1
+      &nbsp;&nbsp;HTTP/1.1&nbsp;&nbsp;&nbsp;
     </span>
   );
 }
@@ -102,7 +102,7 @@ function stringifyBody(request: any) {
   let data = request.data;
 
   if (isMultipartFormData(contentType)) {
-    const boundary = "----WebKitFormBoundarymnBNxgHqBJhLVZSw";
+    const boundary = "----WebKitFormBoundaryzYJBBCMGeui4wPWd";
     request.headers = {
       ...request.headers,
       "Content-Type": `multipart/form-data; boundary=${boundary}`,
@@ -137,7 +137,7 @@ export const httpCardWrapStyle: CSSObject = {
 };
 
 export interface IHttpViewProps {
-  request: AxiosRequestConfig & { form?: any };
+  request: AxiosRequestConfig;
 }
 
 export function HttpRequestView({ request }: IHttpViewProps) {

@@ -6,13 +6,13 @@
 </p>
 <p align="center">
   <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/rookie-luochao/openapi-ui?color=brightgreen&style=flat-square">
+    <img alt="License" src="https://img.shields.io/github/license/rookie-luochao/openapi-ui">
   </a>
   <a href="https://github.com/rookie-luochao/openapi-ui/releases">
-    <img alt="Release (latest by date)" src="https://img.shields.io/github/v/release/rookie-luochao/openapi-ui?color=brightgreen&style=flat-square">
+    <img alt="Release (latest by date)" src="https://img.shields.io/github/v/release/rookie-luochao/openapi-ui">
   </a>
   <a href="https://github.com/rookie-luochao/openapi-ui/actions/workflows/release.yml">
-    <img alt="build" src="https://img.shields.io/github/actions/workflow/status/rookie-luochao/openapi-ui/release.yml?style=flat-square&label=build">
+    <img alt="build" src="https://img.shields.io/github/actions/workflow/status/rookie-luochao/openapi-ui/release.yml">
   </a>
   <a href="https://react.dev">
     <img alt="framework" src="https://img.shields.io/badge/framework-react-brightgreen">

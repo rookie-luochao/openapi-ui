@@ -7,6 +7,8 @@ const translation = {
   requesting: "请求中",
   mockRequired: "模拟必填参数",
   mockAll: "模拟所有参数",
+  cURL: "cURL",
+  copySuccess: "复制成功",
 };
 
 export default translation;

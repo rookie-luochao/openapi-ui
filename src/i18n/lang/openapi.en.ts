@@ -7,6 +7,8 @@ const translation = {
   requesting: "requesting",
   mockRequired: "mock(required)",
   mockAll: "mock(all)",
+  cURL: "cURL",
+  copySuccess: "copy successful",
 };
 
 export default translation;

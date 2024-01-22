@@ -1,6 +1,7 @@
 import { request } from "@request";
-import { Button, Form } from "antd";
+import { Button, Form, Popover, message } from "antd";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
+import copy from "copy-to-clipboard";
 import { filter, isEmpty, map, values } from "lodash-es";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,9 +9,10 @@ import { useLocation } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
 import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../core/store";
 import { dsc } from "../core/style/defaultStyleConfig";
-import { HttpRequestView } from "./HttpRequestView";
+import { HttpRequestView, httpCardWrapStyle } from "./HttpRequestView";
 import { HttpResponseView } from "./HttpResponseView";
 import { RequestParameterInput } from "./RequestParameterInput";
+import { generateCURL } from "./generateCURL.ts";
 import { patchSchema } from "./patchSchema";
 import { isFormURLEncoded, isMultipartFormData, setAxiosConfigFromOperation } from "./request";
 import { getMockBodyDataBySchema, getMockQueryDataBySchema } from "./requestMock";
@@ -24,12 +26,13 @@ function createParametersPicker(parameters: TParameter[]) {
 function renderParameters(parameters: TParameter[], schemas: Dictionary<ISchema> = {}) {
   return map(parameters, (parameter) => {
     const name = parameter.name;
+    const pattern = (parameter.schema as any)?.pattern;
 
     return (
       <Form.Item
         key={name}
         name={name}
-        rules={parameter.required ? [{ required: true, pattern: (parameter.schema as any)?.pattern }] : undefined}
+        rules={parameter.required ? [pattern ? { required: true, pattern: pattern } : { required: true }] : undefined}
         style={{ marginBottom: 10 }}
       >
         <RequestParameterInput parameter={parameter} schemas={schemas} />
@@ -102,6 +105,31 @@ function renderRequestBody(requestBody: IRequestBody, schemas: Dictionary<ISchem
   );
 }
 
+function CreateCURL({ request }: { request: AxiosRequestConfig }) {
+  const { t } = useTranslation();
+  const cURL = generateCURL(request);
+  console.log("cURL", cURL);
+
+  return (
+    <div>
+      <div>
+        <Button
+          type="primary"
+          size="small"
+          style={{ fontSize: dsc.fontSize.xxs }}
+          onClick={() => {
+            copy(cURL);
+            message.success(t("openapi.copySuccess"));
+          }}
+        >
+          复制
+        </Button>
+      </div>
+      <pre css={[{ width: 672, fontSize: dsc.fontSize.xs }, httpCardWrapStyle]}>{cURL}</pre>
+    </div>
+  );
+}
+
 export function RequestBuilder(props: { operation: IOperationEnhance; schemas: Dictionary<ISchema> }) {
   const { operation, schemas } = props;
   const [form] = Form.useForm();
@@ -123,11 +151,12 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
   useEffect(() => {
     form.setFieldValue("Authorization", configInfo?.authorization || "");
     form.setFieldValue("authorization", configInfo?.authorization || "");
+    setCount((count) => count + 1);
   }, [configInfo?.authorization]);
 
-  async function sumbit(axiosConfig: AxiosRequestConfig) {
+  async function sumbit(axiosRequest: AxiosRequestConfig) {
     setLoading(true);
-    const res = await request(axiosConfig).finally(() => setLoading(false));
+    const res = await request(axiosRequest).finally(() => setLoading(false));
 
     if (res?.status >= 200 && res?.status < 300) {
       setAxiosResponse(res);
@@ -163,13 +192,11 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
     <Form
       form={form}
       name="request-control-form"
-      onFinish={() => {
-        sumbit(getRequestByValues({ ...(form.getFieldsValue() || {}) }));
-      }}
+      initialValues={{ Authorization: configInfo?.authorization, authorization: configInfo?.authorization }}
       onValuesChange={() => {
         setCount(count + 1);
       }}
-      initialValues={{ Authorization: configInfo?.authorization, authorization: configInfo?.authorization }}
+      onFinish={() => sumbit(getRequestByValues(form.getFieldsValue()))}
     >
       <div css={{ display: "flex", fontSize: dsc.fontSize.xxs }}>
         <div css={{ flex: 1, maxWidth: "50%" }}>
@@ -186,31 +213,28 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
             marginLeft: "2em",
           }}
         >
-          <HttpRequestView css={{ margin: "1em 0" }} request={getRequestByValues(form.getFieldsValue() || {})} />
-          <div css={{ margin: "1em 0" }}>
+          <HttpRequestView css={{ margin: "1em 0" }} request={getRequestByValues(form.getFieldsValue())} />
+          <div css={{ margin: "1em 0", "& > *": { marginRight: 4 } }}>
             <Button
               htmlType="submit"
               type="primary"
               size="small"
-              disabled={loading}
               style={{ fontSize: dsc.fontSize.xxs }}
+              disabled={loading}
             >
               {loading ? t("openapi.requesting") : t("openapi.request")}
             </Button>
-            <Button
-              size="small"
-              style={{ fontSize: dsc.fontSize.xxs, marginLeft: 4 }}
-              onClick={() => handleMockData(true)}
-            >
+            <Button size="small" style={{ fontSize: dsc.fontSize.xxs }} onClick={() => handleMockData(true)}>
               {t("openapi.mockRequired")}
             </Button>
-            <Button
-              size="small"
-              style={{ fontSize: dsc.fontSize.xxs, marginLeft: 4 }}
-              onClick={() => handleMockData(false)}
-            >
+            <Button size="small" style={{ fontSize: dsc.fontSize.xxs }} onClick={() => handleMockData(false)}>
               {t("openapi.mockAll")}
             </Button>
+            <Popover content={<CreateCURL request={getRequestByValues(form.getFieldsValue())} />} trigger="click">
+              <Button size="small" style={{ fontSize: dsc.fontSize.xxs }}>
+                {t("openapi.cURL")}
+              </Button>
+            </Popover>
           </div>
           {!isEmpty(axiosResponse) && <HttpResponseView {...axiosResponse} />}
         </div>

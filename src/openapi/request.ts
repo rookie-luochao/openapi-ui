@@ -55,12 +55,15 @@ export const getHeadContentType = (operation: Partial<IOperationEnhance>) => {
 
 export const setAxiosConfigFromOperation =
   (operation: Partial<IOperationEnhance>, openapi: IOpenAPI) =>
-  (values: any = {}): AxiosRequestConfig => {
+  (values: Dictionary<any> = {}): AxiosRequestConfig => {
     const req: AxiosRequestConfig = {
       method: operation.method,
       url: operation.basePath + compilePath(operation.path || "", values),
-      params: pickValuesIn("query", operation.parameters || ([] as any), values),
-      headers: pickBy(pickValuesIn("header", operation.parameters || ([] as any), values), (v: any) => !isUndefined(v)),
+      params: pickValuesIn("query", operation.parameters || ([] as any[]), values),
+      headers: pickBy(
+        pickValuesIn("header", operation.parameters || ([] as any[]), values),
+        (v: any) => !isUndefined(v),
+      ),
     };
 
     req.headers?.["Referer"] && delete req.headers["Referer"];
@@ -73,6 +76,7 @@ export const setAxiosConfigFromOperation =
 
     if (isFormURLEncoded(contentType) || isMultipartFormData(contentType)) {
       const schema = patchSchema(operation.requestBody?.content?.[contentType]?.schema, openapi?.components?.schemas);
+      // when the Content-Type is multipart/form-data, axios supports automatically serializing ordinary objects into a FormData object
       req.data = pick(values, keys((schema as any)?.properties));
 
       // TODO: this is hack for swagger2openapi tool convert "in formData" to application/x-www-form-urlencoded
@@ -81,7 +85,7 @@ export const setAxiosConfigFromOperation =
       }
     }
 
-    if ((req as any).data) {
+    if (req.data) {
       req.headers = {
         ...req.headers,
         "Content-Type": contentType + ";charset=UTF-8",
