@@ -243,7 +243,7 @@ export const RequestParameterInput = ({
                 {...commonProps}
                 schema={schema.items}
                 value={value}
-                onChange={(nextValue: string) => {
+                onChange={(nextValue) => {
                   commonProps.onChange(map(commonProps.value, (val, idx) => (index === idx ? nextValue : val)));
                 }}
               />

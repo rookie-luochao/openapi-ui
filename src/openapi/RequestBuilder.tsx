@@ -108,7 +108,6 @@ function renderRequestBody(requestBody: IRequestBody, schemas: Dictionary<ISchem
 function CreateCURL({ request }: { request: AxiosRequestConfig }) {
   const { t } = useTranslation();
   const cURL = generateCURL(request);
-  console.log("cURL", cURL);
 
   return (
     <div>
@@ -125,7 +124,7 @@ function CreateCURL({ request }: { request: AxiosRequestConfig }) {
           复制
         </Button>
       </div>
-      <pre css={[{ width: 672, fontSize: dsc.fontSize.xs }, httpCardWrapStyle]}>{cURL}</pre>
+      <pre css={[{ width: 772, fontSize: dsc.fontSize.xs }, httpCardWrapStyle]}>{cURL}</pre>
     </div>
   );
 }

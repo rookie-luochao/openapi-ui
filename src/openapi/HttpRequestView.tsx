@@ -40,7 +40,7 @@ export function HeadRow({ field, value }: IHeadRowProps) {
   return (
     <span css={{ display: "block" }}>
       <span css={{ fontWeight: "bold", marginRight: "0.5em" }}>{field}:</span>
-      <span>{value}</span>
+      <span>{value}&nbsp;&nbsp;&nbsp;</span>
     </span>
   );
 }
