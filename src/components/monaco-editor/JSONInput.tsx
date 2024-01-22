@@ -1,7 +1,9 @@
 import { Editor, loader } from "@monaco-editor/react";
-import * as monaco from "monaco-editor";
+import "monaco-editor/esm/vs/editor/editor.all.js";
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker";
+import "monaco-editor/esm/vs/language/json/monaco.contribution";
 import { ISchema } from "../../openapi/type";
 
 self.MonacoEnvironment = {
