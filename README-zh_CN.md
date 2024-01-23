@@ -27,8 +27,8 @@
 
 ## 网站域名
 * CN: [www.openapi-ui.com](https://www.openapi-ui.com)
-* US: [docs.openapi-ui.com](https://docs.openapi-ui.com)
-* US2: [doc.openapi-ui.com](https://doc.openapi-ui.com)
+* US: [doc.openapi-ui.com](https://doc.openapi-ui.com)
+* US2: [docs.openapi-ui.com](https://docs.openapi-ui.com)
 
 ## 快速开始
 ```bash

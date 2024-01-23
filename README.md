@@ -27,8 +27,8 @@ A simpler and more beautiful openapi document than swagger-ui, quickly generate 
 
 ## Website domain
 * CN: [www.openapi-ui.com](https://www.openapi-ui.com)
-* US: [docs.openapi-ui.com](https://docs.openapi-ui.com)
-* US2: [doc.openapi-ui.com](https://doc.openapi-ui.com)
+* US: [doc.openapi-ui.com](https://doc.openapi-ui.com)
+* US2: [docs.openapi-ui.com](https://docs.openapi-ui.com)
 
 ## Quick start
 ```bash
