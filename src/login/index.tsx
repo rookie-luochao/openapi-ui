@@ -72,6 +72,9 @@ export default function Login() {
                       backgroundColor: dsc.color.primary,
                       color: dsc.color.bg,
                       border: "none",
+                      "& img": {
+                        filter: "invert(1)",
+                      },
                     }
                   : {},
               ]}

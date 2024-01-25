@@ -25,6 +25,14 @@ export const flexCenterOpts = (arg: IFlexOptions = {}): CSSObject => {
   };
 };
 
+export const flexAlignItemsCenterOpts = (arg: IFlexOptions = {}): CSSObject => {
+  return {
+    display: "flex",
+    alignItems: "center",
+    ...arg,
+  };
+};
+
 export const flexBetweenCenterOpts = (arg: IFlexOptions = {}): CSSObject => {
   return {
     display: "flex",

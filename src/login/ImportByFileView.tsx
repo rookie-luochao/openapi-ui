@@ -1,12 +1,13 @@
-import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload, message } from "antd";
 import { UploadChangeParam } from "antd/es/upload/interface";
 import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toQueryString } from "react-router-toolkit";
+import UploadOutlined from "../assets/images/upload.svg";
 import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
+import { flexAlignItemsCenterOpts } from "../core/style/utils";
 import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
@@ -83,7 +84,19 @@ export function FileImportView() {
         }}
       >
         <Upload maxCount={1} beforeUpload={() => false} accept=".json,.yml">
-          <Button icon={<UploadOutlined />}>{t("login.uploadBtn")}</Button>
+          <Button
+            css={[
+              flexAlignItemsCenterOpts(),
+              {
+                "&:hover img": {
+                  filter: "invert(30%) sepia(85%) saturate(2525%) hue-rotate(208deg) brightness(104%) contrast(101%)",
+                },
+              },
+            ]}
+          >
+            <img src={UploadOutlined} style={{ marginRight: 6 }} alt="upload" />
+            {t("login.uploadBtn")}
+          </Button>
         </Upload>
       </FormItem>
       <Form.Item>

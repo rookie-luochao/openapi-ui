@@ -1,7 +1,6 @@
-import { useDebounceEffect } from "ahooks";
 import { Input } from "antd";
-import { filter, groupBy, includes, isEmpty, map, toLower } from "lodash-es";
-import { useState } from "react";
+import { debounce, filter, groupBy, includes, isEmpty, map, toLower, values } from "lodash-es";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
 import { dsc } from "../core/style/defaultStyleConfig";
@@ -149,37 +148,27 @@ export function OperationList(props: ICollapsed) {
   const [filterValue, setFilterValue] = useState("");
   const [groupedOperations, setGroupedOperations] = useState({} as Dictionary<IOperationEnhance[]>);
 
-  useDebounceEffect(
-    () => {
-      if (!isEmpty(operations)) {
-        let operationList = filterValue
-          ? filter(operations, (k) => includes(toLower(k.operationId) || "", toLower(filterValue)))
-          : operations;
+  useEffect(() => {
+    if (!isEmpty(operations)) {
+      const operationList = filterValue
+        ? filter(operations, (k) => includes(toLower(k.operationId) || "", toLower(filterValue)))
+        : values(operations);
 
-        operationList = filter(operationList, (operation: IOperationEnhance) => {
-          return !["OpenAPI", "ER"].includes(operation.operationId || "");
-        }) as IOperationEnhance[];
+      // groupBy group field
+      const groupedOperations = groupBy(operationList, (operation: IOperationEnhance) => operation.group);
 
-        // groupBy group field
-        const groupedOperations = groupBy(operationList, (operation: IOperationEnhance) => operation.group);
-
-        setGroupedOperations(groupedOperations);
-      }
-    },
-    [operations, filterValue],
-    {
-      wait: 500,
-      leading: true,
-    },
-  );
+      setGroupedOperations(groupedOperations);
+    }
+  }, [operations, filterValue]);
 
   return (
     <div css={{ position: "relative" }}>
       <div css={{ fontSize: dsc.fontSize.xs, padding: "0.5em 0.8em" }}>
         <Input
           placeholder={t("openapi.searchPlaceholder")}
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
+          onChange={debounce((e: ChangeEvent<HTMLInputElement>) => {
+            setFilterValue(e.target.value);
+          }, 500)}
         />
       </div>
       <div>

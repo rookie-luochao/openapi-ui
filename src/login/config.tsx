@@ -1,4 +1,6 @@
-import { FileAddOutlined, FileTextOutlined, LinkOutlined } from "@ant-design/icons";
+import FileAddOutlined from "../assets/images/file.svg";
+import LinkOutlined from "../assets/images/link.svg";
+import FileTextOutlined from "../assets/images/text.svg";
 
 export enum ImportModeType {
   url = "url",
@@ -18,8 +20,8 @@ export const displayImportModeType = (field: IImportModeType) => {
 
 export const displayImportModeTypeIcon = (field: IImportModeType) => {
   return {
-    url: <LinkOutlined />,
-    file: <FileAddOutlined />,
-    text: <FileTextOutlined />,
+    url: <img src={LinkOutlined} alt="url" />,
+    file: <img src={FileAddOutlined} alt="json-file" />,
+    text: <img src={FileTextOutlined} alt="text" />,
   }[field];
 };

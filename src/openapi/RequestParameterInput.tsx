@@ -1,10 +1,13 @@
-import { MinusOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { Button, Input, InputNumber, Select, Upload } from "antd";
 import { filter, map } from "lodash-es";
 import React, { ReactNode, useState } from "react";
 import { Dictionary } from "react-router-toolkit";
+import MinusOutlined from "../assets/images/minus.svg";
+import PlusOutlined from "../assets/images/plus.svg";
+import UploadOutlined from "../assets/images/upload.svg";
 import { IJSONInputProps, IJSONInputWithSchemaProps, JSONInput } from "../components/monaco-editor/JSONInput";
 import { dsc } from "../core/style/defaultStyleConfig";
+import { flexAlignItemsCenterOpts } from "../core/style/utils";
 import { Description, SchemaView } from "./SchemaView";
 import { ParameterPositionIconComp } from "./config";
 import { displayDefault, displayType, displayValidate, toEnumMap } from "./displayType";
@@ -150,7 +153,19 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
         }}
         beforeUpload={() => false}
       >
-        <Button icon={<UploadOutlined />}>{placeholder || "Upload"}</Button>
+        <Button
+          css={[
+            flexAlignItemsCenterOpts(),
+            {
+              "&:hover img": {
+                filter: "invert(30%) sepia(85%) saturate(2525%) hue-rotate(208deg) brightness(104%) contrast(101%)",
+              },
+            },
+          ]}
+        >
+          <img src={UploadOutlined} style={{ marginRight: 6 }} alt="upload" />
+          {placeholder || "Upload"}
+        </Button>
       </Upload>
     );
   }
@@ -193,7 +208,7 @@ function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
           commit();
         })}
       >
-        <PlusOutlined />
+        <img src={PlusOutlined} />
       </span>
     </>
   );
@@ -254,7 +269,7 @@ export const RequestParameterInput = ({
                 commonProps.onChange(filter(commonProps.value, (_, idx) => index !== idx));
               })}
             >
-              <MinusOutlined />
+              <img src={MinusOutlined} />
             </span>
           </Row>
         ))}
