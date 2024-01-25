@@ -13,7 +13,6 @@ import { ParameterPositionIconComp } from "./config";
 import { displayDefault, displayType, displayValidate, toEnumMap } from "./displayType";
 import { isArraySchema, isObjectSchema, patchSchema } from "./patchSchema";
 import { ISchema, TParameter } from "./type";
-import { withoutBubble } from "./util";
 
 function LabelStyleWrap({ children, required }: { required?: boolean; children?: React.ReactNode }) {
   return (
@@ -174,7 +173,7 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
 }
 
 function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
-  const [value, setValue] = useState(commonProps.value);
+  const [value, setValue] = useState();
 
   const commit = () => {
     commonProps.onChange(value);
@@ -184,7 +183,7 @@ function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
   return (
     <>
       <span
-        role={"input"}
+        role="input"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
@@ -202,14 +201,9 @@ function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
           }}
         />
       </span>
-      <span
-        role={"btn"}
-        onClick={withoutBubble(() => {
-          commit();
-        })}
-      >
-        <img src={PlusOutlined} />
-      </span>
+      <a role="btn" onClick={commit}>
+        <img src={PlusOutlined} style={{ padding: "6px 4px" }} />
+      </a>
     </>
   );
 }
@@ -263,14 +257,14 @@ export const RequestParameterInput = ({
                 }}
               />
             </span>
-            <span
+            <a
               role="btn"
-              onClick={withoutBubble(() => {
+              onClick={() => {
                 commonProps.onChange(filter(commonProps.value, (_, idx) => index !== idx));
-              })}
+              }}
             >
-              <img src={MinusOutlined} />
-            </span>
+              <img src={MinusOutlined} style={{ padding: "6px 4px" }} />
+            </a>
           </Row>
         ))}
         <Row>

@@ -1,5 +1,6 @@
 import { notification } from "antd";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { filter, findIndex, isEmpty, keys, map, pickBy, values } from "lodash-es";
 import { MethodType } from "../../openapi/type";
 import { IConfigInfoStorageState, configInfoStorageKey, defaultConfigInfoStorage } from "../store";
 
@@ -31,6 +32,28 @@ export function request(axiosConfig: AxiosRequestConfig) {
     ...axiosConfig,
   };
   console.log("axiosConfig", axiosConfig);
+
+  if (axiosConfig.method === MethodType.get && ~findIndex(values(axiosConfig.params), (item) => Array.isArray(item))) {
+    axiosConfig.paramsSerializer = (params) => {
+      return filter(
+        map(keys(pickBy(params, (value) => !!value)), (key) => {
+          const value = params[key];
+
+          if (Array.isArray(value)) {
+            const newArr = map(
+              filter(value, (item) => !!item),
+              (val) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`,
+            );
+
+            return !isEmpty(newArr) ? newArr.join("&") : "";
+          } else {
+            return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+          }
+        }),
+        (item) => !!item,
+      ).join("&");
+    };
+  }
 
   return axios(axiosConfig).catch((reason) => {
     const resData = reason?.response?.data;
