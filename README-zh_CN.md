@@ -86,7 +86,7 @@ make docker-build-run
 4. 展示 AxiosResponse.statusText 类型对应的字段
 5. 展示 AxiosError.message 类型对应的字段
 
-## 不能连接内网api
+## 连接内网api
 * 如果不能连接内网api, 你可以在本地运行此项目或者使用 docker 在本地或者服务器部署此项目
 
 ## 同时查看多个api网关

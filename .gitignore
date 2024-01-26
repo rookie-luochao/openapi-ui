@@ -32,3 +32,4 @@ yarn.lock
 .tmp
 .husky/_
 mock-dev
+stats.html

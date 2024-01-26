@@ -86,7 +86,7 @@ make docker-build-run
 4. display AxiosResponse.statusText field
 5. display AxiosError.message field
 
-## Unable to connect intranet api
+## Connect intranet api
 * if unable to connect intranet api, you can run this project locally or use docker to deploy this project locally or on the server
 
 ## Support multiple api gateway URL
