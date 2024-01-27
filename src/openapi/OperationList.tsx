@@ -8,6 +8,7 @@ import { mainLayoutPath } from "../main/routes";
 import { IMethodType, IOperationEnhance, IOperationEnhanceMap, MethodType } from "./type";
 // import { useOpenapiInfo } from "./useOpenapiInfo";
 import { useTranslation } from "react-i18next";
+import "../components/monaco-editor/workerLoader";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ICollapsed } from "../main";
 import { getMethodColor } from "./util";

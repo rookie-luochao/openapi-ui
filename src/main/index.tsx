@@ -6,7 +6,6 @@ import LogoIcon from "../assets/images/logo.png";
 import LogoMiniIcon from "../assets/images/logo_mini.svg";
 import { Head } from "../components/head";
 import { ICPRegistration } from "../components/icp-registration";
-import "../components/monaco-editor/workerLoader";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
 import { dsc } from "../core/style/defaultStyleConfig";
