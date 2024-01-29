@@ -1,16 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Env } from "../../config";
 import { getConfig } from "../../core/http/config";
 
 export function ModifyAppTitle() {
-  const isFlagRef = useRef(true);
-
   useEffect(() => {
-    if (isFlagRef.current) {
-      initAppTitle();
-      // initAppCDN();
-      isFlagRef.current = false;
-    }
+    initAppTitle();
   }, []);
 
   function initAppTitle() {
@@ -21,12 +15,6 @@ export function ModifyAppTitle() {
       element[0].textContent = config.appNameZH;
     }
   }
-
-  // function initAppCDN() {
-  //   const script = document.createElement("script");
-  //   script.src = "https://cdn.jsdelivr.net/npm/api-spec-converter@2.12.0/dist/api-spec-converter.js";
-  //   document.body.appendChild(script);
-  // }
 
   return null;
 }
