@@ -67,8 +67,8 @@ function Row({ children }: { children: ReactNode }) {
   return (
     <div
       css={{
-        display: "flex",
         width: "100%",
+        display: "flex",
         alignItems: "center",
         "& [role=input]": { flex: 1 },
         "& [role=btn]": {
@@ -107,6 +107,7 @@ function isFile(schema: any) {
   );
 }
 
+// PatchInput handle minimized schema
 export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
   const isArray = isArraySchema(schema as any);
   const placeholder = displayType(schema) + displayValidate(schema) + displayDefault(schema);
@@ -208,6 +209,20 @@ function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
   );
 }
 
+function EnumArrayInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
+  const placeholder = displayType(schema) + displayValidate(schema) + displayDefault(schema);
+  const enumMap = toEnumMap(schema);
+
+  return (
+    <Select
+      mode="multiple"
+      placeholder={placeholder}
+      options={enumToOptions(schema.enum as string[], enumMap)}
+      {...commonProps}
+    />
+  );
+}
+
 interface TParamInputProps {
   schemas: Dictionary<ISchema>;
   parameter: TParameter;
@@ -243,6 +258,17 @@ export const RequestParameterInput = ({
   }
 
   if (isArray) {
+    const isEnumArray = !!schema.items?.enum;
+
+    // if is multiple enums
+    if (isEnumArray) {
+      return (
+        <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
+          <EnumArrayInput {...commonProps} schema={schema.items} />
+        </FieldLabelWithSchemaWrap>
+      );
+    }
+
     return (
       <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
         {map(commonProps.value, (value, index) => (
