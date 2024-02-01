@@ -121,7 +121,7 @@ function CreateCURL({ request }: { request: AxiosRequestConfig }) {
             message.success(t("openapi.copySuccess"));
           }}
         >
-          复制
+          {t("openapi.copy")}
         </Button>
       </div>
       <pre css={[{ width: 772, fontSize: dsc.fontSize.xs }, httpCardWrapStyle]}>{cURL}</pre>

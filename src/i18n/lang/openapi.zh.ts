@@ -9,6 +9,8 @@ const translation = {
   mockAll: "模拟所有参数",
   cURL: "cURL",
   copySuccess: "复制成功",
+  copy: "复制",
+  clickToCopy: "点击复制",
 };
 
 export default translation;

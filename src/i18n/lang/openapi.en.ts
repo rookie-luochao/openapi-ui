@@ -9,6 +9,8 @@ const translation = {
   mockAll: "mock(all)",
   cURL: "cURL",
   copySuccess: "copy successful",
+  copy: "copy",
+  clickToCopy: "click to copy",
 };
 
 export default translation;

@@ -1,3 +1,5 @@
+import { Tooltip, message } from "antd";
+import copy from "copy-to-clipboard";
 import { map } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
@@ -45,16 +47,22 @@ export default function OpenapiView() {
               marginBottom: 8,
             }}
           >
-            <span
-              title={operation.operationId}
-              css={{
-                fontSize: dsc.fontSize.s,
-                fontWeight: "bold",
-                marginRight: 10,
-              }}
-            >
-              {operation.operationId}
-            </span>
+            <Tooltip title={t("openapi.clickToCopy")}>
+              <span
+                css={{
+                  fontSize: dsc.fontSize.s,
+                  fontWeight: "bold",
+                  marginRight: 10,
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  copy(operation.operationId);
+                  message.success(t("openapi.copySuccess"));
+                }}
+              >
+                {operation.operationId}
+              </span>
+            </Tooltip>
             <span title={operation.summary} css={{ fontSize: dsc.fontSize.xxs }}>
               {operation.summary}
             </span>
