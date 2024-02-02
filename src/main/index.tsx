@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import LogoIcon from "../assets/images/logo.png";
 import LogoMiniIcon from "../assets/images/logo_mini.svg";
 import { Head } from "../components/head";
@@ -9,6 +9,7 @@ import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
 import { dsc } from "../core/style/defaultStyleConfig";
+import { loginModuleName } from "../login/routes";
 import { OperationList } from "../openapi/OperationList";
 
 export const defaultMenuTitleHeight = 54;
@@ -18,8 +19,10 @@ export interface ICollapsed {
 }
 
 const Logo = ({ isCollapsed }: ICollapsed) => {
+  const navigate = useNavigate();
+
   return (
-    <div
+    <a
       className="logo"
       css={{
         height: defaultMenuTitleHeight,
@@ -27,13 +30,16 @@ const Logo = ({ isCollapsed }: ICollapsed) => {
         alignItems: "center",
         marginLeft: 24,
       }}
+      onClick={() => {
+        navigate(loginModuleName);
+      }}
     >
       <img
         css={[isCollapsed ? { width: 32 } : { width: 128 }]}
         src={isCollapsed ? LogoMiniIcon : LogoIcon}
         alt="logo"
       />
-    </div>
+    </a>
   );
 };
 

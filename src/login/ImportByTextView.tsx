@@ -75,7 +75,7 @@ export function TextImportView() {
         label={t("login.openapiTextContentLabel")}
         rules={[{ required: true, message: t("login.openapiTextContentPlaceholder") }]}
       >
-        <Input.TextArea placeholder={t("login.openapiTextContentPlaceholder")} rows={12} />
+        <Input.TextArea placeholder={t("login.openapiTextContentPlaceholder")} autoSize={{ minRows: 12 }} />
       </FormItem>
       <Form.Item>
         <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
