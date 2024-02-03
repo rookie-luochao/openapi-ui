@@ -1,4 +1,5 @@
 import { Button, Dropdown, Form, Input, InputNumber, Modal, message } from "antd";
+import { SearchProps } from "antd/es/input";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -17,13 +18,35 @@ import { IPaths } from "../../openapi/type";
 import { flattenOperations } from "../../openapi/useOpenapiInfo";
 import GithubStar from "../github-star";
 
-function UserName() {
+function UserName({ onChange }: { onChange: (value: string) => void }) {
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
+  const { t } = useTranslation();
+
+  const onSearch: SearchProps["onSearch"] = (value) => {
+    if (!value?.trim()) {
+      return message.warning(t("head.inputUrl"));
+    }
+    onChange(value);
+  };
 
   return (
-    <div css={{ color: dsc.color.text, opacity: 0.6, fontWeight: 500, fontSize: dsc.fontSize.xs }}>
-      {openapiWithServiceInfo?.serviceURL}
-    </div>
+    <>
+      {openapiWithServiceInfo?.importModeType === "url" ? (
+        <Input.Search
+          allowClear
+          enterButton
+          size="small"
+          placeholder={t("head.inputUrl")}
+          style={{ minWidth: 372 }}
+          defaultValue={openapiWithServiceInfo?.serviceURL}
+          onSearch={onSearch}
+        />
+      ) : (
+        <div css={{ color: dsc.color.text, opacity: 0.6, fontWeight: 500, fontSize: dsc.fontSize.xs }}>
+          {openapiWithServiceInfo?.serviceURL}
+        </div>
+      )}
+    </>
   );
 }
 
@@ -165,7 +188,7 @@ export function Head() {
     isFlagRef.current = false;
   }, []);
 
-  async function refetchOpenapiInfo(url: string) {
+  async function refetchOpenapiInfo(url: string, isCallBySearchInput?: boolean) {
     const res = await request(Object.assign({ url: url }));
 
     if (res?.status >= 200 && res?.status < 300) {
@@ -177,6 +200,13 @@ export function Head() {
         operations: flattenOperations((openapi.paths || {}) as IPaths),
       };
       updateOpenapiWithServiceInfo(openapiInfo);
+
+      if (isCallBySearchInput) {
+        setQuery((preState) => ({
+          ...preState,
+          serviceURL: url,
+        }));
+      }
     }
   }
 
@@ -194,7 +224,7 @@ export function Head() {
         ]}
       >
         <div css={[flexCenterOpts(), { "& > * + *": { marginLeft: 6 } }]}>
-          <UserName />
+          <UserName onChange={(value) => refetchOpenapiInfo(value, true)} />
           <Dropdown
             menu={{
               items: [

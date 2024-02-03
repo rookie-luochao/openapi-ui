@@ -9,6 +9,7 @@ const translation = {
   reselectService: "重选服务",
   en: "英语",
   zh: "简体中文",
+  inputUrl: "请输入 openapi 文档链接",
 };
 
 export default translation;
