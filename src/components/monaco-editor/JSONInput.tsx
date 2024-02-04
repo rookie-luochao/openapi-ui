@@ -36,7 +36,7 @@ export function JSONInput(props: IJSONInputWithSchemaProps) {
             validate: true,
             schemas: [
               {
-                uri: "http://json.schemastore.org/schema",
+                uri: "https://json.schemastore.org/schema",
                 fileMatch: ["*"],
                 schema: props.schema,
               },

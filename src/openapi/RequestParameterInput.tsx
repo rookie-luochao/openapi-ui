@@ -138,7 +138,7 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
   }
 
   if (schema.type === "integer" || schema.type === "number") {
-    return <InputNumber css={{ width: "100%" }} {...commonProps} placeholder={placeholder} />;
+    return <InputNumber css={{ width: "100%" }} {...commonProps} placeholder={placeholder} min={0} />;
   }
 
   if (isFile(schema) || (isArray && isFile(schema.items))) {
