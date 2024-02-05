@@ -28,9 +28,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         components: {
           Select: { fontSize: dsc.fontSize.xs },
           Input: { fontSize: dsc.fontSize.xs },
+          InputNumber: { fontSize: dsc.fontSize.xs },
           Upload: { fontSize: dsc.fontSize.xs },
           Dropdown: { fontSize: dsc.fontSize.xs },
           Form: { fontSize: dsc.fontSize.xs },
+          DatePicker: { fontSize: dsc.fontSize.xs },
         },
       }}
     >

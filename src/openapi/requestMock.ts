@@ -47,7 +47,7 @@ enum SampleMockFieldName {
   size = "size",
 }
 
-function getMockValueByFieldName(fieldName: string) {
+function getMockValueByFieldName(fieldName: string, parameter: TParameter) {
   let value;
 
   switch (fieldName) {
@@ -55,18 +55,23 @@ function getMockValueByFieldName(fieldName: string) {
       value = faker.string.uuid();
       break;
     case SampleMockFieldName.dateunix:
-      value = toDateUnix(faker.date.anytime());
+      value = toDateUnix(faker.date.recent());
       break;
     case SampleMockFieldName.date:
-      value = toDate(faker.date.anytime());
+      value = toDate(faker.date.recent());
       break;
     case SampleMockFieldName.datetimeunix:
     case SampleMockFieldName.timestamp:
-      value = toFullTimeWithSecondUnix(faker.date.anytime());
+      value = toFullTimeWithSecondUnix(faker.date.recent());
       break;
     case SampleMockFieldName.datetime:
     case SampleMockFieldName.time:
-      value = toFullTimeWithSecond(faker.date.anytime());
+      // const type = (parameter?.schema as ISchema).type;
+      if ((parameter?.schema as ISchema).type === "number" || (parameter?.schema as ISchema).type === "integer") {
+        value = toFullTimeWithSecondUnix(faker.date.recent());
+      } else {
+        value = toFullTimeWithSecond(faker.date.recent());
+      }
       break;
     case SampleMockFieldName.email:
       value = faker.internet.email();
@@ -139,9 +144,10 @@ export function getMockQueryDataBySchema(parameters?: TParameter[], isRequired?:
         const sampleMockFieldName = find(SampleMockFieldName, (fieldName) =>
           includes(toLower(parameter.name), fieldName),
         );
+
         // if field name predefined
         if (sampleMockFieldName) {
-          mockData[parameter.name] = getMockValueByFieldName(sampleMockFieldName);
+          mockData[parameter.name] = getMockValueByFieldName(sampleMockFieldName, parameter);
         } else if (schema.type === "integer") {
           mockData[parameter.name] = faker.number.int({ min: 0, max: 100000 });
         } else if (schema.type === "string") {

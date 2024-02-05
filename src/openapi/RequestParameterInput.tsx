@@ -1,5 +1,6 @@
-import { Button, Input, InputNumber, Select, Upload } from "antd";
-import { filter, map } from "lodash-es";
+import { Button, DatePicker, DatePickerProps, Input, InputNumber, Select, Upload } from "antd";
+import dayjs from "dayjs";
+import { filter, includes, map, toLower } from "lodash-es";
 import React, { ReactNode, useState } from "react";
 import { Dictionary } from "react-router-toolkit";
 import MinusOutlined from "../assets/images/minus.svg";
@@ -107,6 +108,22 @@ function isFile(schema: any) {
   );
 }
 
+enum TimeSymbolType {
+  time = "time",
+  date = "date",
+  timeZH = "时间",
+  dateZH = "日期",
+}
+
+function isTime(parameter: TParameter) {
+  return (
+    includes(toLower(parameter.name), TimeSymbolType.time) ||
+    includes(toLower(parameter.name), TimeSymbolType.date) ||
+    includes(parameter.description, TimeSymbolType.timeZH) ||
+    includes(parameter.description, TimeSymbolType.dateZH)
+  );
+}
+
 // PatchInput handle minimized schema
 export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
   const isArray = isArraySchema(schema as any);
@@ -115,13 +132,16 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
   if (schema.enum) {
     const enumMap = toEnumMap(schema);
 
-    return <Select {...commonProps} placeholder={placeholder} options={enumToOptions(schema.enum, enumMap)} />;
+    return (
+      <Select {...commonProps} allowClear placeholder={placeholder} options={enumToOptions(schema.enum, enumMap)} />
+    );
   }
 
   if (schema.type === "boolean") {
     return (
       <Select
         {...commonProps}
+        allowClear
         placeholder={placeholder}
         options={[
           {
@@ -138,7 +158,7 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
   }
 
   if (schema.type === "integer" || schema.type === "number") {
-    return <InputNumber css={{ width: "100%" }} {...commonProps} placeholder={placeholder} min={0} />;
+    return <InputNumber {...commonProps} css={{ width: "100%" }} placeholder={placeholder} min={0} />;
   }
 
   if (isFile(schema) || (isArray && isFile(schema.items))) {
@@ -170,7 +190,14 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
     );
   }
 
-  return <Input {...commonProps} onChange={(e) => commonProps.onChange(e.target.value)} placeholder={placeholder} />;
+  return (
+    <Input
+      {...commonProps}
+      allowClear
+      onChange={(e) => commonProps.onChange(e.target.value)}
+      placeholder={placeholder}
+    />
+  );
 }
 
 function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
@@ -215,10 +242,33 @@ function EnumArrayInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
 
   return (
     <Select
+      {...commonProps}
       mode="multiple"
       placeholder={placeholder}
       options={enumToOptions(schema.enum as string[], enumMap)}
-      {...commonProps}
+      allowClear
+    />
+  );
+}
+
+function TimeInput({ schema, isUnix, ...commonProps }: IJSONInputWithSchemaProps & { isUnix?: boolean }) {
+  const placeholder = displayType(schema) + displayValidate(schema) + displayDefault(schema);
+
+  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+    commonProps.onChange(isUnix ? date?.unix() : dateString);
+  };
+
+  return (
+    <DatePicker
+      allowClear
+      style={{ width: "100%" }}
+      placeholder={placeholder}
+      showTime={{
+        showNow: true,
+        defaultValue: dayjs("00:00:00", "HH:mm:ss"),
+      }}
+      value={commonProps.value ? (isUnix ? dayjs.unix(commonProps.value) : dayjs(commonProps.value)) : undefined}
+      onChange={onChange}
     />
   );
 }
@@ -233,7 +283,7 @@ export const RequestParameterInput = ({
   parameter,
   ...otherProps
 }: TParamInputProps & Partial<IJSONInputProps>) => {
-  const schema = patchSchema<TParameter>(parameter.schema || parameter, schemas);
+  const schema = patchSchema<ISchema>(parameter.schema || parameter, schemas);
   const isArray = isArraySchema(schema as any);
   const commonProps = {
     value: isArray ? (otherProps.value ? [].concat(otherProps.value) : []) : otherProps.value,
@@ -255,9 +305,7 @@ export const RequestParameterInput = ({
         <JSONInput {...commonProps} schema={schema as any} />
       </FieldLabelWithSchemaWrap>
     );
-  }
-
-  if (isArray) {
+  } else if (isArray) {
     const isEnumArray = !!schema.items?.enum;
 
     // if is multiple enums
@@ -303,6 +351,15 @@ export const RequestParameterInput = ({
             }}
           />
         </Row>
+      </FieldLabelWithSchemaWrap>
+    );
+  } else if (isTime(parameter)) {
+    const type = (parameter?.schema as ISchema).type;
+    const isUnix = type === "integer" || type === "number";
+
+    return (
+      <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
+        <TimeInput {...commonProps} schema={schema} isUnix={isUnix} />
       </FieldLabelWithSchemaWrap>
     );
   }
