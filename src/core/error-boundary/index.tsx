@@ -15,7 +15,7 @@ export function fallbackRender({ error, resetErrorBoundary }: FallbackProps) {
   );
 }
 
-export const logError = (error: Error, info: ErrorInfo) => {
+export function logError(error: Error, info: ErrorInfo) {
   // Do something with the error, e.g. log to an external API
   Modal.error({
     title: error.message,
@@ -24,9 +24,9 @@ export const logError = (error: Error, info: ErrorInfo) => {
   });
 
   // use error make log
-};
+}
 
-const ErrorBoundaryWrap = ({ children }: { children: ReactNode }) => {
+function ErrorBoundaryWrap({ children }: { children: ReactNode }) {
   return (
     <ErrorBoundary
       fallbackRender={fallbackRender}
@@ -39,10 +39,12 @@ const ErrorBoundaryWrap = ({ children }: { children: ReactNode }) => {
       {children}
     </ErrorBoundary>
   );
-};
+}
 
-export const ErrorBoundaryWrapOutlet = () => (
-  <ErrorBoundaryWrap>
-    <Outlet />
-  </ErrorBoundaryWrap>
-);
+export function ErrorBoundaryWrapOutlet() {
+  return (
+    <ErrorBoundaryWrap>
+      <Outlet />
+    </ErrorBoundaryWrap>
+  );
+}

@@ -1,6 +1,6 @@
-import { CSSObject } from "@emotion/react";
 import { Tooltip } from "antd";
 import copy from "copy-to-clipboard";
+import { ellipsisBasicStyle } from "./config";
 
 interface IEllipsis {
   text: string;
@@ -8,15 +8,7 @@ interface IEllipsis {
   className?: string;
 }
 
-export const ellipsisBasicStyle: CSSObject = {
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  cursor: "pointer",
-  display: "inline-block",
-};
-
-export const Ellipsis = ({ text, width, className }: IEllipsis) => {
+export function Ellipsis({ text, width, className }: IEllipsis) {
   return (
     <Tooltip
       title={<div css={{ maxHeight: 600 }}>{text}</div>}
@@ -30,4 +22,4 @@ export const Ellipsis = ({ text, width, className }: IEllipsis) => {
       </span>
     </Tooltip>
   );
-};
+}
