@@ -18,8 +18,8 @@ dependencies:
     specifier: ^5.13.2
     version: 5.13.2(react-dom@18.2.0)(react@18.2.0)
   axios:
-    specifier: ^1.6.5
-    version: 1.6.6
+    specifier: ^1.6.7
+    version: 1.6.7
   copy-to-clipboard:
     specifier: ^3.3.3
     version: 3.3.3
@@ -1876,8 +1876,8 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: false
 
-  /axios@1.6.6:
-    resolution: {integrity: sha512-XZLZDFfXKM9U/Y/B4nNynfCRUqNyVZ4sBC/n9GDRCkq9vd2mIvKjKKsbIh1WPmHmNbg6ND7cTBY3Y2+u1G3/2Q==}
+  /axios@1.6.7:
+    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
     dependencies:
       follow-redirects: 1.15.5
       form-data: 4.0.0
