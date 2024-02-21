@@ -268,7 +268,7 @@ interface ISchemaProps {
 
 export function SchemaView({ schema, schemas }: ISchemaProps & { schemas: Dictionary<ISchema> }) {
   if (isEmpty(schema)) {
-    return <span />;
+    return null;
   }
 
   const patchedSchema = patchSchema(schema, schemas);

@@ -1,4 +1,4 @@
-import { forEach, has, map, replace, some } from "lodash-es";
+import { forEach, has, map, reduce, replace, some } from "lodash-es";
 import { dsc } from "../core/style/defaultStyleConfig";
 
 function highlightType(v: string) {
@@ -36,12 +36,25 @@ export function displayType(schema: any, id?: string): string {
 }
 
 export function toEnumMap(schema: any) {
-  const options = (schema["x-enum-options"] as any[]) || [];
-  const enumMap: { [key: string]: string } = {};
+  let enumMap: { [key: string]: string } = {};
 
-  forEach(options, (option) => {
-    enumMap[option.value] = option.label;
-  });
+  if (schema["x-enum-options"]) {
+    const options = (schema["x-enum-options"] || []) as any[];
+    forEach(options, (option) => {
+      enumMap[option.value] = option.label;
+    });
+  } else if (schema["x-enum-varnames"]) {
+    enumMap = reduce(
+      schema["x-enum-varnames"] as string[],
+      (pre, item, index) => {
+        return {
+          ...pre,
+          [schema.enum[index]]: schema["x-enum-comments"]?.[item] || item,
+        };
+      },
+      {},
+    );
+  }
 
   return enumMap;
 }

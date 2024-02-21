@@ -75,7 +75,7 @@ export default function MainLayout() {
           <div css={isZh ? { minHeight: defaultContentHeight - 32 - 12 } : {}}>
             <Outlet />
           </div>
-          {isZh && <ICPRegistration />}
+          {isZh && <ICPRegistration css={{ minWidth: 880 }} />}
         </div>
       </Layout>
     </Layout>

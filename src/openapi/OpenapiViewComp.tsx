@@ -18,7 +18,9 @@ export function Responses({ operation }: { operation: IOperationEnhance }) {
       {map(operation.responses as IResponses, (response: IResponse | IReference, code: number) => {
         const schemas = openapiWithServiceInfo.openapi.components?.schemas || {};
 
-        if (isEmpty(schemas)) return null;
+        if (isEmpty(schemas)) {
+          return null;
+        }
 
         if (response.$ref) {
           const schemaName = replace(response.$ref, "#/responses/", "");
@@ -67,7 +69,7 @@ function ResponseItem({ code, response, schemas }: IResponseItemProps) {
           <HttpErrorList httpErrorList={httpErrorList} />
         </div>
       </div>
-      <div css={{ width: "60%" }}>
+      <div css={{ width: "70%" }}>
         {!!response.content &&
           map(response.content, (mediaType: IMediaType, contentType: string) => {
             return (
