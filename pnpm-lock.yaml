@@ -69,8 +69,8 @@ dependencies:
     specifier: ^7.0.8
     version: 7.0.8
   zustand:
-    specifier: ^4.4.7
-    version: 4.5.0(@types/react@18.2.57)(react@18.2.0)
+    specifier: ^4.5.1
+    version: 4.5.1(@types/react@18.2.57)(react@18.2.0)
 
 devDependencies:
   '@babel/preset-react':
@@ -5381,8 +5381,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zustand@4.5.0(@types/react@18.2.57)(react@18.2.0):
-    resolution: {integrity: sha512-zlVFqS5TQ21nwijjhJlx4f9iGrXSL0o/+Dpy4txAP22miJ8Ti6c1Ol1RLNN98BMib83lmDH/2KmLwaNXpjrO1A==}
+  /zustand@4.5.1(@types/react@18.2.57)(react@18.2.0):
+    resolution: {integrity: sha512-XlauQmH64xXSC1qGYNv00ODaQ3B+tNPoy22jv2diYiP4eoDKr9LA+Bh5Bc3gplTrFdb6JVI+N4kc1DZ/tbtfPg==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
