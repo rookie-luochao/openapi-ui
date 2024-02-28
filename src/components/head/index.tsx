@@ -37,7 +37,7 @@ function UserName({ onChange }: { onChange: (value: string) => void }) {
           enterButton
           size="small"
           placeholder={t("head.inputUrl")}
-          style={{ minWidth: 372 }}
+          style={{ minWidth: 476 }}
           defaultValue={openapiWithServiceInfo?.serviceURL}
           onSearch={onSearch}
         />
