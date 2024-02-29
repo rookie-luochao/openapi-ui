@@ -3,7 +3,7 @@ import { SearchProps } from "antd/es/input";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { PartialParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
+import { PartialParsedUrlQuery, toQueryString, useRouterQuery } from "react-router-toolkit";
 import langIcon from "../../assets/images/lang.svg";
 import { defaultTimeout, request } from "../../core/http";
 import { IConfigInfo, useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../../core/store";
@@ -14,6 +14,7 @@ import { IImportModeType, ImportModeType } from "../../login/config";
 import { loginModuleName } from "../../login/routes";
 import { parseSwaggerOrOpenapi } from "../../login/util";
 import { defaultMenuTitleHeight } from "../../main";
+import { mainLayoutPath } from "../../main/routes";
 import { IPaths } from "../../openapi/type";
 import { flattenOperations } from "../../openapi/useOpenapiInfo";
 import GithubStar from "../github-star";
@@ -169,7 +170,8 @@ export function Head() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
-  const [{ serviceURL, importModeType, logon }, setQuery] = useRouterQuery<IQuery>();
+  const [query, setQuery] = useRouterQuery<IQuery>();
+  const { serviceURL, importModeType, logon } = query;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFlagRef = useRef(true);
 
@@ -202,10 +204,15 @@ export function Head() {
       updateOpenapiWithServiceInfo(openapiInfo);
 
       if (isCallBySearchInput) {
-        setQuery((preState) => ({
-          ...preState,
-          serviceURL: url,
-        }));
+        navigate(
+          `/${mainLayoutPath}${toQueryString({
+            ...query,
+            serviceURL: url,
+          })}`,
+          {
+            replace: true,
+          },
+        );
       }
     }
   }
