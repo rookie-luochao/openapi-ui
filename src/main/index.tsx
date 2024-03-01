@@ -1,6 +1,7 @@
 import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { useState } from "react";
+import throttle from "lodash-es/throttle";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import LogoIcon from "../assets/images/logo.png";
 import LogoMiniIcon from "../assets/images/logo_mini.svg";
@@ -45,10 +46,26 @@ const Logo = ({ isCollapsed }: ICollapsed) => {
 
 export default function MainLayout() {
   const [collapsed, setCollapsed] = useState(false);
-  const menuHeight = document.documentElement.clientHeight;
+  const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
   const defaultMenuHeight = defaultContentHeight - 48; // 48px为展开收缩图表高度
   const isZh = getConfig().env === Env.zh;
+
+  const throttledResizeHandler = throttle(
+    () => {
+      setMenuHeight(globalThis.document.documentElement.clientHeight);
+    },
+    1200,
+    { leading: true, trailing: true },
+  );
+
+  useEffect(() => {
+    globalThis.addEventListener("resize", throttledResizeHandler);
+
+    return () => {
+      globalThis.removeEventListener("resize", throttledResizeHandler);
+    };
+  }, [throttledResizeHandler]);
 
   return (
     <Layout>
