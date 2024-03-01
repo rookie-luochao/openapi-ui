@@ -1,0 +1,79 @@
+definitions:
+  user.CreateBody:
+    properties:
+      name:
+        description: 用户名
+        type: string
+    required:
+    - name
+    type: object
+  user.CreateRESP:
+    properties:
+      id:
+        description: 用户id
+        type: string
+    type: object
+  user.UserInfo:
+    properties:
+      id:
+        description: 用户id
+        type: string
+      name:
+        description: 用户名
+        type: string
+    type: object
+info:
+  contact:
+    email: mushaolei@wezhuiyi.com
+    name: API Support
+    url: http://face.wezhuiyi.com
+  description: Swagger API for Face Project
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Blueprint New Face Web API
+  version: 3.1.3
+paths:
+  /users:
+    post:
+      description: 创建用户
+      operationId: CreateUser
+      parameters:
+      - description: body请求
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/user.CreateBody'
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/user.CreateRESP'
+        "500":
+          description: 失败
+      summary: CreateUser
+      tags:
+      - User
+  /users/{id}:
+    get:
+      description: 获取用户信息
+      operationId: GetUser
+      parameters:
+      - description: 用户id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/user.UserInfo'
+        "500":
+          description: 失败
+      summary: GetUser
+      tags:
+      - User
+swagger: "2.0"
