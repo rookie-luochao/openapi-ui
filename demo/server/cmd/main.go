@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
 	"github.com/rookie-luochao/openapi-ui/server/route"
 	_ "github.com/rookie-luochao/openapi-ui/server/swagger"
@@ -28,6 +29,7 @@ func main() {
 	e.Debug = true
 	e.Logger.SetLevel(log.DEBUG)
 	e.Validator = &CustomValidator{validator: validator.New()}
+	e.Use(middleware.CORS())
 
 	e.GET("/swagger/*", esw.WrapHandler)
 
