@@ -6,7 +6,8 @@ import { Dictionary } from "react-router-toolkit";
 import MinusOutlined from "../assets/images/minus.svg";
 import PlusOutlined from "../assets/images/plus.svg";
 import UploadOutlined from "../assets/images/upload.svg";
-import { IJSONInputProps, IJSONInputWithSchemaProps, JSONInput } from "../components/monaco-editor/JSONInput";
+import { IJSONInputProps } from "../components/monaco-editor/JSONInput";
+import { IJSONInputWithSchemaProps, JSONSchemaInput } from "../components/monaco-editor/JSONSchemaInput";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { flexAlignItemsCenterOpts } from "../core/style/utils";
 import { Description, SchemaView } from "./SchemaView";
@@ -302,7 +303,7 @@ export const RequestParameterInput = ({
   if (isObjectSchema(schema as any) || (isArray && isObjectSchema(schema.items))) {
     return (
       <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
-        <JSONInput {...commonProps} schema={schema as any} />
+        <JSONSchemaInput {...commonProps} schema={schema as any} />
       </FieldLabelWithSchemaWrap>
     );
   } else if (isArray) {

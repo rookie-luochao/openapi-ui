@@ -26,9 +26,6 @@ export function request(axiosConfig: AxiosRequestConfig) {
   axiosConfig = {
     method: MethodType.get,
     timeout: timeout,
-    headers: {
-      "Content-Type": "application/json",
-    },
     ...axiosConfig,
   };
   console.log("axiosConfig", axiosConfig);
