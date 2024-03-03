@@ -2,8 +2,9 @@ import { map } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { ParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
 import LogoIcon from "../assets/images/logo.png";
+import { ChangeLangComp } from "../components/change-lang";
 import GithubStar from "../components/github-star";
-import { ChangeLangComp } from "../components/head";
+import { GoToPostman } from "../components/head/common";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
@@ -38,6 +39,7 @@ export default function Login() {
           <img css={{ width: 128 }} src={LogoIcon} alt="openapi-ui" />
           <div css={{ "& > * + *": { marginLeft: 6 } }}>
             <ChangeLangComp />
+            <GoToPostman />
             <GithubStar />
           </div>
         </div>

@@ -18,7 +18,7 @@ export interface ICollapsed {
   isCollapsed?: boolean;
 }
 
-const Logo = ({ isCollapsed }: ICollapsed) => {
+export const Logo = ({ isCollapsed }: ICollapsed) => {
   const navigate = useNavigate();
 
   return (
@@ -47,7 +47,7 @@ export default function MainLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const menuHeight = document.documentElement.clientHeight;
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
-  const defaultMenuHeight = defaultContentHeight - 48; // 48px为展开收缩图表高度
+  const defaultMenuHeight = defaultContentHeight - 48; // 48px为展开收缩图标高度
   const isZh = getConfig().env === Env.zh;
 
   return (
