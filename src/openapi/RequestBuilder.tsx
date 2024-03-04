@@ -105,7 +105,7 @@ function renderRequestBody(requestBody: IRequestBody, schemas: Dictionary<ISchem
   );
 }
 
-function CreateCURL({ request }: { request: AxiosRequestConfig }) {
+export function CreateCURL({ request }: { request: AxiosRequestConfig }) {
   const { t } = useTranslation();
   const cURL = generateCURL(request);
 

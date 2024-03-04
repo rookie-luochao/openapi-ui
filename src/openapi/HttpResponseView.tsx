@@ -50,7 +50,7 @@ function CodeView({ children }: { children: ReactNode }) {
   );
 }
 
-export function HttpResponseView({ data, status, headers }: AxiosResponse) {
+export function HttpResponseView({ data, status, headers = {} }: AxiosResponse) {
   const isHTML = isObject(headers) && includes(headers["content-type"], "text/html");
   if (isHTML) {
     const ref = ($el: HTMLIFrameElement) => {

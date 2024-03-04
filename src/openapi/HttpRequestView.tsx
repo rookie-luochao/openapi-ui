@@ -97,8 +97,8 @@ function displayMultipart(boundary: string, data: any) {
   return map(data, (v: any, k: string) => getPart(k, v)).join("\n") + `${boundary}--`;
 }
 
-function stringifyBody(request: any) {
-  const contentType = request.headers["Content-Type"];
+function stringifyBody(request: AxiosRequestConfig) {
+  const contentType = request?.headers?.["Content-Type"];
   let data = request.data;
 
   if (isMultipartFormData(contentType)) {
@@ -140,7 +140,7 @@ export interface IHttpViewProps {
   request: AxiosRequestConfig;
 }
 
-export function HttpRequestView({ request }: IHttpViewProps) {
+export function HttpRequestView({ request = {} }: IHttpViewProps) {
   return (
     <div css={[httpCardWrapStyle, { whiteSpace: "nowrap" }]}>
       <div>

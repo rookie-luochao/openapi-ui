@@ -1,12 +1,14 @@
 import { request } from "@request";
-import { Button, Form, Input, Select, Tabs, TabsProps, message } from "antd";
+import { Button, Form, Input, Popover, Select, Tabs, TabsProps, message } from "antd";
 import { AxiosHeaders, AxiosRequestConfig, AxiosResponse } from "axios";
 import { isEmpty, map, toUpper } from "lodash-es";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { fullUrlRegex } from "../core/regex";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { HttpRequestView } from "../openapi/HttpRequestView";
 import { HttpResponseView } from "../openapi/HttpResponseView";
+import { CreateCURL } from "../openapi/RequestBuilder";
 import { parameterPositionMap } from "../openapi/config";
 import { MethodType } from "../openapi/type";
 import { RequestBodyInput, RequestHeaderInput, RequestParameterInput } from "./RequestInput";
@@ -52,6 +54,7 @@ const items: TabsProps["items"] = [
 
 export function RequestBuilder() {
   const [form] = Form.useForm();
+  const { t } = useTranslation();
   const [axiosResponse, setAxiosResponse] = useState({} as AxiosResponse);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0); // hack for sync request-view
@@ -69,10 +72,6 @@ export function RequestBuilder() {
     return <Select style={{ width: 96 }} options={methodOptions} defaultValue={MethodType.get} onSelect={setMethod} />;
   };
 
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
   async function sumbit(axiosRequest: AxiosRequestConfig) {
     setLoading(true);
     const res = await request(axiosRequest).finally(() => setLoading(false));
@@ -83,6 +82,10 @@ export function RequestBuilder() {
 
     setLoading(false);
   }
+
+  const axiosRequest = useMemo(() => {
+    return getRequestByValues(Object.assign({ method, url }, form.getFieldsValue()));
+  }, [method, url, form.getFieldsValue()]);
 
   return (
     <div style={{ display: "flex" }}>
@@ -117,17 +120,24 @@ export function RequestBuilder() {
             onValuesChange={() => {
               setCount(count + 1);
             }}
-            onFinish={(values) => {
-              sumbit(Object.assign({ method, url }, getRequestByValues(values)));
+            onFinish={() => {
+              sumbit(axiosRequest);
             }}
           >
-            <Tabs defaultActiveKey="0" items={items} onChange={onChange} />
+            <Tabs defaultActiveKey="0" items={items} />
           </Form>
         </div>
       </div>
       <div style={{ flex: 1, fontSize: dsc.fontSize.xxs, paddingLeft: 10 }}>
-        <div style={{ marginBottom: 12 }}>
-          <HttpRequestView request={getRequestByValues(Object.assign({ method, url }, form.getFieldsValue()))} />
+        <div style={{ marginBottom: 8 }}>
+          <HttpRequestView request={axiosRequest} />
+        </div>
+        <div css={{ marginBottom: 8, "& > *": { marginRight: 4 } }}>
+          <Popover content={<CreateCURL request={Object.assign(axiosRequest, { url })} />} trigger="click">
+            <Button size="small" style={{ fontSize: dsc.fontSize.xxs }}>
+              {t("openapi.cURL")}
+            </Button>
+          </Popover>
         </div>
         {!isEmpty(axiosResponse) && <HttpResponseView {...axiosResponse} />}
       </div>
