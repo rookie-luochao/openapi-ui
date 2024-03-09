@@ -1,11 +1,13 @@
 import { Tabs } from "antd";
 import { throttle } from "lodash-es";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { PostmanHead } from "../components/head/PostmanHead";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
 import { dsc } from "../core/style/defaultStyleConfig";
+import i18n from "../i18n";
 import { defaultMenuTitleHeight } from "../main";
 import { RequestBuilder } from "./RequestBuilder";
 
@@ -14,13 +16,14 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 const initialItems = [
   {
     key: "0",
-    label: "request 1",
+    label: `${i18n.t("postman.request")} 1`,
     children: <RequestBuilder />,
     closable: false,
   },
 ];
 
 export default function Postman() {
+  const { t } = useTranslation();
   const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
   const isZh = getConfig().env === Env.zh;
@@ -49,7 +52,7 @@ export default function Postman() {
     const newPanes = [...items];
     newPanes.push({
       key: newActiveKey,
-      label: `request ${newTabIndex.current + 1}`,
+      label: `${t("postman.request")} ${newTabIndex.current + 1}`,
       children: <RequestBuilder />,
       closable: true,
     });

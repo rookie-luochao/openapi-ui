@@ -1,0 +1,25 @@
+const translation = {
+  goToPostman: "手动填写请求信息",
+  request: "请求",
+  urlPlaceholder: "请输入请求URL",
+  validUrlTip: "请输入合法的请求URL",
+  send: "发送",
+  headers: "请求头",
+  query: "请求参数",
+  body: "请求体",
+  customTime: "快速选择时间",
+  addTimeField: "新增时间字段",
+  fieldName: "字段名称",
+  fieldNamePlaceholder: "请输入字段名称",
+  dateTime: "日期(带时分秒)",
+  date: "日期",
+  dateTimeUnix: "日期时间戳(带时分秒)",
+  dateUnix: "日期时间戳",
+  customFile: "快速上传文件",
+  addFileField: "新增文件字段",
+  single: "单个文件",
+  multiple: "多个文件",
+  uploadFile: "请选择文件进行上传",
+};
+
+export default translation;

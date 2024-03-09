@@ -1,0 +1,25 @@
+const translation = {
+  goToPostman: "goto postman",
+  request: "request",
+  urlPlaceholder: "please input request URL",
+  validUrlTip: "please input valid request url",
+  send: "Send",
+  headers: "Headers",
+  query: "Query",
+  body: "Body",
+  customTime: "quickly select time",
+  addTimeField: "Add time field",
+  fieldName: "field name",
+  fieldNamePlaceholder: "please input field name",
+  dateTime: "date-time",
+  date: "date",
+  dateTimeUnix: "date-time-unix",
+  dateUnix: "date-unix",
+  customFile: "quickly upload file",
+  addFileField: "Add file field",
+  single: "single file",
+  multiple: "multiple file",
+  uploadFile: "please select file upload",
+};
+
+export default translation;

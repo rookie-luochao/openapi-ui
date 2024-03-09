@@ -1,6 +1,7 @@
 import { Button, DatePicker, Form, FormInstance, Input, Select, Upload } from "antd";
 import dayjs from "dayjs";
-import { includes } from "lodash-es";
+import { includes, map } from "lodash-es";
+import { useTranslation } from "react-i18next";
 import MinusOutlined from "../assets/images/minus.svg";
 import PlusOutlined from "../assets/images/plus.svg";
 import UploadOutlined from "../assets/images/upload.svg";
@@ -15,11 +16,23 @@ import {
   ICustomTime,
   TimeType,
   UploadFileType,
-  timeTypeOptions,
-  uploadFileTypeOptions,
+  displayTimeType,
+  displayUploadFileType,
 } from "./config";
 
 export function DefineFormField({ position, form }: { position: string; form: FormInstance<any> }) {
+  const { t } = useTranslation();
+
+  const timeTypeOptions = map(TimeType, (item) => ({
+    label: displayTimeType(item),
+    value: item,
+  }));
+
+  const uploadFileTypeOptions = map(UploadFileType, (item) => ({
+    label: displayUploadFileType(item),
+    value: item,
+  }));
+
   const normFile = (e: any) => {
     if (Array.isArray(e)) {
       return e;
@@ -29,12 +42,12 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
   };
 
   const getFieldValue = (formItemName: string, index: number) => {
-    return form.getFieldValue(formItemName)?.[index];
+    return form.getFieldValue(formItemName)?.[index] || {};
   };
 
   return (
     <>
-      <Section title="custom time">
+      <Section title={t("postman.customTime")}>
         <Form.List name={`custom${position}Times`}>
           {(fields, { add, remove }) => {
             return (
@@ -49,7 +62,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                         name={[name, CustomTimeField.fieldName]}
                         style={{ width: "35%", marginRight: 8 }}
                       >
-                        <Input addonBefore="field name: " placeholder="please input" />
+                        <Input addonBefore={t("postman.fieldName")} placeholder={t("postman.fieldNamePlaceholder")} />
                       </Form.Item>
                       <Form.Item
                         {...restField}
@@ -90,7 +103,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                     style={{ width: "60%" }}
                     icon={<img src={PlusOutlined} />}
                   >
-                    Add time field
+                    {t("postman.addTimeField")}
                   </Button>
                 </div>
               </>
@@ -99,7 +112,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
         </Form.List>
       </Section>
       {position === "Data" && (
-        <Section title="custom file">
+        <Section title={t("postman.customFile")}>
           <Form.List name={`custom${position}Files`}>
             {(fields, { add, remove }) => {
               return (
@@ -114,7 +127,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                           name={[name, CustomFileField.fieldName]}
                           style={{ width: "35%", marginRight: 8 }}
                         >
-                          <Input addonBefore="field name: " placeholder="please input" />
+                          <Input addonBefore={t("postman.fieldName")} placeholder={t("postman.fieldNamePlaceholder")} />
                         </Form.Item>
                         <Form.Item
                           {...restField}
@@ -143,7 +156,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                               ]}
                             >
                               <img src={UploadOutlined} style={{ marginRight: 6 }} alt="upload" />
-                              <span style={{ fontSize: dsc.fontSize.xs }}>please select file upload</span>
+                              <span style={{ fontSize: dsc.fontSize.xs }}>{t("postman.uploadFile")}</span>
                             </Button>
                           </Upload>
                         </Form.Item>
@@ -168,7 +181,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                       style={{ width: "60%" }}
                       icon={<img src={PlusOutlined} />}
                     >
-                      Add file field
+                      {t("postman.addFileField")}
                     </Button>
                   </div>
                 </>

@@ -10,7 +10,6 @@ import { dsc } from "../core/style/defaultStyleConfig";
 import { HttpRequestView } from "../openapi/HttpRequestView";
 import { HttpResponseView } from "../openapi/HttpResponseView";
 import { CreateCURL } from "../openapi/RequestBuilder";
-import { parameterPositionMap } from "../openapi/config";
 import { MethodType } from "../openapi/type";
 import { DefineFormField } from "./DefineFormField";
 import { RequestBodyInput, RequestHeaderInput, RequestParameterInput } from "./RequestInput";
@@ -46,7 +45,7 @@ export function RequestBuilder() {
   const items: TabsProps["items"] = [
     {
       key: "0",
-      label: parameterPositionMap.header,
+      label: t("postman.headers"),
       children: (
         <FormItem name="headers">
           <RequestHeaderInput />
@@ -55,7 +54,7 @@ export function RequestBuilder() {
     },
     {
       key: "1",
-      label: parameterPositionMap.query,
+      label: t("postman.query"),
       children: (
         <div>
           <FormItem name="params" style={{ marginBottom: 6 }}>
@@ -67,7 +66,7 @@ export function RequestBuilder() {
     },
     {
       key: "2",
-      label: parameterPositionMap.body,
+      label: t("postman.body"),
       children: (
         <div>
           <FormItem name="data" style={{ marginBottom: 6 }}>
@@ -147,7 +146,7 @@ export function RequestBuilder() {
           <Input
             css={{ width: "90%", marginRight: 5 }}
             addonBefore={<MethodSelector />}
-            placeholder="please input URL"
+            placeholder={t("postman.urlPlaceholder")}
             defaultValue={url}
             onChange={(e) => setUrl(e.target.value?.trim())}
           />
@@ -158,11 +157,11 @@ export function RequestBuilder() {
               if (urlRegex.test(url)) {
                 form.submit();
               } else {
-                message.warning("please input valid url");
+                message.warning(t("postman.validUrlTip"));
               }
             }}
           >
-            Send
+            {t("postman.send")}
           </Button>
         </div>
         <div>

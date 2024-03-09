@@ -56,7 +56,7 @@ function getNeedQuery(queries: Record<string, any>): string {
 }
 
 function buildOriginalUrl(url: string, params: Dictionary<any>) {
-  const lastQueries = pickBy(params, (v) => !isEmpty(v));
+  const lastQueries = pickBy(params, (v) => !!v);
 
   return `${url}${getNeedQuery(lastQueries as any)}`;
 }

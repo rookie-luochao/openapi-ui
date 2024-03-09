@@ -1,12 +1,12 @@
 import { UploadFile } from "antd/es/upload/interface";
 import { Dayjs } from "dayjs";
-import { map } from "lodash-es";
+import i18n from "../i18n";
 
 export enum TimeType {
-  dateTime = "dateTime",
-  date = "date",
   dateTimeUnix = "dateTimeUnix",
   dateUnix = "dateUnix",
+  dateTime = "dateTime",
+  date = "date",
 }
 
 export enum FullTimeType {
@@ -16,19 +16,14 @@ export enum FullTimeType {
 
 type ITimeType = keyof typeof TimeType;
 
-const displayTimeType = (field: ITimeType) => {
+export const displayTimeType = (field: ITimeType) => {
   return {
-    [TimeType.dateTime]: "dateTime",
-    [TimeType.date]: "date",
-    [TimeType.dateTimeUnix]: "dateTimeUnix",
-    [TimeType.dateUnix]: "dateUnix",
+    [TimeType.dateTime]: i18n.t("postman.dateTime"),
+    [TimeType.date]: i18n.t("postman.date"),
+    [TimeType.dateTimeUnix]: i18n.t("postman.dateTimeUnix"),
+    [TimeType.dateUnix]: i18n.t("postman.dateUnix"),
   }[field];
 };
-
-export const timeTypeOptions = map(TimeType, (item) => ({
-  label: displayTimeType(item),
-  value: item,
-}));
 
 export enum CustomTimeField {
   fieldName = "fieldName",
@@ -51,17 +46,12 @@ export enum UploadFileType {
 
 type IUploadFileType = keyof typeof UploadFileType;
 
-const displayUploadFileType = (field: IUploadFileType) => {
+export const displayUploadFileType = (field: IUploadFileType) => {
   return {
-    [UploadFileType.single]: "single",
-    [UploadFileType.multiple]: "multiple",
+    [UploadFileType.single]: i18n.t("postman.single"),
+    [UploadFileType.multiple]: i18n.t("postman.multiple"),
   }[field];
 };
-
-export const uploadFileTypeOptions = map(UploadFileType, (item) => ({
-  label: displayUploadFileType(item),
-  value: item,
-}));
 
 export enum CustomFileField {
   fieldName = "fieldName",

@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber, Modal, message } from "antd";
+import { Button, Form, Input, InputNumber, Modal, Tooltip, message } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import postmanIcon from "../../assets/images/postman.svg";
@@ -86,15 +86,18 @@ export function UpdateConfigInfoModalComp({ onSuccess }: { onSuccess: () => void
 
 export function GoToPostman() {
   const nav = useNavigate();
+  const { t } = useTranslation();
 
   return (
-    <a
-      style={{ cursor: "pointer" }}
-      onClick={() => {
-        nav(`${postmanModuleName}`);
-      }}
-    >
-      <img css={{ width: 16, opacity: 0.6, "&:hover": { opacity: 1 } }} src={postmanIcon} alt="github" />
-    </a>
+    <Tooltip title={t("postman.goToPostman")}>
+      <a
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          nav(`${postmanModuleName}`);
+        }}
+      >
+        <img css={{ width: 16, opacity: 0.6, "&:hover": { opacity: 1 } }} src={postmanIcon} alt="github" />
+      </a>
+    </Tooltip>
   );
 }
