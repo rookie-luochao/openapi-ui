@@ -1,5 +1,6 @@
 import { Tabs } from "antd";
-import { useRef, useState } from "react";
+import { throttle } from "lodash-es";
+import { useEffect, useRef, useState } from "react";
 import { PostmanHead } from "../components/head/PostmanHead";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
@@ -20,12 +21,28 @@ const initialItems = [
 ];
 
 export default function Postman() {
-  const menuHeight = document.documentElement.clientHeight;
+  const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
   const isZh = getConfig().env === Env.zh;
   const [activeKey, setActiveKey] = useState(initialItems[0].key);
   const [items, setItems] = useState(initialItems);
   const newTabIndex = useRef(0);
+
+  const throttledResizeHandler = throttle(
+    () => {
+      setMenuHeight(globalThis.document.documentElement.clientHeight);
+    },
+    1200,
+    { leading: true, trailing: true },
+  );
+
+  useEffect(() => {
+    globalThis.addEventListener("resize", throttledResizeHandler);
+
+    return () => {
+      globalThis.removeEventListener("resize", throttledResizeHandler);
+    };
+  }, [throttledResizeHandler]);
 
   const add = () => {
     const newActiveKey = `${++newTabIndex.current}`;

@@ -6,4 +6,5 @@ export const idCardRegex = /^[1-9]\d{5}(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][
 
 export const urlRegex = /^(https?:\/\/)/;
 
-export const fullUrlRegex = /^(https?:\/\/)?([\w.-]+)\.([a-zA-Z]{2,})(\S*)?$/;
+export const fullUrlRegex =
+  /^(https?):\/\/(?:www\.)?(?:\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|[-a-zA-Z0-9]+(?:\.[a-zA-Z]{2,}))(:\d+)?(?:\/[^\s]*)?$/;

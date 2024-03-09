@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { isEmpty } from "lodash-es";
-import { fullUrlRegex } from "../core/regex";
+import { urlRegex } from "../core/regex";
 
 interface IRequest extends Pick<AxiosRequestConfig, "baseURL" | "url" | "method" | "headers" | "params" | "data"> {}
 
@@ -28,7 +28,7 @@ export function getRequestByValues(req: IRequest = {}) {
 }
 
 function getAxiosBaseURLAndURL(url: string) {
-  if (!url || !fullUrlRegex.test(url)) {
+  if (!url || !urlRegex.test(url)) {
     return ["//serviceURL", "/URL"];
   }
 

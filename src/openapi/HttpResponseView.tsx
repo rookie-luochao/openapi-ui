@@ -8,7 +8,7 @@ import { HttpCode } from "./OpenapiViewComp";
 type IHeader = AxiosResponse["headers"];
 
 function isJSON(headers = {} as IHeader) {
-  return isObject(headers) && includes((headers as any)["content-type"], "json");
+  return isObject(headers) && includes(headers["content-type"], "json");
 }
 
 export function transformResponse(buffer: any, headers?: any) {
@@ -20,7 +20,8 @@ export function transformResponse(buffer: any, headers?: any) {
 }
 
 function abToString(buffer: any) {
-  return Buffer.from(buffer).toString("utf8");
+  return new TextDecoder("utf-8").decode(new TextEncoder().encode(buffer));
+  // return Buffer.from(buffer).toString("utf8");
 }
 
 function toDataURI(buffer: any, contentType: string) {
@@ -41,7 +42,7 @@ function CodeView({ children }: { children: ReactNode }) {
         httpCardWrapStyle,
         {
           wordBreak: "keep-all",
-          maxHeight: 400,
+          maxHeight: 500,
         },
       ]}
     >
@@ -87,7 +88,7 @@ export function HttpResponseView({ data, status, headers = {} }: AxiosResponse) 
       )}
       {data && (
         <CodeView>
-          <code>{isJSON(headers) ? JSON.stringify(data, null, 2) : `${abToString(data)}`}</code>
+          <code>{isJSON(headers) ? JSON.stringify(data, null, 2) : abToString(data)}</code>
         </CodeView>
       )}
     </span>
