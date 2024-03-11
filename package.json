@@ -23,7 +23,7 @@
     "axios": "^1.6.7",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.10",
-    "i18next": "^23.10.0",
+    "i18next": "^23.10.1",
     "i18next-browser-languagedetector": "^7.2.0",
     "js-yaml": "^4.1.0",
     "lodash-es": "^4.17.21",
