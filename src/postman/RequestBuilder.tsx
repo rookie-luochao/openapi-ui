@@ -1,5 +1,5 @@
 import { request } from "@request";
-import { Button, Form, Input, Popover, Select, Tabs, TabsProps, message } from "antd";
+import { Button, Form, Input, Popover, Select, Tabs, TabsProps, Tooltip, message } from "antd";
 import { AxiosHeaders, AxiosRequestConfig, AxiosResponse } from "axios";
 import { isEmpty, map, toUpper } from "lodash-es";
 import { useEffect, useMemo, useState } from "react";
@@ -15,6 +15,17 @@ import { DefineFormField } from "./DefineFormField";
 import { RequestBodyInput, RequestHeaderInput, RequestParameterInput } from "./RequestInput";
 import { getRequestByValues } from "./request";
 import { getCustomFiles, getCustomTimes } from "./utils";
+
+function TipIcon({ size = "18", fill = "#8A8A8A", ...other }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 1024 1024" {...other}>
+      <path
+        d="M512 81.408a422.4 422.4 0 1 0 422.4 422.4A422.4 422.4 0 0 0 512 81.408zm26.624 629.76a45.056 45.056 0 0 1-31.232 12.288 42.496 42.496 0 0 1-31.232-12.8 41.984 41.984 0 0 1-12.8-30.72 39.424 39.424 0 0 1 12.8-30.72 42.496 42.496 0 0 1 31.232-12.288 43.008 43.008 0 0 1 31.744 12.288 39.424 39.424 0 0 1 12.8 30.72 43.008 43.008 0 0 1-13.312 31.744zm87.04-235.52a617.472 617.472 0 0 1-51.2 47.104 93.184 93.184 0 0 0-25.088 31.232 80.896 80.896 0 0 0-9.728 39.936v10.24h-64v-10.24a119.808 119.808 0 0 1 12.288-57.344A311.296 311.296 0 0 1 555.52 460.8l10.24-11.264a71.168 71.168 0 0 0 16.896-44.032A69.632 69.632 0 0 0 563.2 358.4a69.632 69.632 0 0 0-51.2-17.92 67.072 67.072 0 0 0-58.88 26.112 102.4 102.4 0 0 0-16.384 61.44h-61.44a140.288 140.288 0 0 1 37.888-102.4 140.8 140.8 0 0 1 104.96-38.4 135.68 135.68 0 0 1 96.256 29.184 108.032 108.032 0 0 1 36.352 86.528 116.736 116.736 0 0 1-25.088 73.216z"
+        fill={fill}
+      />
+    </svg>
+  );
+}
 
 interface IRequest {
   headers?: AxiosHeaders;
@@ -66,7 +77,14 @@ export function RequestBuilder() {
     },
     {
       key: "2",
-      label: t("postman.body"),
+      label: (
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {t("postman.body")}&nbsp;
+          <Tooltip title={t("postman.bodyTitleTip")} overlayInnerStyle={{ width: 260 }}>
+            <TipIcon />
+          </Tooltip>
+        </div>
+      ),
       children: (
         <div>
           <FormItem name="data" style={{ marginBottom: 6 }}>

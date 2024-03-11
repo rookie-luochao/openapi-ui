@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import { includes, isObject, map } from "lodash-es";
 import { ReactNode } from "react";
 import { dsc } from "../core/style/defaultStyleConfig";
+import { isJSONString } from "../login/util";
 import { HeadRow, httpCardWrapStyle } from "./HttpRequestView";
 import { HttpCode } from "./OpenapiViewComp";
 
@@ -88,7 +89,9 @@ export function HttpResponseView({ data, status, headers = {} }: AxiosResponse) 
       )}
       {data && (
         <CodeView>
-          <code>{isJSON(headers) ? JSON.stringify(data, null, 2) : abToString(data)}</code>
+          <code>
+            {isJSON(headers) || isObject(data) || isJSONString(data) ? JSON.stringify(data, null, 2) : abToString(data)}
+          </code>
         </CodeView>
       )}
     </span>

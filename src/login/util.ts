@@ -22,7 +22,7 @@ export function readFileContent(file: File): Promise<string> {
   });
 }
 
-function isJSONString(str: string) {
+export function isJSONString(str: string) {
   try {
     JSON.parse(str);
     return true;

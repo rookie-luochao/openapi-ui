@@ -20,6 +20,7 @@ const translation = {
   single: "single file",
   multiple: "multiple file",
   uploadFile: "please select file upload",
+  bodyTitleTip: "default content-type: application/json",
 };
 
 export default translation;

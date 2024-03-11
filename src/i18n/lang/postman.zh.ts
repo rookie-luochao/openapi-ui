@@ -20,6 +20,7 @@ const translation = {
   single: "单个文件",
   multiple: "多个文件",
   uploadFile: "请选择文件进行上传",
+  bodyTitleTip: "默认的content-type: application/json",
 };
 
 export default translation;
