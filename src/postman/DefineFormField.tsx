@@ -53,7 +53,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
             return (
               <>
                 {fields.map(({ key, name, ...restField }, index) => {
-                  const fieldValues: ICustomTime = getFieldValue("customParamsTimes", index);
+                  const fieldValues: ICustomTime = getFieldValue(`custom${position}Times`, index);
 
                   return (
                     <div key={key} style={{ display: "flex" }}>
@@ -113,7 +113,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
       </Section>
       {position === "Data" && (
         <Section title={t("postman.customFile")}>
-          <Form.List name={`custom${position}Files`}>
+          <Form.List name="customDataFiles">
             {(fields, { add, remove }) => {
               return (
                 <>
