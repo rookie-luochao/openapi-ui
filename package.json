@@ -38,7 +38,7 @@
     "react-router-toolkit": "^1.2.0",
     "regenerator-runtime": "^0.14.1",
     "swagger2openapi": "^7.0.8",
-    "zustand": "^4.4.7"
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
