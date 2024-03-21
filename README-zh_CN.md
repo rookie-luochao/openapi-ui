@@ -25,6 +25,19 @@
   </p>
 </h4>
 
+## Screen Shot
+<div style="display:flex">
+  <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/src/assets/screen-shot/openapi-view.png" style="width:50%">
+    <img alt="openapi" src="./src/assets/screen-shot/openapi-view.png">
+  </a>
+  <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/src/assets/screen-shot/openapi-view2.png" style="width:50%">
+    <img alt="openapi" src="./src/assets/screen-shot/openapi-view2.png">
+  </a>
+</div>
+<a href="https://github.com/rookie-luochao/openapi-ui/blob/master/src/assets/screen-shot/postman-view.png">
+  <img alt="postman" src="./src/assets/screen-shot/postman-view.png">
+</a>
+
 ## 网站域名
 * CN: [www.openapi-ui.com](https://www.openapi-ui.com)
 * US: [doc.openapi-ui.com](https://doc.openapi-ui.com)
@@ -32,29 +45,29 @@
 
 ## 快速开始
 ```bash
-// node version >= 18
-// 下载依赖包
+# node version >= 18
+# 下载依赖包
 pnpm install
 # or make install
 
-// 启动
+# 启动
 npm run dev
 # or make dev
 ```
 
 ## 其他命令
 ```bash
-// 打包构建
+# 打包构建
 npm run build
 # or make build
 
-// 生成docker镜像
+# 生成docker镜像
 make docker-build
 
-// 运行docker镜像
+# 运行docker镜像
 make docker-run
 
-// 生成docker镜像，并且运行docker镜像
+# 生成docker镜像，并且运行docker镜像
 make docker-build-run
 ```
 

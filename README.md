@@ -25,6 +25,19 @@ A simpler and more beautiful openapi document than swagger-ui, quickly generate 
   </p>
 </h4>
 
+## Screen Shot
+<div style="display:flex">
+  <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/src/assets/screen-shot/openapi-view.png" style="width:50%">
+    <img alt="openapi" src="./src/assets/screen-shot/openapi-view.png">
+  </a>
+  <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/src/assets/screen-shot/openapi-view2.png" style="width:50%">
+    <img alt="openapi" src="./src/assets/screen-shot/openapi-view2.png">
+  </a>
+</div>
+<a href="https://github.com/rookie-luochao/openapi-ui/blob/master/src/assets/screen-shot/postman-view.png">
+  <img alt="postman" src="./src/assets/screen-shot/postman-view.png">
+</a>
+
 ## Website domain
 * CN: [www.openapi-ui.com](https://www.openapi-ui.com)
 * US: [doc.openapi-ui.com](https://doc.openapi-ui.com)
@@ -32,29 +45,29 @@ A simpler and more beautiful openapi document than swagger-ui, quickly generate 
 
 ## Quick start
 ```bash
-// node version >= 18
-// download node_modules
+# node version >= 18
+# download node_modules
 pnpm install
 # or make install
 
-// start
+# start
 npm run dev
 # or make dev
 ```
 
 ## Some script
 ```bash
-// build
+# build
 npm run build
 # or make build
 
-// make docker image
+# make docker image
 make docker-build
 
-// run docker image
+# run docker image
 make docker-run
 
-// make docker image and run docker image
+# make docker image and run docker image
 make docker-build-run
 ```
 
