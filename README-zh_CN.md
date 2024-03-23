@@ -2,7 +2,7 @@
   OpenAPI UI
 </h1>
 <p align="center">
-一个简单轻量、比 Swagger-UI 更美观的 OpenAPI 接口文档，可以快速的生成模拟请求参数并调用 API 请求
+比 Swagger-UI 更好用、更美观的 OpenAPI-UI 接口文档，可以快速的生成模拟请求参数并调用 API 请求，也是简化版的 postman 工具
 </p>
 <p align="center">
   <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/LICENSE">
@@ -39,7 +39,7 @@
 </a>
 
 ## 网站域名
-* CN: [www.openapi-ui.com](https://www.openapi-ui.com)
+* CN: [www.openapi-ui.com](https://www.openapi-ui.com)，支持http、https
 * US: [doc.openapi-ui.com](https://doc.openapi-ui.com)
 * US2: [docs.openapi-ui.com](https://docs.openapi-ui.com)
 

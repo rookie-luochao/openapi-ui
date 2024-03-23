@@ -2,7 +2,7 @@
   OpenAPI UI
 </h1>
 <p align="center">
-A simpler and more beautiful openapi document than swagger-ui, quickly generate mock params and call api request
+OpenAPI/Swagger UI document, quickly generate mock params and call api, also simplified postman tool
 </p>
 <p align="center">
   <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/LICENSE">
@@ -39,7 +39,7 @@ A simpler and more beautiful openapi document than swagger-ui, quickly generate 
 </a>
 
 ## Website domain
-* CN: [www.openapi-ui.com](https://www.openapi-ui.com)
+* CN: [www.openapi-ui.com](https://www.openapi-ui.com), support http,https
 * US: [doc.openapi-ui.com](https://doc.openapi-ui.com)
 * US2: [docs.openapi-ui.com](https://docs.openapi-ui.com)
 
