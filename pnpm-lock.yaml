@@ -77,8 +77,8 @@ dependencies:
 
 devDependencies:
   '@babel/preset-react':
-    specifier: ^7.23.3
-    version: 7.23.3(@babel/core@7.24.0)
+    specifier: ^7.24.1
+    version: 7.24.1(@babel/core@7.24.0)
   '@commitlint/cli':
     specifier: ^19.2.1
     version: 19.2.1(@types/node@20.11.21)(typescript@5.4.2)
@@ -398,8 +398,8 @@ packages:
       '@babel/helper-plugin-utils': 7.24.0
     dev: true
 
-  /@babel/plugin-transform-react-display-name@7.23.3(@babel/core@7.24.0):
-    resolution: {integrity: sha512-GnvhtVfA2OAtzdX58FJxU19rhoGeQzyVndw3GgtdECQvQFXPEZIOVULHVZGAYmOgmqjXpVpfocAbSjh99V/Fqw==}
+  /@babel/plugin-transform-react-display-name@7.24.1(@babel/core@7.24.0):
+    resolution: {integrity: sha512-mvoQg2f9p2qlpDQRBC7M3c3XTr0k7cp/0+kFKKO/7Gtu0LSw16eKB+Fabe2bDT/UpsyasTBBkAnbdsLrkD5XMw==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -452,8 +452,8 @@ packages:
       '@babel/types': 7.24.0
     dev: true
 
-  /@babel/plugin-transform-react-pure-annotations@7.23.3(@babel/core@7.24.0):
-    resolution: {integrity: sha512-qMFdSS+TUhB7Q/3HVPnEdYJDQIk57jkntAwSuz9xfSE4n+3I+vHYCli3HoHawN1Z3RfCz/y1zXA/JXjG6cVImQ==}
+  /@babel/plugin-transform-react-pure-annotations@7.24.1(@babel/core@7.24.0):
+    resolution: {integrity: sha512-+pWEAaDJvSm9aFvJNpLiM2+ktl2Sn2U5DdyiWdZBxmLc6+xGt88dvFqsHiAiDS+8WqUwbDfkKz9jRxK3M0k+kA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -463,8 +463,8 @@ packages:
       '@babel/helper-plugin-utils': 7.24.0
     dev: true
 
-  /@babel/preset-react@7.23.3(@babel/core@7.24.0):
-    resolution: {integrity: sha512-tbkHOS9axH6Ysf2OUEqoSZ6T3Fa2SrNH6WTWSPBboxKzdxNc9qOICeLXkNG0ZEwbQ1HY8liwOce4aN/Ceyuq6w==}
+  /@babel/preset-react@7.24.1(@babel/core@7.24.0):
+    resolution: {integrity: sha512-eFa8up2/8cZXLIpkafhaADTXSnl7IsUFCYenRWrARBz0/qZwcT0RBXpys0LJU4+WfPoF2ZG6ew6s2V6izMCwRA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -472,10 +472,10 @@ packages:
       '@babel/core': 7.24.0
       '@babel/helper-plugin-utils': 7.24.0
       '@babel/helper-validator-option': 7.23.5
-      '@babel/plugin-transform-react-display-name': 7.23.3(@babel/core@7.24.0)
+      '@babel/plugin-transform-react-display-name': 7.24.1(@babel/core@7.24.0)
       '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.0)
       '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.24.0)
-      '@babel/plugin-transform-react-pure-annotations': 7.23.3(@babel/core@7.24.0)
+      '@babel/plugin-transform-react-pure-annotations': 7.24.1(@babel/core@7.24.0)
     dev: true
 
   /@babel/runtime@7.24.0:
