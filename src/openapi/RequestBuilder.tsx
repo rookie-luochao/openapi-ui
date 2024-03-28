@@ -1,5 +1,5 @@
 import { request } from "@request";
-import { Button, Form, Popover, message } from "antd";
+import { Button, Form, Popover, Radio, message } from "antd";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import copy from "copy-to-clipboard";
 import { filter, isEmpty, map, values } from "lodash-es";
@@ -129,28 +129,32 @@ export function CreateCURL({ request }: { request: AxiosRequestConfig }) {
   );
 }
 
-export function CreateAxios({ request }: { request: AxiosRequestConfig }){
+export function CreateAxios({ request }: { request: AxiosRequestConfig }) {
   const { t } = useTranslation();
-  const {method,url,headers,params} = request
-  const template:string = `
-  var axios = require('axios');\n
-  var config={
-  method:"${method}",
-  url:"${url}",
-  headers:${JSON.stringify(headers)},
-  ${method === 'get'? ('params:' + JSON.stringify(params)) :('data:' + JSON.stringify(params))},
+  const { method, url, headers, params, data } = request;
+  const template = `  import axios from "axios";
+
+  const config = {
+    method: "${method}",
+    url: "${url}",
+    headers: ${JSON.stringify(headers)},
+    ${params ? "params: " + JSON.stringify(params) : "params: null"},
+    ${data ? "data: " + JSON.stringify(data) : "data: null"},
   };
-  \n
+
   axios(config).then((response)=>{
     console.log(JSON.stringify(response.data));
   }).catch((error)=>{
     console.log(error);
-  })
-  `
+  });`;
+
   return (
     <div>
-      <div css={{display: "flex",}}>
-        <div>
+      <div css={{ display: "flex", justifyContent: "space-between" }}>
+        <Radio.Group defaultValue="axios" size="small">
+          <Radio.Button value="axios">javaScript</Radio.Button>
+          {/* <Radio.Button value="python">python</Radio.Button> */}
+        </Radio.Group>
         <Button
           type="primary"
           size="small"
@@ -162,25 +166,6 @@ export function CreateAxios({ request }: { request: AxiosRequestConfig }){
         >
           {t("openapi.copy")}
         </Button>
-        </div>
-       <div css={{display: "flex",'margin-left':"auto",}}>
-       <Button
-          type="primary"
-          size="small"
-          style={{ fontSize: dsc.fontSize.xxs,marginRight:"10px" }}
-         
-        >
-          javaScript
-        </Button>
-        {/* <Button
-          type="primary"
-          size="small"
-          style={{ fontSize: dsc.fontSize.xxs }}
-         
-        >
-         python
-        </Button> */}
-       </div>
       </div>
       <pre css={[{ width: 772, fontSize: dsc.fontSize.xs }, httpCardWrapStyle]}>{template}</pre>
     </div>
@@ -294,7 +279,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
             </Popover>
             <Popover content={<CreateAxios request={getRequestByValues(form.getFieldsValue())} />} trigger="click">
               <Button size="small" style={{ fontSize: dsc.fontSize.xxs }}>
-                axios
+                {t("openapi.generateCode")}
               </Button>
             </Popover>
           </div>

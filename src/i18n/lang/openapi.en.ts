@@ -11,6 +11,7 @@ const translation = {
   copySuccess: "copy successful",
   copy: "copy",
   clickToCopy: "click to copy",
+  generateCode: "generate code",
 };
 
 export default translation;
