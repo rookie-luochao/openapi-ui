@@ -129,6 +129,64 @@ export function CreateCURL({ request }: { request: AxiosRequestConfig }) {
   );
 }
 
+export function CreateAxios({ request }: { request: AxiosRequestConfig }){
+  const { t } = useTranslation();
+  const {method,url,headers,params} = request
+  const template:string = `
+  var axios = require('axios');\n
+  var config={
+  method:"${method}",
+  url:"${url}",
+  headers:${JSON.stringify(headers)},
+  ${method === 'get'? ('params:' + JSON.stringify(params)) :('data:' + JSON.stringify(params))},
+  };
+  \n
+  axios(config).then((response)=>{
+    console.log(JSON.stringify(response.data));
+  }).catch((error)=>{
+    console.log(error);
+  })
+  `
+  return (
+    <div>
+      <div css={{display: "flex",}}>
+        <div>
+        <Button
+          type="primary"
+          size="small"
+          style={{ fontSize: dsc.fontSize.xxs }}
+          onClick={() => {
+            copy(template);
+            message.success(t("openapi.copySuccess"));
+          }}
+        >
+          {t("openapi.copy")}
+        </Button>
+        </div>
+       <div css={{display: "flex",'margin-left':"auto",}}>
+       <Button
+          type="primary"
+          size="small"
+          style={{ fontSize: dsc.fontSize.xxs,marginRight:"10px" }}
+         
+        >
+          javaScript
+        </Button>
+        {/* <Button
+          type="primary"
+          size="small"
+          style={{ fontSize: dsc.fontSize.xxs }}
+         
+        >
+         python
+        </Button> */}
+       </div>
+      </div>
+      <pre css={[{ width: 772, fontSize: dsc.fontSize.xs }, httpCardWrapStyle]}>{template}</pre>
+    </div>
+  );
+}
+
 export function RequestBuilder(props: { operation: IOperationEnhance; schemas: Dictionary<ISchema> }) {
   const { operation, schemas } = props;
   const [form] = Form.useForm();
@@ -232,6 +290,11 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
             <Popover content={<CreateCURL request={getRequestByValues(form.getFieldsValue())} />} trigger="click">
               <Button size="small" style={{ fontSize: dsc.fontSize.xxs }}>
                 {t("openapi.cURL")}
+              </Button>
+            </Popover>
+            <Popover content={<CreateAxios request={getRequestByValues(form.getFieldsValue())} />} trigger="click">
+              <Button size="small" style={{ fontSize: dsc.fontSize.xxs }}>
+                axios
               </Button>
             </Popover>
           </div>
