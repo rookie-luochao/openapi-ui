@@ -9,7 +9,6 @@ export interface IConfig {
 export enum Env {
   en = "en",
   zh = "zh",
-  
 }
 
 const appConfig: IConfig = {
