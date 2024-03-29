@@ -26,6 +26,7 @@ export function PostmanHead() {
             height: defaultMenuTitleHeight,
             backgroundColor: dsc.color.bg,
             padding: 12,
+            margin: "0 16px",
             boxSizing: "border-box",
           },
         ]}
@@ -33,7 +34,6 @@ export function PostmanHead() {
         <a
           css={{
             height: "100%",
-            marginLeft: 24,
             cursor: "pointer",
           }}
           onClick={() => {
