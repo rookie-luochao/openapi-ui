@@ -27,6 +27,10 @@ export function request(axiosConfig: AxiosRequestConfig) {
     method: MethodType.get,
     timeout: timeout,
     ...axiosConfig,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      ...(axiosConfig.headers || {}),
+    },
   };
   console.log("axiosConfig", axiosConfig);
 
