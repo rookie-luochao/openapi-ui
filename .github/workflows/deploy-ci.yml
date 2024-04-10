@@ -1,0 +1,24 @@
+name: Deploy CI
+
+on:
+  workflow_run:
+    workflows: [Docker Image CI]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to remote server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USERNAME }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          port: ${{ secrets.REMOTE_PORT }} 
+          script: |
+            docker pull ghcr.io/rookie-luochao/openapi-ui:latest
+            docker stop ${{ secrets.IMAGE_NAME }} 
+            docker rm ${{ secrets.IMAGE_NAME }}
+            docker run -dp ${{ secrets.HOST_POST }}:80 -e ${{ secrets.ENVS }} --name ${{ secrets.IMAGE_NAME }} ghcr.io/rookie-luochao/openapi-ui:latest
