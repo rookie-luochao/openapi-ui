@@ -1,10 +1,14 @@
 name: Deploy CI
 
+# on:
+#   workflow_run:
+#     workflows: [Docker Image CI]
+#     types:
+#       - completed
 on:
-  workflow_run:
-    workflows: [Docker Image CI]
-    types:
-      - completed
+  push:
+    branches:
+      - master
 
 jobs:
   deploy:
@@ -16,9 +20,16 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USERNAME }}
           password: ${{ secrets.REMOTE_PASSWORD }}
-          port: ${{ secrets.REMOTE_PORT }} 
+          port: ${{ secrets.REMOTE_PORT }}
+          command_timeout: 30m
           script: |
+            # cd ~ && sh ${{ secrets.DEPLOY_FILE }}
+            docker login ghcr.io -u rookie-luochao -p ${{ secrets.GHCR_TOKEN }}
+            echo -e "---------docker login success--------"
             docker pull ghcr.io/rookie-luochao/openapi-ui:latest
-            docker stop ${{ secrets.IMAGE_NAME }} 
+            docker stop ${{ secrets.IMAGE_NAME }}
+            echo -e "---------docker stop container success--------"
             docker rm ${{ secrets.IMAGE_NAME }}
-            docker run -dp ${{ secrets.HOST_POST }}:80 -e ${{ secrets.ENVS }} --name ${{ secrets.IMAGE_NAME }} ghcr.io/rookie-luochao/openapi-ui:latest
+            echo -e "---------docker rm container success--------"
+            docker run -dp ${{ secrets.HOST_PORT }}:80 -e ${{ secrets.ENVS }} --name ${{ secrets.IMAGE_NAME }} ghcr.io/rookie-luochao/openapi-ui:latest
+            echo -e "---------docker deploy success--------"
