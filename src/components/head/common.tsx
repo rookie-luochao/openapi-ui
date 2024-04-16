@@ -1,8 +1,8 @@
+import { defaultTimeout } from "@request";
 import { Button, Form, Input, InputNumber, Modal, Tooltip, message } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import postmanIcon from "../../assets/images/postman.svg";
-import { defaultTimeout } from "../../core/http";
 import { IConfigInfo, useConfigInfoStore } from "../../core/store";
 import { postmanModuleName } from "../../postman/routes";
 

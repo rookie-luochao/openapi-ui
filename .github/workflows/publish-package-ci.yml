@@ -1,0 +1,46 @@
+name: Publish Package CI
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    # 指定操作系统
+    runs-on: ubuntu-latest
+    steps:
+      # 将代码拉到虚拟机
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      # 指定node版本
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      # 依赖缓存策略
+      - name: Cache
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            **/node_modules
+          key: ${{runner.OS}}-${{hashFiles('**/pnpm-lock.yaml')}}
+      - name: Install pnpm
+        run: npm install -g pnpm
+      # 依赖下载
+      - name: Installing Dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: pnpm install
+      # 打包
+      - name: Running Build
+        run: npm run build
+      # 测试
+      # - name: Running Test
+      #   run: pnpm run test-unit
+      # 发布
+      - name: Running Publish
+        run: npm publish
+        env:
+          # NPM_TOKEN is access token
+         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

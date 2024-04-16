@@ -50,7 +50,7 @@ function FieldLabelWithSchemaWrap(props: {
   const { schema, fieldLabel, fieldDesc, schemas, children } = props;
 
   return (
-    <div style={{ fontSize: dsc.fontSize.xxs }}>
+    <div style={{ fontSize: dsc.fontSize.xs }}>
       <div>
         <div css={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
           {fieldLabel}

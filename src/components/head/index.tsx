@@ -1,10 +1,10 @@
+import { request } from "@request";
 import { Dropdown, Input, message } from "antd";
 import { SearchProps } from "antd/es/input";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { PartialParsedUrlQuery, toQueryString, useRouterQuery } from "react-router-toolkit";
-import { request } from "../../core/http";
 import { useOpenapiWithServiceInfoStore } from "../../core/store";
 import { dsc } from "../../core/style/defaultStyleConfig";
 import { flexCenterOpts } from "../../core/style/utils";
@@ -148,7 +148,7 @@ export function Head() {
             </a>
           </Dropdown>
           <ChangeLangComp />
-          <GoToPostman />
+          {import.meta.env.MODE !== "package" && <GoToPostman />}
           <GithubStar />
         </div>
       </div>

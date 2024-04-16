@@ -1,10 +1,12 @@
 import { Navigate, RouteObject } from "react-router-dom";
 import { ErrorBoundaryWrapOutlet } from "./core/error-boundary";
 import { loginModuleName, loginRoutes } from "./login/routes";
-import { mainRoutes } from "./main/routes";
+import { mainLayoutPath, mainRoutes } from "./main/routes";
 import { postmanRoutes } from "./postman/routes";
 
 function getAppRoutes() {
+  const isPackage = import.meta.env.MODE === "package";
+
   return [
     {
       path: "/",
@@ -12,11 +14,10 @@ function getAppRoutes() {
       children: [
         {
           index: true,
-          element: <Navigate to={loginModuleName} />,
+          element: <Navigate to={isPackage ? mainLayoutPath : loginModuleName} />,
         },
-        loginRoutes,
         mainRoutes,
-        postmanRoutes,
+        ...(isPackage ? [] : [loginRoutes, postmanRoutes]),
       ],
     },
   ] as RouteObject[];

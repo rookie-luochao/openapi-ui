@@ -25,7 +25,7 @@
   </p>
 </h4>
 
-## Screen Shot
+## 截图
 <div style="display:flex">
   <a href="https://github.com/rookie-luochao/openapi-ui/blob/master/src/assets/screen-shot/openapi-view.png" style="width:50%">
     <img alt="openapi" src="./src/assets/screen-shot/openapi-view.png">
@@ -42,6 +42,42 @@
 * CN: [www.openapi-ui.com](https://www.openapi-ui.com)，支持http、https
 * US: [doc.openapi-ui.com](https://doc.openapi-ui.com)
 * US2: [docs.openapi-ui.com](https://docs.openapi-ui.com)
+
+## 使用方法
+### CDN接入
+```tsx
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>openAPI UI</title>
+  </head>
+  <body>
+    <div id="openapi-ui-container" spec-url="https://petstore3.swagger.io/api/v3/openapi.json"></div>
+    <script src="https://cdn.jsdelivr.net/npm/openapi-ui-dist@2.0.0/lib/openapi-ui.umd.js"></script>
+  </body>
+</html>
+```
+### React接入(或者 Vue接入)
+```tsx
+import { useEffect } from "react";
+
+const SetUpOpenApiUI = () => {
+  useEffect(() => {
+    import("openapi-ui-dist")
+  }, []);
+
+  return (
+    <div id="openapi-ui-container" spec-url="https://petstore3.swagger.io/api/v3/openapi.json" />
+  );
+}
+
+export const openapiRoutes = {
+  path: "/openapi",
+  id: "openapi",
+  element: <SetUpOpenApiUI />,
+};
+```
 
 ## 快速开始
 ```bash

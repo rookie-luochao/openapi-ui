@@ -25,14 +25,19 @@ export const Logo = ({ isCollapsed }: ICollapsed) => {
   return (
     <a
       className="logo"
-      css={{
-        height: defaultMenuTitleHeight,
-        display: "flex",
-        alignItems: "center",
-        marginLeft: 24,
-      }}
+      css={[
+        {
+          height: defaultMenuTitleHeight,
+          display: "flex",
+          alignItems: "center",
+          marginLeft: 24,
+        },
+        import.meta.env.MODE === "package" ? { cursor: "default" } : {},
+      ]}
       onClick={() => {
-        navigate(loginModuleName);
+        if (import.meta.env.MODE !== "package") {
+          navigate(loginModuleName);
+        }
       }}
     >
       <img

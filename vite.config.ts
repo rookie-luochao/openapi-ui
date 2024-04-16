@@ -1,11 +1,12 @@
 import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
 import { NodeModulesPolyfillPlugin } from "@esbuild-plugins/node-modules-polyfill";
 import react from "@vitejs/plugin-react";
+import { resolve } from "path";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react({
       babel: {
@@ -19,7 +20,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@request": "../core/http/index.ts",
+      "@request": resolve(__dirname, "./src/core/http/index.ts"),
     },
   },
   optimizeDeps: {
@@ -38,4 +39,7 @@ export default defineConfig({
       ],
     },
   },
-});
+  esbuild: {
+    drop: mode === "development" ? [] : ["console", "debugger"],
+  },
+}));

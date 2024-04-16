@@ -1,6 +1,5 @@
 {
-  "name": "openapi-ui",
-  "private": true,
+  "name": "openapi-ui-dist",
   "version": "1.11.1",
   "type": "module",
   "engines": {
@@ -10,6 +9,7 @@
     "dev": "vite",
     "start": "vite",
     "build": "tsc && vite build",
+    "build:package": "tsc && vite build --config vite.package.config.ts --mode package",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lintfix": "eslint . --ext ts,tsx --fix",
     "preview": "vite preview",
@@ -66,7 +66,8 @@
     "rollup-plugin-visualizer": "^5.12.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3",
-    "vite": "^5.1.6"
+    "vite": "^5.1.6",
+    "vite-plugin-css-injected-by-js": "^3.5.0"
   },
   "commitlint": {
     "extends": [
@@ -103,5 +104,31 @@
   "prettier": {
     "arrowParens": "always",
     "printWidth": 120
-  }
+  },
+  "main": "./lib/openapi-ui.umd.js",
+  "module": "./es/openapi-ui.js",
+  "types": "./index.d.ts",
+  "files": [
+    "es",
+    "lib",
+    "index.d.ts"
+  ],
+  "homepage": "https://github.com/rookie-luochao/openapi-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rookie-luochao/openapi-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/rookie-luochao/openapi-ui/issues"
+  },
+  "keywords": [
+    "openapi-ui",
+    "swagger-ui",
+    "openapi",
+    "swagger",
+    "openapi3",
+    "openapi31",
+    "api-documentation",
+    "openapi-specification"
+  ]
 }

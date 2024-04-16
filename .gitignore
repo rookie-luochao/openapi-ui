@@ -28,7 +28,7 @@ package-lock.json
 yarn.lock
 
 # self define
-*.js
+# *.js
 .tmp
 .husky/_
 mock-dev

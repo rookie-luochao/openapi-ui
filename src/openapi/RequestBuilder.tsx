@@ -240,7 +240,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
       }}
       onFinish={() => sumbit(getRequestByValues(form.getFieldsValue()))}
     >
-      <div css={{ display: "flex", fontSize: dsc.fontSize.xxs }}>
+      <div css={{ display: "flex", fontSize: dsc.fontSize.xs }}>
         <div css={{ flex: 1, maxWidth: "50%" }}>
           {renderParameters(pickParametersBy("path") as any, schemas)}
           {renderParameters(pickParametersBy("header") as any, schemas)}

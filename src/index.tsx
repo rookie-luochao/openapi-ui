@@ -5,14 +5,18 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "regenerator-runtime/runtime.js";
 import { ModifyAppTitle } from "./components/app-title";
-import { CreateBrowserRouter } from "./core/router/CreateBrowserRouter";
+import { InitPackageConfig } from "./components/package-config";
+import { CreateAppRouter } from "./core/router/CreateAppRouter";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
 import { dsc } from "./core/style/defaultStyleConfig";
 import "./i18n";
 import { appRoutes } from "./rootRoutes";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(
+  document.getElementById(import.meta.env.MODE === "package" ? "openapi-ui-container" : "root") as HTMLElement,
+).render(
   <StrictMode>
+    <InitPackageConfig />
     <Global
       styles={{
         body: {
@@ -37,7 +41,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       }}
     >
       <LazyImportComponent>
-        <CreateBrowserRouter routes={appRoutes} />
+        <CreateAppRouter routes={appRoutes} isHashRouter={import.meta.env.MODE === "package"} />
       </LazyImportComponent>
     </ConfigProvider>
   </StrictMode>,
