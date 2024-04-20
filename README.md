@@ -54,7 +54,7 @@ OpenAPI/Swagger UI document, quickly generate mock params and call api, also sim
   </head>
   <body>
     <div id="openapi-ui-container" spec-url="https://petstore3.swagger.io/api/v3/openapi.json"></div>
-    <script src="https://cdn.jsdelivr.net/npm/openapi-ui-dist@2.0.0/lib/openapi-ui.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/openapi-ui-dist@latest/lib/openapi-ui.umd.js"></script>
   </body>
 </html>
 ```

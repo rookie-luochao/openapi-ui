@@ -82,7 +82,7 @@ export function Head() {
   }, []);
 
   async function refetchOpenapiInfo(url: string, isCallBySearchInput?: boolean) {
-    const res = await request(Object.assign({ url: url }));
+    const res = await request({ url: url });
 
     if (res?.status >= 200 && res?.status < 300) {
       const openapi = await parseSwaggerOrOpenapi(res.data);

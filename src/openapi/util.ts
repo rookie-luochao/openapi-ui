@@ -1,4 +1,5 @@
 import { keys, map, replace } from "lodash-es";
+import { urlRegex } from "../core/regex";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { IMethodType, IRequestBody, MethodType } from "./type";
 
@@ -80,8 +81,12 @@ export function getAxiosBasePathByUrl(url: string) {
     return "//serviceURL";
   }
 
-  const tmpStrs = url.split("//");
-  const basePath = `${tmpStrs[0]}//${tmpStrs[1].split("/")[0]}`;
+  let basePath = "";
+
+  if (urlRegex.test(url)) {
+    const tmpStrs = url.split("//");
+    basePath = `${tmpStrs[0]}//${tmpStrs[1].split("/")[0]}`;
+  }
 
   return basePath;
 }

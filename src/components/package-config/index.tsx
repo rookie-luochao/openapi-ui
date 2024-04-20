@@ -19,7 +19,7 @@ export function InitPackageConfig() {
   }, []);
 
   async function fetchOpenapiInfo(url: string) {
-    const res = await request(Object.assign({ url: url }));
+    const res = await request({ url: url });
 
     if (res?.status >= 200 && res?.status < 300) {
       const openapi = await parseSwaggerOrOpenapi(res.data);
