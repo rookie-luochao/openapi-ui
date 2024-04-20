@@ -11,17 +11,17 @@ jobs:
     steps:
       # 将代码拉到虚拟机
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       # 指定node版本
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
       # 依赖缓存策略
       - name: Cache
         id: cache-dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             **/node_modules
