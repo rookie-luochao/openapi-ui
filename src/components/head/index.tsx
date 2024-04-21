@@ -3,8 +3,8 @@ import { Dropdown, Input, message } from "antd";
 import { SearchProps } from "antd/es/input";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { PartialParsedUrlQuery, toQueryString, useRouterQuery } from "react-router-toolkit";
+import { useLocation, useNavigate } from "react-router-dom";
+import { PartialParsedUrlQuery, parseQueryString, toQueryString } from "react-router-toolkit";
 import { useOpenapiWithServiceInfoStore } from "../../core/store";
 import { dsc } from "../../core/style/defaultStyleConfig";
 import { flexCenterOpts } from "../../core/style/utils";
@@ -58,10 +58,11 @@ interface IQuery extends PartialParsedUrlQuery {
 }
 
 export function Head() {
+  const { pathname, search } = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
-  const [query, setQuery] = useRouterQuery<IQuery>();
+  const query = parseQueryString(search) as IQuery;
   const { serviceURL, importModeType, logon } = query;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFlagRef = useRef(true);
@@ -72,10 +73,15 @@ export function Head() {
     if (importModeType === ImportModeType.url && serviceURL && !logon) {
       refetchOpenapiInfo(serviceURL);
     } else {
-      setQuery((preState) => ({
-        ...preState,
-        logon: "",
-      }));
+      navigate(
+        `${pathname}${toQueryString({
+          ...(query || {}),
+          logon: "",
+        })}`,
+        {
+          replace: true,
+        },
+      );
     }
 
     isFlagRef.current = false;
