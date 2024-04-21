@@ -7,7 +7,7 @@ import { getRequestBodyContent } from "./util";
 
 function compilePath(path: string, params: Dictionary<any> = {}): string {
   return replace(path, /{([\s\S]+?)}/g, (target: string, key: string) =>
-    ([] as string[]).concat((params as any)[key] || target).join(","),
+    ([] as string[]).concat((params as any)[key] ?? target).join(","),
   );
 }
 
