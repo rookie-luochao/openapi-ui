@@ -43,7 +43,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.24.1",
     "@commitlint/cli": "^19.2.1",
-    "@commitlint/config-conventional": "^19.1.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@emotion/babel-plugin": "^11.11.0",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
