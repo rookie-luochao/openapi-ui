@@ -1,4 +1,4 @@
-import { CSSObject } from "@emotion/react";
+import { useTheme } from "@emotion/react";
 import { AxiosRequestConfig } from "axios";
 import {
   assign,
@@ -17,7 +17,7 @@ import {
   toUpper,
 } from "lodash-es";
 import { Dictionary, toQueryString } from "react-router-toolkit";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { ITheme } from "../core/style/defaultStyleConfig";
 import { isFormURLEncoded, isJSON, isMultipartFormData } from "./request";
 
 function getDefaultHeads() {
@@ -97,7 +97,7 @@ function displayMultipart(boundary: string, data: any) {
   return map(data, (v: any, k: string) => getPart(k, v)).join("\n") + `${boundary}--`;
 }
 
-function stringifyBody(request: AxiosRequestConfig) {
+export function stringifyBody(request: AxiosRequestConfig) {
   const contentType = request?.headers?.["Content-Type"];
   let data = request.data;
 
@@ -129,10 +129,9 @@ function stringifyBody(request: AxiosRequestConfig) {
   return isString(data) ? data : JSON.stringify(data);
 }
 
-export const httpCardWrapStyle: CSSObject = {
+export const httpCardWrapStyle: React.CSSProperties = {
   borderRadius: 6,
   padding: "6px 8px",
-  backgroundColor: dsc.color.primaryLight,
   overflowX: "auto",
 };
 
@@ -141,8 +140,17 @@ export interface IHttpViewProps {
 }
 
 export function HttpRequestView({ request = {} }: IHttpViewProps) {
+  const theme = useTheme() as ITheme;
+
   return (
-    <div css={[httpCardWrapStyle, { whiteSpace: "nowrap" }]}>
+    <div
+      style={{
+        ...httpCardWrapStyle,
+        color: theme.color.menuItem,
+        backgroundColor: theme.color.primaryLight,
+        whiteSpace: "nowrap",
+      }}
+    >
       <div>
         <HttpFirstLine params={request.params} method={request.method} baseURL={request.baseURL} url={request.url} />
       </div>
@@ -151,11 +159,11 @@ export function HttpRequestView({ request = {} }: IHttpViewProps) {
           <HeadRow key={key} field={key} value={value} />
         ))}
       </div>
-      {!isEmpty(pickBy(request.data, (v) => !!v)) && (
+      {/* {!isEmpty(pickBy(request.data, (v) => !!v)) && (
         <pre>
           <code>{stringifyBody(request)}</code>
         </pre>
-      )}
+      )} */}
     </div>
   );
 }

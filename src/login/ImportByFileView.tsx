@@ -1,12 +1,14 @@
+import { useTheme } from "@emotion/react";
 import { Button, Form, Input, Upload, message } from "antd";
 import { UploadChangeParam } from "antd/es/upload/interface";
 import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toQueryString } from "react-router-toolkit";
-import UploadOutlined from "../assets/images/upload.svg";
+import { UploadOutlined } from "../components/icon";
 import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
+import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { flexAlignItemsCenterOpts } from "../core/style/utils";
 import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
@@ -22,6 +24,7 @@ export function FileImportView() {
   const [form] = Form.useForm<IFileImport>();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const theme = useTheme() as ITheme;
 
   async function onFinish(values: IFileImport) {
     let url = values.serviceURL;
@@ -88,19 +91,19 @@ export function FileImportView() {
             css={[
               flexAlignItemsCenterOpts(),
               {
-                "&:hover img": {
-                  filter: "invert(30%) sepia(85%) saturate(2525%) hue-rotate(208deg) brightness(104%) contrast(101%)",
+                "&:hover path": {
+                  fill: theme.color.primary,
                 },
               },
             ]}
+            icon={<UploadOutlined fill={theme.color.menuItem} />}
           >
-            <img src={UploadOutlined} style={{ marginRight: 6 }} alt="upload" />
             {t("login.uploadBtn")}
           </Button>
         </Upload>
       </FormItem>
       <Form.Item>
-        <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+        <Button type="primary" htmlType="submit" style={{ width: "100%", fontSize: dsc.fontSize.xs }}>
           {t("login.importBtn")}
         </Button>
       </Form.Item>

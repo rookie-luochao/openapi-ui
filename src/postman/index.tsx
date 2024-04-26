@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import { Tabs } from "antd";
 import { throttle } from "lodash-es";
 import { useEffect, useRef, useState } from "react";
@@ -6,7 +7,8 @@ import { PostmanHead } from "../components/head/PostmanHead";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { useConfigInfoStore } from "../core/store";
+import { ITheme, darkTheme, lightTheme } from "../core/style/defaultStyleConfig";
 import i18n from "../i18n";
 import { defaultMenuTitleHeight } from "../main";
 import { RequestBuilder } from "./RequestBuilder";
@@ -24,6 +26,9 @@ const initialItems = [
 
 export default function Postman() {
   const { t } = useTranslation();
+  const theme = useTheme() as ITheme;
+  const { configInfo } = useConfigInfoStore();
+  const isDarkTheme = configInfo?.theme === "dark";
   const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
   const isZh = getConfig().env === Env.zh;
@@ -92,7 +97,7 @@ export default function Postman() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: theme.color.bg }}>
       <PostmanHead />
       <div
         css={[
@@ -100,7 +105,7 @@ export default function Postman() {
             height: defaultContentHeight,
             overflow: "auto",
             padding: 12,
-            backgroundColor: dsc.color.bgGray,
+            backgroundColor: theme.color.bgGray,
             borderRadius: "10px 10px 0",
             boxSizing: "border-box",
           },
@@ -109,7 +114,11 @@ export default function Postman() {
       >
         <div
           css={[
-            { backgroundColor: dsc.color.bg, padding: 10, borderRadius: 8 },
+            {
+              backgroundColor: isDarkTheme ? darkTheme.color.bgGray : lightTheme.color.bg,
+              padding: 10,
+              borderRadius: 8,
+            },
             isZh ? { minHeight: defaultContentHeight - 32 - 12 } : {},
           ]}
         >

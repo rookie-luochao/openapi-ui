@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import { request } from "@request";
 import { Dropdown, Input, message } from "antd";
 import { SearchProps } from "antd/es/input";
@@ -6,7 +7,8 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PartialParsedUrlQuery, parseQueryString, toQueryString } from "react-router-toolkit";
 import { useOpenapiWithServiceInfoStore } from "../../core/store";
-import { dsc } from "../../core/style/defaultStyleConfig";
+import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
+import { SwitchTheme } from "../../core/style/theme";
 import { flexCenterOpts } from "../../core/style/utils";
 import { IImportModeType, ImportModeType } from "../../login/config";
 import { loginModuleName } from "../../login/routes";
@@ -22,6 +24,7 @@ import { GoToPostman, IconDown, UpdateConfigInfoModalComp } from "./common";
 function UserName({ onChange }: { onChange: (value: string) => void }) {
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const { t } = useTranslation();
+  const theme = useTheme() as ITheme;
 
   const onSearch: SearchProps["onSearch"] = (value) => {
     if (!value?.trim()) {
@@ -43,7 +46,7 @@ function UserName({ onChange }: { onChange: (value: string) => void }) {
           onSearch={onSearch}
         />
       ) : (
-        <div css={{ color: dsc.color.text, opacity: 0.6, fontWeight: 500, fontSize: dsc.fontSize.xs }}>
+        <div style={{ color: theme.color.textLight, fontWeight: 500, fontSize: dsc.fontSize.xs }}>
           {openapiWithServiceInfo?.serviceURL}
         </div>
       )}
@@ -62,6 +65,7 @@ export function Head() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
+  const theme = useTheme() as ITheme;
   const query = parseQueryString(search) as IQuery;
   const { serviceURL, importModeType, logon } = query;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -122,12 +126,12 @@ export function Head() {
           flexCenterOpts({ justifyContent: "flex-end" }),
           {
             height: defaultMenuTitleHeight,
-            backgroundColor: dsc.color.bg,
+            backgroundColor: theme.color.bg,
             padding: 12,
           },
         ]}
       >
-        <div css={[flexCenterOpts(), { "& > * + *": { marginLeft: 6 } }]}>
+        <div css={[{ display: "flex" }, { "& > *": { marginLeft: 4, ...flexCenterOpts() } }]}>
           <UserName onChange={(value) => refetchOpenapiInfo(value, true)} />
           <Dropdown
             menu={{
@@ -149,10 +153,11 @@ export function Head() {
               ],
             }}
           >
-            <a css={flexCenterOpts()} onClick={(e) => e.preventDefault()}>
+            <a style={{ cursor: "pointer" }} onClick={(e) => e.preventDefault()}>
               <IconDown />
             </a>
           </Dropdown>
+          <SwitchTheme />
           <ChangeLangComp />
           {import.meta.env.MODE !== "package" && <GoToPostman />}
           <GithubStar />

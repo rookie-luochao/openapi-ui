@@ -11,7 +11,6 @@ export function ICPRegistration({ ...otherProps }) {
           minWidth: 1200,
           height: 32,
           fontSize: dsc.fontSize.xs,
-          color: dsc.color.text,
           opacity: 0.6,
         },
       ]}

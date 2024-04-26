@@ -2,9 +2,9 @@ import { defaultTimeout } from "@request";
 import { Button, Form, Input, InputNumber, Modal, Tooltip, message } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import postmanIcon from "../../assets/images/postman.svg";
 import { IConfigInfo, useConfigInfoStore } from "../../core/store";
 import { postmanModuleName } from "../../postman/routes";
+import { PostmanIcon } from "../icon";
 
 export function IconDown() {
   return (
@@ -91,12 +91,12 @@ export function GoToPostman() {
   return (
     <Tooltip title={t("postman.goToPostman")}>
       <a
-        style={{ cursor: "pointer" }}
+        css={{ cursor: "pointer", opacity: 0.8, "&:hover": { opacity: 1 } }}
         onClick={() => {
           nav(`${postmanModuleName}`);
         }}
       >
-        <img css={{ width: 16, opacity: 0.6, "&:hover": { opacity: 1 } }} src={postmanIcon} alt="github" />
+        <PostmanIcon />
       </a>
     </Tooltip>
   );

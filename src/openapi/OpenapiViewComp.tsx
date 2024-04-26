@@ -1,7 +1,8 @@
+import { useTheme } from "@emotion/react";
 import { isEmpty, map, replace, sortBy } from "lodash-es";
 import { Dictionary } from "react-router-toolkit";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { SchemaView } from "./SchemaView";
 import { IMediaType, IOperationEnhance, IReference, IResponse, IResponses, ISchema } from "./type";
 import { IStatusError, getCodeColor, getHttpErrorDes, pickHttpError } from "./util";
@@ -48,43 +49,44 @@ interface IResponseItemProps {
 }
 
 function ResponseItem({ code, response, schemas }: IResponseItemProps) {
+  const theme = useTheme() as ITheme;
   const httpErrorList = pickHttpError(response["x-status-errors"]);
 
   return (
     <div
-      css={{
+      style={{
         padding: "0.5em 0",
-        borderBottom: `1px solid ${dsc.color.border}`,
+        borderBottom: `1px solid ${theme.color.border}`,
         display: "flex",
         alignItems: "flex-start",
         lineHeight: 2,
       }}
     >
-      <div css={{ flex: 1, display: "flex", alignItems: "flex-start" }}>
+      <div style={{ flex: 1, display: "flex", alignItems: "flex-start" }}>
         <div>
           <HttpCode code={code} />
         </div>
-        <div css={{ flex: 1, marginLeft: "0.5em" }}>
-          <div>{getHttpErrorDes(response.description)}</div>
+        <div style={{ flex: 1, marginLeft: "0.5em" }}>
+          <div style={{ color: theme.color.title }}>{getHttpErrorDes(response.description)}</div>
           <HttpErrorList httpErrorList={httpErrorList} />
         </div>
       </div>
-      <div css={{ width: "70%" }}>
+      <div style={{ width: "70%" }}>
         {!!response.content &&
           map(response.content, (mediaType: IMediaType, contentType: string) => {
             return (
               <div
                 key={contentType}
-                css={() => ({
+                style={{
                   position: "relative",
                   padding: "0.4em 0.6em",
                   width: "100%",
                   overflow: "auto",
-                })}
+                }}
               >
                 <div
-                  css={{
-                    color: dsc.color.text,
+                  style={{
+                    color: theme.color.textLight,
                     fontSize: dsc.fontSize.xs,
                     textAlign: "right",
                   }}
@@ -103,7 +105,7 @@ function ResponseItem({ code, response, schemas }: IResponseItemProps) {
 export function HttpCode({ code }: { code: number }) {
   return (
     <div
-      css={{
+      style={{
         fontWeight: "bold",
         color: getCodeColor(code),
       }}
@@ -114,12 +116,15 @@ export function HttpCode({ code }: { code: number }) {
 }
 
 function HttpErrorList({ httpErrorList }: { httpErrorList: IStatusError[] }): React.ReactNode {
+  const theme = useTheme() as ITheme;
+
   return (
     <div>
       {map(sortBy(httpErrorList, "name"), (httpError, index) => (
         <div key={`${httpError.code}${index}`}>
           <div
-            css={{
+            style={{
+              color: theme.color.title,
               fontWeight: "bold",
               marginRight: "0.5em",
               textDecoration: httpError.canBeTalkError ? "underline" : "none",
@@ -127,7 +132,7 @@ function HttpErrorList({ httpErrorList }: { httpErrorList: IStatusError[] }): Re
           >
             {httpError.name}
             <small
-              css={{
+              style={{
                 opacity: 0.6,
                 marginLeft: "0.5em",
                 fontWeight: "bold",
@@ -136,7 +141,7 @@ function HttpErrorList({ httpErrorList }: { httpErrorList: IStatusError[] }): Re
               {httpError.code}
             </small>
           </div>
-          <small css={{ lineHeight: 1, display: "block" }}>{httpError.msg}</small>
+          <small style={{ lineHeight: 1, display: "block", color: theme.color.title }}>{httpError.msg}</small>
         </div>
       ))}
     </div>

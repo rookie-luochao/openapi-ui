@@ -3,10 +3,11 @@ import { debounce, filter, groupBy, includes, isEmpty, map, toLower, values } fr
 import { ChangeEvent, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { mainLayoutPath } from "../main/routes";
 import { IMethodType, IOperationEnhance, IOperationEnhanceMap, MethodType } from "./type";
 // import { useOpenapiInfo } from "./useOpenapiInfo";
+import { useTheme } from "@emotion/react";
 import { useTranslation } from "react-i18next";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ICollapsed } from "../main";
@@ -15,14 +16,14 @@ import { getMethodColor } from "./util";
 function MethodStyleWrap({ method, children }: { method: IMethodType; children: React.ReactNode }) {
   return (
     <div
-      css={{
+      style={{
         position: "absolute",
         top: 0,
         right: 0,
         fontSize: dsc.fontSize.l,
         fontFamily: dsc.fontFamily.mono,
         color: getMethodColor(method),
-        opacity: 0.6,
+        opacity: 0.8,
         textTransform: "uppercase",
         padding: 8,
       }}
@@ -63,25 +64,26 @@ function GroupedOperationList({
 } & ICollapsed) {
   const nav = useNavigate();
   const location = useLocation();
+  const theme = useTheme() as ITheme;
 
   return (
-    <div css={{ position: "relative" }}>
+    <div style={{ position: "relative" }}>
       <div
-        css={{
-          fontSize: dsc.fontSize.xs,
-          color: dsc.color.bg,
-          backgroundColor: dsc.color.primary,
-          opacity: 0.6,
+        style={{
+          fontSize: dsc.fontSize.s,
+          color: theme.color.menuGroup,
+          backgroundColor: theme.color.menuGroupBg,
           padding: "0.5em 0.8em",
-          borderBottom: `1px solid ${dsc.color.border}`,
+          borderBottom: `1px solid ${theme.color.border}`,
           borderRadius: 4,
+          fontWeight: 400,
         }}
       >
         {group}
       </div>
       <div>
         {map(operationList, (operation: IOperationEnhance, key: string) => (
-          <a
+          <div
             key={key}
             onClick={() => {
               nav(`/${mainLayoutPath}/${operation.operationId}${location.search}`);
@@ -89,42 +91,40 @@ function GroupedOperationList({
             css={[
               {
                 height: 46,
-                borderBottom: `1px solid ${dsc.color.border}`,
+                borderBottom: `1px solid ${theme.color.border}`,
                 position: "relative",
-                fontSize: dsc.fontSize.xxs,
                 display: "flex",
                 alignItems: "center",
                 padding: "0.8em 0.4em",
                 textDecoration: "none",
-                color: dsc.color.text,
+                color: theme.color.menuItem,
+                backgroundColor: theme.color.bg,
                 borderRadius: 4,
+                cursor: "pointer",
                 ":hover": {
-                  backgroundColor: dsc.color.bgGray,
-                  cursor: "pointer",
+                  backgroundColor: theme.color.bgGray,
                 },
               },
               toLower(activeOperationId) === toLower(operation.operationId)
                 ? {
-                    backgroundColor: dsc.color.bgGray,
+                    backgroundColor: theme.color.bgGray,
+                    color: theme.color.primary,
                   }
                 : {},
             ]}
           >
-            <MethodStyleWrap method={operation.method}>
-              {operation.method === MethodType.delete ? operation.method.slice(0, 3) : operation.method}
-            </MethodStyleWrap>
             {!isCollapsed ? (
               <OperationDescStyleWrap deprecated={operation.deprecated}>
                 <div
-                  css={{
+                  style={{
                     fontSize: dsc.fontSize.xs,
-                    fontWeight: "bold",
+                    fontWeight: 600,
                     marginBottom: 4,
                   }}
                 >
                   {operation.operationId || ""}
                 </div>
-                <div css={{ fontSize: dsc.fontSize.xxs }}>
+                <div style={{ fontSize: dsc.fontSize.xxs }}>
                   {operation.summary || ""}
                   &nbsp;
                 </div>
@@ -132,7 +132,10 @@ function GroupedOperationList({
             ) : (
               <div style={{ height: 46 }} />
             )}
-          </a>
+            <MethodStyleWrap method={operation.method}>
+              {operation.method === MethodType.delete ? operation.method.slice(0, 3) : operation.method}
+            </MethodStyleWrap>
+          </div>
         ))}
       </div>
     </div>
@@ -162,9 +165,10 @@ export function OperationList(props: ICollapsed) {
   }, [operations, filterValue]);
 
   return (
-    <div css={{ position: "relative" }}>
-      <div css={{ fontSize: dsc.fontSize.xs, padding: "0.5em 0.8em" }}>
+    <div style={{ position: "relative" }}>
+      <div style={{ fontSize: dsc.fontSize.xs, padding: "0.5em 0.8em" }}>
         <Input
+          allowClear
           placeholder={t("openapi.searchPlaceholder")}
           onChange={debounce((e: ChangeEvent<HTMLInputElement>) => {
             setFilterValue(e.target.value);

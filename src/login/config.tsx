@@ -1,6 +1,4 @@
-import FileAddOutlined from "../assets/images/file.svg";
-import LinkOutlined from "../assets/images/link.svg";
-import FileTextOutlined from "../assets/images/text.svg";
+import { FileAddOutlined, FileTextOutlined, LinkOutlined } from "../components/icon";
 
 export enum ImportModeType {
   url = "url",
@@ -18,10 +16,10 @@ export const displayImportModeType = (field: IImportModeType) => {
   }[field];
 };
 
-export const displayImportModeTypeIcon = (field: IImportModeType) => {
+export const displayImportModeTypeIcon = (field: IImportModeType, fill: string) => {
   return {
-    url: <img src={LinkOutlined} alt="url" />,
-    file: <img src={FileAddOutlined} alt="json-file" />,
-    text: <img src={FileTextOutlined} alt="text" />,
+    url: <LinkOutlined fill={fill} />,
+    file: <FileAddOutlined fill={fill} />,
+    text: <FileTextOutlined fill={fill} />,
   }[field];
 };

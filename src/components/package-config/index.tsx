@@ -1,6 +1,7 @@
 import { request } from "@request";
 import { useEffect } from "react";
-import { useOpenapiWithServiceInfoStore } from "../../core/store";
+import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../../core/store";
+import { IThemeType } from "../../core/style/theme";
 import { ImportModeType } from "../../login/config";
 import { parseSwaggerOrOpenapi } from "../../login/util";
 import { IPaths } from "../../openapi/type";
@@ -8,13 +9,19 @@ import { flattenOperations } from "../../openapi/useOpenapiInfo";
 
 export function InitPackageConfig() {
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
+  const { updateConfigInfo } = useConfigInfoStore();
 
   useEffect(() => {
     const configElement = document.getElementById("openapi-ui-container");
     const specUrl = configElement?.getAttribute("spec-url");
+    const theme = configElement?.getAttribute("theme");
 
     if (specUrl) {
       fetchOpenapiInfo(specUrl);
+    }
+
+    if (theme) {
+      updateConfigInfo({ theme: theme as IThemeType });
     }
   }, []);
 

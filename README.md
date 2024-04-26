@@ -11,6 +11,9 @@ OpenAPI/Swagger UI document, quickly generate mock params and call api, also sim
   <a href="https://github.com/rookie-luochao/openapi-ui/releases">
     <img alt="Release (latest by date)" src="https://img.shields.io/github/v/release/rookie-luochao/openapi-ui">
   </a>
+  <a href="https://www.npmjs.com/package/openapi-ui-dist">
+    <img alt="npm openapi-ui package" src="https://img.shields.io/npm/v/openapi-ui-dist.svg">
+  </a>
   <a href="https://github.com/rookie-luochao/openapi-ui/actions/workflows/release-ci.yml">
     <img alt="build" src="https://img.shields.io/github/actions/workflow/status/rookie-luochao/openapi-ui/release-ci.yml">
   </a>

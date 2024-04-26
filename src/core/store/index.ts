@@ -2,11 +2,13 @@ import { create } from "zustand";
 import { StorageValue, createJSONStorage, devtools, persist } from "zustand/middleware";
 import { IImportModeType } from "../../login/config";
 import { IOpenAPI, IOperationEnhanceMap } from "../../openapi/type";
+import { IThemeType } from "../style/theme";
 import { logger } from "./loggerMiddleware";
 
 export interface IConfigInfo {
-  timeout: number;
+  timeout?: number;
   authorization?: string;
+  theme?: IThemeType;
 }
 
 interface IConfigInfoState {

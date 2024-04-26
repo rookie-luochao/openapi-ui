@@ -1,13 +1,12 @@
+import { useTheme } from "@emotion/react";
 import { Button, DatePicker, Form, FormInstance, Input, Select, Upload } from "antd";
 import dayjs from "dayjs";
 import { includes, map } from "lodash-es";
 import { useTranslation } from "react-i18next";
-import MinusOutlined from "../assets/images/minus.svg";
-import PlusOutlined from "../assets/images/plus.svg";
-import UploadOutlined from "../assets/images/upload.svg";
 import { Section } from "../components/Section";
-import { dsc } from "../core/style/defaultStyleConfig";
-import { flexAlignItemsCenterOpts } from "../core/style/utils";
+import { MinusOutlined, PlusOutlined, UploadOutlined } from "../components/icon";
+import { ITheme, dsc } from "../core/style/defaultStyleConfig";
+import { flexAlignItemsCenterOpts, flexCenterOpts } from "../core/style/utils";
 import {
   CustomFileField,
   CustomTimeField,
@@ -22,6 +21,7 @@ import {
 
 export function DefineFormField({ position, form }: { position: string; form: FormInstance<any> }) {
   const { t } = useTranslation();
+  const theme = useTheme() as ITheme;
 
   const timeTypeOptions = map(TimeType, (item) => ({
     label: displayTimeType(item),
@@ -44,6 +44,16 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
   const getFieldValue = (formItemName: string, index: number) => {
     return form.getFieldValue(formItemName)?.[index] || {};
   };
+
+  const addFieldGroupBtnStyle = [
+    flexCenterOpts(),
+    { width: "60%", fontSize: dsc.fontSize.xs },
+    {
+      "&:hover path": {
+        fill: theme.color.primary,
+      },
+    },
+  ];
 
   return (
     <>
@@ -84,7 +94,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                       </Form.Item>
                       <Form.Item {...restField} style={{ width: "5%" }}>
                         <a onClick={() => remove(name)}>
-                          <img src={MinusOutlined} />
+                          <MinusOutlined fill={theme.color.menuItem} />
                         </a>
                       </Form.Item>
                     </div>
@@ -93,6 +103,8 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                 <div>
                   <Button
                     type="dashed"
+                    icon={<PlusOutlined fill={theme.color.menuItem} />}
+                    css={addFieldGroupBtnStyle}
                     onClick={() =>
                       add({
                         [CustomTimeField.fieldName]: "time",
@@ -100,8 +112,6 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                         [CustomTimeField.fieldValue]: dayjs(),
                       })
                     }
-                    style={{ width: "60%" }}
-                    icon={<img src={PlusOutlined} />}
                   >
                     {t("postman.addTimeField")}
                   </Button>
@@ -148,21 +158,20 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                               css={[
                                 flexAlignItemsCenterOpts(),
                                 {
-                                  "&:hover img": {
-                                    filter:
-                                      "invert(30%) sepia(85%) saturate(2525%) hue-rotate(208deg) brightness(104%) contrast(101%)",
+                                  "&:hover path": {
+                                    fill: theme.color.primary,
                                   },
                                 },
                               ]}
+                              icon={<UploadOutlined fill={theme.color.menuItem} />}
                             >
-                              <img src={UploadOutlined} style={{ marginRight: 6 }} alt="upload" />
                               <span style={{ fontSize: dsc.fontSize.xs }}>{t("postman.uploadFile")}</span>
                             </Button>
                           </Upload>
                         </Form.Item>
                         <Form.Item {...restField} style={{ width: "5%" }}>
                           <a onClick={() => remove(name)}>
-                            <img src={MinusOutlined} />
+                            <MinusOutlined fill={theme.color.menuItem} />
                           </a>
                         </Form.Item>
                       </div>
@@ -171,6 +180,8 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                   <div>
                     <Button
                       type="dashed"
+                      icon={<PlusOutlined fill={theme.color.menuItem} />}
+                      css={addFieldGroupBtnStyle}
                       onClick={() =>
                         add({
                           [CustomTimeField.fieldName]: "file",
@@ -178,8 +189,6 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                           [CustomTimeField.fieldValue]: null,
                         })
                       }
-                      style={{ width: "60%" }}
-                      icon={<img src={PlusOutlined} />}
                     >
                       {t("postman.addFileField")}
                     </Button>

@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
 import throttle from "lodash-es/throttle";
@@ -9,7 +10,9 @@ import { Head } from "../components/head";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { useConfigInfoStore } from "../core/store";
+import { ITheme } from "../core/style/defaultStyleConfig";
+import { ThemeType } from "../core/style/theme";
 import { loginModuleName } from "../login/routes";
 import { OperationList } from "../openapi/OperationList";
 
@@ -25,31 +28,27 @@ export const Logo = ({ isCollapsed }: ICollapsed) => {
   return (
     <a
       className="logo"
-      css={[
-        {
-          height: defaultMenuTitleHeight,
-          display: "flex",
-          alignItems: "center",
-          marginLeft: 24,
-        },
-        import.meta.env.MODE === "package" ? { cursor: "default" } : {},
-      ]}
+      style={{
+        height: defaultMenuTitleHeight,
+        display: "flex",
+        alignItems: "center",
+        marginLeft: 24,
+        cursor: import.meta.env.MODE === "package" ? "default" : "pointer",
+      }}
       onClick={() => {
         if (import.meta.env.MODE !== "package") {
           navigate(loginModuleName);
         }
       }}
     >
-      <img
-        css={[isCollapsed ? { width: 32 } : { width: 128 }]}
-        src={isCollapsed ? LogoMiniIcon : LogoIcon}
-        alt="logo"
-      />
+      <img style={{ width: isCollapsed ? 32 : 128 }} src={isCollapsed ? LogoMiniIcon : LogoIcon} alt="logo" />
     </a>
   );
 };
 
 export default function MainLayout() {
+  const { configInfo } = useConfigInfoStore();
+  const theme = useTheme() as ITheme;
   const [collapsed, setCollapsed] = useState(false);
   const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
   const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
@@ -74,27 +73,31 @@ export default function MainLayout() {
 
   return (
     <Layout>
-      <Sider theme={"light"} width={320} collapsible collapsed={collapsed} onCollapse={setCollapsed}>
+      <Sider
+        theme={configInfo?.theme === "dark" ? ThemeType.dark : ThemeType.light}
+        width={320}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={setCollapsed}
+      >
         <Logo isCollapsed={collapsed} />
-        <div css={{ height: defaultMenuHeight, overflow: "auto" }}>
+        <div style={{ height: defaultMenuHeight, overflow: "auto" }}>
           <OperationList isCollapsed={collapsed} />
         </div>
       </Sider>
-      <Layout className="site-layout" css={{ backgroundColor: dsc.color.bg }}>
+      <Layout className="site-layout" style={{ backgroundColor: theme.color.bg }}>
         <Head />
         <div
-          css={[
-            {
-              height: defaultContentHeight,
-              overflow: "auto",
-              padding: 12,
-              backgroundColor: dsc.color.bgGray,
-              borderRadius: "10px 0 0",
-            },
-            isZh ? { paddingBottom: 0 } : {},
-          ]}
+          style={{
+            height: defaultContentHeight,
+            overflow: "auto",
+            padding: 12,
+            backgroundColor: theme.color.bgGray,
+            borderRadius: "10px 0 0",
+            paddingBottom: isZh ? 0 : 12,
+          }}
         >
-          <div css={isZh ? { minHeight: defaultContentHeight - 32 - 12 } : {}}>
+          <div style={isZh ? { minHeight: defaultContentHeight - 32 - 12 } : {}}>
             <Outlet />
           </div>
           {isZh && <ICPRegistration css={{ minWidth: 880 }} />}

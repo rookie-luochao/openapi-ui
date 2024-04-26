@@ -1,14 +1,13 @@
+import { useTheme } from "@emotion/react";
 import { Button, DatePicker, DatePickerProps, Input, InputNumber, Select, Upload } from "antd";
 import dayjs from "dayjs";
 import { filter, includes, map, toLower } from "lodash-es";
 import React, { ReactNode, useState } from "react";
 import { Dictionary } from "react-router-toolkit";
-import MinusOutlined from "../assets/images/minus.svg";
-import PlusOutlined from "../assets/images/plus.svg";
-import UploadOutlined from "../assets/images/upload.svg";
+import { MinusOutlined, PlusOutlined, UploadOutlined } from "../components/icon";
 import { IJSONInputProps } from "../components/monaco-editor/JSONInput";
 import { IJSONInputWithSchemaProps, JSONSchemaInput } from "../components/monaco-editor/JSONSchemaInput";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { flexAlignItemsCenterOpts } from "../core/style/utils";
 import { Description, SchemaView } from "./SchemaView";
 import { ParameterPositionIconComp } from "./config";
@@ -17,23 +16,28 @@ import { isArraySchema, isObjectSchema, patchSchema } from "./patchSchema";
 import { ISchema, TParameter } from "./type";
 
 function LabelStyleWrap({ children, required }: { required?: boolean; children?: React.ReactNode }) {
+  const theme = useTheme() as ITheme;
+
   return (
     <div
-      css={{
-        ...(required
+      css={
+        required
           ? {
               position: "relative",
               fontWeight: "bold",
+              color: theme.color.title,
               "&:after": {
                 content: `"*"`,
-                color: dsc.color.danger,
+                color: theme.color.danger,
                 position: "absolute",
                 top: "15%",
                 marginLeft: 1,
               },
             }
-          : {}),
-      }}
+          : {
+              color: theme.color.title,
+            }
+      }
     >
       {children}
     </div>
@@ -52,15 +56,13 @@ function FieldLabelWithSchemaWrap(props: {
   return (
     <div style={{ fontSize: dsc.fontSize.xs }}>
       <div>
-        <div css={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
           {fieldLabel}
           {fieldDesc}
         </div>
         <div>{children}</div>
       </div>
-      {schema && (isObjectSchema(schema) || isArraySchema(schema)) && (
-        <SchemaView schema={schema} schemas={schemas} css={{ overflow: "auto" }} />
-      )}
+      {schema && (isObjectSchema(schema) || isArraySchema(schema)) && <SchemaView schema={schema} schemas={schemas} />}
     </div>
   );
 }
@@ -77,8 +79,8 @@ function Row({ children }: { children: ReactNode }) {
           width: "2em",
           display: "flex",
           justifyContent: "center",
-          opacity: 0.5,
           cursor: "pointer",
+          opacity: 0.6,
         },
         "& + &": {
           marginTop: 6,
@@ -127,6 +129,7 @@ function isTime(parameter: TParameter) {
 
 // PatchInput handle minimized schema
 export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
+  const theme = useTheme() as ITheme;
   const isArray = isArraySchema(schema as any);
   const placeholder = displayType(schema) + displayValidate(schema) + displayDefault(schema);
 
@@ -159,7 +162,16 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
   }
 
   if (schema.type === "integer" || schema.type === "number") {
-    return <InputNumber {...commonProps} css={{ width: "100%" }} placeholder={placeholder} min={0} />;
+    return (
+      <InputNumber
+        {...commonProps}
+        style={{ width: "100%" }}
+        placeholder={placeholder}
+        min={0}
+        changeOnWheel={false}
+        controls={false}
+      />
+    );
   }
 
   if (isFile(schema) || (isArray && isFile(schema.items))) {
@@ -178,13 +190,13 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
           css={[
             flexAlignItemsCenterOpts(),
             {
-              "&:hover img": {
-                filter: "invert(30%) sepia(85%) saturate(2525%) hue-rotate(208deg) brightness(104%) contrast(101%)",
+              "&:hover path": {
+                fill: theme.color.primary,
               },
             },
           ]}
+          icon={<UploadOutlined fill={theme.color.menuItem} />}
         >
-          <img src={UploadOutlined} style={{ marginRight: 6 }} alt="upload" />
           {placeholder || "Upload"}
         </Button>
       </Upload>
@@ -195,13 +207,14 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
     <Input
       {...commonProps}
       allowClear
-      onChange={(e) => commonProps.onChange(e.target.value)}
       placeholder={placeholder}
+      onChange={(e) => commonProps.onChange(e.target.value)}
     />
   );
 }
 
 function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
+  const theme = useTheme() as ITheme;
   const [value, setValue] = useState();
 
   const commit = () => {
@@ -231,7 +244,7 @@ function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
         />
       </span>
       <a role="btn" onClick={commit}>
-        <img src={PlusOutlined} style={{ padding: "6px 4px" }} />
+        <PlusOutlined fill={theme.color.text} />
       </a>
     </>
   );
@@ -244,10 +257,10 @@ function EnumArrayInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
   return (
     <Select
       {...commonProps}
+      allowClear
       mode="multiple"
       placeholder={placeholder}
       options={enumToOptions(schema.enum as string[], enumMap)}
-      allowClear
     />
   );
 }
@@ -284,6 +297,7 @@ export const RequestParameterInput = ({
   parameter,
   ...otherProps
 }: TParamInputProps & Partial<IJSONInputProps>) => {
+  const theme = useTheme() as ITheme;
   const schema = patchSchema<ISchema>(parameter.schema || parameter, schemas);
   const isArray = isArraySchema(schema as any);
   const commonProps = {
@@ -298,7 +312,7 @@ export const RequestParameterInput = ({
     </LabelStyleWrap>
   );
 
-  const fieldDesc = <Description desc={parameter.description || schema.description || ""} />;
+  const fieldDesc = <Description desc={parameter.description || schema.description || ""} ishighLightDesc />;
 
   if (isObjectSchema(schema as any) || (isArray && isObjectSchema(schema.items))) {
     return (
@@ -338,7 +352,7 @@ export const RequestParameterInput = ({
                 commonProps.onChange(filter(commonProps.value, (_, idx) => index !== idx));
               }}
             >
-              <img src={MinusOutlined} style={{ padding: "6px 4px" }} />
+              <MinusOutlined fill={theme.color.text} />
             </a>
           </Row>
         ))}

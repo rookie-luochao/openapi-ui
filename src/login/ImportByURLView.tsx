@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toQueryString } from "react-router-toolkit";
 import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
+import { dsc } from "../core/style/defaultStyleConfig";
 import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
@@ -74,7 +75,7 @@ export function URLImportView() {
         <Input placeholder={t("login.serviceURLPlaceholder")} />
       </FormItem>
       <Form.Item>
-        <Button type="primary" htmlType="submit" style={{ width: "100%" }} loading={loading}>
+        <Button type="primary" htmlType="submit" style={{ width: "100%", fontSize: dsc.fontSize.xs }} loading={loading}>
           {t("login.importBtn")}
         </Button>
       </Form.Item>

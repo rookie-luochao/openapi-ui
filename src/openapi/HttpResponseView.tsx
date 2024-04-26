@@ -1,7 +1,8 @@
+import { useTheme } from "@emotion/react";
 import { AxiosResponse } from "axios";
 import { includes, isObject, map } from "lodash-es";
 import { ReactNode } from "react";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { isJSONString } from "../login/util";
 import { HeadRow, httpCardWrapStyle } from "./HttpRequestView";
 import { HttpCode } from "./OpenapiViewComp";
@@ -37,15 +38,17 @@ function toDataURI(buffer: any, contentType: string) {
 }
 
 function CodeView({ children }: { children: ReactNode }) {
+  const theme = useTheme() as ITheme;
+
   return (
     <pre
-      css={[
-        httpCardWrapStyle,
-        {
-          wordBreak: "keep-all",
-          maxHeight: 500,
-        },
-      ]}
+      style={{
+        ...httpCardWrapStyle,
+        wordBreak: "keep-all",
+        maxHeight: 500,
+        color: theme.color.menuItem,
+        backgroundColor: theme.color.primaryLight,
+      }}
     >
       {children}
     </pre>
@@ -76,7 +79,7 @@ export function HttpResponseView({ data, status, headers = {} }: AxiosResponse) 
   }
 
   return (
-    <span css={{ fontSize: dsc.fontSize.xxs, position: "relative" }}>
+    <div style={{ fontSize: dsc.fontSize.xs, position: "relative" }}>
       <div>
         <HttpCode code={status} />
       </div>
@@ -94,6 +97,6 @@ export function HttpResponseView({ data, status, headers = {} }: AxiosResponse) 
           </code>
         </CodeView>
       )}
-    </span>
+    </div>
   );
 }

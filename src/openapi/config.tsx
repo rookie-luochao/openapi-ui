@@ -1,5 +1,6 @@
+import { useTheme } from "@emotion/react";
 import { Dictionary } from "react-router-toolkit";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { ITheme } from "../core/style/defaultStyleConfig";
 
 export const parameterPositionMap = {
   path: "URL Path",
@@ -28,6 +29,8 @@ function getIconStyleByParameterPosition(position: string) {
 }
 
 export function ParameterPositionIconComp({ position }: { position: string }) {
+  const theme = useTheme() as ITheme;
+
   return (
     <span
       css={{
@@ -40,8 +43,8 @@ export function ParameterPositionIconComp({ position }: { position: string }) {
         lineHeight: "1.3em",
         bottom: "0.1em",
         padding: 1,
-        backgroundColor: dsc.color.text,
-        color: dsc.color.bg,
+        backgroundColor: theme.color.title,
+        color: theme.color.bg,
         fontSize: "0.8em",
         marginRight: "0.5em",
         ...getIconStyleByParameterPosition(position),

@@ -2,18 +2,19 @@ import { Dropdown } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import postmanIcon from "../../assets/images/postman.svg";
-import { dsc } from "../../core/style/defaultStyleConfig";
+import { SwitchTheme } from "../../core/style/theme";
 import { flexBetweenCenterOpts, flexCenterOpts } from "../../core/style/utils";
 import { loginModuleName } from "../../login/routes";
 import { defaultMenuTitleHeight } from "../../main";
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
+import { PostmanIcon } from "../icon";
 import { IconDown, UpdateConfigInfoModalComp } from "./common";
 
 export function PostmanHead() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  // const theme = useTheme() as ITheme;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -24,7 +25,7 @@ export function PostmanHead() {
           flexBetweenCenterOpts(),
           {
             height: defaultMenuTitleHeight,
-            backgroundColor: dsc.color.bg,
+            // backgroundColor: theme.color.bg,
             padding: 12,
             margin: "0 16px",
             boxSizing: "border-box",
@@ -40,9 +41,9 @@ export function PostmanHead() {
             navigate(loginModuleName);
           }}
         >
-          <img src={postmanIcon} alt="postman" />
+          <PostmanIcon size="26" />
         </a>
-        <div css={[flexCenterOpts(), { "& > * + *": { marginLeft: 6 } }]}>
+        <div css={[{ display: "flex" }, { "& > *": { marginLeft: 4, ...flexCenterOpts() } }]}>
           <Dropdown
             menu={{
               items: [
@@ -63,10 +64,11 @@ export function PostmanHead() {
               ],
             }}
           >
-            <a css={flexCenterOpts()} onClick={(e) => e.preventDefault()}>
+            <a css={{ cursor: "pointer" }} onClick={(e) => e.preventDefault()}>
               <IconDown />
             </a>
           </Dropdown>
+          <SwitchTheme />
           <ChangeLangComp />
           <GithubStar />
         </div>

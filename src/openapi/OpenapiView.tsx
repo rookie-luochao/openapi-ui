@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import { Tooltip, message } from "antd";
 import copy from "copy-to-clipboard";
 import { map } from "lodash-es";
@@ -5,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
 import { Section } from "../components/Section";
-import { useOpenapiWithServiceInfoStore } from "../core/store";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../core/store";
+import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { Responses } from "./OpenapiViewComp";
 import { RequestBuilder } from "./RequestBuilder";
 import { ParameterPositionIconComp, parameterPositionMap } from "./config";
@@ -16,6 +17,8 @@ export default function OpenapiView() {
   const { operationId } = useParams();
   const { t } = useTranslation();
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
+  const theme = useTheme() as ITheme;
+  const { configInfo } = useConfigInfoStore();
 
   if (!openapiWithServiceInfo?.operations || !operationId) {
     return null;
@@ -23,37 +26,37 @@ export default function OpenapiView() {
 
   const operation = openapiWithServiceInfo.operations[operationId] || {};
   const methodStyle = operation.method ? { color: getMethodColor(operation.method) } : {};
-  const commonColorStyle = { color: dsc.color.primary };
+  const isDarkTheme = configInfo?.theme === "dark";
 
   return (
     <div>
       <div
-        css={{
+        style={{
           borderRadius: 6,
           overflow: "hidden",
-          border: `1px solid ${methodStyle.color}`,
+          border: `1px solid ${isDarkTheme ? theme.color.border : methodStyle.color}`,
         }}
       >
         <div
-          css={{
-            backgroundColor: methodStyle.color,
+          style={{
+            backgroundColor: isDarkTheme ? theme.color.descCardBg : methodStyle.color,
             padding: 10,
-            color: dsc.color.bg,
+            color: theme.color.menuGroup,
           }}
         >
           <div
-            css={{
+            style={{
               textDecoration: operation.deprecated ? "line-through" : "none",
               marginBottom: 8,
             }}
           >
             <Tooltip title={t("openapi.clickToCopy")}>
-              <span
-                css={{
+              <a
+                style={{
                   fontSize: dsc.fontSize.s,
                   fontWeight: "bold",
                   marginRight: 10,
-                  cursor: "pointer",
+                  color: theme.color.menuGroup,
                 }}
                 onClick={() => {
                   copy(operation.operationId);
@@ -61,20 +64,20 @@ export default function OpenapiView() {
                 }}
               >
                 {operation.operationId}
-              </span>
+              </a>
             </Tooltip>
-            <span title={operation.summary} css={{ fontSize: dsc.fontSize.xxs }}>
+            <span title={operation.summary} style={{ fontSize: dsc.fontSize.xxs }}>
               {operation.summary}
             </span>
           </div>
           <div
-            css={{
+            style={{
               fontSize: dsc.fontSize.s,
             }}
           >
-            <span css={{ textTransform: "uppercase", fontFamily: dsc.fontFamily.mono }}>{operation.method}</span>
+            <span style={{ textTransform: "uppercase", fontFamily: dsc.fontFamily.mono }}>{operation.method}</span>
             <span
-              css={{
+              style={{
                 display: "inline-block",
                 marginLeft: 8,
               }}
@@ -83,28 +86,30 @@ export default function OpenapiView() {
             </span>
           </div>
         </div>
-        <div css={{ padding: 16 }}>
+        <div style={{ padding: 16 }}>
           {operation.description && (
-            <Section title={<span css={commonColorStyle}>{t("openapi.description")}</span>}>
-              <ReactMarkdown>{operation.description}</ReactMarkdown>
+            <Section title={t("openapi.description")}>
+              <ReactMarkdown css={isDarkTheme ? { color: theme.color.textLight } : null}>
+                {operation.description}
+              </ReactMarkdown>
             </Section>
           )}
           <Section
             title={
               <span>
-                <span css={commonColorStyle}>{t("openapi.parameters")}</span>
+                <span>{t("openapi.parameters")}</span>
                 <small
-                  css={{
+                  style={{
                     lineHeight: 1.4,
                     fontSize: "0.8em",
                     marginBottom: "0.5em",
-                    color: dsc.color.text,
+                    color: theme.color.title,
                   }}
                 >
                   {map(parameterPositionMap, (label, position) => (
                     <span
                       key={position}
-                      css={{
+                      style={{
                         marginLeft: "1em",
                       }}
                     >
@@ -124,7 +129,7 @@ export default function OpenapiView() {
               }}
             />
           </Section>
-          <Section title={<span css={commonColorStyle}>{t("openapi.responses")}</span>}>
+          <Section title={t("openapi.responses")}>
             <Responses operation={operation} />
           </Section>
         </div>

@@ -1,6 +1,6 @@
 import { keys, map, replace } from "lodash-es";
 import { urlRegex } from "../core/regex";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { dsc, lightTheme } from "../core/style/defaultStyleConfig";
 import { IMethodType, IRequestBody, MethodType } from "./type";
 
 export function getMethodColor(method: IMethodType) {
@@ -55,14 +55,14 @@ export function getHttpErrorDes(s = "") {
 
 export const getCodeColor = (code: number) => {
   if (code >= 400) {
-    return dsc.color.danger;
+    return lightTheme.color.danger;
   }
 
   if (code >= 300) {
-    return dsc.color.warning;
+    return lightTheme.color.warning;
   }
 
-  return dsc.color.success;
+  return lightTheme.color.success;
 };
 
 export function withoutBubble(callback: () => void) {

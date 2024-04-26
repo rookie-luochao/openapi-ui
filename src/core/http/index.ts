@@ -19,7 +19,7 @@ export function request(axiosConfig: AxiosRequestConfig) {
   let timeout = defaultTimeout * 1000; // default request timeout is 120000 millisecond
   const configInfo = getConfigInfo();
 
-  if (configInfo) {
+  if (configInfo?.timeout) {
     timeout = configInfo.timeout * 1000;
   }
 

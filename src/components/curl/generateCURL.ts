@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { forEach, isEmpty, map, reduce } from "lodash-es";
 import { Dictionary, toQueryString } from "react-router-toolkit";
-import { MethodType } from "./type";
+import { MethodType } from "../../openapi/type";
 
 export function mapToFormData(map: Dictionary<any>) {
   const formData = new FormData();

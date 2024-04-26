@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import { map } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { ParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
@@ -8,7 +9,8 @@ import { GoToPostman } from "../components/head/common";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { ITheme, dsc, lightTheme } from "../core/style/defaultStyleConfig";
+import { SwitchTheme } from "../core/style/theme";
 import { flexBetweenCenterOpts, flexCenterOpts, flexOpts } from "../core/style/utils";
 import { defaultMenuTitleHeight } from "../main";
 import { FileImportView } from "./ImportByFileView";
@@ -23,21 +25,25 @@ interface ILoginQuery extends ParsedUrlQuery {
 export default function Login() {
   const [{ activeImportModeType = ImportModeType.url }, setQuery] = useRouterQuery<ILoginQuery>();
   const { t } = useTranslation();
+  const theme = useTheme() as ITheme;
   const isZh = getConfig().env === Env.zh;
 
   return (
     <div
       css={{
-        height: globalThis.document.documentElement.clientHeight,
+        minHeight: document.documentElement.clientHeight,
         backgroundImage: "url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg)",
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
+        backgroundColor: theme.color.bg,
+        color: theme.color.menuItem,
       }}
     >
       <div css={{ minHeight: document.documentElement.clientHeight - 32 }}>
         <div css={[flexBetweenCenterOpts(), { minWidth: 1200, height: defaultMenuTitleHeight, padding: "0px 30px" }]}>
-          <img css={{ width: 128 }} src={LogoIcon} alt="openapi-ui" />
-          <div css={{ "& > * + *": { marginLeft: 6 } }}>
+          <img style={{ width: 128 }} src={LogoIcon} alt="openapi-ui" />
+          <div css={{ display: "flex", "& > *": { marginLeft: 4, ...flexCenterOpts() } }}>
+            <SwitchTheme />
             <ChangeLangComp />
             <GoToPostman />
             <GithubStar />
@@ -64,18 +70,18 @@ export default function Login() {
                   {
                     width: 150,
                     height: 32,
-                    border: `1px solid ${dsc.color.border}`,
+                    border: `1px solid ${theme.color.border}`,
                     borderRadius: 6,
                     padding: "0px 6px",
                     cursor: "pointer",
                   },
                   activeImportModeType === item
                     ? {
-                        backgroundColor: dsc.color.primary,
-                        color: dsc.color.bg,
+                        backgroundColor: lightTheme.color.primary,
+                        color: lightTheme.color.bg,
                         border: "none",
-                        "& img": {
-                          filter: "invert(1)",
+                        "& path": {
+                          fill: theme.color.menuGroup,
                         },
                       }
                     : {},
@@ -86,7 +92,7 @@ export default function Login() {
                   }));
                 }}
               >
-                {displayImportModeTypeIcon(item)}
+                {displayImportModeTypeIcon(item, theme.color.textLight)}
                 <span css={{ marginLeft: 10 }}>{t(displayImportModeType(item))}</span>
               </a>
             ))}

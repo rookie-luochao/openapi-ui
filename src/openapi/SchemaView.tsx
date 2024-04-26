@@ -1,24 +1,28 @@
+import { useTheme } from "@emotion/react";
 import { Tooltip } from "antd";
 import { includes, isEmpty, isObject, keys, map, sortBy } from "lodash-es";
 import ReactMarkdown from "react-markdown";
 import { Dictionary } from "react-router-toolkit";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { displayClassName } from "./displayType";
 import { isArraySchema, isObjectSchema, patchSchema } from "./patchSchema";
 import { ISchema } from "./type";
+
+export const schemaOpacity = 0.6;
 
 function SchemaNameWrapView({
   deprecated,
   required,
   children,
 }: { deprecated?: boolean; required?: boolean } & React.HTMLAttributes<any>) {
+  const theme = useTheme() as ITheme;
+
   return (
     <>
       <span
         css={[
           {
-            color: dsc.color.text,
-            opacity: 0.6,
+            color: theme.color.textLight,
             fontWeight: 500,
           },
           deprecated && {
@@ -28,7 +32,7 @@ function SchemaNameWrapView({
       >
         {children}
       </span>
-      {!required && <span style={{ fontWeight: 700, fontSize: dsc.fontSize.xs }}>?</span>}
+      {!required && <span style={{ fontWeight: 700, fontSize: dsc.fontSize.xs, color: theme.color.text }}>?</span>}
     </>
   );
 }
@@ -43,16 +47,21 @@ function defaultNameRenderer(name: string, required: boolean, schema: ISchema = 
   );
 }
 
-const SchemaTypeWrapView = (props: React.HTMLAttributes<any>) => (
-  <span
-    {...props}
-    css={{
-      display: "block",
-      fontWeight: "bold",
-      marginBottom: "1em",
-    }}
-  />
-);
+const SchemaTypeWrapView = (props: React.HTMLAttributes<any>) => {
+  const theme = useTheme() as ITheme;
+
+  return (
+    <span
+      {...props}
+      style={{
+        display: "block",
+        fontWeight: "bold",
+        marginBottom: 12,
+        color: theme.color.title,
+      }}
+    />
+  );
+};
 
 const defaultTypeRenderer = (type: React.ReactNode) => <SchemaTypeWrapView>{type}</SchemaTypeWrapView>;
 
@@ -61,8 +70,22 @@ interface ISchemaRowProps extends ISchemaProps {
   typeRenderer?: (type: React.ReactNode, schema: ISchema) => React.ReactNode;
 }
 
-export function Description({ desc, prefix }: { desc: string; prefix?: string }) {
+export function Description({
+  desc,
+  prefix,
+  ishighLightDesc,
+}: {
+  desc: string;
+  prefix?: string;
+  ishighLightDesc?: boolean;
+}) {
+  const theme = useTheme() as ITheme;
   const lines = (desc || "").split("\n");
+  const style: React.CSSProperties = {
+    position: "relative",
+    whiteSpace: "nowrap",
+    color: ishighLightDesc ? theme.color.title : theme.color.textLight,
+  };
 
   if (lines.length > 1) {
     const line = lines[0];
@@ -70,16 +93,16 @@ export function Description({ desc, prefix }: { desc: string; prefix?: string })
 
     return (
       <Tooltip
-        css={{ userSelect: "auto" }}
+        style={{ userSelect: "auto" }}
         title={<ReactMarkdown css={{ maxWidth: "200px" }}>{lines.join("\n\n")}</ReactMarkdown>}
       >
-        <span css={{ position: "relative", whiteSpace: "nowrap" }}>
+        <span style={style}>
           <span>
             {prefix}
             {line}
           </span>
           <span
-            css={{
+            style={{
               display: "inline-block",
               marginLeft: "0.5em",
               width: "1em",
@@ -87,8 +110,8 @@ export function Description({ desc, prefix }: { desc: string; prefix?: string })
               textAlign: "center",
               lineHeight: "1em",
               borderRadius: "100%",
-              backgroundColor: dsc.color.primary,
-              color: dsc.color.bg,
+              backgroundColor: theme.color.primary,
+              color: theme.color.bg,
             }}
           >
             ?
@@ -99,7 +122,7 @@ export function Description({ desc, prefix }: { desc: string; prefix?: string })
   }
 
   return (
-    <span css={{ position: "relative", whiteSpace: "nowrap" }}>
+    <span style={style}>
       {prefix}
       {desc}
     </span>
@@ -111,7 +134,7 @@ function SchemaRow(props: ISchemaRowProps) {
 
   return (
     <span
-      css={{
+      style={{
         fontSize: dsc.fontSize.xs,
         position: "relative",
         display: "flex",
@@ -121,7 +144,7 @@ function SchemaRow(props: ISchemaRowProps) {
     >
       {name && (
         <span
-          css={{
+          style={{
             display: "block",
             position: "relative",
             paddingRight: "0.5em",
@@ -132,22 +155,20 @@ function SchemaRow(props: ISchemaRowProps) {
       )}
       {schema.description && (
         <span
-          css={{
-            position: "absolute",
-            top: "-0.8em",
-            left: 0,
+          style={{
             display: "block",
+            position: "absolute",
+            top: "-10px",
+            left: 0,
             lineHeight: 1,
             fontSize: dsc.fontSize.xxs,
-            opacity: 0.5,
-            color: dsc.color.text,
           }}
         >
           <Description desc={schema.description} prefix={"// "} />
         </span>
       )}
       <span
-        css={{
+        style={{
           display: "block",
         }}
       >
@@ -165,18 +186,18 @@ function renderSchema(schema: ISchema, name?: string, required?: boolean): React
         name={name}
         required={required}
         schema={schema}
-        typeRenderer={(type) => {
-          const shouldShowClassName = !!schema["x-id"] && !isObjectSchema(schema.items || {});
+        typeRenderer={() => {
+          // const shouldShowClassName = !!schema["x-id"] && !isObjectSchema(schema.items || {});
 
           return (
             <span>
-              <span css={{ display: "flex" }}>
+              <span style={{ display: "flex" }}>
                 <SchemaTypeWrapView>
                   [{schema.maxItems && schema.maxItems === schema.minItems ? schema.minItems : ""}]
                 </SchemaTypeWrapView>
                 {renderSchema(schema.items || {}, undefined, undefined)}
               </span>
-              {shouldShowClassName && (
+              {/* {shouldShowClassName && (
                 <span
                   css={{
                     display: "block",
@@ -190,7 +211,7 @@ function renderSchema(schema: ISchema, name?: string, required?: boolean): React
                 >
                   {type}
                 </span>
-              )}
+              )} */}
             </span>
           );
         }}
@@ -209,10 +230,10 @@ function renderSchema(schema: ISchema, name?: string, required?: boolean): React
           const asMap = isObject(schema.additionalProperties);
 
           return (
-            <div css={() => [asMap && { display: "flex" }]}>
+            <div style={asMap ? { display: "flex" } : {}}>
               {asMap ? (
                 <SchemaTypeWrapView>
-                  <span css={{ display: "flex" }}>
+                  <span>
                     <span>map[</span>
                     {displayClassName(schema.propertyNames || { type: "string" })}
                     <span>]</span>
@@ -221,7 +242,7 @@ function renderSchema(schema: ISchema, name?: string, required?: boolean): React
               ) : (
                 <SchemaTypeWrapView>
                   {type}
-                  <small css={{ opacity: 0.5, fontWeight: "normal" }}>{"{}"}</small>
+                  <small style={{ opacity: schemaOpacity, fontWeight: "normal" }}>{"{}"}</small>
                 </SchemaTypeWrapView>
               )}
               <div>
@@ -235,13 +256,11 @@ function renderSchema(schema: ISchema, name?: string, required?: boolean): React
                       return (
                         <span
                           key={propName}
-                          css={() => [
-                            {
-                              display: "block",
-                              position: "relative",
-                              padding: "0 1em",
-                            },
-                          ]}
+                          style={{
+                            display: "block",
+                            position: "relative",
+                            padding: "0 1em",
+                          }}
                         >
                           {renderSchema(propSchema, propName, includes(schema.required || [], propName))}
                         </span>
@@ -273,5 +292,5 @@ export function SchemaView({ schema, schemas }: ISchemaProps & { schemas: Dictio
 
   const patchedSchema = patchSchema(schema, schemas);
 
-  return <div css={{ padding: "1.4em 1em", overflowX: "auto" }}>{renderSchema(patchedSchema)}</div>;
+  return <div style={{ padding: "1.4em 1em", overflowX: "auto" }}>{renderSchema(patchedSchema)}</div>;
 }

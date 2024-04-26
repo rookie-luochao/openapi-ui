@@ -1,5 +1,5 @@
 import { forEach, has, map, reduce, replace, some } from "lodash-es";
-import { dsc } from "../core/style/defaultStyleConfig";
+import { schemaOpacity } from "./SchemaView";
 
 function highlightType(v: string) {
   const parts = /^([^<>]+)(<(.+)>)?$/.exec(v);
@@ -11,7 +11,7 @@ function highlightType(v: string) {
   return (
     <span>
       {parts[1]}
-      <small css={{ opacity: 0.6, fontWeight: "normal" }}>{parts[2]}</small>
+      <small style={{ opacity: schemaOpacity, fontWeight: "normal" }}>{parts[2]}</small>
     </span>
   );
 }
@@ -180,30 +180,30 @@ export function displayDefault(schema: any): string {
 export function displayClassName(schema: any): React.ReactNode {
   if (schema.enum) {
     return (
-      <span style={{ display: "block" }}>
+      <div>
         {highlightType(displayType(schema))}
         <div
-          css={{
+          style={{
             fontSize: "0.8em",
             paddingLeft: "1em",
             paddingBottom: "0.6em",
           }}
         >
           {map(toEnumMap(schema), (label, key) => (
-            <div key={key} css={{ display: "flex", lineHeight: 1.4, opacity: 0.6 }}>
+            <div key={key} style={{ display: "flex", lineHeight: 1.4, opacity: schemaOpacity }}>
               <span>{key}</span>
-              <span css={{ fontWeight: "normal", opacity: 0.8, marginLeft: "1em" }}>{`// ${label}`}</span>
+              <span style={{ fontWeight: "normal", marginLeft: "1em" }}>{`// ${label}`}</span>
             </div>
           ))}
         </div>
-      </span>
+      </div>
     );
   }
 
   return (
     <span>
       {highlightType(displayType(schema))}
-      <span css={{ color: dsc.color.text, opacity: 0.8, fontSize: "0.8em" }}>
+      <span>
         {displayValidate(schema)}
         {displayDefault(schema)}
       </span>
