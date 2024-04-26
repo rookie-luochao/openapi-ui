@@ -45,7 +45,7 @@ function LabelStyleWrap({ children, required }: { required?: boolean; children?:
 }
 
 function FieldLabelWithSchemaWrap(props: {
-  schema: any;
+  schema: ISchema;
   schemas: any;
   children: ReactNode;
   fieldLabel?: ReactNode;
@@ -130,7 +130,7 @@ function isTime(parameter: TParameter) {
 // PatchInput handle minimized schema
 export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
   const theme = useTheme() as ITheme;
-  const isArray = isArraySchema(schema as any);
+  const isArray = isArraySchema(schema);
   const placeholder = displayType(schema) + displayValidate(schema) + displayDefault(schema);
 
   if (schema.enum) {
@@ -236,7 +236,7 @@ function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
       >
         <PatchInput
           {...commonProps}
-          schema={schema as any}
+          schema={schema}
           value={value}
           onChange={(nextValue) => {
             setValue(nextValue);
@@ -299,7 +299,7 @@ export const RequestParameterInput = ({
 }: TParamInputProps & Partial<IJSONInputProps>) => {
   const theme = useTheme() as ITheme;
   const schema = patchSchema<ISchema>(parameter.schema || parameter, schemas);
-  const isArray = isArraySchema(schema as any);
+  const isArray = isArraySchema(schema);
   const commonProps = {
     value: isArray ? (otherProps.value ? [].concat(otherProps.value) : []) : otherProps.value,
     onChange: otherProps.onChange ? otherProps.onChange : () => undefined,
@@ -314,10 +314,10 @@ export const RequestParameterInput = ({
 
   const fieldDesc = <Description desc={parameter.description || schema.description || ""} ishighLightDesc />;
 
-  if (isObjectSchema(schema as any) || (isArray && isObjectSchema(schema.items))) {
+  if (isObjectSchema(schema) || (isArray && isObjectSchema(schema.items))) {
     return (
       <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
-        <JSONSchemaInput {...commonProps} schema={schema as any} />
+        <JSONSchemaInput {...commonProps} schema={schema} />
       </FieldLabelWithSchemaWrap>
     );
   } else if (isArray) {
@@ -381,7 +381,7 @@ export const RequestParameterInput = ({
 
   return (
     <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
-      <PatchInput {...commonProps} schema={schema as any} />
+      <PatchInput {...commonProps} schema={schema} />
     </FieldLabelWithSchemaWrap>
   );
 };

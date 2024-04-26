@@ -290,7 +290,7 @@ export function SchemaView({ schema, schemas }: ISchemaProps & { schemas: Dictio
     return null;
   }
 
-  const patchedSchema = patchSchema(schema, schemas);
+  const patchedSchema = patchSchema<ISchema>(schema, schemas);
 
   return <div style={{ padding: "1.4em 1em", overflowX: "auto" }}>{renderSchema(patchedSchema)}</div>;
 }

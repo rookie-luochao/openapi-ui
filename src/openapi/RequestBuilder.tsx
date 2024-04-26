@@ -27,13 +27,17 @@ function createParametersPicker(parameters: TParameter[]) {
 function renderParameters(parameters: TParameter[], schemas: Dictionary<ISchema> = {}) {
   return map(parameters, (parameter) => {
     const name = parameter.name;
-    const pattern = (parameter.schema as any)?.pattern;
+    const pattern = (parameter.schema as ISchema)?.pattern;
 
     return (
       <Form.Item
         key={name}
         name={name}
-        rules={parameter.required ? [pattern ? { required: true, pattern: pattern } : { required: true }] : undefined}
+        rules={
+          parameter.required
+            ? [pattern ? { required: true, pattern: pattern as unknown as RegExp } : { required: true }]
+            : undefined
+        }
         style={{ marginBottom: 10 }}
       >
         <RequestParameterInput parameter={parameter} schemas={schemas} />
@@ -49,7 +53,9 @@ function RenderRequestBody({ requestBody, schemas = {} }: { requestBody: IReques
   return (
     <div key="requestBody">
       {map(content, (mediaType: IMediaType, contentType: string) => {
-        const schema = mediaType.schema ? patchSchema(mediaType.schema, schemas) : ({} as IMediaType["schema"]);
+        const schema = mediaType.schema
+          ? patchSchema<ISchema>(mediaType.schema, schemas)
+          : ({} as IMediaType["schema"]);
 
         return (
           <div key={contentType}>
@@ -180,10 +186,10 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
     >
       <div style={{ display: "flex", fontSize: dsc.fontSize.xs }}>
         <div style={{ flex: 1, maxWidth: "50%" }}>
-          {renderParameters(pickParametersBy("path") as any, schemas)}
-          {renderParameters(pickParametersBy("header") as any, schemas)}
-          {renderParameters(pickParametersBy("query") as any, schemas)}
-          {renderParameters(pickParametersBy("cookie") as any, schemas)}
+          {renderParameters(pickParametersBy("path") as TParameter[], schemas)}
+          {renderParameters(pickParametersBy("header") as TParameter[], schemas)}
+          {renderParameters(pickParametersBy("query") as TParameter[], schemas)}
+          {renderParameters(pickParametersBy("cookie") as TParameter[], schemas)}
           {operation.requestBody && <RenderRequestBody requestBody={operation.requestBody} schemas={schemas} />}
         </div>
         <div

@@ -14,17 +14,17 @@ export function patchSchema<T extends object>(schema: any, schemas: Dictionary<I
     return reduce(
       schema.allOf,
       (last, s) => {
-        const f: any = {
-          ...last,
+        const f: Dictionary<any> = {
+          ...(last || {}),
         };
-        const next = patchSchema(s, schemas);
+        const next = patchSchema<ISchema>(s, schemas);
 
         forEach(next, (v, k) => {
           switch (k) {
             case "properties":
               f[k] = {
                 ...f[k],
-                ...(v as any),
+                ...(v || {}),
               };
               break;
             case "required":

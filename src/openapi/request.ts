@@ -75,9 +75,12 @@ export const setAxiosConfigFromOperation =
     let contentType = getHeadContentType(operation) || "application/json";
 
     if (isFormURLEncoded(contentType) || isMultipartFormData(contentType)) {
-      const schema = patchSchema(operation.requestBody?.content?.[contentType]?.schema, openapi?.components?.schemas);
+      const schema = patchSchema<ISchema>(
+        operation.requestBody?.content?.[contentType]?.schema,
+        openapi?.components?.schemas,
+      );
       // when the Content-Type is multipart/form-data, axios supports automatically serializing ordinary objects into a FormData object
-      req.data = pick(values, keys((schema as any)?.properties));
+      req.data = pick(values, keys((schema as ISchema)?.properties));
 
       // TODO: this is hack for swagger2openapi tool convert "in formData" to application/x-www-form-urlencoded
       if (openapi?.["x-original-swagger-version"]) {
