@@ -29,8 +29,8 @@ export function CreateGenerateCode({ request }: { request: AxiosRequestConfig })
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Radio.Group defaultValue="axios" size="small">
-          <Radio.Button value="axios">javaScript</Radio.Button>
+        <Radio.Group defaultValue="axios" size="small" buttonStyle="solid">
+          <Radio.Button value="axios">JavaScript</Radio.Button>
           {/* <Radio.Button value="python">python</Radio.Button> */}
         </Radio.Group>
         <Button

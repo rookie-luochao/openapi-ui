@@ -29,29 +29,6 @@ export const dsc = {
   spacing: {
     base: "0.6em 1em",
   },
-  color: {
-    primary: "#1677ff",
-    primaryLight: "rgb(22, 119, 255, 0.2)",
-
-    success: "#23CBA0",
-    warning: "#F1911E",
-    info: "#A9AEFC",
-    danger: "#E51D30",
-
-    text: "#333",
-
-    bg: "#FFFFFF",
-    bgGray: "#f0f2f5",
-
-    border: "#DEE2EC",
-
-    menuText: "#333",
-
-    hover: "#1677FFCC",
-
-    menuGroup: "#FFFFFF",
-    menuGroupBg: "#1677FF99",
-  },
 };
 
 export type ITheme = typeof lightTheme;

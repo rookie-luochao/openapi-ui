@@ -14,7 +14,6 @@ import { IconDown, UpdateConfigInfoModalComp } from "./common";
 export function PostmanHead() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  // const theme = useTheme() as ITheme;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -25,7 +24,6 @@ export function PostmanHead() {
           flexBetweenCenterOpts(),
           {
             height: defaultMenuTitleHeight,
-            // backgroundColor: theme.color.bg,
             padding: 12,
             margin: "0 16px",
             boxSizing: "border-box",

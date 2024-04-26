@@ -55,45 +55,48 @@ export function AntdConfigProviderWrap({ children }: { children: React.ReactNode
                 itemActiveColor: darkTheme.color.textLight,
               }
             : {},
-          Button: {
-            ...(isDarkTheme
-              ? Object.assign({}, darkThemeColorMap, {
-                  colorBgContainerDisabled: darkTheme.color.descCardBg,
-                  colorTextDisabled: darkTheme.color.textLight,
-                  fontSize: dsc.fontSize.xxs,
-                })
-              : { fontSize: dsc.fontSize.xxs }),
-          },
+          Button: isDarkTheme
+            ? {
+                ...darkThemeColorMap,
+                colorBgContainerDisabled: darkTheme.color.descCardBg,
+                colorTextDisabled: darkTheme.color.textLight,
+                fontSize: dsc.fontSize.xxs,
+              }
+            : { fontSize: dsc.fontSize.xxs },
           Upload: isDarkTheme
-            ? Object.assign({}, lightThemeColorMap, {
+            ? {
+                ...lightThemeColorMap,
                 colorText: darkTheme.color.textLight,
                 actionsColor: darkTheme.color.textLight,
                 colorTextDescription: darkTheme.color.textLight,
                 controlItemBgHover: darkTheme.color.descCardBg,
-              })
+              }
             : lightThemeColorMap,
           Select: isDarkTheme
-            ? Object.assign({}, darkThemeColorMap, {
+            ? {
+                ...darkThemeColorMap,
                 colorBgElevated: darkTheme.color.bg,
                 optionActiveBg: darkTheme.color.descCardBg,
                 optionSelectedBg: darkTheme.color.descCardBg,
                 multipleItemBg: darkTheme.color.bgGray,
-              })
+              }
             : lightThemeColorMap,
           Dropdown: isDarkTheme
-            ? Object.assign({}, darkThemeColorMap, {
+            ? {
+                ...darkThemeColorMap,
                 colorBgElevated: darkTheme.color.bg,
                 controlItemBgHover: darkTheme.color.descCardBg,
-              })
+              }
             : lightThemeColorMap,
           DatePicker: isDarkTheme
-            ? Object.assign({}, darkThemeColorMap, {
+            ? {
+                ...darkThemeColorMap,
                 colorBgElevated: darkTheme.color.bg,
                 colorTextHeading: darkTheme.color.textLight,
                 controlItemBgHover: darkTheme.color.descCardBg,
                 controlItemBgActive: darkTheme.color.descCardBg,
                 colorTextDisabled: darkTheme.color.textLight,
-              })
+              }
             : lightThemeColorMap,
         },
       }}

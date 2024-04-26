@@ -69,7 +69,7 @@ function RenderRequestBody({ requestBody, schemas = {} }: { requestBody: IReques
                 >
                   {contentType}
                 </div>
-                <div style={{ height: 1, backgroundColor: dsc.color.border, marginBottom: 10 }} />
+                <div style={{ height: 1, backgroundColor: theme.color.border, marginBottom: 10 }} />
                 {map((schema || ({} as any)).properties, (propSchema: any, key: string) => {
                   return (
                     <Form.Item key={key} name={key}>

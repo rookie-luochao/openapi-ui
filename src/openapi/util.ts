@@ -1,6 +1,6 @@
 import { keys, map, replace } from "lodash-es";
 import { urlRegex } from "../core/regex";
-import { dsc, lightTheme } from "../core/style/defaultStyleConfig";
+import { lightTheme } from "../core/style/defaultStyleConfig";
 import { IMethodType, IRequestBody, MethodType } from "./type";
 
 export function getMethodColor(method: IMethodType) {
@@ -9,15 +9,15 @@ export function getMethodColor(method: IMethodType) {
 
   switch (method) {
     case MethodType.get:
-      return dsc.color.primary;
+      return lightTheme.color.primary;
     case MethodType.post:
-      return dsc.color.success;
+      return lightTheme.color.success;
     case MethodType.put:
-      return dsc.color.warning;
+      return lightTheme.color.warning;
     case MethodType.patch:
       return purpleColor;
     case MethodType.delete:
-      return dsc.color.danger;
+      return lightTheme.color.danger;
     default:
       return cyanBlueColor;
   }
