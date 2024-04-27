@@ -122,17 +122,15 @@ export default function Postman() {
             isZh ? { minHeight: defaultContentHeight - 32 - 12 } : {},
           ]}
         >
-          <div>
-            <Tabs
-              type="editable-card"
-              items={items}
-              activeKey={activeKey}
-              onChange={(newActiveKey: string) => {
-                setActiveKey(newActiveKey);
-              }}
-              onEdit={onEdit}
-            />
-          </div>
+          <Tabs
+            type="editable-card"
+            items={items}
+            activeKey={activeKey}
+            onChange={(newActiveKey: string) => {
+              setActiveKey(newActiveKey);
+            }}
+            onEdit={onEdit}
+          />
         </div>
         {isZh && <ICPRegistration />}
       </div>

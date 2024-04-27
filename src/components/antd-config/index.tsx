@@ -1,9 +1,12 @@
 import { ConfigProvider } from "antd";
 import zhCN from "antd/locale/zh_CN";
+import { useTranslation } from "react-i18next";
 import { useConfigInfoStore } from "../../core/store";
 import { darkTheme, dsc } from "../../core/style/defaultStyleConfig";
+import { LangType } from "../../i18n/config";
 
 export function AntdConfigProviderWrap({ children }: { children: React.ReactNode }) {
+  const { i18n } = useTranslation();
   const { configInfo } = useConfigInfoStore();
   const isDarkTheme = configInfo?.theme === "dark";
 
@@ -22,7 +25,7 @@ export function AntdConfigProviderWrap({ children }: { children: React.ReactNode
 
   return (
     <ConfigProvider
-      locale={zhCN}
+      locale={i18n?.resolvedLanguage === LangType.zh ? zhCN : undefined}
       theme={{
         components: {
           Layout: {

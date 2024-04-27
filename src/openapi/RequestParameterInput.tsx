@@ -20,12 +20,12 @@ function LabelStyleWrap({ children, required }: { required?: boolean; children?:
 
   return (
     <div
-      css={
+      css={[
+        { color: theme.color.title, whiteSpace: "nowrap" },
         required
           ? {
               position: "relative",
               fontWeight: "bold",
-              color: theme.color.title,
               "&:after": {
                 content: `"*"`,
                 color: theme.color.danger,
@@ -34,10 +34,8 @@ function LabelStyleWrap({ children, required }: { required?: boolean; children?:
                 marginLeft: 1,
               },
             }
-          : {
-              color: theme.color.title,
-            }
-      }
+          : null,
+      ]}
     >
       {children}
     </div>

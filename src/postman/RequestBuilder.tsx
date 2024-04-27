@@ -71,7 +71,9 @@ export function RequestBuilder() {
         <div style={{ display: "flex", alignItems: "center" }}>
           {t("postman.body")}&nbsp;
           <Tooltip title={t("postman.bodyTitleTip")} overlayInnerStyle={{ width: 260 }}>
-            <TipIcon />
+            <a style={{ display: "flex", alignItems: "center" }}>
+              <TipIcon />
+            </a>
           </Tooltip>
         </div>
       ),

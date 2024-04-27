@@ -122,7 +122,7 @@ export function Description({
   }
 
   return (
-    <span style={style}>
+    <span style={{ ...style, whiteSpace: "break-spaces", textAlign: "right" }}>
       {prefix}
       {desc}
     </span>

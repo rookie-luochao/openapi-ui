@@ -30,7 +30,7 @@ export function CreateCURL({ request }: { request: AxiosRequestConfig }) {
       <pre
         style={{
           width: 672,
-          fontSize: dsc.fontSize.s,
+          fontSize: dsc.fontSize.xs,
           backgroundColor: theme.color.primaryLight,
           color: theme.color.menuItem,
           ...httpCardWrapStyle,

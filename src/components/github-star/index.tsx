@@ -19,17 +19,20 @@ export default function GithubStar() {
   const isDarkTheme = configInfo?.theme === "dark";
   const [star, setStar] = useState(0);
   const [isFetched, setIsFetched] = useState(false);
+  const isPackage = import.meta.env.MODE === "package";
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await getStar();
-        setStar(res.stargazers_count);
-        setIsFetched(true);
-      } catch (e) {
-        console.log("fetch github info error:", e);
-      }
-    })();
+    if (!isPackage) {
+      (async () => {
+        try {
+          const res = await getStar();
+          setStar(res.stargazers_count);
+          setIsFetched(true);
+        } catch (e) {
+          console.log("fetch github info error:", e);
+        }
+      })();
+    }
   }, []);
 
   async function getStar() {
@@ -46,22 +49,32 @@ export default function GithubStar() {
     return null;
   }
 
-  return (
-    <Tooltip
-      title={
-        <span>
-          {`${star}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          <span css={{ color: "gold" }}>&#9733;</span>
-        </span>
-      }
+  const githubLink = (
+    <a
+      href="https://github.com/rookie-luochao/openapi-ui"
+      target="_blank"
+      css={{ cursor: "pointer", opacity: 0.8, "&:hover": { opacity: 1 } }}
     >
-      <a
-        href="https://github.com/rookie-luochao/openapi-ui"
-        target="_blank"
-        css={{ cursor: "pointer", opacity: 0.8, "&:hover": { opacity: 1 } }}
-      >
-        <GithubIcon fill={isDarkTheme ? darkTheme.color.text : undefined} />
-      </a>
-    </Tooltip>
+      <GithubIcon fill={isDarkTheme ? darkTheme.color.text : undefined} />
+    </a>
+  );
+
+  return (
+    <>
+      {isPackage ? (
+        githubLink
+      ) : (
+        <Tooltip
+          title={
+            <span>
+              {`${star}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              <span css={{ color: "gold" }}>&#9733;</span>
+            </span>
+          }
+        >
+          {githubLink}
+        </Tooltip>
+      )}
+    </>
   );
 }

@@ -16,6 +16,7 @@ ReactDOM.createRoot(
 ).render(
   <StrictMode>
     <InitPackageConfig />
+    <ModifyAppTitle />
     <Global
       styles={{
         body: {
@@ -24,7 +25,6 @@ ReactDOM.createRoot(
         },
       }}
     />
-    <ModifyAppTitle />
     <ThemeWrap>
       <AntdConfigProviderWrap>
         <LazyImportComponent>
