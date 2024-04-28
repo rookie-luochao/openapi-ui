@@ -310,7 +310,9 @@ export const RequestParameterInput = ({
     </LabelStyleWrap>
   );
 
-  const fieldDesc = <Description desc={parameter.description || schema.description || ""} ishighLightDesc />;
+  const fieldDesc = (
+    <Description desc={parameter.description || schema.description || ""} ishighLightDesc isBreakWord />
+  );
 
   if (isObjectSchema(schema) || (isArray && isObjectSchema(schema.items))) {
     return (

@@ -14,20 +14,23 @@ const GithubIcon = ({ size = "16", fill = "#333", ...other }) => {
   );
 };
 
+let isFetchedGithubStar = false;
+let star = 0;
+
 export default function GithubStar() {
   const { configInfo } = useConfigInfoStore();
   const isDarkTheme = configInfo?.theme === "dark";
-  const [star, setStar] = useState(0);
-  const [isFetched, setIsFetched] = useState(false);
+  const [, setCount] = useState(0);
   const isPackage = import.meta.env.MODE === "package";
 
   useEffect(() => {
-    if (!isPackage) {
+    if (!isPackage && !isFetchedGithubStar) {
       (async () => {
         try {
           const res = await getStar();
-          setStar(res.stargazers_count);
-          setIsFetched(true);
+          star = res.stargazers_count;
+          isFetchedGithubStar = true;
+          setCount((preCount) => preCount + 1);
         } catch (e) {
           console.log("fetch github info error:", e);
         }
@@ -45,7 +48,7 @@ export default function GithubStar() {
     return res.json();
   }
 
-  if (!isFetched) {
+  if (!isFetchedGithubStar) {
     return null;
   }
 

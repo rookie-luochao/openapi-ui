@@ -16,7 +16,7 @@ import { ThemeType } from "../core/style/theme";
 import { loginModuleName } from "../login/routes";
 import { OperationList } from "../openapi/OperationList";
 
-export const defaultMenuTitleHeight = 54;
+export const defaultHeadTitleHeight = 54;
 
 export interface ICollapsed {
   isCollapsed?: boolean;
@@ -29,7 +29,7 @@ export const Logo = ({ isCollapsed }: ICollapsed) => {
     <a
       className="logo"
       style={{
-        height: defaultMenuTitleHeight,
+        height: defaultHeadTitleHeight,
         display: "flex",
         alignItems: "center",
         marginLeft: 24,
@@ -51,7 +51,7 @@ export default function MainLayout() {
   const theme = useTheme() as ITheme;
   const [collapsed, setCollapsed] = useState(false);
   const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
-  const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
+  const defaultContentHeight = menuHeight - defaultHeadTitleHeight;
   const defaultMenuHeight = defaultContentHeight - 48; // 48px为展开收缩图标高度
   const isZh = getConfig().env === Env.zh;
 

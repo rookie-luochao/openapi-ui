@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SwitchTheme } from "../../core/style/theme";
 import { flexBetweenCenterOpts, flexCenterOpts } from "../../core/style/utils";
 import { loginModuleName } from "../../login/routes";
-import { defaultMenuTitleHeight } from "../../main";
+import { defaultHeadTitleHeight } from "../../main";
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
 import { PostmanIcon } from "../icon";
@@ -23,7 +23,7 @@ export function PostmanHead() {
         css={[
           flexBetweenCenterOpts(),
           {
-            height: defaultMenuTitleHeight,
+            height: defaultHeadTitleHeight,
             padding: 12,
             margin: "0 16px",
             boxSizing: "border-box",

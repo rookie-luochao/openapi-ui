@@ -154,7 +154,15 @@ export function OperationList(props: ICollapsed) {
   useEffect(() => {
     if (!isEmpty(operations)) {
       const operationList = filterValue
-        ? filter(operations, (k) => includes(toLower(k.operationId) || "", toLower(filterValue)))
+        ? filter(operations, (operation) => {
+            const lowerFilterValue = toLower(filterValue);
+            return (
+              includes(toLower(operation.operationId), lowerFilterValue) ||
+              includes(toLower(operation.group), lowerFilterValue) ||
+              includes(toLower(operation.path), lowerFilterValue) ||
+              includes(toLower(operation.summary), filterValue)
+            );
+          })
         : values(operations);
 
       // groupBy group field

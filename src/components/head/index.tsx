@@ -13,7 +13,7 @@ import { flexCenterOpts } from "../../core/style/utils";
 import { IImportModeType, ImportModeType } from "../../login/config";
 import { loginModuleName } from "../../login/routes";
 import { parseSwaggerOrOpenapi } from "../../login/util";
-import { defaultMenuTitleHeight } from "../../main";
+import { defaultHeadTitleHeight } from "../../main";
 import { mainLayoutPath } from "../../main/routes";
 import { IPaths } from "../../openapi/type";
 import { flattenOperations } from "../../openapi/useOpenapiInfo";
@@ -125,7 +125,7 @@ export function Head() {
         css={[
           flexCenterOpts({ justifyContent: "flex-end" }),
           {
-            height: defaultMenuTitleHeight,
+            height: defaultHeadTitleHeight,
             backgroundColor: theme.color.bg,
             padding: 12,
           },
@@ -158,7 +158,7 @@ export function Head() {
             </a>
           </Dropdown>
           <SwitchTheme />
-          <ChangeLangComp />
+          <ChangeLangComp isMainHead />
           {import.meta.env.MODE !== "package" && <GoToPostman />}
           <GithubStar />
         </div>

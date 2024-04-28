@@ -1,4 +1,4 @@
-import { ConfigProvider } from "antd";
+import { ConfigProvider /* , theme */ } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import { useTranslation } from "react-i18next";
 import { useConfigInfoStore } from "../../core/store";
@@ -27,6 +27,7 @@ export function AntdConfigProviderWrap({ children }: { children: React.ReactNode
     <ConfigProvider
       locale={i18n?.resolvedLanguage === LangType.zh ? zhCN : undefined}
       theme={{
+        // algorithm: theme.darkAlgorithm,
         components: {
           Layout: {
             siderBg: darkTheme.color.bg,

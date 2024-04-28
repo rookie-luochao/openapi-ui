@@ -74,10 +74,12 @@ export function Description({
   desc,
   prefix,
   ishighLightDesc,
+  isBreakWord,
 }: {
   desc: string;
   prefix?: string;
   ishighLightDesc?: boolean;
+  isBreakWord?: true;
 }) {
   const theme = useTheme() as ITheme;
   const lines = (desc || "").split("\n");
@@ -122,7 +124,7 @@ export function Description({
   }
 
   return (
-    <span style={{ ...style, whiteSpace: "break-spaces", textAlign: "right" }}>
+    <span style={{ ...style, whiteSpace: isBreakWord ? "break-spaces" : "nowrap", textAlign: "right" }}>
       {prefix}
       {desc}
     </span>

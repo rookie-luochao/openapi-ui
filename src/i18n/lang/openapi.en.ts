@@ -1,5 +1,5 @@
 const translation = {
-  searchPlaceholder: "please input operationID to search",
+  searchPlaceholder: "input operationID、summary、path、group",
   description: "Description",
   parameters: "Parameters",
   responses: "Responses",

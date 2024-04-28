@@ -10,7 +10,7 @@ import { getConfig } from "../core/http/config";
 import { useConfigInfoStore } from "../core/store";
 import { ITheme, darkTheme, lightTheme } from "../core/style/defaultStyleConfig";
 import i18n from "../i18n";
-import { defaultMenuTitleHeight } from "../main";
+import { defaultHeadTitleHeight } from "../main";
 import { RequestBuilder } from "./RequestBuilder";
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -29,8 +29,8 @@ export default function Postman() {
   const theme = useTheme() as ITheme;
   const { configInfo } = useConfigInfoStore();
   const isDarkTheme = configInfo?.theme === "dark";
-  const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
-  const defaultContentHeight = menuHeight - defaultMenuTitleHeight;
+  const [contentHeight, setContentHeight] = useState(document.documentElement.clientHeight);
+  const defaultContentHeight = contentHeight - defaultHeadTitleHeight;
   const isZh = getConfig().env === Env.zh;
   const [activeKey, setActiveKey] = useState(initialItems[0].key);
   const [items, setItems] = useState(initialItems);
@@ -38,7 +38,7 @@ export default function Postman() {
 
   const throttledResizeHandler = throttle(
     () => {
-      setMenuHeight(globalThis.document.documentElement.clientHeight);
+      setContentHeight(globalThis.document.documentElement.clientHeight);
     },
     1200,
     { leading: true, trailing: true },
