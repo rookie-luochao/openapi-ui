@@ -54,7 +54,7 @@
     "@types/react-dom": "^18.2.25",
     "@types/react-syntax-highlighter": "^15.5.11",
     "@types/swagger2openapi": "^7.0.4",
-    "@typescript-eslint/eslint-plugin": "^7.7.0",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.7.1",
     "@vitejs/plugin-react": "^4.2.1",
     "csstype": "^3.1.3",
