@@ -1,6 +1,8 @@
 import { useTheme } from "@emotion/react";
 import { Tooltip } from "antd";
 import { includes, isEmpty, isObject, keys, map, sortBy } from "lodash-es";
+import { ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { Dictionary } from "react-router-toolkit";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
@@ -56,7 +58,7 @@ const SchemaTypeWrapView = (props: React.HTMLAttributes<any>) => {
       style={{
         display: "block",
         fontWeight: "bold",
-        marginBottom: 12,
+        marginBottom: 14,
         color: theme.color.title,
       }}
     />
@@ -180,6 +182,37 @@ function SchemaRow(props: ISchemaRowProps) {
   );
 }
 
+function SchemaStructWrapView({
+  title,
+  isStruct,
+  children,
+}: {
+  title: ReactNode;
+  isStruct?: boolean;
+  children: ReactNode;
+}) {
+  const { t } = useTranslation();
+  const theme = useTheme() as ITheme;
+  const [isExpandStruct, setIsExpandStruct] = useState(true);
+
+  return (
+    <>
+      <SchemaTypeWrapView>
+        {title}
+        {isStruct && (
+          <a
+            style={{ fontSize: dsc.fontSize.xxs, marginLeft: 4, color: theme.color.primary }}
+            onClick={() => setIsExpandStruct(!isExpandStruct)}
+          >
+            {isExpandStruct ? t("openapi.collapse") : t("openapi.expand")}
+          </a>
+        )}
+      </SchemaTypeWrapView>
+      <div style={isExpandStruct ? {} : { height: 0, overflow: "hidden", opacity: 0 }}>{children}</div>
+    </>
+  );
+}
+
 function renderSchema(schema: ISchema, name?: string, required?: boolean): React.ReactNode {
   if (isArraySchema(schema)) {
     return (
@@ -233,44 +266,50 @@ function renderSchema(schema: ISchema, name?: string, required?: boolean): React
 
           return (
             <div style={asMap ? { display: "flex" } : {}}>
-              {asMap ? (
-                <SchemaTypeWrapView>
-                  <span>
-                    <span>map[</span>
-                    {displayClassName(schema.propertyNames || { type: "string" })}
-                    <span>]</span>
-                  </span>
-                </SchemaTypeWrapView>
-              ) : (
-                <SchemaTypeWrapView>
-                  {type}
-                  <small style={{ opacity: schemaOpacity, fontWeight: "normal" }}>{"{}"}</small>
-                </SchemaTypeWrapView>
-              )}
-              <div>
-                {asMap ? (
-                  <>{renderSchema(schema.additionalProperties as ISchema)}</>
-                ) : (
+              <SchemaStructWrapView
+                isStruct={!isEmpty(schema.properties)}
+                title={
                   <>
-                    {map(sortBy(keys(schema.properties || {})), (propName: string) => {
-                      const propSchema = (schema.properties || {})[propName];
-
-                      return (
-                        <span
-                          key={propName}
-                          style={{
-                            display: "block",
-                            position: "relative",
-                            padding: "0 1em",
-                          }}
-                        >
-                          {renderSchema(propSchema, propName, includes(schema.required || [], propName))}
-                        </span>
-                      );
-                    })}
+                    {asMap ? (
+                      <span>
+                        <span>map[</span>
+                        {displayClassName(schema.propertyNames || { type: "string" })}
+                        <span>]</span>
+                      </span>
+                    ) : (
+                      <span>
+                        {type}
+                        <small style={{ opacity: schemaOpacity, fontWeight: "normal" }}>{"{}"}</small>
+                      </span>
+                    )}
                   </>
-                )}
-              </div>
+                }
+              >
+                <div>
+                  {asMap ? (
+                    <>{renderSchema(schema.additionalProperties as ISchema)}</>
+                  ) : (
+                    <>
+                      {map(sortBy(keys(schema.properties || {})), (propName: string) => {
+                        const propSchema = (schema.properties || {})[propName];
+
+                        return (
+                          <span
+                            key={propName}
+                            style={{
+                              display: "block",
+                              position: "relative",
+                              padding: "0 1em",
+                            }}
+                          >
+                            {renderSchema(propSchema, propName, includes(schema.required || [], propName))}
+                          </span>
+                        );
+                      })}
+                    </>
+                  )}
+                </div>
+              </SchemaStructWrapView>
             </div>
           );
         }}

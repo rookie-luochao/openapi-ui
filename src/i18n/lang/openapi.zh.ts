@@ -12,6 +12,8 @@ const translation = {
   copy: "复制",
   clickToCopy: "点击复制",
   generateCode: "生成代码",
+  expand: "展开",
+  collapse: "收起",
 };
 
 export default translation;
