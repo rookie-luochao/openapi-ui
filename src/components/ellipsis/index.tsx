@@ -11,13 +11,13 @@ interface IEllipsis {
 export function Ellipsis({ text, width, className }: IEllipsis) {
   return (
     <Tooltip
-      title={<div css={{ maxHeight: 600 }}>{text}</div>}
+      title={<div style={{ maxHeight: 600 }}>{text}</div>}
       overlayStyle={{
         maxWidth: 600,
         fontSize: 12,
       }}
     >
-      <span className={className} css={[ellipsisBasicStyle, { width }]} onClick={() => copy(text)}>
+      <span className={className} css={{ ...ellipsisBasicStyle, width: width }} onClick={() => copy(text)}>
         {text}
       </span>
     </Tooltip>

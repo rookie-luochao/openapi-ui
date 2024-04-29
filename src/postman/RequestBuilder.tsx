@@ -154,7 +154,7 @@ export function RequestBuilder() {
       <div style={{ width: "50%" }}>
         <div style={{ display: "flex", marginBottom: 10 }}>
           <Input
-            css={{ width: "90%", marginRight: 5 }}
+            style={{ width: "90%", marginRight: 5 }}
             addonBefore={<MethodSelector />}
             placeholder={t("postman.urlPlaceholder")}
             defaultValue={url}

@@ -69,10 +69,10 @@ export function UpdateConfigInfoModalComp({ onSuccess }: { onSuccess: () => void
           label={t("head.requestTimeoutLabel")}
           rules={[{ required: true, message: t("head.requestTimeoutPlaceholder") }]}
         >
-          <InputNumber css={{ width: "100%" }} min={1} max={3600} placeholder={t("head.requestTimeoutPlaceholder")} />
+          <InputNumber style={{ width: "100%" }} min={1} max={3600} placeholder={t("head.requestTimeoutPlaceholder")} />
         </FormItem>
         <FormItem name="authorization" label={t("head.authorizationLabel")}>
-          <Input css={{ width: "100%" }} placeholder={t("head.authorizationPlaceholder")} />
+          <Input style={{ width: "100%" }} placeholder={t("head.authorizationPlaceholder")} />
         </FormItem>
         <FormItem>
           <Button type="primary" htmlType="submit" style={{ width: "100%" }}>

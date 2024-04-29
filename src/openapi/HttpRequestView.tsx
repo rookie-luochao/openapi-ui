@@ -38,8 +38,8 @@ interface IHeadRowProps {
 
 export function HeadRow({ field, value }: IHeadRowProps) {
   return (
-    <span css={{ display: "block" }}>
-      <span css={{ fontWeight: "bold", marginRight: "0.5em" }}>{field}:</span>
+    <span style={{ display: "block" }}>
+      <span style={{ fontWeight: "bold", marginRight: "0.5em" }}>{field}:</span>
       <span>{value}&nbsp;&nbsp;&nbsp;</span>
     </span>
   );
@@ -63,10 +63,10 @@ function buildOriginalUrl(url: string, params: Dictionary<any>) {
 
 function HttpFirstLine({ method, url, baseURL, params }: AxiosRequestConfig) {
   return (
-    <span css={{ fontWeight: "bold" }}>
+    <span style={{ fontWeight: "bold" }}>
       {toUpper(method)}
       &nbsp;&nbsp;
-      <span css={{ fontWeight: "normal" }}>{buildOriginalUrl((baseURL || "") + url, params)}</span>
+      <span style={{ fontWeight: "normal" }}>{buildOriginalUrl((baseURL || "") + url, params)}</span>
       &nbsp;&nbsp;HTTP/1.1&nbsp;&nbsp;&nbsp;
     </span>
   );
@@ -154,7 +154,7 @@ export function HttpRequestView({ request = {} }: IHttpViewProps) {
       <div>
         <HttpFirstLine params={request.params} method={request.method} baseURL={request.baseURL} url={request.url} />
       </div>
-      <div css={{ marginTop: 12 }}>
+      <div style={{ marginTop: 12 }}>
         {map(sortObject(assign(getDefaultHeads(), request.headers)), (value: string, key: string) => (
           <HeadRow key={key} field={key} value={value} />
         ))}

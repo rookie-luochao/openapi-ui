@@ -1,5 +1,6 @@
 import { useTheme } from "@emotion/react";
-import { Button, DatePicker, Form, FormInstance, Input, Select, Upload } from "antd";
+import { Button, DatePicker, Form, FormInstance, Input, Select } from "antd";
+import Upload from "antd/es/upload/Upload";
 import dayjs from "dayjs";
 import { includes, map } from "lodash-es";
 import { useTranslation } from "react-i18next";

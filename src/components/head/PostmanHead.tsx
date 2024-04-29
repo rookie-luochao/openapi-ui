@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SwitchTheme } from "../../core/style/theme";
 import { flexBetweenCenterOpts, flexCenterOpts } from "../../core/style/utils";
 import { loginModuleName } from "../../login/routes";
-import { defaultHeadTitleHeight } from "../../main";
+import { defaultHeadTitleHeight } from "../../main/Main";
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
 import { PostmanIcon } from "../icon";
@@ -31,7 +31,7 @@ export function PostmanHead() {
         ]}
       >
         <a
-          css={{
+          style={{
             height: "100%",
             cursor: "pointer",
           }}
@@ -62,7 +62,7 @@ export function PostmanHead() {
               ],
             }}
           >
-            <a css={{ cursor: "pointer" }} onClick={(e) => e.preventDefault()}>
+            <a style={{ cursor: "pointer" }} onClick={(e) => e.preventDefault()}>
               <IconDown />
             </a>
           </Dropdown>

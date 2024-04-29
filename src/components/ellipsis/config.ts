@@ -1,6 +1,4 @@
-import { CSSObject } from "@emotion/react";
-
-export const ellipsisBasicStyle: CSSObject = {
+export const ellipsisBasicStyle: React.CSSProperties = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",

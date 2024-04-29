@@ -21,7 +21,7 @@ export const Section = ({ title, children }: ISectionProps): JSX.Element => {
     >
       {title && (
         <h3
-          css={{
+          style={{
             position: "relative",
             fontSize: dsc.fontSize.s,
             margin: "0 0 1em",

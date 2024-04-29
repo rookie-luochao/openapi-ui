@@ -1,5 +1,6 @@
 import { useTheme } from "@emotion/react";
-import { Button, Form, Input, Upload, message } from "antd";
+import { Button, Form, Input, message } from "antd";
+import Upload from "antd/es/upload/Upload";
 import { UploadChangeParam } from "antd/es/upload/interface";
 import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";

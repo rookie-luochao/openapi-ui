@@ -13,7 +13,7 @@ import { flexCenterOpts } from "../../core/style/utils";
 import { IImportModeType, ImportModeType } from "../../login/config";
 import { loginModuleName } from "../../login/routes";
 import { parseSwaggerOrOpenapi } from "../../login/util";
-import { defaultHeadTitleHeight } from "../../main";
+import { defaultHeadTitleHeight } from "../../main/Main";
 import { mainLayoutPath } from "../../main/routes";
 import { IPaths } from "../../openapi/type";
 import { flattenOperations } from "../../openapi/useOpenapiInfo";

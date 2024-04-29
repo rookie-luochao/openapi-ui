@@ -3,6 +3,6 @@ import { ReactNode, Suspense } from "react";
 
 export const LazyImportComponent = ({ children }: { children: ReactNode }) => {
   return (
-    <Suspense fallback={<Spin spinning css={{ position: "fixed", top: "50%", left: "50%" }} />}>{children}</Suspense>
+    <Suspense fallback={<Spin spinning style={{ position: "fixed", top: "50%", left: "50%" }} />}>{children}</Suspense>
   );
 };

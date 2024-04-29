@@ -71,7 +71,7 @@ export default function GithubStar() {
           title={
             <span>
               {`${star}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-              <span css={{ color: "gold" }}>&#9733;</span>
+              <span style={{ color: "gold" }}>&#9733;</span>
             </span>
           }
         >

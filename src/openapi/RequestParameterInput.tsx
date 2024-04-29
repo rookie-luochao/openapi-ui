@@ -1,5 +1,6 @@
 import { useTheme } from "@emotion/react";
-import { Button, DatePicker, DatePickerProps, Input, InputNumber, Select, Upload } from "antd";
+import { Button, DatePicker, DatePickerProps, Input, InputNumber, Select } from "antd";
+import Upload from "antd/es/upload/Upload";
 import dayjs from "dayjs";
 import { filter, includes, map, toLower } from "lodash-es";
 import React, { ReactNode, useState } from "react";

@@ -10,7 +10,7 @@ import { IMethodType, IOperationEnhance, IOperationEnhanceMap, MethodType } from
 import { useTheme } from "@emotion/react";
 import { useTranslation } from "react-i18next";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
-import { ICollapsed } from "../main";
+import { ICollapsed } from "../main/Main";
 import { getMethodColor } from "./util";
 
 function MethodStyleWrap({ method, children }: { method: IMethodType; children: React.ReactNode }) {
