@@ -34,7 +34,7 @@ jobs:
         run: pnpm install
       # 打包
       - name: Running Build
-        run: npm run build
+        run: npm run build:package
       # 测试
       # - name: Running Test
       #   run: pnpm run test-unit

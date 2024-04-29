@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-const MainLayout = lazy(() => import("./index"));
+const MainLayout = lazy(() => import("./Main"));
 const OpenapiView = lazy(() => import("../openapi/OpenapiView"));
 export const mainLayoutPath = "service";
 

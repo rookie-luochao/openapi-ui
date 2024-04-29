@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-const Postman = lazy(() => import("./index"));
+const Postman = lazy(() => import("./Postman"));
 export const postmanModuleName = "/postman";
 
 export const postmanRoutes = {

@@ -10,7 +10,7 @@ import { getConfig } from "../core/http/config";
 import { useConfigInfoStore } from "../core/store";
 import { ITheme, darkTheme, lightTheme } from "../core/style/defaultStyleConfig";
 import i18n from "../i18n";
-import { defaultHeadTitleHeight } from "../main";
+import { defaultHeadTitleHeight } from "../main/Main";
 import { RequestBuilder } from "./RequestBuilder";
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;

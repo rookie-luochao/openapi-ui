@@ -55,7 +55,11 @@ export default defineConfig({
           entryFileNames: () => {
             return "openapi-ui.js";
           },
+          chunkFileNames: () => {
+            return "[name].js";
+          },
           dir: resolve(__dirname, "es"),
+          // sourcemap: true,
         },
         {
           name: "umd build",
@@ -64,6 +68,7 @@ export default defineConfig({
             return "openapi-ui.umd.js";
           },
           dir: resolve(__dirname, "lib"),
+          // sourcemap: true,
         },
       ],
     },
