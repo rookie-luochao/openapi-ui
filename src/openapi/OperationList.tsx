@@ -180,7 +180,7 @@ export function OperationList(props: ICollapsed) {
           placeholder={t("openapi.searchPlaceholder")}
           onChange={debounce((e: ChangeEvent<HTMLInputElement>) => {
             setFilterValue(e.target.value);
-          }, 500)}
+          }, 250)}
         />
       </div>
       <div>

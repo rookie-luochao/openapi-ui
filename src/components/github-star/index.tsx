@@ -48,7 +48,7 @@ export default function GithubStar() {
     return res.json();
   }
 
-  if (!isFetchedGithubStar) {
+  if (!isPackage && !isFetchedGithubStar) {
     return null;
   }
 

@@ -185,7 +185,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
       onFinish={() => sumbit(getRequestByValues(form.getFieldsValue()))}
     >
       <div style={{ display: "flex", fontSize: dsc.fontSize.xs }}>
-        <div style={{ flex: 1, maxWidth: "50%" }}>
+        <div style={{ width: "50%", paddingRight: 12 }}>
           {renderParameters(pickParametersBy("path") as TParameter[], schemas)}
           {renderParameters(pickParametersBy("header") as TParameter[], schemas)}
           {renderParameters(pickParametersBy("query") as TParameter[], schemas)}
@@ -194,9 +194,8 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
         </div>
         <div
           style={{
-            flex: 1,
-            maxWidth: "50%",
-            marginLeft: "2em",
+            width: "50%",
+            paddingLeft: 12,
           }}
         >
           <HttpRequestView request={getRequestByValues(form.getFieldsValue())} />

@@ -1,7 +1,6 @@
 import { defaultTimeout } from "@request";
 import { Button, Form, Input, InputNumber, Modal, Tooltip, message } from "antd";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { IConfigInfo, useConfigInfoStore } from "../../core/store";
 import { postmanModuleName } from "../../postman/routes";
 import { PostmanIcon } from "../icon";
@@ -85,7 +84,6 @@ export function UpdateConfigInfoModalComp({ onSuccess }: { onSuccess: () => void
 }
 
 export function GoToPostman() {
-  const nav = useNavigate();
   const { t } = useTranslation();
 
   return (
@@ -93,7 +91,7 @@ export function GoToPostman() {
       <a
         css={{ cursor: "pointer", opacity: 0.8, "&:hover": { opacity: 1 } }}
         onClick={() => {
-          nav(`${postmanModuleName}`);
+          globalThis.open(`${globalThis.location.origin}${postmanModuleName}`);
         }}
       >
         <PostmanIcon />
