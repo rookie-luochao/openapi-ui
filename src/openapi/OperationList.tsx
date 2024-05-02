@@ -1,6 +1,6 @@
 import { Input } from "antd";
 import { debounce, filter, groupBy, includes, isEmpty, map, toLower, values } from "lodash-es";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
@@ -82,61 +82,64 @@ function GroupedOperationList({
         {group}
       </div>
       <div>
-        {map(operationList, (operation: IOperationEnhance, key: string) => (
-          <div
-            key={key}
-            onClick={() => {
-              nav(`/${mainLayoutPath}/${operation.operationId}${location.search}`);
-            }}
-            css={[
-              {
-                height: 46,
-                borderBottom: `1px solid ${theme.color.border}`,
-                position: "relative",
-                display: "flex",
-                alignItems: "center",
-                padding: "0.8em 0.4em",
-                textDecoration: "none",
-                color: theme.color.menuItem,
-                backgroundColor: theme.color.bg,
-                borderRadius: 4,
-                cursor: "pointer",
-                ":hover": {
-                  backgroundColor: theme.color.bgGray,
-                },
-              },
-              toLower(activeOperationId) === toLower(operation.operationId)
-                ? {
+        {map(operationList, (operation: IOperationEnhance, index) => {
+          return (
+            <div
+              id={operation.operationId}
+              key={operation.operationId || index}
+              onClick={() => {
+                nav(`/${mainLayoutPath}/${operation.operationId}${location.search}`);
+              }}
+              css={[
+                {
+                  height: 46,
+                  borderBottom: `1px solid ${theme.color.border}`,
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "0.8em 0.4em",
+                  textDecoration: "none",
+                  color: theme.color.menuItem,
+                  backgroundColor: theme.color.bg,
+                  borderRadius: 4,
+                  cursor: "pointer",
+                  ":hover": {
                     backgroundColor: theme.color.bgGray,
-                    color: theme.color.primary,
-                  }
-                : {},
-            ]}
-          >
-            {!isCollapsed ? (
-              <OperationDescStyleWrap deprecated={operation.deprecated}>
-                <div
-                  style={{
-                    fontSize: dsc.fontSize.xs,
-                    fontWeight: 600,
-                    marginBottom: 4,
-                  }}
-                >
-                  {operation.operationId || ""}
-                </div>
-                <div style={{ fontSize: dsc.fontSize.xxs }}>
-                  {operation.summary || ""}
-                  &nbsp;
-                </div>
-              </OperationDescStyleWrap>
-            ) : (
-              <div style={{ height: 46 }} />
-            )}
-            <MethodStyleWrap method={operation.method}>
-              {operation.method === MethodType.delete ? operation.method.slice(0, 3) : operation.method}
-            </MethodStyleWrap>
-          </div>
-        ))}
+                  },
+                },
+                toLower(activeOperationId) === toLower(operation.operationId)
+                  ? {
+                      backgroundColor: theme.color.bgGray,
+                      color: theme.color.primary,
+                    }
+                  : {},
+              ]}
+            >
+              {!isCollapsed ? (
+                <OperationDescStyleWrap deprecated={operation.deprecated}>
+                  <div
+                    style={{
+                      fontSize: dsc.fontSize.xs,
+                      fontWeight: 600,
+                      marginBottom: 4,
+                    }}
+                  >
+                    {operation.operationId || ""}
+                  </div>
+                  <div style={{ fontSize: dsc.fontSize.xxs }}>
+                    {operation.summary || ""}
+                    &nbsp;
+                  </div>
+                </OperationDescStyleWrap>
+              ) : (
+                <div style={{ height: 46 }} />
+              )}
+              <MethodStyleWrap method={operation.method}>
+                {operation.method === MethodType.delete ? operation.method.slice(0, 3) : operation.method}
+              </MethodStyleWrap>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -150,6 +153,7 @@ export function OperationList(props: ICollapsed) {
   const operations = openapiWithServiceInfo?.operations || ({} as IOperationEnhanceMap);
   const [filterValue, setFilterValue] = useState("");
   const [groupedOperations, setGroupedOperations] = useState({} as Dictionary<IOperationEnhance[]>);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (!isEmpty(operations)) {
@@ -171,6 +175,29 @@ export function OperationList(props: ICollapsed) {
       setGroupedOperations(groupedOperations);
     }
   }, [operations, filterValue]);
+
+  useEffect(() => {
+    if (operationId) {
+      scrollIntoAnchorElement();
+    }
+    return () => {
+      timerRef.current && clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  function scrollIntoAnchorElement() {
+    const anchorElement = document.getElementById(`${operationId}`);
+
+    if (anchorElement) {
+      anchorElement.scrollIntoView({ behavior: "smooth" });
+
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    } else {
+      timerRef.current = setTimeout(scrollIntoAnchorElement, 100);
+    }
+  }
 
   return (
     <div style={{ position: "relative" }}>
