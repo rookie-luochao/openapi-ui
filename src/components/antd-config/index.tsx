@@ -1,4 +1,5 @@
 import { ConfigProvider /* , theme */ } from "antd";
+import enUS from "antd/locale/en_US";
 import zhCN from "antd/locale/zh_CN";
 import { useTranslation } from "react-i18next";
 import { useConfigInfoStore } from "../../core/store";
@@ -25,7 +26,7 @@ export function AntdConfigProviderWrap({ children }: { children: React.ReactNode
 
   return (
     <ConfigProvider
-      locale={i18n?.resolvedLanguage === LangType.zh ? zhCN : undefined}
+      locale={i18n?.resolvedLanguage === LangType.zh ? zhCN : enUS}
       theme={{
         // algorithm: theme.darkAlgorithm,
         components: {

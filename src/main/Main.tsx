@@ -24,6 +24,7 @@ export interface ICollapsed {
 
 export const Logo = ({ isCollapsed }: ICollapsed) => {
   const navigate = useNavigate();
+  const isPackage = import.meta.env.MODE === "package";
 
   return (
     <a
@@ -33,10 +34,10 @@ export const Logo = ({ isCollapsed }: ICollapsed) => {
         display: "flex",
         alignItems: "center",
         marginLeft: 24,
-        cursor: import.meta.env.MODE === "package" ? "default" : "pointer",
+        cursor: isPackage ? "default" : "pointer",
       }}
       onClick={() => {
-        if (import.meta.env.MODE !== "package") {
+        if (!isPackage) {
           navigate(loginModuleName);
         }
       }}

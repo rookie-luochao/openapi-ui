@@ -1,8 +1,6 @@
 import { useTheme } from "@emotion/react";
 import { Dropdown } from "antd";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
-import { parseQueryString, toQueryString } from "react-router-toolkit";
 import { ITheme } from "../../core/style/defaultStyleConfig";
 import { LangType } from "../../i18n/config";
 
@@ -18,26 +16,9 @@ const LangIcon = ({ size = "16", fill = "#333", ...other }) => {
   );
 };
 
-export function ChangeLangComp({ isMainHead }: { isMainHead?: boolean }) {
-  const { pathname, search } = useLocation();
-  const query = parseQueryString(search);
-  const navigate = useNavigate();
+export function ChangeLangComp() {
   const { t, i18n } = useTranslation();
   const theme = useTheme() as ITheme;
-
-  function avoidRefetchOpenApi() {
-    if (isMainHead && search) {
-      navigate(
-        `${pathname}${toQueryString({
-          ...(query || {}),
-          logon: "yes",
-        })}`,
-        {
-          replace: true,
-        },
-      );
-    }
-  }
 
   return (
     <Dropdown
@@ -51,7 +32,6 @@ export function ChangeLangComp({ isMainHead }: { isMainHead?: boolean }) {
                 return;
               }
               i18n.changeLanguage(LangType.en);
-              avoidRefetchOpenApi();
             },
           },
           {
@@ -62,7 +42,6 @@ export function ChangeLangComp({ isMainHead }: { isMainHead?: boolean }) {
                 return;
               }
               i18n.changeLanguage(LangType.zh);
-              avoidRefetchOpenApi();
             },
           },
         ],

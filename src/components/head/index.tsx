@@ -158,7 +158,7 @@ export function Head() {
             </a>
           </Dropdown>
           <SwitchTheme />
-          <ChangeLangComp isMainHead />
+          <ChangeLangComp />
           {import.meta.env.MODE !== "package" && <GoToPostman />}
           <GithubStar />
         </div>
