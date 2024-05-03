@@ -81,6 +81,8 @@ export const openapiRoutes = {
   element: <SetUpOpenApiUI />,
 };
 ```
+### Golang后端框架接入
+- [go-openapi-ui](https://github.com/rookie-luochao/go-openapi-ui)
 
 ## 快速开始
 ```bash

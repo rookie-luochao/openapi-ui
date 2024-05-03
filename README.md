@@ -81,6 +81,8 @@ export const openapiRoutes = {
   element: <SetUpOpenApiUI />,
 };
 ```
+### With Go Web Framework
+- [go-openapi-ui](https://github.com/rookie-luochao/go-openapi-ui)
 
 ## Quick start
 ```bash
