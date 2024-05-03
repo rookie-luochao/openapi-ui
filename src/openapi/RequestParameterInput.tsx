@@ -72,7 +72,6 @@ function Row({ children }: { children: ReactNode }) {
       css={{
         width: "100%",
         display: "flex",
-        alignItems: "center",
         "& [role=input]": { flex: 1 },
         "& [role=btn]": {
           width: "2em",
@@ -80,6 +79,7 @@ function Row({ children }: { children: ReactNode }) {
           justifyContent: "center",
           cursor: "pointer",
           opacity: 0.6,
+          paddingTop: 10,
         },
         "& + &": {
           marginTop: 6,
@@ -148,11 +148,11 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
         placeholder={placeholder}
         options={[
           {
-            label: "是",
+            label: "true",
             value: true,
           },
           {
-            label: "否",
+            label: "false",
             value: false,
           },
         ]}
@@ -212,7 +212,7 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
   );
 }
 
-function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
+export function ValueInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
   const theme = useTheme() as ITheme;
   const [value, setValue] = useState();
 
@@ -300,7 +300,7 @@ export const RequestParameterInput = ({
   const schema = patchSchema<ISchema>(parameter.schema || parameter, schemas);
   const isArray = isArraySchema(schema);
   const commonProps = {
-    value: isArray ? (otherProps.value ? [].concat(otherProps.value) : []) : otherProps.value,
+    value: isArray ? (otherProps.value ? [].concat(otherProps.value) : [null]) : otherProps.value,
     onChange: otherProps.onChange ? otherProps.onChange : () => undefined,
   };
 
@@ -358,14 +358,32 @@ export const RequestParameterInput = ({
           </Row>
         ))}
         <Row>
-          <ValueInput
+          {/* <ValueInput
             key="input"
             schema={schema.items}
             value={commonProps.value}
             onChange={(v) => {
               commonProps.onChange(commonProps.value.concat(v));
             }}
-          />
+          /> */}
+          <Button
+            size="small"
+            css={[
+              flexAlignItemsCenterOpts(),
+              {
+                "&:hover path": {
+                  fill: theme.color.primary,
+                },
+              },
+            ]}
+            onClick={() => {
+              commonProps.onChange(commonProps.value.concat(null));
+            }}
+          >
+            &nbsp;&nbsp;&nbsp;
+            <PlusOutlined fill={theme.color.menuItem} />
+            &nbsp;&nbsp;&nbsp;
+          </Button>
         </Row>
       </FieldLabelWithSchemaWrap>
     );

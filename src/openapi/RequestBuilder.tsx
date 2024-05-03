@@ -53,9 +53,7 @@ function RenderRequestBody({ requestBody, schemas = {} }: { requestBody: IReques
   return (
     <div key="requestBody">
       {map(content, (mediaType: IMediaType, contentType: string) => {
-        const schema = mediaType.schema
-          ? patchSchema<ISchema>(mediaType.schema, schemas)
-          : ({} as IMediaType["schema"]);
+        const schema = (mediaType.schema ? patchSchema<ISchema>(mediaType.schema, schemas) : {}) as ISchema;
 
         return (
           <div key={contentType}>
@@ -76,16 +74,18 @@ function RenderRequestBody({ requestBody, schemas = {} }: { requestBody: IReques
                   {contentType}
                 </div>
                 <div style={{ height: 1, backgroundColor: theme.color.border, marginBottom: 10 }} />
-                {map((schema || ({} as any)).properties, (propSchema: any, key: string) => {
+                {map(schema.properties, (propSchema, key) => {
+                  const required = schema.required?.includes(key);
+
                   return (
-                    <Form.Item key={key} name={key}>
+                    <Form.Item key={key} name={key} rules={required ? [{ required: true }] : undefined}>
                       <RequestParameterInput
                         parameter={
                           {
                             in: "formData",
                             name: key,
                             schema: propSchema,
-                            required: requestBody.required,
+                            required: required,
                           } as any
                         }
                         schemas={schemas}
