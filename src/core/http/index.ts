@@ -34,7 +34,7 @@ export function request(axiosConfig: AxiosRequestConfig) {
   };
   console.log("axiosConfig", axiosConfig);
 
-  if (axiosConfig.method === MethodType.get && ~findIndex(values(axiosConfig.params), (item) => Array.isArray(item))) {
+  if (~findIndex(values(axiosConfig.params), (item) => Array.isArray(item))) {
     axiosConfig.paramsSerializer = (params) => {
       return filter(
         map(keys(pickBy(params, (value) => !!value)), (key) => {

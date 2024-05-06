@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { Button, DatePicker, DatePickerProps, Input, InputNumber, Select } from "antd";
 import Upload from "antd/es/upload/Upload";
 import dayjs from "dayjs";
-import { filter, includes, map, toLower } from "lodash-es";
+import { filter, includes, isEmpty, map, toLower } from "lodash-es";
 import React, { ReactNode, useState } from "react";
 import { Dictionary } from "react-router-toolkit";
 import { MinusOutlined, PlusOutlined, UploadOutlined } from "../components/icon";
@@ -300,7 +300,7 @@ export const RequestParameterInput = ({
   const schema = patchSchema<ISchema>(parameter.schema || parameter, schemas);
   const isArray = isArraySchema(schema);
   const commonProps = {
-    value: isArray ? (otherProps.value ? [].concat(otherProps.value) : [null]) : otherProps.value,
+    value: isArray ? (otherProps.value ? [].concat(otherProps.value) : []) : otherProps.value,
     onChange: otherProps.onChange ? otherProps.onChange : () => undefined,
   };
 
@@ -323,6 +323,7 @@ export const RequestParameterInput = ({
     );
   } else if (isArray) {
     const isEnumArray = !!schema.items?.enum;
+    const isFileArray = isFile(schema.items);
 
     // if is multiple enums
     if (isEnumArray) {
@@ -331,6 +332,10 @@ export const RequestParameterInput = ({
           <EnumArrayInput {...commonProps} schema={schema.items} />
         </FieldLabelWithSchemaWrap>
       );
+    }
+
+    if (isFileArray && isEmpty(commonProps.value)) {
+      commonProps.value = [null];
     }
 
     return (
