@@ -70,7 +70,6 @@ function GroupedOperationList({
     <div style={{ position: "relative" }}>
       <div
         style={{
-          fontSize: dsc.fontSize.s,
           color: theme.color.menuGroup,
           backgroundColor: theme.color.menuGroupBg,
           padding: "0.5em 0.8em",
@@ -94,7 +93,7 @@ function GroupedOperationList({
               }}
               css={[
                 {
-                  height: 46,
+                  height: 50,
                   borderBottom: `1px solid ${theme.color.border}`,
                   position: "relative",
                   display: "flex",
@@ -121,20 +120,19 @@ function GroupedOperationList({
                 <OperationDescStyleWrap deprecated={operation.deprecated}>
                   <div
                     style={{
-                      fontSize: dsc.fontSize.xs,
                       fontWeight: 600,
                       marginBottom: 4,
                     }}
                   >
                     {operation.operationName}
                   </div>
-                  <div style={{ fontSize: dsc.fontSize.xxs }}>
+                  <div style={{ fontSize: dsc.fontSize.xs }}>
                     {operation.summary || ""}
                     &nbsp;
                   </div>
                 </OperationDescStyleWrap>
               ) : (
-                <div style={{ height: 46 }} />
+                <div style={{ height: 50 }} />
               )}
               <MethodStyleWrap method={operation.method}>
                 {operation.method === MethodType.delete ? operation.method.slice(0, 3) : operation.method}

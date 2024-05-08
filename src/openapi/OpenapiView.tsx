@@ -53,7 +53,6 @@ export default function OpenapiView() {
             <Tooltip title={t("openapi.clickToCopy")}>
               <a
                 style={{
-                  fontSize: dsc.fontSize.s,
                   fontWeight: "bold",
                   marginRight: 10,
                   color: theme.color.menuGroup,
@@ -66,15 +65,11 @@ export default function OpenapiView() {
                 {operation.operationName}
               </a>
             </Tooltip>
-            <span title={operation.summary} style={{ fontSize: dsc.fontSize.xxs }}>
+            <span title={operation.summary} style={{ fontSize: dsc.fontSize.xs }}>
               {operation.summary}
             </span>
           </div>
-          <div
-            style={{
-              fontSize: dsc.fontSize.s,
-            }}
-          >
+          <div>
             <span style={{ textTransform: "uppercase", fontFamily: dsc.fontFamily.mono }}>{operation.method}</span>
             <span
               style={{
@@ -101,7 +96,6 @@ export default function OpenapiView() {
                 <small
                   style={{
                     lineHeight: 1.4,
-                    fontSize: "0.8em",
                     marginBottom: "0.5em",
                     color: theme.color.title,
                   }}

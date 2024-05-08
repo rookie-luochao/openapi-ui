@@ -34,7 +34,7 @@ function SchemaNameWrapView({
       >
         {children}
       </span>
-      {!required && <span style={{ fontWeight: 700, fontSize: dsc.fontSize.xs, color: theme.color.text }}>?</span>}
+      {!required && <span style={{ fontWeight: 700, color: theme.color.text }}>?</span>}
     </>
   );
 }
@@ -58,7 +58,7 @@ const SchemaTypeWrapView = (props: React.HTMLAttributes<any>) => {
       style={{
         display: "block",
         fontWeight: "bold",
-        marginBottom: 14,
+        marginBottom: 16,
         color: theme.color.title,
       }}
     />
@@ -139,7 +139,7 @@ function SchemaRow(props: ISchemaRowProps) {
   return (
     <span
       style={{
-        fontSize: dsc.fontSize.xs,
+        fontSize: dsc.fontSize.s,
         position: "relative",
         display: "flex",
         whiteSpace: "nowrap",
@@ -165,7 +165,7 @@ function SchemaRow(props: ISchemaRowProps) {
             top: "-10px",
             left: 0,
             lineHeight: 1,
-            fontSize: dsc.fontSize.xxs,
+            fontSize: dsc.fontSize.xs,
           }}
         >
           <Description desc={schema.description} prefix={"// "} />
@@ -237,7 +237,6 @@ function renderSchema(schema: ISchema, name?: string, required?: boolean): React
                   css={{
                     display: "block",
                     lineHeight: 1.4,
-                    fontSize: dsc.fontSize.xxs,
                     opacity: 0.5,
                     "&:hover": {
                       opacity: 1,

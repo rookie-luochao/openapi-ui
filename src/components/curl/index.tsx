@@ -17,8 +17,6 @@ export function CreateCURL({ request }: { request: AxiosRequestConfig }) {
       <div>
         <Button
           type="primary"
-          size="small"
-          style={{ fontSize: dsc.fontSize.xxs }}
           onClick={() => {
             copy(cURL);
             message.success(t("openapi.copySuccess"));

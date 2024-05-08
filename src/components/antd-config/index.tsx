@@ -65,9 +65,9 @@ export function AntdConfigProviderWrap({ children }: { children: React.ReactNode
                 ...darkThemeColorMap,
                 colorBgContainerDisabled: darkTheme.color.descCardBg,
                 colorTextDisabled: darkTheme.color.textLight,
-                fontSize: dsc.fontSize.xxs,
+                fontSize: dsc.fontSize.xs,
               }
-            : { fontSize: dsc.fontSize.xxs },
+            : { fontSize: dsc.fontSize.xs },
           Upload: isDarkTheme
             ? {
                 ...lightThemeColorMap,

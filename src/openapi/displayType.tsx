@@ -1,4 +1,5 @@
 import { forEach, has, map, reduce, replace, some } from "lodash-es";
+import { dsc } from "../core/style/defaultStyleConfig";
 import { schemaOpacity } from "./SchemaView";
 
 function highlightType(v: string) {
@@ -184,7 +185,7 @@ export function displayClassName(schema: any): React.ReactNode {
         {highlightType(displayType(schema))}
         <div
           style={{
-            fontSize: "0.8em",
+            fontSize: dsc.fontSize.xs,
             paddingLeft: "1em",
             paddingBottom: "0.6em",
           }}

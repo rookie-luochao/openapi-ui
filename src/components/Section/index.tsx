@@ -23,7 +23,6 @@ export const Section = ({ title, children }: ISectionProps): JSX.Element => {
         <h3
           style={{
             position: "relative",
-            fontSize: dsc.fontSize.s,
             margin: "0 0 1em",
             color: theme.color.primary,
             padding: "0.5em 0",

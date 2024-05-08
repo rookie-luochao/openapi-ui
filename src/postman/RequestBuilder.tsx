@@ -163,7 +163,6 @@ export function RequestBuilder() {
           <Button
             type="primary"
             disabled={loading}
-            style={{ fontSize: dsc.fontSize.xs }}
             onClick={() => {
               if (urlRegex.test(url)) {
                 form.submit();
@@ -204,9 +203,7 @@ export function RequestBuilder() {
         </div>
         <div css={{ marginBottom: 8, "& > *": { marginRight: 4 } }}>
           <Popover content={<CreateCURL request={Object.assign({}, axiosRequest, { url })} />} trigger="click">
-            <Button size="small" style={{ fontSize: dsc.fontSize.xxs }}>
-              {t("openapi.cURL")}
-            </Button>
+            <Button>{t("openapi.cURL")}</Button>
           </Popover>
         </div>
         {!isEmpty(axiosResponse) && <HttpResponseView {...axiosResponse} />}

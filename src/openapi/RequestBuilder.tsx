@@ -200,23 +200,19 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
         >
           <HttpRequestView request={getRequestByValues(form.getFieldsValue())} />
           <div css={{ margin: "1em 0", "& > *": { marginRight: 4 } }}>
-            <Button htmlType="submit" type="primary" size="small" disabled={loading}>
+            <Button htmlType="submit" type="primary" disabled={loading}>
               {loading ? t("openapi.requesting") : t("openapi.request")}
             </Button>
-            <Button size="small" onClick={() => handleMockData(true)}>
-              {t("openapi.mockRequired")}
-            </Button>
-            <Button size="small" onClick={() => handleMockData(false)}>
-              {t("openapi.mockAll")}
-            </Button>
+            <Button onClick={() => handleMockData(true)}>{t("openapi.mockRequired")}</Button>
+            <Button onClick={() => handleMockData(false)}>{t("openapi.mockAll")}</Button>
             <Popover content={<CreateCURL request={getRequestByValues(form.getFieldsValue())} />} trigger="click">
-              <Button size="small">{t("openapi.cURL")}</Button>
+              <Button>{t("openapi.cURL")}</Button>
             </Popover>
             <Popover
               content={<CreateGenerateCode request={getRequestByValues(form.getFieldsValue())} />}
               trigger="click"
             >
-              <Button size="small">{t("openapi.generateCode")}</Button>
+              <Button>{t("openapi.generateCode")}</Button>
             </Popover>
           </div>
           {!isEmpty(axiosResponse) && <HttpResponseView {...axiosResponse} />}
