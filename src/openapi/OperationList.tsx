@@ -83,10 +83,12 @@ function GroupedOperationList({
       </div>
       <div>
         {map(operationList, (operation: IOperationEnhance, index) => {
+          const lastOperationId = decodeURIComponent(operation.operationId);
+
           return (
             <div
-              id={operation.operationId}
-              key={operation.operationId || index}
+              id={lastOperationId}
+              key={lastOperationId || index}
               onClick={() => {
                 nav(`/${mainLayoutPath}/${operation.operationId}${location.search}`);
               }}
@@ -107,7 +109,7 @@ function GroupedOperationList({
                     backgroundColor: theme.color.bgGray,
                   },
                 },
-                toLower(activeOperationId) === toLower(operation.operationId)
+                activeOperationId === lastOperationId
                   ? {
                       backgroundColor: theme.color.bgGray,
                       color: theme.color.primary,
@@ -124,7 +126,7 @@ function GroupedOperationList({
                       marginBottom: 4,
                     }}
                   >
-                    {operation.operationId || ""}
+                    {operation.operationName}
                   </div>
                   <div style={{ fontSize: dsc.fontSize.xxs }}>
                     {operation.summary || ""}

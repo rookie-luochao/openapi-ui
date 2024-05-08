@@ -63,7 +63,7 @@ export default function OpenapiView() {
                   message.success(t("openapi.copySuccess"));
                 }}
               >
-                {operation.operationId}
+                {operation.operationName}
               </a>
             </Tooltip>
             <span title={operation.summary} style={{ fontSize: dsc.fontSize.xxs }}>

@@ -14,7 +14,9 @@ const patchOperation =
 
     // last struct is { [operationid: apiName]: apiInfo }
     return assign(operations, {
-      [operationId]: {
+      [decodeURIComponent(operationId)]: {
+        operationName: operation.operationId || path,
+        operationId: operationId,
         ...operation,
         group: tag,
         method: toLower(method),
@@ -32,7 +34,7 @@ export function flattenOperations(paths: IPaths) {
         methodMap,
         (last, operation: IOperation, method) =>
           reduce(
-            operation.tags || [""],
+            operation.tags || ["default"],
             patchOperation(path, method as IMethodType, {
               ...operation,
             }),
