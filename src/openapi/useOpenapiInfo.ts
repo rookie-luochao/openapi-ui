@@ -56,9 +56,9 @@ export function useOpenapiInfo() {
   }, []);
 
   async function getMockOpenapiData() {
-    const res = await axios.get("/mock/openapi3.json");
+    const res = await axios.get("/demo/server/swagger/swagger.json");
     const newOpenapiInfo = {
-      serviceURL: "https://srv-demo-docker.onrender.com",
+      serviceURL: "http://127.0.0.1:1323",
       openapi: res.data,
       operations: flattenOperations(res.data.paths),
       importModeType: ImportModeType.file,

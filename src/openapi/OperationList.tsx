@@ -1,16 +1,16 @@
+import { useTheme } from "@emotion/react";
 import { Input } from "antd";
 import { debounce, filter, groupBy, includes, isEmpty, map, toLower, values } from "lodash-es";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
+import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
+import { ICollapsed } from "../main/Main";
 import { mainLayoutPath } from "../main/routes";
 import { IMethodType, IOperationEnhance, IOperationEnhanceMap, MethodType } from "./type";
 // import { useOpenapiInfo } from "./useOpenapiInfo";
-import { useTheme } from "@emotion/react";
-import { useTranslation } from "react-i18next";
-import { useOpenapiWithServiceInfoStore } from "../core/store";
-import { ICollapsed } from "../main/Main";
 import { getMethodColor } from "./util";
 
 function MethodStyleWrap({ method, children }: { method: IMethodType; children: React.ReactNode }) {
@@ -65,6 +65,7 @@ function GroupedOperationList({
   const nav = useNavigate();
   const location = useLocation();
   const theme = useTheme() as ITheme;
+  const operationHeight = 54;
 
   return (
     <div style={{ position: "relative" }}>
@@ -93,7 +94,7 @@ function GroupedOperationList({
               }}
               css={[
                 {
-                  height: 50,
+                  height: operationHeight,
                   borderBottom: `1px solid ${theme.color.border}`,
                   position: "relative",
                   display: "flex",
@@ -132,7 +133,7 @@ function GroupedOperationList({
                   </div>
                 </OperationDescStyleWrap>
               ) : (
-                <div style={{ height: 50 }} />
+                <div style={{ height: operationHeight }} />
               )}
               <MethodStyleWrap method={operation.method}>
                 {operation.method === MethodType.delete ? operation.method.slice(0, 3) : operation.method}
