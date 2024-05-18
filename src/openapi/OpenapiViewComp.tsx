@@ -1,5 +1,5 @@
 import { useTheme } from "@emotion/react";
-import { isEmpty, map, replace, sortBy } from "lodash-es";
+import { map, replace, sortBy } from "lodash-es";
 import { Dictionary } from "react-router-toolkit";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
@@ -18,10 +18,6 @@ export function Responses({ operation }: { operation: IOperationEnhance }) {
     <div>
       {map(operation.responses as IResponses, (response: IResponse | IReference, code: number) => {
         const schemas = openapiWithServiceInfo.openapi.components?.schemas || {};
-
-        if (isEmpty(schemas)) {
-          return null;
-        }
 
         if (response.$ref) {
           const schemaName = replace(response.$ref, "#/responses/", "");
