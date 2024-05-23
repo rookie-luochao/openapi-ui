@@ -1,5 +1,5 @@
 import { Editor } from "@monaco-editor/react";
-// import "./workerLoader";
+import "./workerLoader";
 
 export interface IJSONInputProps {
   value: any;
