@@ -22,7 +22,7 @@
     "antd": "^5.16.4",
     "axios": "^1.6.8",
     "copy-to-clipboard": "^3.3.3",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.11",
     "i18next": "^23.11.2",
     "i18next-browser-languagedetector": "^7.2.1",
     "js-yaml": "^4.1.0",
