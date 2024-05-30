@@ -9,7 +9,7 @@ export const RequestHeaderInput = (props: Partial<IJSONInputProps>) => {
 
   return (
     <div>
-      <JSONInput {...commonProps} height={400} />
+      <JSONInput {...commonProps} height="400px" />
       <Radio.Group
         style={{ marginTop: 10 }}
         value={commonProps.value["Content-Type"] || ""}
@@ -30,7 +30,7 @@ export const RequestParameterInput = (props: Partial<IJSONInputProps>) => {
     onChange: props.onChange ? props.onChange : () => undefined,
   };
 
-  return <JSONInput {...commonProps} height={400} />;
+  return <JSONInput {...commonProps} height="400px" />;
 };
 
 export const RequestBodyInput = (props: Partial<IJSONInputProps>) => {
@@ -39,5 +39,5 @@ export const RequestBodyInput = (props: Partial<IJSONInputProps>) => {
     onChange: props.onChange ? props.onChange : () => undefined,
   };
 
-  return <JSONInput {...commonProps} height={400} />;
+  return <JSONInput {...commonProps} height="400px" />;
 };

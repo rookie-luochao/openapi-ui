@@ -6,7 +6,7 @@ export interface IJSONInputProps {
   onChange: (value: any) => void;
 }
 
-export function JSONInput(props: IJSONInputProps & { height?: number }) {
+export function JSONInput(props: IJSONInputProps & { height?: number | string }) {
   const value = props.value ? JSON.stringify(props.value, null, 4) : "{}";
 
   return (
