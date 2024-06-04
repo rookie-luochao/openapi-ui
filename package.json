@@ -49,6 +49,7 @@
     "@emotion/babel-plugin": "^11.11.0",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash-es": "^4.17.8",
     "@types/react": "^18.2.79",
@@ -106,7 +107,17 @@
   },
   "prettier": {
     "arrowParens": "always",
-    "printWidth": 120
+    "printWidth": 120,
+    "importOrder": [
+      "^@core/(.*)$",
+      "^@ui/(.*)$",
+      "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ]
   },
   "main": "./lib/openapi-ui.umd.js",
   "module": "./es/openapi-ui.js",
