@@ -48,6 +48,8 @@ OpenAPI/Swagger UI document, quickly generate mock params and call api, also sim
 
 ## Usage
 ### With CDN
+`spec-url` is `full path`
+
 ```tsx
 <!doctype html>
 <html lang="en">
@@ -61,6 +63,23 @@ OpenAPI/Swagger UI document, quickly generate mock params and call api, also sim
   </body>
 </html>
 ```
+
+`spec-url` is `path`
+
+```tsx
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>openAPI UI</title>
+  </head>
+  <body>
+    <div id="openapi-ui-container" spec-url="/openapi.json" theme="dark"></div>
+    <script src="https://cdn.jsdelivr.net/npm/openapi-ui-dist@latest/lib/openapi-ui.umd.js"></script>
+  </body>
+</html>
+```
+
 ### With React(or With Vue)
 ```tsx
 import { useEffect } from "react";
@@ -83,6 +102,9 @@ export const openapiRoutes = {
 ```
 ### With Go Web Framework
 - [go-openapi-ui](https://github.com/rookie-luochao/go-openapi-ui)
+
+### With Nodejs Web Framework
+- [nodejs-openapi-ui](https://github.com/openapi-ui/nodejs-openapi-ui)
 
 ## Quick start
 ```bash

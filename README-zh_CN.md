@@ -48,6 +48,8 @@
 
 ## 使用方法
 ### CDN接入
+`spec-url` 为 `完整路径`
+
 ```tsx
 <!doctype html>
 <html lang="en">
@@ -61,6 +63,23 @@
   </body>
 </html>
 ```
+
+`spec-url` 为 `路径`
+
+```tsx
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>openAPI UI</title>
+  </head>
+  <body>
+    <div id="openapi-ui-container" spec-url="/openapi.json" theme="dark"></div>
+    <script src="https://cdn.jsdelivr.net/npm/openapi-ui-dist@latest/lib/openapi-ui.umd.js"></script>
+  </body>
+</html>
+```
+
 ### React接入(或者 Vue接入)
 ```tsx
 import { useEffect } from "react";
@@ -83,6 +102,9 @@ export const openapiRoutes = {
 ```
 ### Golang后端框架接入
 - [go-openapi-ui](https://github.com/rookie-luochao/go-openapi-ui)
+
+### Nodejs后端框架接入
+- [nodejs-openapi-ui](https://github.com/openapi-ui/nodejs-openapi-ui)
 
 ## 快速开始
 ```bash
