@@ -1,7 +1,8 @@
 import { request } from "@request";
 import { useEffect } from "react";
+
 import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../../core/store";
-import { IThemeType } from "../../core/style/theme";
+import { IThemeType } from "../../core/style/themeConfig";
 import { ImportModeType } from "../../login/config";
 import { parseSwaggerOrOpenapi } from "../../login/util";
 import { IPaths } from "../../openapi/type";

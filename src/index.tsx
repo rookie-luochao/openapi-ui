@@ -2,12 +2,13 @@ import { Global } from "@emotion/react";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "regenerator-runtime/runtime.js";
+
 import { AntdConfigProviderWrap } from "./components/antd-config";
 import { ModifyAppTitle } from "./components/app-title";
 import { InitPackageConfig } from "./components/package-config";
 import { CreateAppRouter } from "./core/router/CreateAppRouter";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
-import { ThemeWrap } from "./core/style/theme";
+import ThemeWrap from "./core/style/themeWrap";
 import "./i18n";
 import { appRoutes } from "./rootRoutes";
 

@@ -2,6 +2,7 @@ import { useTheme } from "@emotion/react";
 import { AxiosResponse } from "axios";
 import { includes, isObject, map } from "lodash-es";
 import { ReactNode } from "react";
+
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { isJSONString } from "../login/util";
 import { HeadRow, httpCardWrapStyle } from "./HttpRequestView";
@@ -13,13 +14,13 @@ function isJSON(headers = {} as IHeader) {
   return isObject(headers) && includes(headers["content-type"], "json");
 }
 
-export function transformResponse(buffer: any, headers?: any) {
-  if (isJSON(headers)) {
-    return JSON.parse(abToString(buffer));
-  }
+// function transformResponse(buffer: any, headers?: any) {
+//   if (isJSON(headers)) {
+//     return JSON.parse(abToString(buffer));
+//   }
 
-  return buffer;
-}
+//   return buffer;
+// }
 
 function abToString(buffer: any) {
   return new TextDecoder("utf-8").decode(new TextEncoder().encode(buffer));

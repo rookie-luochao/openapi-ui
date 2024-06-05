@@ -2,7 +2,8 @@ import { Dropdown } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { SwitchTheme } from "../../core/style/theme";
+
+import SwitchTheme from "../../core/style/ThemeSwitch";
 import { flexBetweenCenterOpts, flexCenterOpts } from "../../core/style/utils";
 import { loginModuleName } from "../../login/routes";
 import { defaultHeadTitleHeight } from "../../main/Main";

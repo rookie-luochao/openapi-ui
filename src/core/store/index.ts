@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { StorageValue, createJSONStorage, devtools, persist } from "zustand/middleware";
+
 import { IImportModeType } from "../../login/config";
 import { IOpenAPI, IOperationEnhanceMap } from "../../openapi/type";
-import { IThemeType } from "../style/theme";
+import { IThemeType } from "../style/themeConfig";
 import { logger } from "./loggerMiddleware";
 
 export interface IConfigInfo {

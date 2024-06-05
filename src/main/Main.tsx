@@ -4,6 +4,7 @@ import Sider from "antd/es/layout/Sider";
 import throttle from "lodash-es/throttle";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+
 import LogoIcon from "../assets/images/logo.png";
 import LogoMiniIcon from "../assets/images/logo_mini.svg";
 import { Head } from "../components/head";
@@ -12,7 +13,7 @@ import { Env } from "../config";
 import { getConfig } from "../core/http/config";
 import { useConfigInfoStore } from "../core/store";
 import { ITheme } from "../core/style/defaultStyleConfig";
-import { ThemeType } from "../core/style/theme";
+import { ThemeType } from "../core/style/themeConfig";
 import { loginModuleName } from "../login/routes";
 import { OperationList } from "../openapi/OperationList";
 

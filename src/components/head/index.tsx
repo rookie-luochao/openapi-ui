@@ -6,9 +6,10 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PartialParsedUrlQuery, parseQueryString, toQueryString } from "react-router-toolkit";
+
 import { useOpenapiWithServiceInfoStore } from "../../core/store";
+import SwitchTheme from "../../core/style/ThemeSwitch";
 import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
-import { SwitchTheme } from "../../core/style/theme";
 import { flexCenterOpts } from "../../core/style/utils";
 import { IImportModeType, ImportModeType } from "../../login/config";
 import { loginModuleName } from "../../login/routes";

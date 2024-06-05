@@ -1,23 +1,11 @@
-import { ThemeProvider, useTheme } from "@emotion/react";
+import { useTheme } from "@emotion/react";
+
 import { ThemeIcon } from "../../components/icon";
 import { useConfigInfoStore } from "../store";
-import { ITheme, darkTheme, lightTheme } from "./defaultStyleConfig";
+import { ITheme } from "./defaultStyleConfig";
+import { ThemeType } from "./themeConfig";
 
-export enum ThemeType {
-  light = "light",
-  dark = "dark",
-}
-
-export type IThemeType = keyof typeof ThemeType;
-
-export function ThemeWrap({ children }: { children: React.ReactNode }) {
-  const { configInfo } = useConfigInfoStore();
-  const themeType = configInfo?.theme;
-
-  return <ThemeProvider theme={themeType === ThemeType.dark ? darkTheme : lightTheme}>{children}</ThemeProvider>;
-}
-
-export function SwitchTheme() {
+export default function SwitchTheme() {
   const themeConf = useTheme() as ITheme;
   const { configInfo, updateConfigInfo } = useConfigInfoStore();
   const { theme } = configInfo || { theme: ThemeType.light };

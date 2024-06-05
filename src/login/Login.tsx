@@ -3,6 +3,7 @@ import { map, throttle } from "lodash-es";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
+
 import backgroundImage from "../assets/images/login-bg.svg";
 import LogoIcon from "../assets/images/logo.png";
 import { ChangeLangComp } from "../components/change-lang";
@@ -11,8 +12,8 @@ import { GoToPostman } from "../components/head/common";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
+import SwitchTheme from "../core/style/ThemeSwitch";
 import { ITheme, dsc, lightTheme } from "../core/style/defaultStyleConfig";
-import { SwitchTheme } from "../core/style/theme";
 import { flexBetweenCenterOpts, flexCenterOpts, flexOpts } from "../core/style/utils";
 import { defaultHeadTitleHeight } from "../main/Main";
 import { FileImportView } from "./ImportByFileView";

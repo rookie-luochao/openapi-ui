@@ -4,7 +4,7 @@ import { ErrorInfo, ReactNode } from "react";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
 
-export function fallbackRender({ error, resetErrorBoundary }: FallbackProps) {
+function fallbackRender({ error, resetErrorBoundary }: FallbackProps) {
   // Call resetErrorBoundary() to reset the error boundary and retry the render.
   return (
     <div role="alert">
@@ -15,7 +15,7 @@ export function fallbackRender({ error, resetErrorBoundary }: FallbackProps) {
   );
 }
 
-export function logError(error: Error, info: ErrorInfo) {
+function logError(error: Error, info: ErrorInfo) {
   // Do something with the error, e.g. log to an external API
   Modal.error({
     title: error.message,
