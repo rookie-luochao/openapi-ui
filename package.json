@@ -101,10 +101,11 @@
   },
   "lint-staged": {
     "*.(ts|tsx)": [
-      "npm run lintfix",
-      "npm run lintquiet"
+      "eslint --fix",
+      "eslint --quiet",
+      "prettier --write"
     ],
-    "*.(ts|tsx|cjs|json|html)": [
+    "*.(cjs|json|html)": [
       "prettier --write"
     ]
   },
