@@ -10,8 +10,9 @@
     "start": "vite",
     "build": "tsc && vite build",
     "build:package": "tsc && vite build --config vite.package.config.ts --mode package",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lintfix": "eslint . --ext ts,tsx --fix",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings=0",
+    "lintfix": "eslint . --ext ts,tsx --report-unused-disable-directives --fix",
+    "lintquiet": "eslint src --quiet",
     "preview": "vite preview",
     "prepare": "husky"
   },
@@ -61,6 +62,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "csstype": "^3.1.3",
     "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "husky": "^9.0.11",
@@ -100,9 +102,9 @@
   "lint-staged": {
     "*.(ts|tsx)": [
       "npm run lintfix",
-      "eslint --quiet"
+      "npm run lintquiet"
     ],
-    "*.(ts|tsx|json|html)": [
+    "*.(ts|tsx|cjs|json|html)": [
       "prettier --write"
     ]
   },

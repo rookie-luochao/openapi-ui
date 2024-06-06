@@ -8,7 +8,7 @@ import { ModifyAppTitle } from "./components/app-title";
 import { InitPackageConfig } from "./components/package-config";
 import { CreateAppRouter } from "./core/router/CreateAppRouter";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
-import ThemeWrap from "./core/style/themeWrap";
+import ThemeWrap from "./core/style/ThemeWrap";
 import "./i18n";
 import { appRoutes } from "./rootRoutes";
 
@@ -29,7 +29,7 @@ ReactDOM.createRoot(
     <ThemeWrap>
       <AntdConfigProviderWrap>
         <LazyImportComponent>
-          <CreateAppRouter routes={appRoutes} isHashRouter={import.meta.env.MODE === "package"} />
+          <CreateAppRouter isHashRouter={import.meta.env.MODE === "package"} routes={appRoutes} />
         </LazyImportComponent>
       </AntdConfigProviderWrap>
     </ThemeWrap>
