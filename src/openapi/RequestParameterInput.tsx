@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { filter, includes, isEmpty, map, toLower } from "lodash-es";
 import React, { ReactNode, useState } from "react";
 import { Dictionary } from "react-router-toolkit";
+
 import { MinusOutlined, PlusOutlined, UploadOutlined } from "../components/icon";
 import { IJSONInputProps } from "../components/monaco-editor/JSONInput";
 import { IJSONInputWithSchemaProps, JSONSchemaInput } from "../components/monaco-editor/JSONSchemaInput";
@@ -136,7 +137,7 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
     const enumMap = toEnumMap(schema);
 
     return (
-      <Select {...commonProps} allowClear placeholder={placeholder} options={enumToOptions(schema.enum, enumMap)} />
+      <Select {...commonProps} allowClear options={enumToOptions(schema.enum, enumMap)} placeholder={placeholder} />
     );
   }
 
@@ -164,11 +165,11 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
     return (
       <InputNumber
         {...commonProps}
-        style={{ width: "100%" }}
-        placeholder={placeholder}
-        min={0}
         changeOnWheel={false}
         controls={false}
+        min={0}
+        placeholder={placeholder}
+        style={{ width: "100%" }}
       />
     );
   }
@@ -177,15 +178,16 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
     return (
       <Upload
         {...commonProps}
-        multiple={isArray}
-        maxCount={isArray ? undefined : 1}
+        beforeUpload={() => false}
         fileList={isArray ? commonProps.value : commonProps.value ? [commonProps.value] : []}
+        maxCount={isArray ? undefined : 1}
+        multiple={isArray}
         onChange={(file) => {
           commonProps.onChange(isArray ? file.fileList : file.file);
         }}
-        beforeUpload={() => false}
       >
         <Button
+          icon={<UploadOutlined fill={theme.color.menuItem} />}
           css={[
             flexAlignItemsCenterOpts(),
             {
@@ -194,7 +196,6 @@ export function PatchInput({ schema, ...commonProps }: IJSONInputWithSchemaProps
               },
             },
           ]}
-          icon={<UploadOutlined fill={theme.color.menuItem} />}
         >
           {placeholder || "Upload"}
         </Button>
@@ -258,8 +259,8 @@ function EnumArrayInput({ schema, ...commonProps }: IJSONInputWithSchemaProps) {
       {...commonProps}
       allowClear
       mode="multiple"
-      placeholder={placeholder}
       options={enumToOptions(schema.enum as string[], enumMap)}
+      placeholder={placeholder}
     />
   );
 }
@@ -274,13 +275,13 @@ function TimeInput({ schema, isUnix, ...commonProps }: IJSONInputWithSchemaProps
   return (
     <DatePicker
       allowClear
-      style={{ width: "100%" }}
       placeholder={placeholder}
+      style={{ width: "100%" }}
+      value={commonProps.value ? (isUnix ? dayjs.unix(commonProps.value) : dayjs(commonProps.value)) : undefined}
       showTime={{
         showNow: true,
         defaultValue: dayjs("00:00:00", "HH:mm:ss"),
       }}
-      value={commonProps.value ? (isUnix ? dayjs.unix(commonProps.value) : dayjs(commonProps.value)) : undefined}
       onChange={onChange}
     />
   );
@@ -312,12 +313,12 @@ export const RequestParameterInput = ({
   );
 
   const fieldDesc = (
-    <Description desc={parameter.description || schema.description || ""} ishighLightDesc isBreakWord />
+    <Description isBreakWord ishighLightDesc desc={parameter.description || schema.description || ""} />
   );
 
   if (isObjectSchema(schema) || (isArray && isObjectSchema(schema.items))) {
     return (
-      <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
+      <FieldLabelWithSchemaWrap fieldDesc={fieldDesc} fieldLabel={fieldLabel} schema={schema} schemas={schemas}>
         <JSONSchemaInput {...commonProps} schema={schema} />
       </FieldLabelWithSchemaWrap>
     );
@@ -328,7 +329,7 @@ export const RequestParameterInput = ({
     // if is multiple enums
     if (isEnumArray) {
       return (
-        <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
+        <FieldLabelWithSchemaWrap fieldDesc={fieldDesc} fieldLabel={fieldLabel} schema={schema} schemas={schemas}>
           <EnumArrayInput {...commonProps} schema={schema.items} />
         </FieldLabelWithSchemaWrap>
       );
@@ -339,7 +340,7 @@ export const RequestParameterInput = ({
     }
 
     return (
-      <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
+      <FieldLabelWithSchemaWrap fieldDesc={fieldDesc} fieldLabel={fieldLabel} schema={schema} schemas={schemas}>
         {map(commonProps.value, (value, index) => (
           <Row key={index}>
             <span role="input">
@@ -397,14 +398,14 @@ export const RequestParameterInput = ({
     const isUnix = type === "integer" || type === "number";
 
     return (
-      <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
-        <TimeInput {...commonProps} schema={schema} isUnix={isUnix} />
+      <FieldLabelWithSchemaWrap fieldDesc={fieldDesc} fieldLabel={fieldLabel} schema={schema} schemas={schemas}>
+        <TimeInput {...commonProps} isUnix={isUnix} schema={schema} />
       </FieldLabelWithSchemaWrap>
     );
   }
 
   return (
-    <FieldLabelWithSchemaWrap schema={schema} schemas={schemas} fieldLabel={fieldLabel} fieldDesc={fieldDesc}>
+    <FieldLabelWithSchemaWrap fieldDesc={fieldDesc} fieldLabel={fieldLabel} schema={schema} schemas={schemas}>
       <PatchInput {...commonProps} schema={schema} />
     </FieldLabelWithSchemaWrap>
   );

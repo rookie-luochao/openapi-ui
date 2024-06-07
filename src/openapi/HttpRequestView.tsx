@@ -17,6 +17,7 @@ import {
   toUpper,
 } from "lodash-es";
 import { Dictionary, toQueryString } from "react-router-toolkit";
+
 import { ITheme } from "../core/style/defaultStyleConfig";
 import { isFormURLEncoded, isJSON, isMultipartFormData } from "./request";
 
@@ -152,7 +153,7 @@ export function HttpRequestView({ request = {} }: IHttpViewProps) {
       }}
     >
       <div>
-        <HttpFirstLine params={request.params} method={request.method} baseURL={request.baseURL} url={request.url} />
+        <HttpFirstLine baseURL={request.baseURL} method={request.method} params={request.params} url={request.url} />
       </div>
       <div style={{ marginTop: 12 }}>
         {map(sortObject(assign(getDefaultHeads(), request.headers)), (value: string, key: string) => (

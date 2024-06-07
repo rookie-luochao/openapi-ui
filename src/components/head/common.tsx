@@ -1,33 +1,34 @@
 import { defaultTimeout } from "@request";
 import { Button, Form, Input, InputNumber, Modal, Tooltip, message } from "antd";
 import { useTranslation } from "react-i18next";
+
 import { IConfigInfo, useConfigInfoStore } from "../../core/store";
 import { postmanModuleName } from "../../postman/routes";
 import { PostmanIcon } from "../icon";
 
 export function IconDown() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" version="1.1" width="18" height="18" viewBox="0 0 18 18">
+    <svg fill="none" height="18" version="1.1" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <filter
-          id="master_svg0_182_24814"
-          filterUnits="objectBoundingBox"
           colorInterpolationFilters="sRGB"
+          filterUnits="objectBoundingBox"
+          height="18"
+          id="master_svg0_182_24814"
+          width="18"
           x="0"
           y="0"
-          width="18"
-          height="18"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape" />
           <feGaussianBlur in="BackgroundImage" stdDeviation="2" />
           <feComposite in2="SourceAlpha" operator="in" result="effect1_foregroundBlur" />
-          <feBlend mode="normal" in="SourceGraphic" in2="effect1_foregroundBlur" result="shape" />
+          <feBlend in="SourceGraphic" in2="effect1_foregroundBlur" mode="normal" result="shape" />
         </filter>
       </defs>
       <g>
         <g filter="url(#master_svg0_182_24814)">
-          <rect x="0" y="0" width="18" height="18" rx="4" fill="#EEF2F9" fillOpacity="0.8500000238418579" />
+          <rect fill="#EEF2F9" fillOpacity="0.8500000238418579" height="18" rx="4" width="18" x="0" y="0" />
         </g>
         <g transform="matrix(-1,0,0,-1,26,24)">
           <path
@@ -55,26 +56,26 @@ export function UpdateConfigInfoModalComp({ onSuccess }: { onSuccess: () => void
   }
 
   return (
-    <Modal title={t("head.updateConfig")} open={true} footer={null} onCancel={onSuccess}>
+    <Modal footer={null} open={true} title={t("head.updateConfig")} onCancel={onSuccess}>
       <Form
-        name="config"
         form={form}
-        layout="vertical"
         initialValues={{ timeout: configInfo?.timeout || defaultTimeout, authorization: configInfo?.authorization }}
+        layout="vertical"
+        name="config"
         onFinish={onFinish}
       >
         <FormItem
-          name="timeout"
           label={t("head.requestTimeoutLabel")}
+          name="timeout"
           rules={[{ required: true, message: t("head.requestTimeoutPlaceholder") }]}
         >
-          <InputNumber style={{ width: "100%" }} min={1} max={3600} placeholder={t("head.requestTimeoutPlaceholder")} />
+          <InputNumber max={3600} min={1} placeholder={t("head.requestTimeoutPlaceholder")} style={{ width: "100%" }} />
         </FormItem>
-        <FormItem name="authorization" label={t("head.authorizationLabel")}>
-          <Input style={{ width: "100%" }} placeholder={t("head.authorizationPlaceholder")} />
+        <FormItem label={t("head.authorizationLabel")} name="authorization">
+          <Input placeholder={t("head.authorizationPlaceholder")} style={{ width: "100%" }} />
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+          <Button htmlType="submit" style={{ width: "100%" }} type="primary">
             {t("head.submit")}
           </Button>
         </FormItem>

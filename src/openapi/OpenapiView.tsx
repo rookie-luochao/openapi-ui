@@ -5,6 +5,7 @@ import { map } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
+
 import { Section } from "../components/Section";
 import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../core/store";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
@@ -65,7 +66,7 @@ export default function OpenapiView() {
                 {operation.operationName}
               </a>
             </Tooltip>
-            <span title={operation.summary} style={{ fontSize: dsc.fontSize.xs }}>
+            <span style={{ fontSize: dsc.fontSize.xs }} title={operation.summary}>
               {operation.summary}
             </span>
           </div>

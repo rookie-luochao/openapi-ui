@@ -67,7 +67,7 @@ export function HttpResponseView({ data, status, headers = {} }: AxiosResponse) 
       }
     };
 
-    return <iframe src="about:blank" style={{ width: "100%", minHeight: 400 }} ref={ref} />;
+    return <iframe ref={ref} src="about:blank" style={{ width: "100%", minHeight: 400 }} />;
   }
 
   const isImage = isObject(headers) && includes(headers["content-type"], "image/");

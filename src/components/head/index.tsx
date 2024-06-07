@@ -40,10 +40,10 @@ function UserName({ onChange }: { onChange: (value: string) => void }) {
         <Input.Search
           allowClear
           enterButton
-          size="small"
-          placeholder={t("head.inputUrl")}
-          style={{ minWidth: 476 }}
           defaultValue={openapiWithServiceInfo?.serviceURL}
+          placeholder={t("head.inputUrl")}
+          size="small"
+          style={{ minWidth: 476 }}
           onSearch={onSearch}
         />
       ) : (

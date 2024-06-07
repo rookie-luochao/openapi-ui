@@ -3,6 +3,7 @@ import { Tabs } from "antd";
 import { throttle } from "lodash-es";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import { PostmanHead } from "../components/head/PostmanHead";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
@@ -123,13 +124,13 @@ export default function Postman() {
           ]}
         >
           <Tabs
-            type="editable-card"
-            items={items}
             activeKey={activeKey}
+            items={items}
+            type="editable-card"
+            onEdit={onEdit}
             onChange={(newActiveKey: string) => {
               setActiveKey(newActiveKey);
             }}
-            onEdit={onEdit}
           />
         </div>
         {isZh && <ICPRegistration />}

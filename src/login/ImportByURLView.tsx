@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toQueryString } from "react-router-toolkit";
+
 import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { dsc } from "../core/style/defaultStyleConfig";
@@ -66,16 +67,16 @@ export function URLImportView() {
   }
 
   return (
-    <Form name="urlImportForm" form={form} layout="vertical" initialValues={{ serviceURL: "" }} onFinish={onFinish}>
+    <Form form={form} initialValues={{ serviceURL: "" }} layout="vertical" name="urlImportForm" onFinish={onFinish}>
       <FormItem
-        name="serviceURL"
         label={t("login.serviceURLLabel")}
+        name="serviceURL"
         rules={[{ required: true, message: t("login.serviceURLPlaceholder") }]}
       >
         <Input placeholder={t("login.serviceURLPlaceholder")} />
       </FormItem>
       <Form.Item>
-        <Button type="primary" htmlType="submit" style={{ width: "100%", fontSize: dsc.fontSize.xs }} loading={loading}>
+        <Button htmlType="submit" loading={loading} style={{ width: "100%", fontSize: dsc.fontSize.xs }} type="primary">
           {t("login.importBtn")}
         </Button>
       </Form.Item>

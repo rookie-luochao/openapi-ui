@@ -5,6 +5,7 @@ import { ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { Dictionary } from "react-router-toolkit";
+
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { displayClassName } from "./displayType";
 import { isArraySchema, isObjectSchema, patchSchema } from "./patchSchema";
@@ -43,7 +44,7 @@ function defaultNameRenderer(name: string, required: boolean, schema: ISchema = 
   if (!name) return;
 
   return (
-    <SchemaNameWrapView required={required} deprecated={schema.deprecated}>
+    <SchemaNameWrapView deprecated={schema.deprecated} required={required}>
       {name}
     </SchemaNameWrapView>
   );

@@ -101,8 +101,7 @@
   },
   "lint-staged": {
     "*.(ts|tsx)": [
-      "eslint --fix",
-      "eslint --quiet",
+      "eslint --fix --quiet",
       "prettier --write"
     ],
     "*.(cjs|json|html)": [

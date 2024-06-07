@@ -5,6 +5,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
+
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { ICollapsed } from "../main/Main";
@@ -87,11 +88,8 @@ function GroupedOperationList({
 
           return (
             <div
-              id={lastOperationId}
               key={lastOperationId || index}
-              onClick={() => {
-                nav(`/${mainLayoutPath}/${operation.operationId}${location.search}`);
-              }}
+              id={lastOperationId}
               css={[
                 {
                   height: operationHeight,
@@ -116,6 +114,9 @@ function GroupedOperationList({
                     }
                   : {},
               ]}
+              onClick={() => {
+                nav(`/${mainLayoutPath}/${operation.operationId}${location.search}`);
+              }}
             >
               {!isCollapsed ? (
                 <OperationDescStyleWrap deprecated={operation.deprecated}>
@@ -218,9 +219,9 @@ export function OperationList(props: ICollapsed) {
               <GroupedOperationList
                 {...props}
                 key={group}
+                activeOperationId={operationId}
                 group={group}
                 operationList={operationList}
-                activeOperationId={operationId}
               />
             ))}
           </>

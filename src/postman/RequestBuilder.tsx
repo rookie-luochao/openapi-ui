@@ -4,6 +4,7 @@ import { AxiosHeaders, AxiosRequestConfig, AxiosResponse } from "axios";
 import { isEmpty, map, toUpper } from "lodash-es";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import { CreateCURL } from "../components/curl";
 import { TipIcon } from "../components/icon";
 import { urlRegex } from "../core/regex";
@@ -61,7 +62,7 @@ export function RequestBuilder() {
           <FormItem name="params" style={{ marginBottom: 6 }}>
             <RequestParameterInput />
           </FormItem>
-          <DefineFormField position="Params" form={form} />
+          <DefineFormField form={form} position="Params" />
         </div>
       ),
     },
@@ -70,7 +71,7 @@ export function RequestBuilder() {
       label: (
         <div style={{ display: "flex", alignItems: "center" }}>
           {t("postman.body")}&nbsp;
-          <Tooltip title={t("postman.bodyTitleTip")} overlayInnerStyle={{ width: 260 }}>
+          <Tooltip overlayInnerStyle={{ width: 260 }} title={t("postman.bodyTitleTip")}>
             <a style={{ display: "flex", alignItems: "center" }}>
               <TipIcon />
             </a>
@@ -82,7 +83,7 @@ export function RequestBuilder() {
           <FormItem name="data" style={{ marginBottom: 6 }}>
             <RequestBodyInput />
           </FormItem>
-          <DefineFormField position="Data" form={form} />
+          <DefineFormField form={form} position="Data" />
         </div>
       ),
     },
@@ -96,7 +97,7 @@ export function RequestBuilder() {
   }, []);
 
   const MethodSelector = () => {
-    return <Select style={{ width: 96 }} options={methodOptions} value={method} onSelect={setMethod} />;
+    return <Select options={methodOptions} style={{ width: 96 }} value={method} onSelect={setMethod} />;
   };
 
   async function sumbit(axiosRequest: AxiosRequestConfig) {
@@ -154,15 +155,15 @@ export function RequestBuilder() {
       <div style={{ width: "50%" }}>
         <div style={{ display: "flex", marginBottom: 10 }}>
           <Input
-            style={{ width: "90%", marginRight: 5 }}
             addonBefore={<MethodSelector />}
-            placeholder={t("postman.urlPlaceholder")}
             defaultValue={url}
+            placeholder={t("postman.urlPlaceholder")}
+            style={{ width: "90%", marginRight: 5 }}
             onChange={(e) => setUrl(e.target.value?.trim())}
           />
           <Button
-            type="primary"
             disabled={loading}
+            type="primary"
             onClick={() => {
               if (urlRegex.test(url)) {
                 form.submit();
@@ -186,11 +187,11 @@ export function RequestBuilder() {
               customDataTimes: null,
               customDataFiles: null,
             }}
-            onValuesChange={() => {
-              setCount(count + 1);
-            }}
             onFinish={() => {
               sumbit(axiosRequest);
+            }}
+            onValuesChange={() => {
+              setCount(count + 1);
             }}
           >
             <Tabs defaultActiveKey="1" items={items} />

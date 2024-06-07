@@ -1,4 +1,5 @@
 import { Editor } from "@monaco-editor/react";
+
 import "./workerLoader";
 
 export interface IJSONInputProps {
@@ -11,9 +12,9 @@ export function JSONInput(props: IJSONInputProps & { height?: number | string })
 
   return (
     <Editor
+      defaultLanguage="json"
       height={props.height || 300}
       theme="vs-dark"
-      defaultLanguage="json"
       value={value}
       onChange={(value) => {
         if (!value) return props.onChange(null);

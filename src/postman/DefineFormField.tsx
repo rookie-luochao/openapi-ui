@@ -4,6 +4,7 @@ import Upload from "antd/es/upload/Upload";
 import dayjs from "dayjs";
 import { includes, map } from "lodash-es";
 import { useTranslation } from "react-i18next";
+
 import { Section } from "../components/Section";
 import { MinusOutlined, PlusOutlined, UploadOutlined } from "../components/icon";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
@@ -80,7 +81,7 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                         name={[name, CustomTimeField.fieldType]}
                         style={{ width: "27%", marginRight: 8 }}
                       >
-                        <Select placeholder="please select time type" options={timeTypeOptions} />
+                        <Select options={timeTypeOptions} placeholder="please select time type" />
                       </Form.Item>
                       <Form.Item
                         {...restField}
@@ -88,8 +89,8 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                         style={{ width: "33%", marginRight: 8 }}
                       >
                         <DatePicker
-                          showTime={includes(FullTimeType, fieldValues.fieldType)}
                           needConfirm={false}
+                          showTime={includes(FullTimeType, fieldValues.fieldType)}
                           style={{ width: "100%" }}
                         />
                       </Form.Item>
@@ -103,9 +104,9 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                 })}
                 <div>
                   <Button
-                    type="dashed"
-                    icon={<PlusOutlined fill={theme.color.menuItem} />}
                     css={addFieldGroupBtnStyle}
+                    icon={<PlusOutlined fill={theme.color.menuItem} />}
+                    type="dashed"
                     onClick={() =>
                       add({
                         [CustomTimeField.fieldName]: "time",
@@ -145,17 +146,18 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                           name={[name, CustomTimeField.fieldType]}
                           style={{ width: "27%", marginRight: 8 }}
                         >
-                          <Select placeholder="please select upload file type" options={uploadFileTypeOptions} />
+                          <Select options={uploadFileTypeOptions} placeholder="please select upload file type" />
                         </Form.Item>
                         <Form.Item
                           {...restField}
-                          name={[name, CustomFileField.fieldValue]}
-                          valuePropName="fileList"
                           getValueFromEvent={normFile}
+                          name={[name, CustomFileField.fieldValue]}
                           style={{ width: "33%", marginRight: 8 }}
+                          valuePropName="fileList"
                         >
-                          <Upload multiple={fieldValues?.fieldType === "multiple"} beforeUpload={() => false}>
+                          <Upload beforeUpload={() => false} multiple={fieldValues?.fieldType === "multiple"}>
                             <Button
+                              icon={<UploadOutlined fill={theme.color.menuItem} />}
                               css={[
                                 flexAlignItemsCenterOpts(),
                                 {
@@ -164,7 +166,6 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                                   },
                                 },
                               ]}
-                              icon={<UploadOutlined fill={theme.color.menuItem} />}
                             >
                               <span style={{ fontSize: dsc.fontSize.xs }}>{t("postman.uploadFile")}</span>
                             </Button>
@@ -180,9 +181,9 @@ export function DefineFormField({ position, form }: { position: string; form: Fo
                   })}
                   <div>
                     <Button
-                      type="dashed"
-                      icon={<PlusOutlined fill={theme.color.menuItem} />}
                       css={addFieldGroupBtnStyle}
+                      icon={<PlusOutlined fill={theme.color.menuItem} />}
+                      type="dashed"
                       onClick={() =>
                         add({
                           [CustomTimeField.fieldName]: "file",

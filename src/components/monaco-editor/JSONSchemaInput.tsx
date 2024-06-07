@@ -1,4 +1,5 @@
 import { Editor } from "@monaco-editor/react";
+
 import { ISchema } from "../../openapi/type";
 import { IJSONInputProps } from "./JSONInput";
 import "./workerLoader";
@@ -10,9 +11,9 @@ export function JSONSchemaInput(props: IJSONInputWithSchemaProps) {
 
   return (
     <Editor
+      defaultLanguage="json"
       height="300px"
       theme="vs-dark"
-      defaultLanguage="json"
       value={value}
       onChange={(value) => {
         if (!value) return props.onChange(null);

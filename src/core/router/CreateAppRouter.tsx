@@ -11,5 +11,5 @@ export function CreateAppRouter({ routes, isHashRouter }: { routes: RouteObject[
         },
       });
 
-  return <RouterProvider router={router} fallbackElement={<Spin spinning />} />;
+  return <RouterProvider fallbackElement={<Spin spinning />} router={router} />;
 }

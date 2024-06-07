@@ -3,6 +3,7 @@ import { Button, Radio, message } from "antd";
 import { AxiosRequestConfig } from "axios";
 import copy from "copy-to-clipboard";
 import { useTranslation } from "react-i18next";
+
 import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
 import { httpCardWrapStyle } from "../../openapi/HttpRequestView";
 
@@ -29,7 +30,7 @@ export function CreateGenerateCode({ request }: { request: AxiosRequestConfig })
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Radio.Group defaultValue="axios" buttonStyle="solid">
+        <Radio.Group buttonStyle="solid" defaultValue="axios">
           <Radio.Button value="axios">JavaScript</Radio.Button>
           {/* <Radio.Button value="python">python</Radio.Button> */}
         </Radio.Group>

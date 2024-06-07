@@ -15,9 +15,9 @@ export function CodeMarkDown({ dataSource }: { dataSource: string }) {
             <SyntaxHighlighter
               {...(rest as any)}
               children={String(children).replace(/\n$/, "")}
-              style={darcula}
               language={match[1]}
               PreTag="div"
+              style={darcula}
             />
           ) : (
             <code {...rest} className={className}>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
+
 import { CreateCURL } from "../components/curl";
 import { CreateGenerateCode } from "../components/generate-code";
 import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../core/store";
@@ -33,12 +34,12 @@ function renderParameters(parameters: TParameter[], schemas: Dictionary<ISchema>
       <Form.Item
         key={name}
         name={name}
+        style={{ marginBottom: 10 }}
         rules={
           parameter.required
             ? [pattern ? { required: true, pattern: pattern as unknown as RegExp } : { required: true }]
             : undefined
         }
-        style={{ marginBottom: 10 }}
       >
         <RequestParameterInput parameter={parameter} schemas={schemas} />
       </Form.Item>
@@ -80,6 +81,7 @@ function RenderRequestBody({ requestBody, schemas = {} }: { requestBody: IReques
                   return (
                     <Form.Item key={key} name={key} rules={required ? [{ required: true }] : undefined}>
                       <RequestParameterInput
+                        schemas={schemas}
                         parameter={
                           {
                             in: "formData",
@@ -88,7 +90,6 @@ function RenderRequestBody({ requestBody, schemas = {} }: { requestBody: IReques
                             required: required,
                           } as any
                         }
-                        schemas={schemas}
                       />
                     </Form.Item>
                   );
@@ -97,6 +98,7 @@ function RenderRequestBody({ requestBody, schemas = {} }: { requestBody: IReques
             ) : (
               <Form.Item name="body" rules={requestBody.required ? [{ required: true }] : undefined}>
                 <RequestParameterInput
+                  schemas={schemas}
                   parameter={
                     {
                       in: "body",
@@ -105,7 +107,6 @@ function RenderRequestBody({ requestBody, schemas = {} }: { requestBody: IReques
                       required: requestBody.required,
                     } as any
                   }
-                  schemas={schemas}
                 />
               </Form.Item>
             )}
@@ -177,12 +178,12 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
   return (
     <Form
       form={form}
-      name="request-control-form"
       initialValues={{ Authorization: configInfo?.authorization, authorization: configInfo?.authorization }}
+      name="request-control-form"
+      onFinish={() => sumbit(getRequestByValues(form.getFieldsValue()))}
       onValuesChange={() => {
         setCount(count + 1);
       }}
-      onFinish={() => sumbit(getRequestByValues(form.getFieldsValue()))}
     >
       <div style={{ display: "flex", fontSize: dsc.fontSize.xs }}>
         <div style={{ width: "50%", paddingRight: 12 }}>
@@ -200,7 +201,7 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
         >
           <HttpRequestView request={getRequestByValues(form.getFieldsValue())} />
           <div css={{ margin: "1em 0", "& > *": { marginRight: 4 } }}>
-            <Button htmlType="submit" type="primary" disabled={loading}>
+            <Button disabled={loading} htmlType="submit" type="primary">
               {loading ? t("openapi.requesting") : t("openapi.request")}
             </Button>
             <Button onClick={() => handleMockData(true)}>{t("openapi.mockRequired")}</Button>

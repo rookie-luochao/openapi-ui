@@ -6,6 +6,7 @@ import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toQueryString } from "react-router-toolkit";
+
 import { UploadOutlined } from "../components/icon";
 import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
@@ -65,30 +66,31 @@ export function FileImportView() {
 
   return (
     <Form
-      name="fileImportForm"
       form={form}
-      layout="vertical"
       initialValues={{ serviceURL: "", file: [] }}
+      layout="vertical"
+      name="fileImportForm"
       onFinish={onFinish}
     >
       <FormItem
-        name="serviceURL"
         label={t("login.serviceURLLabel2")}
+        name="serviceURL"
         rules={[{ required: true, message: t("login.serviceURLPlaceholder2") }]}
       >
         <Input placeholder={t("login.serviceURLPlaceholder2")} />
       </FormItem>
       <FormItem
-        name="file"
         label={t("login.uploadLabel")}
-        valuePropName="fileList"
+        name="file"
         rules={[{ required: true, message: t("login.uploadPlaceholder") }]}
+        valuePropName="fileList"
         getValueFromEvent={(e: UploadChangeParam) => {
           return e.fileList || [];
         }}
       >
-        <Upload maxCount={1} beforeUpload={() => false} accept=".json,.yml">
+        <Upload accept=".json,.yml" beforeUpload={() => false} maxCount={1}>
           <Button
+            icon={<UploadOutlined fill={theme.color.menuItem} />}
             css={[
               flexAlignItemsCenterOpts(),
               {
@@ -97,14 +99,13 @@ export function FileImportView() {
                 },
               },
             ]}
-            icon={<UploadOutlined fill={theme.color.menuItem} />}
           >
             {t("login.uploadBtn")}
           </Button>
         </Upload>
       </FormItem>
       <Form.Item>
-        <Button type="primary" htmlType="submit" style={{ width: "100%", fontSize: dsc.fontSize.xs }}>
+        <Button htmlType="submit" style={{ width: "100%", fontSize: dsc.fontSize.xs }} type="primary">
           {t("login.importBtn")}
         </Button>
       </Form.Item>

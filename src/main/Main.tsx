@@ -43,7 +43,7 @@ export const Logo = ({ isCollapsed }: ICollapsed) => {
         }
       }}
     >
-      <img style={{ width: isCollapsed ? 32 : 128 }} src={isCollapsed ? LogoMiniIcon : LogoIcon} alt="logo" />
+      <img alt="logo" src={isCollapsed ? LogoMiniIcon : LogoIcon} style={{ width: isCollapsed ? 32 : 128 }} />
     </a>
   );
 };
@@ -76,10 +76,10 @@ export default function MainLayout() {
   return (
     <Layout>
       <Sider
-        theme={configInfo?.theme === "dark" ? ThemeType.dark : ThemeType.light}
-        width={320}
         collapsible
         collapsed={collapsed}
+        theme={configInfo?.theme === "dark" ? ThemeType.dark : ThemeType.light}
+        width={320}
         onCollapse={setCollapsed}
       >
         <Logo isCollapsed={collapsed} />

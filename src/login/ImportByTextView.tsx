@@ -3,6 +3,7 @@ import { isEmpty, isObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toQueryString } from "react-router-toolkit";
+
 import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { dsc } from "../core/style/defaultStyleConfig";
@@ -58,31 +59,31 @@ export function TextImportView() {
 
   return (
     <Form
-      name="textImportForm"
       form={form}
-      layout="vertical"
       initialValues={{ serviceURL: "", file: [] }}
+      layout="vertical"
+      name="textImportForm"
       onFinish={onFinish}
     >
       <FormItem
-        name="serviceURL"
         label={t("login.serviceURLLabel2")}
+        name="serviceURL"
         rules={[{ required: true, message: t("login.serviceURLPlaceholder2") }]}
       >
         <Input placeholder={t("login.serviceURLPlaceholder2")} />
       </FormItem>
       <FormItem
-        name="openapiTextContent"
         label={t("login.openapiTextContentLabel")}
+        name="openapiTextContent"
         rules={[{ required: true, message: t("login.openapiTextContentPlaceholder") }]}
       >
         <Input.TextArea
-          placeholder={t("login.openapiTextContentPlaceholder")}
           autoSize={{ minRows: 12, maxRows: 36 }}
+          placeholder={t("login.openapiTextContentPlaceholder")}
         />
       </FormItem>
       <Form.Item>
-        <Button type="primary" htmlType="submit" style={{ width: "100%", fontSize: dsc.fontSize.xs }}>
+        <Button htmlType="submit" style={{ width: "100%", fontSize: dsc.fontSize.xs }} type="primary">
           {t("login.importBtn")}
         </Button>
       </Form.Item>

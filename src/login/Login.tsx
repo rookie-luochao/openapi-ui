@@ -61,7 +61,7 @@ export default function Login() {
     >
       <div style={{ minHeight: document.documentElement.clientHeight - 32 }}>
         <div css={[flexBetweenCenterOpts(), { minWidth: 1200, height: defaultHeadTitleHeight, padding: "0px 30px" }]}>
-          <img style={{ width: 128 }} src={LogoIcon} alt="openapi-ui" />
+          <img alt="openapi-ui" src={LogoIcon} style={{ width: 128 }} />
           <div css={{ display: "flex", "& > *": { marginLeft: 4, ...flexCenterOpts() } }}>
             <SwitchTheme />
             <ChangeLangComp />
