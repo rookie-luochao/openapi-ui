@@ -37,7 +37,7 @@ export default function GithubStar() {
         }
       })();
     }
-  }, []);
+  }, [isPackage]);
 
   async function getStar() {
     const res = await fetch("https://api.github.com/repos/rookie-luochao/openapi-ui");

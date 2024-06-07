@@ -1,8 +1,13 @@
+import { lazy } from "react";
 import { Navigate, RouteObject } from "react-router-dom";
+
 import { ErrorBoundaryWrapOutlet } from "./core/error-boundary";
-import { loginModuleName, loginRoutes } from "./login/routes";
-import { mainLayoutPath, mainRoutes } from "./main/routes";
-import { postmanRoutes } from "./postman/routes";
+import { loginModulePath, mainLayoutName, postmanModulePath } from "./rootRouteConfig";
+
+const MainLayout = lazy(() => import("./main/Main"));
+const OpenapiView = lazy(() => import("./openapi/OpenapiView"));
+const Login = lazy(() => import("./login/Login"));
+const Postman = lazy(() => import("./postman/Postman"));
 
 function getAppRoutes() {
   const isPackage = import.meta.env.MODE === "package";
@@ -14,13 +19,37 @@ function getAppRoutes() {
       children: [
         {
           index: true,
-          element: <Navigate to={isPackage ? mainLayoutPath : loginModuleName} />,
+          element: <Navigate to={isPackage ? mainLayoutName : loginModulePath} />,
         },
-        mainRoutes,
-        ...(isPackage ? [] : [loginRoutes, postmanRoutes]),
+        {
+          path: mainLayoutName,
+          element: <MainLayout />,
+          children: [
+            {
+              path: `:operationId`,
+              element: <OpenapiView />,
+            },
+          ],
+        },
+        ...(isPackage
+          ? []
+          : [
+              {
+                path: loginModulePath,
+                id: "login",
+                element: <Login />,
+              },
+              {
+                path: postmanModulePath,
+                id: "postman",
+                element: <Postman />,
+              },
+            ]),
       ],
     },
   ] as RouteObject[];
 }
 
-export const appRoutes = getAppRoutes();
+const appRoutes = getAppRoutes();
+
+export default appRoutes;

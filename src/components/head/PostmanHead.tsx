@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import SwitchTheme from "../../core/style/ThemeSwitch";
 import { flexBetweenCenterOpts, flexCenterOpts } from "../../core/style/utils";
-import { loginModuleName } from "../../login/routes";
 import { defaultHeadTitleHeight } from "../../main/Main";
+import { loginModulePath } from "../../rootRouteConfig";
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
 import { PostmanIcon } from "../icon";
@@ -37,7 +37,7 @@ export function PostmanHead() {
             cursor: "pointer",
           }}
           onClick={() => {
-            navigate(loginModuleName);
+            navigate(loginModulePath);
           }}
         >
           <PostmanIcon size="26" />
@@ -57,7 +57,7 @@ export function PostmanHead() {
                   key: "1",
                   label: t("head.reselectService"),
                   onClick() {
-                    navigate(loginModuleName);
+                    navigate(loginModulePath);
                   },
                 },
               ],

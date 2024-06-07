@@ -7,9 +7,9 @@ import { toQueryString } from "react-router-toolkit";
 import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { dsc } from "../core/style/defaultStyleConfig";
-import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
+import { mainLayoutName } from "../rootRouteConfig";
 import { ImportModeType } from "./config";
 import { ITextImport } from "./type";
 import { parseSwaggerOrOpenapi } from "./util";
@@ -51,7 +51,7 @@ export function TextImportView() {
         operations: flattenOperations(openapi.paths as IPaths),
       };
       updateOpenapiWithServiceInfo(openapiInfo);
-      navigate(`/${mainLayoutPath}${toQueryString(basicInfo)}`);
+      navigate(`/${mainLayoutName}${toQueryString(basicInfo)}`);
     } catch (e) {
       message.warning(t("login.parseTextWarn"));
     }

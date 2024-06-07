@@ -24,7 +24,7 @@ export function InitPackageConfig() {
     if (theme) {
       updateConfigInfo({ theme: theme as IThemeType });
     }
-  }, []);
+  }, [fetchOpenapiInfo, updateConfigInfo]);
 
   async function fetchOpenapiInfo(url: string) {
     const res = await request({ url: url });

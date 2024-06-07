@@ -12,9 +12,9 @@ import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { flexAlignItemsCenterOpts } from "../core/style/utils";
-import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
+import { mainLayoutName } from "../rootRouteConfig";
 import { ImportModeType } from "./config";
 import { IFileImport } from "./type";
 import { parseSwaggerOrOpenapi, readFileContent } from "./util";
@@ -58,7 +58,7 @@ export function FileImportView() {
         operations: flattenOperations(openapi.paths as IPaths),
       };
       updateOpenapiWithServiceInfo(openapiInfo);
-      navigate(`/${mainLayoutPath}${toQueryString(basicInfo)}`);
+      navigate(`/${mainLayoutName}${toQueryString(basicInfo)}`);
     } catch (e) {
       message.warning(t("login.parseWarn"));
     }

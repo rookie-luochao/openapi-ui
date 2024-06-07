@@ -3,7 +3,7 @@ import { Button, Form, Input, InputNumber, Modal, Tooltip, message } from "antd"
 import { useTranslation } from "react-i18next";
 
 import { IConfigInfo, useConfigInfoStore } from "../../core/store";
-import { postmanModuleName } from "../../postman/routes";
+import { postmanModulePath } from "../../rootRouteConfig";
 import { PostmanIcon } from "../icon";
 
 export function IconDown() {
@@ -92,7 +92,7 @@ export function GoToPostman() {
       <a
         css={{ cursor: "pointer", opacity: 0.8, "&:hover": { opacity: 1 } }}
         onClick={() => {
-          globalThis.open(`${globalThis.location.origin}${postmanModuleName}`);
+          globalThis.open(`${globalThis.location.origin}${postmanModulePath}`);
         }}
       >
         <PostmanIcon />

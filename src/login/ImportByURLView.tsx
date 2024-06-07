@@ -9,9 +9,9 @@ import { toQueryString } from "react-router-toolkit";
 import { urlRegex } from "../core/regex";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { dsc } from "../core/style/defaultStyleConfig";
-import { mainLayoutPath } from "../main/routes";
 import { IPaths } from "../openapi/type";
 import { flattenOperations } from "../openapi/useOpenapiInfo";
+import { mainLayoutName } from "../rootRouteConfig";
 import { ImportModeType } from "./config";
 import { IURLImport } from "./type";
 import { parseSwaggerOrOpenapi } from "./util";
@@ -57,7 +57,7 @@ export function URLImportView() {
           operations: flattenOperations((openapi.paths || {}) as IPaths),
         };
         updateOpenapiWithServiceInfo(openapiInfo);
-        navigate(`/${mainLayoutPath}${toQueryString(Object.assign(basicInfo, { logon: "yes" }))}`);
+        navigate(`/${mainLayoutName}${toQueryString(Object.assign(basicInfo, { logon: "yes" }))}`);
       } catch (e) {
         message.warning(t("login.parseTextWarn"));
       }

@@ -14,8 +14,8 @@ import { getConfig } from "../core/http/config";
 import { useConfigInfoStore } from "../core/store";
 import { ITheme } from "../core/style/defaultStyleConfig";
 import { ThemeType } from "../core/style/themeConfig";
-import { loginModuleName } from "../login/routes";
 import { OperationList } from "../openapi/OperationList";
+import { loginModulePath } from "../rootRouteConfig";
 
 export const defaultHeadTitleHeight = 54;
 
@@ -39,7 +39,7 @@ export const Logo = ({ isCollapsed }: ICollapsed) => {
       }}
       onClick={() => {
         if (!isPackage) {
-          navigate(loginModuleName);
+          navigate(loginModulePath);
         }
       }}
     >

@@ -133,13 +133,13 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
   useEffect(() => {
     form.resetFields();
     setAxiosResponse({} as AxiosResponse);
-  }, [location.pathname]);
+  }, [location.pathname, form]);
 
   useEffect(() => {
     form.setFieldValue("Authorization", configInfo?.authorization || "");
     form.setFieldValue("authorization", configInfo?.authorization || "");
     setCount((count) => count + 1);
-  }, [configInfo?.authorization]);
+  }, [configInfo?.authorization, form]);
 
   async function sumbit(axiosRequest: AxiosRequestConfig) {
     setLoading(true);

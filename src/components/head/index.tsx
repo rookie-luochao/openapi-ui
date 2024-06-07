@@ -12,12 +12,11 @@ import SwitchTheme from "../../core/style/ThemeSwitch";
 import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
 import { flexCenterOpts } from "../../core/style/utils";
 import { IImportModeType, ImportModeType } from "../../login/config";
-import { loginModuleName } from "../../login/routes";
 import { parseSwaggerOrOpenapi } from "../../login/util";
 import { defaultHeadTitleHeight } from "../../main/Main";
-import { mainLayoutPath } from "../../main/routes";
 import { IPaths } from "../../openapi/type";
 import { flattenOperations } from "../../openapi/useOpenapiInfo";
+import { loginModulePath, mainLayoutName } from "../../rootRouteConfig";
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
 import { GoToPostman, IconDown, UpdateConfigInfoModalComp } from "./common";
@@ -90,7 +89,7 @@ export function Head() {
     }
 
     isFlagRef.current = false;
-  }, []);
+  }, [importModeType, logon, navigate, pathname, query, refetchOpenapiInfo, serviceURL]);
 
   async function refetchOpenapiInfo(url: string, isCallBySearchInput?: boolean) {
     const res = await request({ url: url });
@@ -107,7 +106,7 @@ export function Head() {
 
       if (isCallBySearchInput) {
         navigate(
-          `/${mainLayoutPath}${toQueryString({
+          `/${mainLayoutName}${toQueryString({
             ...query,
             serviceURL: url,
           })}`,
@@ -148,7 +147,7 @@ export function Head() {
                   key: "1",
                   label: t("head.reselectService"),
                   onClick() {
-                    navigate(loginModuleName);
+                    navigate(loginModulePath);
                   },
                 },
               ],

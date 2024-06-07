@@ -9,7 +9,7 @@ import { Dictionary } from "react-router-toolkit";
 import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { ICollapsed } from "../main/Main";
-import { mainLayoutPath } from "../main/routes";
+import { mainLayoutName } from "../rootRouteConfig";
 import { IMethodType, IOperationEnhance, IOperationEnhanceMap, MethodType } from "./type";
 // import { useOpenapiInfo } from "./useOpenapiInfo";
 import { getMethodColor } from "./util";
@@ -115,7 +115,7 @@ function GroupedOperationList({
                   : {},
               ]}
               onClick={() => {
-                nav(`/${mainLayoutPath}/${operation.operationId}${location.search}`);
+                nav(`/${mainLayoutName}/${operation.operationId}${location.search}`);
               }}
             >
               {!isCollapsed ? (

@@ -10,7 +10,7 @@ import { CreateAppRouter } from "./core/router/CreateAppRouter";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
 import ThemeWrap from "./core/style/ThemeWrap";
 import "./i18n";
-import { appRoutes } from "./rootRoutes";
+import appRoutes from "./rootRoutes";
 
 ReactDOM.createRoot(
   document.getElementById(import.meta.env.MODE === "package" ? "openapi-ui-container" : "root") as HTMLElement,
