@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import { RouteObject, RouterProvider, createBrowserRouter, createHashRouter } from "react-router-dom";
 
-export function CreateAppRouter({ routes, isHashRouter }: { routes: RouteObject[]; isHashRouter?: boolean }) {
+export default function CreateAppRouter({ routes, isHashRouter }: { routes: RouteObject[]; isHashRouter?: boolean }) {
   const router = isHashRouter
     ? createHashRouter(routes)
     : createBrowserRouter(routes, {

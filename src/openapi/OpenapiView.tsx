@@ -6,12 +6,13 @@ import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
 
-import { Section } from "../components/Section";
+import { Section } from "../components/section-tmp";
 import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../core/store";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { Responses } from "./OpenapiViewComp";
+import { ParameterPositionIconComp } from "./ParameterPosition";
 import { RequestBuilder } from "./RequestBuilder";
-import { ParameterPositionIconComp, parameterPositionMap } from "./config";
+import { parameterPositionMap } from "./config";
 import { getAxiosBasePathByUrl, getMethodColor } from "./util";
 
 export default function OpenapiView() {

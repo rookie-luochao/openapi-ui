@@ -8,6 +8,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import LogoIcon from "../assets/images/logo.png";
 import LogoMiniIcon from "../assets/images/logo_mini.svg";
 import { Head } from "../components/head";
+import { defaultHeadTitleHeight } from "../components/head/common";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
@@ -17,13 +18,11 @@ import { ThemeType } from "../core/style/themeConfig";
 import { OperationList } from "../openapi/OperationList";
 import { loginModulePath } from "../rootRouteConfig";
 
-export const defaultHeadTitleHeight = 54;
-
 export interface ICollapsed {
   isCollapsed?: boolean;
 }
 
-export const Logo = ({ isCollapsed }: ICollapsed) => {
+const Logo = ({ isCollapsed }: { isCollapsed?: boolean }) => {
   const navigate = useNavigate();
   const isPackage = import.meta.env.MODE === "package";
 

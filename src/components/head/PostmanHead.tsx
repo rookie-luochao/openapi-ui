@@ -5,12 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 import SwitchTheme from "../../core/style/ThemeSwitch";
 import { flexBetweenCenterOpts, flexCenterOpts } from "../../core/style/utils";
-import { defaultHeadTitleHeight } from "../../main/Main";
 import { loginModulePath } from "../../rootRouteConfig";
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
 import { PostmanIcon } from "../icon";
-import { IconDown, UpdateConfigInfoModalComp } from "./common";
+import { IconDown, UpdateConfigInfoModalComp, defaultHeadTitleHeight } from "./common";
 
 export function PostmanHead() {
   const navigate = useNavigate();

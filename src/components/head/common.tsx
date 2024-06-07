@@ -100,3 +100,5 @@ export function GoToPostman() {
     </Tooltip>
   );
 }
+
+export const defaultHeadTitleHeight = 54;

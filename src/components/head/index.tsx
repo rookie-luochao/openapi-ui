@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { request } from "@request";
 import { Dropdown, Input, message } from "antd";
 import { SearchProps } from "antd/es/input";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PartialParsedUrlQuery, parseQueryString, toQueryString } from "react-router-toolkit";
@@ -13,13 +13,12 @@ import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
 import { flexCenterOpts } from "../../core/style/utils";
 import { IImportModeType, ImportModeType } from "../../login/config";
 import { parseSwaggerOrOpenapi } from "../../login/util";
-import { defaultHeadTitleHeight } from "../../main/Main";
 import { IPaths } from "../../openapi/type";
 import { flattenOperations } from "../../openapi/useOpenapiInfo";
 import { loginModulePath, mainLayoutName } from "../../rootRouteConfig";
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
-import { GoToPostman, IconDown, UpdateConfigInfoModalComp } from "./common";
+import { GoToPostman, IconDown, UpdateConfigInfoModalComp, defaultHeadTitleHeight } from "./common";
 
 function UserName({ onChange }: { onChange: (value: string) => void }) {
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
@@ -71,6 +70,36 @@ export function Head() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isFlagRef = useRef(true);
 
+  const refetchOpenapiInfo = useCallback(
+    async (url: string, isCallBySearchInput?: boolean) => {
+      const res = await request({ url: url });
+
+      if (res?.status >= 200 && res?.status < 300) {
+        const openapi = await parseSwaggerOrOpenapi(res.data);
+        const openapiInfo = {
+          serviceURL: url,
+          importModeType: ImportModeType.url,
+          openapi: openapi,
+          operations: flattenOperations((openapi.paths || {}) as IPaths),
+        };
+        updateOpenapiWithServiceInfo(openapiInfo);
+
+        if (isCallBySearchInput) {
+          navigate(
+            `/${mainLayoutName}${toQueryString({
+              ...query,
+              serviceURL: url,
+            })}`,
+            {
+              replace: true,
+            },
+          );
+        }
+      }
+    },
+    [query, updateOpenapiWithServiceInfo, navigate],
+  );
+
   useEffect(() => {
     if (!isFlagRef.current) return;
 
@@ -90,33 +119,6 @@ export function Head() {
 
     isFlagRef.current = false;
   }, [importModeType, logon, navigate, pathname, query, refetchOpenapiInfo, serviceURL]);
-
-  async function refetchOpenapiInfo(url: string, isCallBySearchInput?: boolean) {
-    const res = await request({ url: url });
-
-    if (res?.status >= 200 && res?.status < 300) {
-      const openapi = await parseSwaggerOrOpenapi(res.data);
-      const openapiInfo = {
-        serviceURL: url,
-        importModeType: ImportModeType.url,
-        openapi: openapi,
-        operations: flattenOperations((openapi.paths || {}) as IPaths),
-      };
-      updateOpenapiWithServiceInfo(openapiInfo);
-
-      if (isCallBySearchInput) {
-        navigate(
-          `/${mainLayoutName}${toQueryString({
-            ...query,
-            serviceURL: url,
-          })}`,
-          {
-            replace: true,
-          },
-        );
-      }
-    }
-  }
 
   return (
     <>

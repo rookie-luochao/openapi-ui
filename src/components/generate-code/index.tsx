@@ -5,7 +5,7 @@ import copy from "copy-to-clipboard";
 import { useTranslation } from "react-i18next";
 
 import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
-import { httpCardWrapStyle } from "../../openapi/HttpRequestView";
+import { httpCardWrapStyle } from "../../openapi/style";
 
 export function CreateGenerateCode({ request }: { request: AxiosRequestConfig }) {
   const { t } = useTranslation();

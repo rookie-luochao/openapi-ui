@@ -1,7 +1,9 @@
 import { keys, map, replace } from "lodash-es";
+
 import { urlRegex } from "../core/regex";
 import { lightTheme } from "../core/style/defaultStyleConfig";
-import { IMethodType, IRequestBody, MethodType } from "./type";
+import { MethodType } from "./config";
+import { IMethodType, IRequestBody } from "./type";
 
 export function getMethodColor(method: IMethodType) {
   const cyanBlueColor = "#00EEEE";

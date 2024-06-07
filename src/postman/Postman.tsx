@@ -5,13 +5,13 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { PostmanHead } from "../components/head/PostmanHead";
+import { defaultHeadTitleHeight } from "../components/head/common";
 import { ICPRegistration } from "../components/icp-registration";
 import { Env } from "../config";
 import { getConfig } from "../core/http/config";
 import { useConfigInfoStore } from "../core/store";
 import { ITheme, darkTheme, lightTheme } from "../core/style/defaultStyleConfig";
 import i18n from "../i18n";
-import { defaultHeadTitleHeight } from "../main/Main";
 import { RequestBuilder } from "./RequestBuilder";
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;

@@ -3,8 +3,9 @@ import { Button, message } from "antd";
 import { AxiosRequestConfig } from "axios";
 import copy from "copy-to-clipboard";
 import { useTranslation } from "react-i18next";
+
 import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
-import { httpCardWrapStyle } from "../../openapi/HttpRequestView";
+import { httpCardWrapStyle } from "../../openapi/style";
 import { generateCURL } from "./generateCURL";
 
 export function CreateCURL({ request }: { request: AxiosRequestConfig }) {

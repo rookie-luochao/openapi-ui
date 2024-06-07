@@ -1,6 +1,8 @@
 import { OpenAPI, OpenAPIV3, OpenAPIV3_1 } from "openapi-types";
 import { Dictionary } from "react-router-toolkit";
 
+import { MethodType } from "./config";
+
 export type IOpenAPI = OpenAPI.Document & Dictionary<any>;
 
 export type IOperation = OpenAPI.Operation<Dictionary<any>>;
@@ -30,16 +32,6 @@ export type IResponse = IResponseV3 | IResponseV3_1;
 type IPathsV3 = OpenAPIV3.PathsObject & Dictionary<any>;
 type IPathsV3_1 = OpenAPIV3_1.PathsObject & Dictionary<any>;
 export type IPaths = IPathsV3 | IPathsV3_1;
-
-export enum MethodType {
-  get = "get",
-  post = "post",
-  put = "put",
-  patch = "patch",
-  delete = "delete",
-  options = "options",
-  head = "head",
-}
 
 export type IMethodType = keyof typeof MethodType;
 

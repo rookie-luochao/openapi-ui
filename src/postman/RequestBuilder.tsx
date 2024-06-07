@@ -12,7 +12,7 @@ import { useConfigInfoStore } from "../core/store";
 import { dsc } from "../core/style/defaultStyleConfig";
 import { HttpRequestView } from "../openapi/HttpRequestView";
 import { HttpResponseView } from "../openapi/HttpResponseView";
-import { MethodType } from "../openapi/type";
+import { MethodType } from "../openapi/config";
 import { DefineFormField } from "./DefineFormField";
 import { RequestBodyInput, RequestHeaderInput, RequestParameterInput } from "./RequestInput";
 import { getRequestByValues } from "./request";
@@ -42,7 +42,7 @@ export function RequestBuilder() {
       Object.assign({}, form.getFieldValue("headers") || {}, { Authorization: configInfo?.authorization }),
     );
     setCount((count) => count + 1);
-  }, [configInfo?.authorization]);
+  }, [configInfo?.authorization, form]);
 
   const items: TabsProps["items"] = [
     {
@@ -148,7 +148,7 @@ export function RequestBuilder() {
     }
 
     return getRequestByValues(Object.assign({ method, url }, values));
-  }, [method, url, form.getFieldsValue()]);
+  }, [method, url, form]);
 
   return (
     <div style={{ display: "flex" }}>

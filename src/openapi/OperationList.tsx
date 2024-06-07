@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import { Input } from "antd";
 import { debounce, filter, groupBy, includes, isEmpty, map, toLower, values } from "lodash-es";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
@@ -10,7 +10,8 @@ import { useOpenapiWithServiceInfoStore } from "../core/store";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { ICollapsed } from "../main/Main";
 import { mainLayoutName } from "../rootRouteConfig";
-import { IMethodType, IOperationEnhance, IOperationEnhanceMap, MethodType } from "./type";
+import { MethodType } from "./config";
+import { IMethodType, IOperationEnhance, IOperationEnhanceMap } from "./type";
 // import { useOpenapiInfo } from "./useOpenapiInfo";
 import { getMethodColor } from "./util";
 
@@ -152,10 +153,13 @@ export function OperationList(props: ICollapsed) {
   const { t } = useTranslation();
   // const openapiWithServiceInfo = useOpenapiInfo();
   const { openapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
-  const operations = openapiWithServiceInfo?.operations || ({} as IOperationEnhanceMap);
   const [filterValue, setFilterValue] = useState("");
   const [groupedOperations, setGroupedOperations] = useState({} as Dictionary<IOperationEnhance[]>);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const operations = useMemo(() => {
+    return openapiWithServiceInfo?.operations || ({} as IOperationEnhanceMap);
+  }, [openapiWithServiceInfo]);
 
   useEffect(() => {
     if (!isEmpty(operations)) {
@@ -176,18 +180,9 @@ export function OperationList(props: ICollapsed) {
 
       setGroupedOperations(groupedOperations);
     }
-  }, [operations, filterValue]);
+  }, [filterValue, operations]);
 
-  useEffect(() => {
-    if (operationId) {
-      scrollIntoAnchorElement();
-    }
-    return () => {
-      timerRef.current && clearTimeout(timerRef.current);
-    };
-  }, []);
-
-  function scrollIntoAnchorElement() {
+  const scrollIntoAnchorElement = useCallback(() => {
     const anchorElement = document.getElementById(`${operationId}`);
 
     if (anchorElement) {
@@ -199,7 +194,16 @@ export function OperationList(props: ICollapsed) {
     } else {
       timerRef.current = setTimeout(scrollIntoAnchorElement, 100);
     }
-  }
+  }, [operationId]);
+
+  useEffect(() => {
+    if (operationId) {
+      scrollIntoAnchorElement();
+    }
+    return () => {
+      timerRef.current && clearTimeout(timerRef.current);
+    };
+  }, [operationId, scrollIntoAnchorElement]);
 
   return (
     <div style={{ position: "relative" }}>

@@ -1,15 +1,7 @@
 import { useTheme } from "@emotion/react";
 import { Dictionary } from "react-router-toolkit";
-import { ITheme } from "../core/style/defaultStyleConfig";
 
-export const parameterPositionMap = {
-  path: "URL Path",
-  header: "Header",
-  query: "Query",
-  body: "Body",
-  cookie: "Cookie",
-  formData: "Form Data",
-};
+import { ITheme } from "../core/style/defaultStyleConfig";
 
 function getIconStyleByParameterPosition(position: string) {
   const parameterPositionToIconMap: Dictionary<string> = {

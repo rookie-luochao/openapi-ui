@@ -6,11 +6,10 @@ import "regenerator-runtime/runtime.js";
 import { AntdConfigProviderWrap } from "./components/antd-config";
 import { ModifyAppTitle } from "./components/app-title";
 import { InitPackageConfig } from "./components/package-config";
-import { CreateAppRouter } from "./core/router/CreateAppRouter";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
 import ThemeWrap from "./core/style/ThemeWrap";
 import "./i18n";
-import appRoutes from "./rootRoutes";
+import Routes from "./rootRoutes";
 
 ReactDOM.createRoot(
   document.getElementById(import.meta.env.MODE === "package" ? "openapi-ui-container" : "root") as HTMLElement,
@@ -29,7 +28,7 @@ ReactDOM.createRoot(
     <ThemeWrap>
       <AntdConfigProviderWrap>
         <LazyImportComponent>
-          <CreateAppRouter isHashRouter={import.meta.env.MODE === "package"} routes={appRoutes} />
+          <Routes />
         </LazyImportComponent>
       </AntdConfigProviderWrap>
     </ThemeWrap>

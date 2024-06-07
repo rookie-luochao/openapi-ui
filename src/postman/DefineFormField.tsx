@@ -5,8 +5,8 @@ import dayjs from "dayjs";
 import { includes, map } from "lodash-es";
 import { useTranslation } from "react-i18next";
 
-import { Section } from "../components/Section";
 import { MinusOutlined, PlusOutlined, UploadOutlined } from "../components/icon";
+import { Section } from "../components/section-tmp";
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { flexAlignItemsCenterOpts, flexCenterOpts } from "../core/style/utils";
 import {

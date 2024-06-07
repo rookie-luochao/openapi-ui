@@ -1,6 +1,7 @@
 import axios from "axios";
 import { assign, reduce, toLower } from "lodash-es";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import { IOpenapiWithServiceInfo, useOpenapiWithServiceInfoStore } from "../core/store";
 import { ImportModeType } from "../login/config";
 import { IMethodType, IOperation, IOperationEnhanceMap, IPaths } from "./type";
@@ -51,11 +52,7 @@ export function useOpenapiInfo() {
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const [openapiInfo, setOpenapiInfo] = useState({} as IOpenapiWithServiceInfo);
 
-  useEffect(() => {
-    getMockOpenapiData();
-  }, []);
-
-  async function getMockOpenapiData() {
+  const getMockOpenapiData = useCallback(async () => {
     const res = await axios.get("/demo/server/swagger/swagger.json");
     const newOpenapiInfo = {
       serviceURL: "http://127.0.0.1:1323",
@@ -66,7 +63,11 @@ export function useOpenapiInfo() {
 
     updateOpenapiWithServiceInfo(newOpenapiInfo);
     setOpenapiInfo(newOpenapiInfo);
-  }
+  }, [updateOpenapiWithServiceInfo]);
+
+  useEffect(() => {
+    getMockOpenapiData();
+  }, [getMockOpenapiData]);
 
   return openapiInfo;
 }

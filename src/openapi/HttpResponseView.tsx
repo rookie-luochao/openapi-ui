@@ -5,8 +5,9 @@ import { ReactNode } from "react";
 
 import { ITheme, dsc } from "../core/style/defaultStyleConfig";
 import { isJSONString } from "../login/util";
-import { HeadRow, httpCardWrapStyle } from "./HttpRequestView";
+import { HeadRow } from "./HttpRequestView";
 import { HttpCode } from "./OpenapiViewComp";
+import { httpCardWrapStyle } from "./style";
 
 type IHeader = AxiosResponse["headers"];
 

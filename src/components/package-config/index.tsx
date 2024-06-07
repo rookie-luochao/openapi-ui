@@ -1,5 +1,5 @@
 import { request } from "@request";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../../core/store";
 import { IThemeType } from "../../core/style/themeConfig";
@@ -11,6 +11,24 @@ import { flattenOperations } from "../../openapi/useOpenapiInfo";
 export function InitPackageConfig() {
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();
   const { updateConfigInfo } = useConfigInfoStore();
+
+  const fetchOpenapiInfo = useCallback(
+    async (url: string) => {
+      const res = await request({ url: url });
+
+      if (res?.status >= 200 && res?.status < 300) {
+        const openapi = await parseSwaggerOrOpenapi(res.data);
+        const openapiInfo = {
+          serviceURL: url,
+          importModeType: ImportModeType.url,
+          openapi: openapi,
+          operations: flattenOperations((openapi.paths || {}) as IPaths),
+        };
+        updateOpenapiWithServiceInfo(openapiInfo);
+      }
+    },
+    [updateOpenapiWithServiceInfo],
+  );
 
   useEffect(() => {
     const configElement = document.getElementById("openapi-ui-container");
@@ -25,21 +43,6 @@ export function InitPackageConfig() {
       updateConfigInfo({ theme: theme as IThemeType });
     }
   }, [fetchOpenapiInfo, updateConfigInfo]);
-
-  async function fetchOpenapiInfo(url: string) {
-    const res = await request({ url: url });
-
-    if (res?.status >= 200 && res?.status < 300) {
-      const openapi = await parseSwaggerOrOpenapi(res.data);
-      const openapiInfo = {
-        serviceURL: url,
-        importModeType: ImportModeType.url,
-        openapi: openapi,
-        operations: flattenOperations((openapi.paths || {}) as IPaths),
-      };
-      updateOpenapiWithServiceInfo(openapiInfo);
-    }
-  }
 
   return null;
 }
