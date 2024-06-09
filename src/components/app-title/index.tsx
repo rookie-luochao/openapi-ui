@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { Env } from "../../config";
-import { getConfig } from "../../core/http/config";
+
+import { Env } from "@/config";
+import { getConfig } from "@/core/http/config";
 
 export function ModifyAppTitle() {
   useEffect(() => {

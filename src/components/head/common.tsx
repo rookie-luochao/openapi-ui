@@ -2,8 +2,9 @@ import { defaultTimeout } from "@request";
 import { Button, Form, Input, InputNumber, Modal, Tooltip, message } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { IConfigInfo, useConfigInfoStore } from "../../core/store";
-import { postmanModulePath } from "../../rootRouteConfig";
+import { IConfigInfo, useConfigInfoStore } from "@/core/store";
+import { postmanModulePath } from "@/router/config";
+
 import { PostmanIcon } from "../icon";
 
 export function IconDown() {

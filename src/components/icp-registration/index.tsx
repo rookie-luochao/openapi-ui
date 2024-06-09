@@ -1,5 +1,5 @@
-import { dsc } from "../../core/style/defaultStyleConfig";
-import { flexCenterOpts } from "../../core/style/utils";
+import { dsc } from "@/core/style/defaultStyleConfig";
+import { flexCenterOpts } from "@/core/style/utils";
 
 export function ICPRegistration({ ...otherProps }) {
   return (

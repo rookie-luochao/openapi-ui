@@ -4,9 +4,10 @@ import { AxiosRequestConfig } from "axios";
 import copy from "copy-to-clipboard";
 import { useTranslation } from "react-i18next";
 
-import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
-import { httpCardWrapStyle } from "../../openapi/style";
-import { generateCURL } from "./generateCURL";
+import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
+import { httpCardWrapStyle } from "@/pages/openapi/common/style";
+
+import { generateCURL } from "./utils";
 
 export function CreateCURL({ request }: { request: AxiosRequestConfig }) {
   const { t } = useTranslation();

@@ -1,6 +1,7 @@
 import { useTheme } from "@emotion/react";
 
-import { ThemeIcon } from "../../components/icon";
+import { ThemeIcon } from "@/components/icon";
+
 import { useConfigInfoStore } from "../store";
 import { ITheme } from "./defaultStyleConfig";
 import { ThemeType } from "./themeConfig";

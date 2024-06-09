@@ -1,12 +1,12 @@
 import { request } from "@request";
 import { useCallback, useEffect } from "react";
 
-import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "../../core/store";
-import { IThemeType } from "../../core/style/themeConfig";
-import { ImportModeType } from "../../login/config";
-import { parseSwaggerOrOpenapi } from "../../login/util";
-import { IPaths } from "../../openapi/type";
-import { flattenOperations } from "../../openapi/useOpenapiInfo";
+import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "@/core/store";
+import { IThemeType } from "@/core/style/themeConfig";
+import { ImportModeType } from "@/pages/login/common/config";
+import { parseSwaggerOrOpenapi } from "@/pages/login/common/utils";
+import { IPaths } from "@/pages/openapi/common/type";
+import { flattenOperations } from "@/pages/openapi/hook/utils";
 
 export function InitPackageConfig() {
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();

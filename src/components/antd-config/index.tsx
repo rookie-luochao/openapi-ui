@@ -1,10 +1,14 @@
-import { ConfigProvider /* , theme */ } from "antd";
+import {
+  ConfigProvider,
+  /* , theme */
+} from "antd";
 import enUS from "antd/locale/en_US";
 import zhCN from "antd/locale/zh_CN";
 import { useTranslation } from "react-i18next";
-import { useConfigInfoStore } from "../../core/store";
-import { darkTheme, dsc } from "../../core/style/defaultStyleConfig";
-import { LangType } from "../../i18n/config";
+
+import { useConfigInfoStore } from "@/core/store";
+import { darkTheme, dsc } from "@/core/style/defaultStyleConfig";
+import { LangType } from "@/i18n/config";
 
 export function AntdConfigProviderWrap({ children }: { children: React.ReactNode }) {
   const { i18n } = useTranslation();

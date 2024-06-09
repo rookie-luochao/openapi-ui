@@ -1,4 +1,4 @@
-import appConfig, { IConfig } from "../../config";
+import appConfig, { IConfig } from "@/config";
 
 export function getConfig(): IConfig {
   const mateEnv = import.meta.env;

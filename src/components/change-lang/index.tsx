@@ -2,8 +2,8 @@ import { useTheme } from "@emotion/react";
 import { Dropdown } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { ITheme } from "../../core/style/defaultStyleConfig";
-import { LangType } from "../../i18n/config";
+import { ITheme } from "@/core/style/defaultStyleConfig";
+import { LangType } from "@/i18n/config";
 
 const LangIcon = ({ size = "16", fill = "#333", ...other }) => {
   return (

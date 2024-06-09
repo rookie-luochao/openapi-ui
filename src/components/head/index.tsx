@@ -7,15 +7,16 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PartialParsedUrlQuery, parseQueryString, toQueryString } from "react-router-toolkit";
 
-import { useOpenapiWithServiceInfoStore } from "../../core/store";
-import SwitchTheme from "../../core/style/ThemeSwitch";
-import { ITheme, dsc } from "../../core/style/defaultStyleConfig";
-import { flexCenterOpts } from "../../core/style/utils";
-import { IImportModeType, ImportModeType } from "../../login/config";
-import { parseSwaggerOrOpenapi } from "../../login/util";
-import { IPaths } from "../../openapi/type";
-import { flattenOperations } from "../../openapi/useOpenapiInfo";
-import { loginModulePath, mainLayoutName } from "../../rootRouteConfig";
+import { useOpenapiWithServiceInfoStore } from "@/core/store";
+import SwitchTheme from "@/core/style/ThemeSwitch";
+import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
+import { flexCenterOpts } from "@/core/style/utils";
+import { IImportModeType, ImportModeType } from "@/pages/login/common/config";
+import { parseSwaggerOrOpenapi } from "@/pages/login/common/utils";
+import { IPaths } from "@/pages/openapi/common/type";
+import { flattenOperations } from "@/pages/openapi/hook/utils";
+import { loginModulePath, mainLayoutName } from "@/router/config";
+
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
 import { GoToPostman, IconDown, UpdateConfigInfoModalComp, defaultHeadTitleHeight } from "./common";

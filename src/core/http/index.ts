@@ -2,7 +2,8 @@ import { notification } from "antd";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { filter, findIndex, keys, map, pickBy, values } from "lodash-es";
 
-import { MethodType } from "../../openapi/config";
+import { MethodType } from "@/pages/openapi/common/config";
+
 import { IConfigInfoStorageState, configInfoStorageKey, defaultConfigInfoStorage } from "../store";
 
 export function getConfigInfo() {

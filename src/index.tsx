@@ -9,7 +9,7 @@ import { InitPackageConfig } from "./components/package-config";
 import { LazyImportComponent } from "./core/router/LazyImportComponent";
 import ThemeWrap from "./core/style/ThemeWrap";
 import "./i18n";
-import Routes from "./rootRoutes";
+import Router from "./router";
 
 ReactDOM.createRoot(
   document.getElementById(import.meta.env.MODE === "package" ? "openapi-ui-container" : "root") as HTMLElement,
@@ -28,7 +28,7 @@ ReactDOM.createRoot(
     <ThemeWrap>
       <AntdConfigProviderWrap>
         <LazyImportComponent>
-          <Routes />
+          <Router />
         </LazyImportComponent>
       </AntdConfigProviderWrap>
     </ThemeWrap>

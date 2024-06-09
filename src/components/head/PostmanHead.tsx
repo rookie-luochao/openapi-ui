@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import SwitchTheme from "../../core/style/ThemeSwitch";
-import { flexBetweenCenterOpts, flexCenterOpts } from "../../core/style/utils";
-import { loginModulePath } from "../../rootRouteConfig";
+import SwitchTheme from "@/core/style/ThemeSwitch";
+import { flexBetweenCenterOpts, flexCenterOpts } from "@/core/style/utils";
+import { loginModulePath } from "@/router/config";
+
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";
 import { PostmanIcon } from "../icon";

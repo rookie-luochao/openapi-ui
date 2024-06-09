@@ -1,8 +1,8 @@
 import { Tooltip } from "antd";
 import { useEffect, useState } from "react";
 
-import { useConfigInfoStore } from "../../core/store";
-import { darkTheme } from "../../core/style/defaultStyleConfig";
+import { useConfigInfoStore } from "@/core/store";
+import { darkTheme } from "@/core/style/defaultStyleConfig";
 
 const GithubIcon = ({ size = "16", fill = "#333", ...other }) => {
   return (

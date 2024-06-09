@@ -20,7 +20,8 @@ export default defineConfig(({ mode }) => ({
   ],
   resolve: {
     alias: {
-      "@request": resolve(__dirname, "./src/core/http/index.ts"),
+      "@request": resolve(__dirname, "src/core/http/index.ts"),
+      "@": resolve(__dirname, "src"),
     },
   },
   optimizeDeps: {

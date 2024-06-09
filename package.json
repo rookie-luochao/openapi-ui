@@ -112,8 +112,8 @@
     "arrowParens": "always",
     "printWidth": 120,
     "importOrder": [
-      "^@core/(.*)$",
-      "^@ui/(.*)$",
+      "^@?\\w",
+      "^@/(.*)$",
       "^[./]"
     ],
     "importOrderSeparation": true,

@@ -1,4 +1,4 @@
-import { lightTheme } from "../../core/style/defaultStyleConfig";
+import { lightTheme } from "@/core/style/defaultStyleConfig";
 
 const textColor = lightTheme.color.text;
 
