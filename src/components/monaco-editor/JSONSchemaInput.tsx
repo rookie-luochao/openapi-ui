@@ -1,6 +1,6 @@
 import { Editor } from "@monaco-editor/react";
 
-import { ISchema } from "@/pages/openapi/common/type";
+import { ISchema } from "@/type";
 
 import { IJSONInputProps } from "./JSONInput";
 import "./workerLoader";

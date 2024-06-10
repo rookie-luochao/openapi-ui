@@ -3,7 +3,7 @@ import { isEmpty, isObject } from "lodash-es";
 import { Dictionary } from "react-router-toolkit";
 import * as converter from "swagger2openapi";
 
-import { IOpenAPI } from "@/pages/openapi/common/type";
+import { IOpenAPI } from "@/type";
 
 export function readFileContent(file: File): Promise<string> {
   return new Promise((resolve, reject) => {

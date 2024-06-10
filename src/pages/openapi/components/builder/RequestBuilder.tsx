@@ -12,7 +12,7 @@ import { CreateCURL } from "@/components/curl";
 import { CreateGenerateCode } from "@/components/generate-code";
 import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "@/core/store";
 import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
-import { IMediaType, IOperationEnhance, IRequestBody, ISchema, TParameter } from "@/pages/openapi/common/type";
+import { IMediaType, IOperationEnhance, IRequestBody, ISchema, TParameter } from "@/type";
 
 import { HttpRequestView } from "../http-view/HttpRequestView";
 import { HttpResponseView } from "../http-view/HttpResponseView";

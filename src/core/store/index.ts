@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { StorageValue, createJSONStorage, devtools, persist } from "zustand/middleware";
 
 import { IImportModeType } from "@/pages/login/common/config";
-import { IOpenAPI, IOperationEnhanceMap } from "@/pages/openapi/common/type";
+import { IOpenAPI, IOperationEnhanceMap } from "@/type";
 
 import { IThemeType } from "../style/themeConfig";
 import { logger } from "./loggerMiddleware";

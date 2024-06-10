@@ -11,7 +11,7 @@ import { IJSONInputProps } from "@/components/monaco-editor/JSONInput";
 import { IJSONInputWithSchemaProps, JSONSchemaInput } from "@/components/monaco-editor/JSONSchemaInput";
 import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
 import { flexAlignItemsCenterOpts } from "@/core/style/utils";
-import { ISchema, TParameter } from "@/pages/openapi/common/type";
+import { ISchema, TParameter } from "@/type";
 
 import { ParameterPositionIconComp } from "../parameter-position";
 import { Description, SchemaView } from "../schema-view/SchemaView";

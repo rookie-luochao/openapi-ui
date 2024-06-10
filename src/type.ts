@@ -1,7 +1,7 @@
 import { OpenAPI, OpenAPIV3, OpenAPIV3_1 } from "openapi-types";
 import { Dictionary } from "react-router-toolkit";
 
-import { MethodType } from "./config";
+import { MethodType } from "./pages/openapi/common/config";
 
 export type IOpenAPI = OpenAPI.Document & Dictionary<any>;
 

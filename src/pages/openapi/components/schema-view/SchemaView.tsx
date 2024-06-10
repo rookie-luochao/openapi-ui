@@ -7,7 +7,7 @@ import ReactMarkdown from "react-markdown";
 import { Dictionary } from "react-router-toolkit";
 
 import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
-import { ISchema } from "@/pages/openapi/common/type";
+import { ISchema } from "@/type";
 
 import { displayClassName } from "./displayType";
 import { isArraySchema, isObjectSchema, patchSchema } from "./patchSchema";

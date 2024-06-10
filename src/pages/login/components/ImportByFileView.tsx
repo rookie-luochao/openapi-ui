@@ -12,9 +12,9 @@ import { urlRegex } from "@/core/regex";
 import { useOpenapiWithServiceInfoStore } from "@/core/store";
 import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
 import { flexAlignItemsCenterOpts } from "@/core/style/utils";
-import { IPaths } from "@/pages/openapi/common/type";
 import { flattenOperations } from "@/pages/openapi/hook/utils";
 import { mainLayoutName } from "@/router/config";
+import { IPaths } from "@/type";
 
 import { ImportModeType } from "../common/config";
 import { IFileImport } from "../common/type";

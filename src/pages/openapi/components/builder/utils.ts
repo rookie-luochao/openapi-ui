@@ -1,6 +1,6 @@
 import { keys } from "lodash-es";
 
-import { IRequestBody } from "@/pages/openapi/common/type";
+import { IRequestBody } from "@/type";
 
 export function getRequestBodyContent(requestBody: IRequestBody) {
   const contentKeys = keys(requestBody.content);

@@ -22,7 +22,7 @@ export interface ICollapsed {
   isCollapsed?: boolean;
 }
 
-const Logo = ({ isCollapsed }: { isCollapsed?: boolean }) => {
+const Logo = ({ isCollapsed }: ICollapsed) => {
   const navigate = useNavigate();
   const isPackage = import.meta.env.MODE === "package";
 

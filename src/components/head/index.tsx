@@ -13,9 +13,9 @@ import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
 import { flexCenterOpts } from "@/core/style/utils";
 import { IImportModeType, ImportModeType } from "@/pages/login/common/config";
 import { parseSwaggerOrOpenapi } from "@/pages/login/common/utils";
-import { IPaths } from "@/pages/openapi/common/type";
 import { flattenOperations } from "@/pages/openapi/hook/utils";
 import { loginModulePath, mainLayoutName } from "@/router/config";
+import { IPaths } from "@/type";
 
 import { ChangeLangComp } from "../change-lang";
 import GithubStar from "../github-star";

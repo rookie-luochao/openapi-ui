@@ -5,8 +5,8 @@ import { useConfigInfoStore, useOpenapiWithServiceInfoStore } from "@/core/store
 import { IThemeType } from "@/core/style/themeConfig";
 import { ImportModeType } from "@/pages/login/common/config";
 import { parseSwaggerOrOpenapi } from "@/pages/login/common/utils";
-import { IPaths } from "@/pages/openapi/common/type";
 import { flattenOperations } from "@/pages/openapi/hook/utils";
+import { IPaths } from "@/type";
 
 export function InitPackageConfig() {
   const { updateOpenapiWithServiceInfo } = useOpenapiWithServiceInfoStore();

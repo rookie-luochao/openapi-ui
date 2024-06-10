@@ -9,10 +9,10 @@ import { Dictionary } from "react-router-toolkit";
 import { useOpenapiWithServiceInfoStore } from "@/core/store";
 import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
 import { mainLayoutName } from "@/router/config";
+import { IMethodType, IOperationEnhance, IOperationEnhanceMap } from "@/type";
 
 import { ICollapsed } from "../main/Main";
 import { MethodType } from "./common/config";
-import { IMethodType, IOperationEnhance, IOperationEnhanceMap } from "./common/type";
 // import { useOpenapiInfo } from "./hook/useOpenapiInfo";
 import { getMethodColor } from "./common/utils";
 

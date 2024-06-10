@@ -1,7 +1,7 @@
 import { forEach, has, isEmpty, isObject, mapValues, reduce, replace, startsWith, uniq } from "lodash-es";
 import { Dictionary } from "react-router-toolkit";
 
-import { ISchema } from "@/pages/openapi/common/type";
+import { ISchema } from "@/type";
 
 export const isObjectSchema = (schema: ISchema) => schema.type === "object" || has(schema, "properties");
 export const isArraySchema = (schema: ISchema) => schema.type === "array" || has(schema, "items");

@@ -1,6 +1,6 @@
 import { assign, reduce, toLower } from "lodash-es";
 
-import { IMethodType, IOperation, IOperationEnhanceMap, IPaths } from "../common/type";
+import { IMethodType, IOperation, IOperationEnhanceMap, IPaths } from "@/type";
 
 // use operationId combine Operations
 const patchOperation =

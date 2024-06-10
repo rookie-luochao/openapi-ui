@@ -4,8 +4,8 @@ import { Dictionary } from "react-router-toolkit";
 
 import { useOpenapiWithServiceInfoStore } from "@/core/store";
 import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
+import { IMediaType, IOperationEnhance, IReference, IResponse, IResponses, ISchema } from "@/type";
 
-import { IMediaType, IOperationEnhance, IReference, IResponse, IResponses, ISchema } from "./common/type";
 import { IStatusError, getCodeColor, getHttpErrorDes, pickHttpError } from "./common/utils";
 import { SchemaView } from "./components/schema-view/SchemaView";
 

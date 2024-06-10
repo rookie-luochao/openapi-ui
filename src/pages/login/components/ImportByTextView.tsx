@@ -7,9 +7,9 @@ import { toQueryString } from "react-router-toolkit";
 import { urlRegex } from "@/core/regex";
 import { useOpenapiWithServiceInfoStore } from "@/core/store";
 import { dsc } from "@/core/style/defaultStyleConfig";
-import { IPaths } from "@/pages/openapi/common/type";
 import { flattenOperations } from "@/pages/openapi/hook/utils";
 import { mainLayoutName } from "@/router/config";
+import { IPaths } from "@/type";
 
 import { ImportModeType } from "../common/config";
 import { ITextImport } from "../common/type";

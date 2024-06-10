@@ -4,7 +4,7 @@ import { filter, find, forEach, includes, isEmpty, toLower } from "lodash-es";
 import { sample } from "openapi-sampler";
 
 import { toDate, toDateUnix, toFullTimeWithSecond, toFullTimeWithSecondUnix } from "@/core/time";
-import { IOpenAPI, ISchema, TParameter } from "@/pages/openapi/common/type";
+import { IOpenAPI, ISchema, TParameter } from "@/type";
 
 enum SampleMockFieldName {
   // uuid

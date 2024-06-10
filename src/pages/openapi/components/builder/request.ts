@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from "axios";
 import { filter, first, isUndefined, keys, map, pick, pickBy, reduce, replace } from "lodash-es";
 import { Dictionary } from "react-router-toolkit";
 
-import { IOpenAPI, IOperationEnhance, ISchema, TParameter } from "@/pages/openapi//common/type";
+import { IOpenAPI, IOperationEnhance, ISchema, TParameter } from "@/type";
 
 import { patchSchema } from "../schema-view/patchSchema";
 import { getRequestBodyContent } from "./utils";
