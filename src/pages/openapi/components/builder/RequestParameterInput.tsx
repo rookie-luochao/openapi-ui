@@ -6,9 +6,10 @@ import { filter, includes, isEmpty, map, toLower } from "lodash-es";
 import React, { ReactNode, useState } from "react";
 import { Dictionary } from "react-router-toolkit";
 
+import { JSONSchemaInput } from "@/components/codemirror-editor/JSONSchemaInput";
 import { MinusOutlined, PlusOutlined, UploadOutlined } from "@/components/icon";
 import { IJSONInputProps } from "@/components/monaco-editor/JSONInput";
-import { IJSONInputWithSchemaProps, JSONSchemaInput } from "@/components/monaco-editor/JSONSchemaInput";
+import { IJSONInputWithSchemaProps } from "@/components/monaco-editor/JSONSchemaInput";
 import { ITheme, dsc } from "@/core/style/defaultStyleConfig";
 import { flexAlignItemsCenterOpts } from "@/core/style/utils";
 import { ISchema, TParameter } from "@/type";
