@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
 import throttle from "lodash-es/throttle";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import LogoIcon from "@/assets/images/logo.png";
@@ -56,13 +56,15 @@ export default function MainLayout() {
   const defaultMenuHeight = defaultContentHeight - 48; // 48px为展开收缩图标高度
   const isZh = getConfig().env === Env.zh;
 
-  const throttledResizeHandler = throttle(
-    () => {
-      setMenuHeight(globalThis.document.documentElement.clientHeight);
-    },
-    1200,
-    { leading: true, trailing: true },
-  );
+  const throttledResizeHandler = useMemo(() => {
+    return throttle(
+      () => {
+        setMenuHeight(globalThis.document.documentElement.clientHeight);
+      },
+      1200,
+      { leading: true, trailing: true },
+    );
+  }, []);
 
   useEffect(() => {
     globalThis.addEventListener("resize", throttledResizeHandler);

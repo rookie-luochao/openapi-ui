@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import { Tabs } from "antd";
 import { throttle } from "lodash-es";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { PostmanHead } from "@/components/head/PostmanHead";
@@ -38,13 +38,15 @@ export default function Postman() {
   const [items, setItems] = useState(initialItems);
   const newTabIndex = useRef(0);
 
-  const throttledResizeHandler = throttle(
-    () => {
-      setContentHeight(globalThis.document.documentElement.clientHeight);
-    },
-    1200,
-    { leading: true, trailing: true },
-  );
+  const throttledResizeHandler = useMemo(() => {
+    return throttle(
+      () => {
+        setContentHeight(globalThis.document.documentElement.clientHeight);
+      },
+      1200,
+      { leading: true, trailing: true },
+    );
+  }, []);
 
   useEffect(() => {
     globalThis.addEventListener("resize", throttledResizeHandler);

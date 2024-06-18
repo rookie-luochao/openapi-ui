@@ -1,6 +1,6 @@
 import { useTheme } from "@emotion/react";
 import { map, throttle } from "lodash-es";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ParsedUrlQuery, useRouterQuery } from "react-router-toolkit";
 
@@ -32,13 +32,15 @@ export default function Login() {
   const [contentHeight, setContentHeight] = useState(document.documentElement.clientHeight);
   const isZh = getConfig().env === Env.zh;
 
-  const throttledResizeHandler = throttle(
-    () => {
-      setContentHeight(globalThis.document.documentElement.clientHeight);
-    },
-    1200,
-    { leading: true, trailing: true },
-  );
+  const throttledResizeHandler = useMemo(() => {
+    return throttle(
+      () => {
+        setContentHeight(globalThis.document.documentElement.clientHeight);
+      },
+      1200,
+      { leading: true, trailing: true },
+    );
+  }, []);
 
   useEffect(() => {
     globalThis.addEventListener("resize", throttledResizeHandler);
