@@ -157,6 +157,7 @@ export function OperationList(props: ICollapsed) {
   const [filterValue, setFilterValue] = useState("");
   const [groupedOperations, setGroupedOperations] = useState({} as Dictionary<IOperationEnhance[]>);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const anchorElementRef = useRef<HTMLElement | null>(null);
 
   const operations = useMemo(() => {
     return openapiWithServiceInfo?.operations || ({} as IOperationEnhanceMap);
@@ -184,27 +185,28 @@ export function OperationList(props: ICollapsed) {
   }, [filterValue, operations]);
 
   const scrollIntoAnchorElement = useCallback(() => {
-    const anchorElement = document.getElementById(`${operationId}`);
+    if (!operationId || anchorElementRef.current) {
+      return;
+    }
 
-    if (anchorElement) {
-      anchorElement.scrollIntoView({ behavior: "smooth" });
+    anchorElementRef.current = document.getElementById(`${operationId}`);
 
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
+    if (anchorElementRef.current) {
+      anchorElementRef.current.scrollIntoView({ behavior: "smooth" });
+
+      timerRef.current && clearTimeout(timerRef.current);
     } else {
       timerRef.current = setTimeout(scrollIntoAnchorElement, 100);
     }
   }, [operationId]);
 
   useEffect(() => {
-    if (operationId) {
-      scrollIntoAnchorElement();
-    }
+    scrollIntoAnchorElement();
+
     return () => {
       timerRef.current && clearTimeout(timerRef.current);
     };
-  }, [operationId, scrollIntoAnchorElement]);
+  }, [scrollIntoAnchorElement]);
 
   return (
     <div style={{ position: "relative" }}>
