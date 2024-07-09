@@ -21,7 +21,7 @@
     "@emotion/react": "^11.11.3",
     "@faker-js/faker": "^8.4.1",
     "@monaco-editor/react": "^4.6.0",
-    "antd": "^5.18.3",
+    "antd": "^5.19.1",
     "axios": "^1.7.2",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.11",
