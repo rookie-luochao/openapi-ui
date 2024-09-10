@@ -30,8 +30,8 @@ importers:
         specifier: ^1.11.12
         version: 1.11.12
       i18next:
-        specifier: ^23.13.0
-        version: 23.13.0
+        specifier: ^23.15.1
+        version: 23.15.1
       i18next-browser-languagedetector:
         specifier: ^8.0.0
         version: 8.0.0
@@ -61,7 +61,7 @@ importers:
         version: 4.0.13(react@18.3.0)
       react-i18next:
         specifier: ^15.0.1
-        version: 15.0.1(i18next@23.13.0)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        version: 15.0.1(i18next@23.15.1)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       react-markdown:
         specifier: ^9.0.1
         version: 9.0.1(@types/react@18.3.0)(react@18.3.0)
@@ -2022,8 +2022,8 @@ packages:
   i18next-browser-languagedetector@8.0.0:
     resolution: {integrity: sha512-zhXdJXTTCoG39QsrOCiOabnWj2jecouOqbchu3EfhtSHxIB5Uugnm9JaizenOy39h7ne3+fLikIjeW88+rgszw==}
 
-  i18next@23.13.0:
-    resolution: {integrity: sha512-B+g0/KTKmN3+NeMKPljQxdrih6Q6lyDF5O2e/Ofd0JQsTLojJD/BSTTN04iw6OVc0yBiHeypu5hoBNV6ag44Zw==}
+  i18next@23.15.1:
+    resolution: {integrity: sha512-wB4abZ3uK7EWodYisHl/asf8UYEhrI/vj/8aoSsrj/ZDxj4/UXPOa1KvFt1Fq5hkUHquNqwFlDprmjZ8iySgYA==}
 
   ignore@5.3.1:
     resolution: {integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==}
@@ -5867,7 +5867,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.24.4
 
-  i18next@23.13.0:
+  i18next@23.15.1:
     dependencies:
       '@babel/runtime': 7.24.8
 
@@ -7087,11 +7087,11 @@ snapshots:
       '@babel/runtime': 7.24.4
       react: 18.3.0
 
-  react-i18next@15.0.1(i18next@23.13.0)(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  react-i18next@15.0.1(i18next@23.15.1)(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@babel/runtime': 7.24.8
       html-parse-stringify: 3.0.1
-      i18next: 23.13.0
+      i18next: 23.15.1
       react: 18.3.0
     optionalDependencies:
       react-dom: 18.3.0(react@18.3.0)
