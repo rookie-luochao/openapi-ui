@@ -5,12 +5,12 @@
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
   },
-  "packageManager": "pnpm@9.3.0",
+  "packageManager": "pnpm@9.10.0",
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "tsc && vite build",
-    "build:package": "tsc && vite build --config vite.package.config.ts --mode package",
+    "build": "tsc -b && vite build",
+    "build:package": "tsc -b && vite build --config vite.package.config.ts --mode package",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings=0",
     "lintfix": "eslint . --ext ts,tsx --report-unused-disable-directives --fix",
     "lintquiet": "eslint src --quiet",
