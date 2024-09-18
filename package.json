@@ -18,7 +18,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.0",
+    "@emotion/react": "^11.13.3",
     "@faker-js/faker": "^8.4.1",
     "@monaco-editor/react": "^4.6.0",
     "antd": "^5.20.1",
