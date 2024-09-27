@@ -1,7 +1,7 @@
 import { Radio } from "antd";
 
-import { JSONInput } from "@/components/codemirror-editor/JSONInput";
-import { IJSONInputProps } from "@/components/monaco-editor/JSONInput";
+// import { JSONInput } from "@/components/codemirror-editor/JSONInput";
+import { IJSONInputProps, JSONInput } from "@/components/monaco-editor/JSONInput";
 
 export const RequestHeaderInput = (props: Partial<IJSONInputProps>) => {
   const commonProps = {

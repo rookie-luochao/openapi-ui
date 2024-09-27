@@ -1,4 +1,5 @@
 import { loader } from "@monaco-editor/react";
+import "monaco-editor/esm/vs/editor/contrib/hover/browser/hoverContribution.js";
 // import "monaco-editor/esm/vs/editor/editor.all.js";
 import "monaco-editor/esm/vs/editor/contrib/suggest/browser/suggestController.js";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
