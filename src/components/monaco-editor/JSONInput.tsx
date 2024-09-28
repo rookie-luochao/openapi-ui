@@ -1,4 +1,5 @@
 import { Editor } from "@monaco-editor/react";
+import { isObject } from "lodash-es";
 
 import "./workerLoader";
 
@@ -8,7 +9,7 @@ export interface IJSONInputProps {
 }
 
 export function JSONInput(props: IJSONInputProps & { height?: number | string }) {
-  const value = props.value ? JSON.stringify(props.value, null, 4) : "{}";
+  const value = props.value ? (isObject(props.value) ? JSON.stringify(props.value, null, 4) : props.value) : "{}";
 
   return (
     <Editor
@@ -17,16 +18,7 @@ export function JSONInput(props: IJSONInputProps & { height?: number | string })
       theme="vs-dark"
       value={value}
       onChange={(value) => {
-        if (!value) return props.onChange(null);
-
-        try {
-          const result = JSON.parse(value);
-          if (result) {
-            props.onChange(result);
-          }
-        } catch (e) {
-          // _
-        }
+        props.onChange(value || null);
       }}
       onMount={(_, monaco) => {
         try {

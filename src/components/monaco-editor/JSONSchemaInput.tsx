@@ -1,4 +1,5 @@
 import { Editor } from "@monaco-editor/react";
+import { isObject } from "lodash-es";
 
 import { ISchema } from "@/type";
 
@@ -8,7 +9,7 @@ import "./workerLoader";
 export type IJSONInputWithSchemaProps = { schema: ISchema } & IJSONInputProps;
 
 export function JSONSchemaInput(props: IJSONInputWithSchemaProps) {
-  const value = props.value ? JSON.stringify(props.value, null, 4) : "{}";
+  const value = props.value ? (isObject(props.value) ? JSON.stringify(props.value, null, 4) : props.value) : "{}";
 
   return (
     <Editor
@@ -17,16 +18,7 @@ export function JSONSchemaInput(props: IJSONInputWithSchemaProps) {
       theme="vs-dark"
       value={value}
       onChange={(value) => {
-        if (!value) return props.onChange(null);
-
-        try {
-          const result = JSON.parse(value);
-          if (result) {
-            props.onChange(result);
-          }
-        } catch (e) {
-          // _
-        }
+        props.onChange(value || null);
       }}
       onMount={(_, monaco) => {
         try {
