@@ -3,7 +3,7 @@ const translation = {
   fileModeImport: "文件模式导入",
   textModeImport: "文本模式导入",
   requiredFieldPlaceholder: "请输入必填项",
-  serviceURLLabel: "服务网关地址, 默认协议http, 例如: https://srv-demo-docker.onrender.com/openapi",
+  serviceURLLabel: "服务网关地址, 默认协议http, 例如: https://petstore3.swagger.io/api/v3/openapi.json",
   serviceURLLabel2: "服务网关地址, 默认协议http, 例如: https://srv-demo-docker.onrender.com",
   serviceURLPlaceholder: "请输入服务网关地址, 例如: http://127.0.0.1:80/swagger/doc.json",
   serviceURLPlaceholder2: "请输入服务网关地址, 例如: http://127.0.0.1:80",

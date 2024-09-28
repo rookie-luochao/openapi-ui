@@ -3,7 +3,8 @@ const translation = {
   fileModeImport: "file mode import",
   textModeImport: "text mode import",
   requiredFieldPlaceholder: "please input required field",
-  serviceURLLabel: "service url, default protocol is http, for example: https://srv-demo-docker.onrender.com/openapi",
+  serviceURLLabel:
+    "service url, default protocol is http, for example: https://petstore3.swagger.io/api/v3/openapi.json",
   serviceURLLabel2: "service url, default protocol is http, for example: https://srv-demo-docker.onrender.com",
   serviceURLPlaceholder: "please input service url, for example: http://127.0.0.1:80/swagger/doc.json",
   serviceURLPlaceholder2: "please input service url, for example: http://127.0.0.1:80",
