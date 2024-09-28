@@ -1,6 +1,6 @@
 {
   "name": "openapi-ui-dist",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "type": "module",
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
