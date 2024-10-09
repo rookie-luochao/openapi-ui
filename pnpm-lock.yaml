@@ -181,8 +181,8 @@ importers:
         specifier: ^5.4.8
         version: 5.4.8(@types/node@20.12.7)
       vite-plugin-css-injected-by-js:
-        specifier: ^3.5.1
-        version: 3.5.1(vite@5.4.8(@types/node@20.12.7))
+        specifier: ^3.5.2
+        version: 3.5.2(vite@5.4.8(@types/node@20.12.7))
 
 packages:
 
@@ -3834,8 +3834,8 @@ packages:
   vfile@6.0.1:
     resolution: {integrity: sha512-1bYqc7pt6NIADBJ98UiG0Bn/CHIVOoZ/IyEkqIruLg0mE1BKzkOXY2D6CSqQIcKqgadppE5lrxgWXJmXd7zZJw==}
 
-  vite-plugin-css-injected-by-js@3.5.1:
-    resolution: {integrity: sha512-9ioqwDuEBxW55gNoWFEDhfLTrVKXEEZgl5adhWmmqa88EQGKfTmexy4v1Rh0pAS6RhKQs2bUYQArprB32JpUZQ==}
+  vite-plugin-css-injected-by-js@3.5.2:
+    resolution: {integrity: sha512-2MpU/Y+SCZyWUB6ua3HbJCrgnF0KACAsmzOQt1UvRVJCGF6S8xdA3ZUhWcWdM9ivG4I5az8PnQmwwrkC2CAQrQ==}
     peerDependencies:
       vite: '>2.0.0-0'
 
@@ -8373,7 +8373,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite-plugin-css-injected-by-js@3.5.1(vite@5.4.8(@types/node@20.12.7)):
+  vite-plugin-css-injected-by-js@3.5.2(vite@5.4.8(@types/node@20.12.7)):
     dependencies:
       vite: 5.4.8(@types/node@20.12.7)
 
