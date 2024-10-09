@@ -68,7 +68,7 @@
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.12",
-    "husky": "^9.1.4",
+    "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "openapi-ts-request": "^0.6.0",
     "openapi-types": "^12.1.3",
