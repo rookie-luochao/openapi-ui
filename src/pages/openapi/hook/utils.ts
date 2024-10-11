@@ -1,4 +1,4 @@
-import { assign, reduce, toLower } from "lodash-es";
+import { assign, isEmpty, reduce, toLower } from "lodash-es";
 
 import { IMethodType, IOperation, IOperationEnhanceMap, IPaths } from "@/type";
 
@@ -31,7 +31,7 @@ export function flattenOperations(paths: IPaths) {
         methodMap,
         (last, operation: IOperation, method) =>
           reduce(
-            operation.tags || ["default"],
+            !isEmpty(operation.tags) ? operation.tags : ["default"],
             patchOperation(path, method as IMethodType, {
               ...operation,
             }),
