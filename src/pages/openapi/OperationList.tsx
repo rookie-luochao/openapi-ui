@@ -23,12 +23,12 @@ function MethodStyleWrap({ method, children }: { method: IMethodType; children: 
         position: "absolute",
         top: 0,
         right: 0,
-        fontSize: dsc.fontSize.l,
+        fontSize: dsc.fontSize.m,
         fontFamily: dsc.fontFamily.mono,
         color: getMethodColor(method),
         opacity: 0.8,
         textTransform: "uppercase",
-        padding: 8,
+        padding: "15px 8px",
       }}
     >
       {children}

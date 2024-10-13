@@ -50,10 +50,8 @@ const Logo = ({ isCollapsed }: ICollapsed) => {
 export default function MainLayout() {
   const { configInfo } = useConfigInfoStore();
   const theme = useTheme() as ITheme;
-  const [collapsed, setCollapsed] = useState(false);
   const [menuHeight, setMenuHeight] = useState(document.documentElement.clientHeight);
   const defaultContentHeight = menuHeight - defaultHeadTitleHeight;
-  const defaultMenuHeight = defaultContentHeight - 48; // 48px为展开收缩图标高度
   const isZh = getConfig().env === Env.zh;
 
   const throttledResizeHandler = useMemo(() => {
@@ -76,16 +74,10 @@ export default function MainLayout() {
 
   return (
     <Layout>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        theme={configInfo?.theme === "dark" ? ThemeType.dark : ThemeType.light}
-        width={320}
-        onCollapse={setCollapsed}
-      >
-        <Logo isCollapsed={collapsed} />
-        <div style={{ height: defaultMenuHeight, overflow: "auto" }}>
-          <OperationList isCollapsed={collapsed} />
+      <Sider theme={configInfo?.theme === "dark" ? ThemeType.dark : ThemeType.light} width={320}>
+        <Logo isCollapsed={false} />
+        <div style={{ height: defaultContentHeight, overflow: "auto" }}>
+          <OperationList isCollapsed={false} />
         </div>
       </Sider>
       <Layout className="site-layout" style={{ backgroundColor: theme.color.bg }}>
