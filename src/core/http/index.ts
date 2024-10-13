@@ -1,7 +1,8 @@
 import { notification } from "antd";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { filter, findIndex, keys, map, pickBy, values } from "lodash-es";
+import { filter, findIndex, isString, keys, map, pickBy, values } from "lodash-es";
 
+import { isJSONString } from "@/pages/login/common/utils";
 import { MethodType } from "@/pages/openapi/common/config";
 
 import { IConfigInfoStorageState, configInfoStorageKey, defaultConfigInfoStorage } from "../store";
@@ -60,6 +61,10 @@ export function request(axiosConfig: AxiosRequestConfig) {
         (item) => !!item,
       ).join("&");
     };
+  }
+
+  if (axiosConfig.data && isString(axiosConfig.data) && !isJSONString(axiosConfig.data)) {
+    return Promise.reject();
   }
 
   return axios(axiosConfig).catch((reason) => {

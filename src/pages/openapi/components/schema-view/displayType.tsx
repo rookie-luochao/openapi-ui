@@ -192,7 +192,6 @@ export function displayDefault(schema: any): string {
 
 export function displayClassName(schema: any): React.ReactNode {
   if (schema.enum) {
-    console.log("xxx", schema);
     return (
       <div>
         {highlightType(displayType(schema))}
