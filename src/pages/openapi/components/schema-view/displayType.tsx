@@ -43,7 +43,7 @@ export function toEnumMap(schema: any) {
   if (schema["x-enum-options"]) {
     const options = (schema["x-enum-options"] || []) as any[];
     forEach(options, (option) => {
-      enumMap[option.value] = option.label;
+      enumMap[`${option.label} = ${option.value}`] = option.description;
     });
   } else if (schema["x-enum-varnames"]) {
     enumMap = reduce(
@@ -51,7 +51,18 @@ export function toEnumMap(schema: any) {
       (pre, item, index) => {
         return {
           ...pre,
-          [schema.enum[index]]: schema["x-enum-comments"]?.[item] || item,
+          [`${item} = ${schema.enum[index]}`]: schema["x-enum-comments"]?.[item] || item,
+        };
+      },
+      {},
+    );
+  } else if (schema["enum"]) {
+    enumMap = reduce(
+      schema["enum"] as string[],
+      (pre, item) => {
+        return {
+          ...pre,
+          [`${item} = ${item}`]: schema["x-enum-comments"]?.[item] || item,
         };
       },
       {},
@@ -181,6 +192,7 @@ export function displayDefault(schema: any): string {
 
 export function displayClassName(schema: any): React.ReactNode {
   if (schema.enum) {
+    console.log("xxx", schema);
     return (
       <div>
         {highlightType(displayType(schema))}
