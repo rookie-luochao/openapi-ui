@@ -43,7 +43,7 @@ export function toEnumMap(schema: any) {
   if (schema["x-enum-options"]) {
     const options = (schema["x-enum-options"] || []) as any[];
     forEach(options, (option) => {
-      enumMap[`${option.label} = ${option.value}`] = option.description;
+      enumMap[`${option.value} = ${option.value}`] = option.description || option.label || option.value || "";
     });
   } else if (schema["x-enum-varnames"]) {
     enumMap = reduce(
@@ -51,7 +51,8 @@ export function toEnumMap(schema: any) {
       (pre, item, index) => {
         return {
           ...pre,
-          [`${item} = ${schema.enum[index]}`]: schema["x-enum-comments"]?.[item] || item,
+          [`${item} = ${schema.enum[index]}`]:
+            schema["x-enum-comments"]?.[item] || schema["x-enum-descriptions"]?.[index] || item,
         };
       },
       {},
@@ -59,10 +60,10 @@ export function toEnumMap(schema: any) {
   } else if (schema["enum"]) {
     enumMap = reduce(
       schema["enum"] as string[],
-      (pre, item) => {
+      (pre, item, index) => {
         return {
           ...pre,
-          [`${item} = ${item}`]: schema["x-enum-comments"]?.[item] || item,
+          [`${item} = ${item}`]: schema["x-enum-comments"]?.[item] || schema["x-enum-descriptions"]?.[index] || item,
         };
       },
       {},
