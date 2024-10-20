@@ -3,7 +3,7 @@ import { request } from "@request";
 import { Button, Form, Popover } from "antd";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { filter, isEmpty, map, values } from "lodash-es";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { Dictionary } from "react-router-toolkit";
@@ -131,10 +131,37 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0); // hack for sync request-view
 
+  const handleMockData = useCallback(
+    (isRequired?: boolean) => {
+      let mockQueryData;
+      let mockBodyData;
+
+      if (operation.parameters) {
+        mockQueryData = getMockQueryDataBySchema(operation.parameters as TParameter[], isRequired);
+      }
+
+      if (operation.requestBody) {
+        const schema = values(operation.requestBody.content)?.[0]?.schema;
+
+        if (schema) {
+          mockBodyData = getMockBodyDataBySchema(schema, openapiWithServiceInfo?.openapi, isRequired);
+        }
+      }
+
+      form.setFieldsValue({
+        ...(mockQueryData || {}),
+        body: isEmpty(mockBodyData) ? undefined : mockBodyData, // this is antd form setFieldsValue hack
+      });
+      setCount((count) => count + 1);
+    },
+    [form, openapiWithServiceInfo?.openapi, operation.parameters, operation.requestBody],
+  );
+
   useEffect(() => {
     form.resetFields();
     setAxiosResponse({} as AxiosResponse);
-  }, [location.pathname, form]);
+    handleMockData();
+  }, [location.pathname, form, handleMockData]);
 
   useEffect(() => {
     form.setFieldValue("Authorization", configInfo?.authorization || "");
@@ -151,29 +178,6 @@ export function RequestBuilder(props: { operation: IOperationEnhance; schemas: D
     }
 
     setLoading(false);
-  }
-
-  function handleMockData(isRequired?: boolean) {
-    let mockQueryData;
-    let mockBodyData;
-
-    if (operation.parameters) {
-      mockQueryData = getMockQueryDataBySchema(operation.parameters as TParameter[], isRequired);
-    }
-
-    if (operation.requestBody) {
-      const schema = values(operation.requestBody.content)?.[0]?.schema;
-
-      if (schema) {
-        mockBodyData = getMockBodyDataBySchema(schema, openapiWithServiceInfo?.openapi, isRequired);
-      }
-    }
-
-    form.setFieldsValue({
-      ...(mockQueryData || {}),
-      body: isEmpty(mockBodyData) ? undefined : mockBodyData, // this is antd form setFieldsValue hack
-    });
-    setCount(count + 1);
   }
 
   return (
