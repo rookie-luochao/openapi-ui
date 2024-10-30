@@ -81,8 +81,8 @@ importers:
         specifier: ^7.0.8
         version: 7.0.8
       zustand:
-        specifier: ^4.5.5
-        version: 4.5.5(@types/react@18.3.0)(react@18.3.0)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/react@18.3.0)(react@18.3.0)(use-sync-external-store@1.2.2(react@18.3.0))
     devDependencies:
       '@babel/preset-react':
         specifier: ^7.25.9
@@ -4002,19 +4002,22 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
 
-  zustand@4.5.5:
-    resolution: {integrity: sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==}
-    engines: {node: '>=12.7.0'}
+  zustand@5.0.1:
+    resolution: {integrity: sha512-pRET7Lao2z+n5R/HduXMio35TncTlSW68WsYBq2Lg1ASspsNGjpwLAsij3RpouyV6+kHMwwwzP0bZPD70/Jx/w==}
+    engines: {node: '>=12.20.0'}
     peerDependencies:
-      '@types/react': '>=16.8'
+      '@types/react': '>=18.0.0'
       immer: '>=9.0.6'
-      react: '>=16.8'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
     peerDependenciesMeta:
       '@types/react':
         optional: true
       immer:
         optional: true
       react:
+        optional: true
+      use-sync-external-store:
         optional: true
 
   zwitch@2.0.4:
@@ -8438,6 +8441,7 @@ snapshots:
   use-sync-external-store@1.2.2(react@18.3.0):
     dependencies:
       react: 18.3.0
+    optional: true
 
   v8-compile-cache-lib@3.0.1: {}
 
@@ -8568,11 +8572,10 @@ snapshots:
 
   yocto-queue@1.0.0: {}
 
-  zustand@4.5.5(@types/react@18.3.0)(react@18.3.0):
-    dependencies:
-      use-sync-external-store: 1.2.2(react@18.3.0)
+  zustand@5.0.1(@types/react@18.3.0)(react@18.3.0)(use-sync-external-store@1.2.2(react@18.3.0)):
     optionalDependencies:
       '@types/react': 18.3.0
       react: 18.3.0
+      use-sync-external-store: 1.2.2(react@18.3.0)
 
   zwitch@2.0.4: {}
