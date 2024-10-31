@@ -18,8 +18,8 @@ importers:
         specifier: ^4.6.0
         version: 4.6.0(monaco-editor@0.52.0)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       antd:
-        specifier: ^5.21.5
-        version: 5.21.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: ^5.21.6
+        version: 5.21.6(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -1339,8 +1339,8 @@ packages:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
 
-  antd@5.21.5:
-    resolution: {integrity: sha512-g/c8VkdruKDCVA6di9Ow1fG6dLtYJ1IOraPo7vXaY7DoQ56A3HExaFaH0fBEwTYKC0ICeftC4iA5eAjrF6/b9w==}
+  antd@5.21.6:
+    resolution: {integrity: sha512-EviOde/VEu+OsIKH5t6YXTMmmNeg9R85m0W5zXAo+Np8Latg9q10691JvAqOTMpnrRmbdeKUQL1Krp69Bzbe/g==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -5338,7 +5338,7 @@ snapshots:
 
   ansi-styles@6.2.1: {}
 
-  antd@5.21.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  antd@5.21.6(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@ant-design/colors': 7.1.0
       '@ant-design/cssinjs': 1.21.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
