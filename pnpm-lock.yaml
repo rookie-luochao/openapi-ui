@@ -60,8 +60,8 @@ importers:
         specifier: ^4.1.2
         version: 4.1.2(react@18.3.0)
       react-i18next:
-        specifier: ^15.1.0
-        version: 15.1.0(i18next@23.16.4)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: ^15.1.1
+        version: 15.1.1(i18next@23.16.4)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       react-markdown:
         specifier: ^9.0.1
         version: 9.0.1(@types/react@18.3.0)(react@18.3.0)
@@ -3338,8 +3338,8 @@ packages:
     peerDependencies:
       react: '>=16.13.1'
 
-  react-i18next@15.1.0:
-    resolution: {integrity: sha512-zj3nJynMnZsy2gPZiOTC7XctCY5eQGqT3tcKMmfJWC9FMvgd+960w/adq61j8iPzpwmsXejqID9qC3Mqu1Xu2Q==}
+  react-i18next@15.1.1:
+    resolution: {integrity: sha512-R/Vg9wIli2P3FfeI8o1eNJUJue5LWpFsQePCHdQDmX0Co3zkr6kdT8gAseb/yGeWbNz1Txc4bKDQuZYsC0kQfw==}
     peerDependencies:
       i18next: '>= 23.2.3'
       react: '>= 16.8.0'
@@ -7821,7 +7821,7 @@ snapshots:
       '@babel/runtime': 7.25.6
       react: 18.3.0
 
-  react-i18next@15.1.0(i18next@23.16.4)(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  react-i18next@15.1.1(i18next@23.16.4)(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@babel/runtime': 7.25.6
       html-parse-stringify: 3.0.1
