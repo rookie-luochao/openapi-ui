@@ -160,8 +160,8 @@ importers:
         specifier: ^15.2.10
         version: 15.2.10
       openapi-ts-request:
-        specifier: ^0.11.0
-        version: 0.11.0(@types/node@20.12.7)(typescript@5.7.2)
+        specifier: ^0.13.1
+        version: 0.13.1(@types/node@20.12.7)(typescript@5.7.2)
       openapi-types:
         specifier: ^12.1.3
         version: 12.1.3
@@ -2903,8 +2903,8 @@ packages:
   openapi-sampler@1.5.1:
     resolution: {integrity: sha512-tIWIrZUKNAsbqf3bd9U1oH6JEXo8LNYuDlXw26By67EygpjT+ArFnsxxyTMjFWRfbqo5ozkvgSQDK69Gd8CddA==}
 
-  openapi-ts-request@0.11.0:
-    resolution: {integrity: sha512-pTHAS5PzwAQhqIgkWgkpN4TLmM0/H9IhH/j+g7GwaQhCSht2j7YIufEUK0UL6i/nzQy2h7qCZ5SF1AgYAfH+Iw==}
+  openapi-ts-request@0.13.1:
+    resolution: {integrity: sha512-gWIEn17RoDlkUeXldxq4RmDog1XxW4cHHL/AFtvteSE2iNriMYlYrKe6S6Hh4wI5+eyUvCdF0vq5RBi65NdJ1w==}
     engines: {node: '>=18.0.0', pnpm: '>=9'}
     hasBin: true
 
@@ -7225,7 +7225,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       json-pointer: 0.6.2
 
-  openapi-ts-request@0.11.0(@types/node@20.12.7)(typescript@5.7.2):
+  openapi-ts-request@0.13.1(@types/node@20.12.7)(typescript@5.7.2):
     dependencies:
       '@prettier/sync': 0.5.2(prettier@3.3.3)
       '@trivago/prettier-plugin-sort-imports': 4.3.0(prettier@3.3.3)
@@ -7239,6 +7239,7 @@ snapshots:
       js-yaml: 4.1.0
       lodash: 4.17.21
       memoizee: 0.4.17
+      minimatch: 10.0.1
       mockjs: 1.1.0
       nunjucks: 3.2.4
       prettier: 3.3.3
