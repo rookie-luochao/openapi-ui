@@ -104,7 +104,7 @@ importers:
         version: 0.2.2(esbuild@0.21.5)
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^5.2.0
-        version: 5.2.0(prettier@3.3.3)
+        version: 5.2.0(prettier@3.4.2)
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
@@ -166,8 +166,8 @@ importers:
         specifier: ^12.1.3
         version: 12.1.3
       prettier:
-        specifier: ^3.3.3
-        version: 3.3.3
+        specifier: ^3.4.2
+        version: 3.4.2
       rollup-plugin-visualizer:
         specifier: ^5.13.1
         version: 5.13.1(rollup@4.24.0)
@@ -3077,8 +3077,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier@3.3.3:
-    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+  prettier@3.4.2:
+    resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -4864,10 +4864,10 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@prettier/sync@0.5.2(prettier@3.3.3)':
+  '@prettier/sync@0.5.2(prettier@3.4.2)':
     dependencies:
       make-synchronized: 0.2.9
-      prettier: 3.3.3
+      prettier: 3.4.2
 
   '@rc-component/async-validator@5.0.4':
     dependencies:
@@ -5003,7 +5003,7 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.3)':
+  '@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.4.2)':
     dependencies:
       '@babel/generator': 7.17.7
       '@babel/parser': 7.26.1
@@ -5011,11 +5011,11 @@ snapshots:
       '@babel/types': 7.17.0
       javascript-natural-sort: 0.7.1
       lodash: 4.17.21
-      prettier: 3.3.3
+      prettier: 3.4.2
     transitivePeerDependencies:
       - supports-color
 
-  '@trivago/prettier-plugin-sort-imports@5.2.0(prettier@3.3.3)':
+  '@trivago/prettier-plugin-sort-imports@5.2.0(prettier@3.4.2)':
     dependencies:
       '@babel/generator': 7.26.3
       '@babel/parser': 7.26.3
@@ -5023,7 +5023,7 @@ snapshots:
       '@babel/types': 7.26.0
       javascript-natural-sort: 0.7.1
       lodash: 4.17.21
-      prettier: 3.3.3
+      prettier: 3.4.2
     transitivePeerDependencies:
       - supports-color
 
@@ -7519,8 +7519,8 @@ snapshots:
 
   openapi-ts-request@0.13.4(@types/node@20.12.7)(typescript@5.7.2):
     dependencies:
-      '@prettier/sync': 0.5.2(prettier@3.3.3)
-      '@trivago/prettier-plugin-sort-imports': 4.3.0(prettier@3.3.3)
+      '@prettier/sync': 0.5.2(prettier@3.4.2)
+      '@trivago/prettier-plugin-sort-imports': 4.3.0(prettier@3.4.2)
       axios: 1.7.9
       bing-translate-api: 4.0.2
       chalk: 4.1.2
@@ -7534,7 +7534,7 @@ snapshots:
       minimatch: 10.0.1
       mockjs: 1.1.0
       nunjucks: 3.2.4
-      prettier: 3.3.3
+      prettier: 3.4.2
       reserved-words: 0.1.2
       rimraf: 6.0.1
       swagger2openapi: 7.0.8
@@ -7654,7 +7654,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier@3.3.3: {}
+  prettier@3.4.2: {}
 
   prismjs@1.27.0: {}
 
