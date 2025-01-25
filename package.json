@@ -67,7 +67,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.37.3",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
+    "eslint-plugin-react-refresh": "^0.4.18",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "openapi-ts-request": "^1.1.2",
