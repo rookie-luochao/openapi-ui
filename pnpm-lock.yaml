@@ -131,7 +131,7 @@ importers:
         version: 7.18.0(eslint@8.57.0)(typescript@5.7.3)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.3.4(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.5.0))
+        version: 4.3.4(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.7.0))
       csstype:
         specifier: ^3.1.3
         version: 3.1.3
@@ -148,8 +148,8 @@ importers:
         specifier: ^7.37.3
         version: 7.37.3(eslint@8.57.0)
       eslint-plugin-react-hooks:
-        specifier: ^5.0.0
-        version: 5.0.0(eslint@8.57.0)
+        specifier: ^5.1.0
+        version: 5.1.0(eslint@8.57.0)
       eslint-plugin-react-refresh:
         specifier: ^0.4.18
         version: 0.4.18(eslint@8.57.0)
@@ -179,10 +179,10 @@ importers:
         version: 5.7.3
       vite:
         specifier: ^6.0.11
-        version: 6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.5.0)
+        version: 6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.7.0)
       vite-plugin-css-injected-by-js:
         specifier: ^3.5.2
-        version: 3.5.2(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.5.0))
+        version: 3.5.2(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.7.0))
 
 packages:
 
@@ -1852,8 +1852,8 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
-  eslint-plugin-react-hooks@5.0.0:
-    resolution: {integrity: sha512-hIOwI+5hYGpJEc4uPRmz2ulCjAGD/N13Lukkh8cLV0i2IRk/bdZDYjgLVHj+U9Z704kLIdIO6iueGvxNur0sgw==}
+  eslint-plugin-react-hooks@5.1.0:
+    resolution: {integrity: sha512-mpJRtPgHN2tNAvZ35AMfqeB3Xqeo273QxrHJsbBEPWODRM4r0yB6jfoROqKEYrOn27UtRPpcpHc2UqyBSuUNTw==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -5273,14 +5273,14 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-react@4.3.4(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.5.0))':
+  '@vitejs/plugin-react@4.3.4(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.7.0))':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.5.0)
+      vite: 6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -6180,7 +6180,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-react-hooks@5.0.0(eslint@8.57.0):
+  eslint-plugin-react-hooks@5.1.0(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
 
@@ -8818,11 +8818,11 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite-plugin-css-injected-by-js@3.5.2(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.5.0)):
+  vite-plugin-css-injected-by-js@3.5.2(vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.7.0)):
     dependencies:
-      vite: 6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.5.0)
+      vite: 6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.7.0)
 
-  vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.5.0):
+  vite@6.0.11(@types/node@22.10.7)(jiti@2.4.2)(yaml@2.7.0):
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.1
@@ -8831,7 +8831,7 @@ snapshots:
       '@types/node': 22.10.7
       fsevents: 2.3.3
       jiti: 2.4.2
-      yaml: 2.5.0
+      yaml: 2.7.0
 
   void-elements@3.1.0: {}
 
