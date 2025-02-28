@@ -20,7 +20,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@faker-js/faker": "^8.4.1",
-    "@monaco-editor/react": "^4.6.0",
+    "@monaco-editor/react": "^4.7.0",
     "antd": "^5.24.1",
     "axios": "^1.7.9",
     "copy-to-clipboard": "^3.3.3",
