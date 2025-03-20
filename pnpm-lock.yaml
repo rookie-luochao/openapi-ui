@@ -18,8 +18,8 @@ importers:
         specifier: ^4.7.0
         version: 4.7.0(monaco-editor@0.52.2)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       antd:
-        specifier: ^5.24.3
-        version: 5.24.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: ^5.24.4
+        version: 5.24.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       axios:
         specifier: ^1.8.4
         version: 1.8.4
@@ -1224,8 +1224,8 @@ packages:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
 
-  antd@5.24.3:
-    resolution: {integrity: sha512-H5fopyOVRAnegfwLuEdjhPR+l5z3/lo4aQyDsgIYhfmeBcRgN/XNkefVxzRHNuWHeYr9E9LbyxEQcMF91sy5lg==}
+  antd@5.24.4:
+    resolution: {integrity: sha512-s89666DcoWeekJFaIqbtz2vRlIvgPR28GuDYYGUpW1mVP08bV7HZAPBH5lFJKYNGKrN3dHbZGgRK5aNRD2iPHg==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -3174,8 +3174,8 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
-  rc-image@7.11.0:
-    resolution: {integrity: sha512-aZkTEZXqeqfPZtnSdNUnKQA0N/3MbgR7nUnZ+/4MfSFWPFHZau4p5r5ShaI0KPEMnNjv4kijSCFq/9wtJpwykw==}
+  rc-image@7.11.1:
+    resolution: {integrity: sha512-XuoWx4KUXg7hNy5mRTy1i8c8p3K8boWg6UajbHpDXS5AlRVucNfTi5YxTtPBTBzegxAZpvuLfh3emXFt6ybUdA==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -5272,7 +5272,7 @@ snapshots:
 
   ansi-styles@6.2.1: {}
 
-  antd@5.24.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  antd@5.24.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@ant-design/colors': 7.2.0
       '@ant-design/cssinjs': 1.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -5296,7 +5296,7 @@ snapshots:
       rc-drawer: 7.2.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-dropdown: 4.2.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-field-form: 2.7.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      rc-image: 7.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      rc-image: 7.11.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-input: 1.7.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-input-number: 9.4.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-mentions: 2.19.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -7762,7 +7762,7 @@ snapshots:
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
-  rc-image@7.11.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  rc-image@7.11.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@babel/runtime': 7.26.10
       '@rc-component/portal': 1.1.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
