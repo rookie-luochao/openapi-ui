@@ -18,8 +18,8 @@ importers:
         specifier: ^4.7.0
         version: 4.7.0(monaco-editor@0.52.2)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       antd:
-        specifier: ^5.24.5
-        version: 5.24.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: ^5.24.6
+        version: 5.24.6(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       axios:
         specifier: ^1.8.4
         version: 1.8.4
@@ -1324,8 +1324,8 @@ packages:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
 
-  antd@5.24.5:
-    resolution: {integrity: sha512-1lAv/G+9ewQanyoAo3JumQmIlVxwo5QwWGb6QCHYc40Cq0NxC/EzITcjsgq1PSaTUpLkKq8A2l7Fjtu47vqQBg==}
+  antd@5.24.6:
+    resolution: {integrity: sha512-xIlTa/1CTbgkZsdU/dOXkYvJXb9VoiMwsaCzpKFH2zAEY3xqOfwQ57/DdG7lAdrWP7QORtSld4UA6suxzuTHXw==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -3411,8 +3411,8 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
-  rc-tabs@15.5.1:
-    resolution: {integrity: sha512-yiWivLAjEo5d1v2xlseB2dQocsOhkoVSfo1krS8v8r+02K+TBUjSjXIf7dgyVSxp6wRIPv5pMi5hanNUlQMgUA==}
+  rc-tabs@15.5.2:
+    resolution: {integrity: sha512-Hbqf2IV6k/jPgfMjPtIDmPV0D0C9c/fN4B/fYcoh9qqaUzUZQoK0PYzsV3UaV+3UsmyoYt48p74m/HkLhGTw+w==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
@@ -5465,7 +5465,7 @@ snapshots:
 
   ansi-styles@6.2.1: {}
 
-  antd@5.24.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  antd@5.24.6(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@ant-design/colors': 7.2.0
       '@ant-design/cssinjs': 1.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -5507,7 +5507,7 @@ snapshots:
       rc-steps: 6.0.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-switch: 4.1.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-table: 7.50.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      rc-tabs: 15.5.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      rc-tabs: 15.5.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-textarea: 1.9.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-tooltip: 6.4.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-tree: 5.13.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -8140,7 +8140,7 @@ snapshots:
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
-  rc-tabs@15.5.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  rc-tabs@15.5.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@babel/runtime': 7.27.0
       classnames: 2.5.1
