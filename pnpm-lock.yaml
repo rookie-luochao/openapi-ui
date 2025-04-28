@@ -18,8 +18,8 @@ importers:
         specifier: ^4.7.0
         version: 4.7.0(monaco-editor@0.52.2)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       antd:
-        specifier: ^5.24.7
-        version: 5.24.7(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        specifier: ^5.24.8
+        version: 5.24.8(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       axios:
         specifier: ^1.8.4
         version: 1.8.4
@@ -1346,8 +1346,8 @@ packages:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
 
-  antd@5.24.7:
-    resolution: {integrity: sha512-xROWsw0yYFGiNFpVSUZ9/Gs43q0qIM9BkfjugeqgePlZBpLZzLjtOpf4UGM+5aijelHqMi8864KZCX5BbcZYfA==}
+  antd@5.24.8:
+    resolution: {integrity: sha512-vJcW81WSRq+ymBKTiA3NE+FddmiqTAKxdWVRZU+HnLLrRrIz896svcUxXFPa7M4mH9HqyeJ5JPOHsne4sQAC1A==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
@@ -3336,8 +3336,8 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
-  rc-notification@5.6.3:
-    resolution: {integrity: sha512-42szwnn8VYQoT6GnjO00i1iwqV9D1TTMvxObWsuLwgl0TsOokzhkYiufdtQBsJMFjJravS1hfDKVMHLKLcPE4g==}
+  rc-notification@5.6.4:
+    resolution: {integrity: sha512-KcS4O6B4qzM3KH7lkwOB7ooLPZ4b6J+VMmQgT51VZCeEcmghdeR4IrMcFq0LG+RPdnbe/ArT086tGM8Snimgiw==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
@@ -3434,8 +3434,8 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
-  rc-tabs@15.5.2:
-    resolution: {integrity: sha512-Hbqf2IV6k/jPgfMjPtIDmPV0D0C9c/fN4B/fYcoh9qqaUzUZQoK0PYzsV3UaV+3UsmyoYt48p74m/HkLhGTw+w==}
+  rc-tabs@15.6.0:
+    resolution: {integrity: sha512-SQ99Yjc9ewrJCUwoWPKq0FeGL2znWsqPhfcZgsHz1R7bkA2rMNe7CPgOiJkwppdJ98wkLhzs9vPrv21QOE1RyQ==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
@@ -5521,7 +5521,7 @@ snapshots:
 
   ansi-styles@6.2.1: {}
 
-  antd@5.24.7(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  antd@5.24.8(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@ant-design/colors': 7.2.0
       '@ant-design/cssinjs': 1.23.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -5551,7 +5551,7 @@ snapshots:
       rc-mentions: 2.20.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-menu: 9.16.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-motion: 2.9.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      rc-notification: 5.6.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      rc-notification: 5.6.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-pagination: 5.1.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-picker: 4.11.3(dayjs@1.11.13)(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-progress: 4.0.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -5563,7 +5563,7 @@ snapshots:
       rc-steps: 6.0.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-switch: 4.1.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-table: 7.50.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
-      rc-tabs: 15.5.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+      rc-tabs: 15.6.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-textarea: 1.10.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-tooltip: 6.4.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-tree: 5.13.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -8065,7 +8065,7 @@ snapshots:
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
-  rc-notification@5.6.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  rc-notification@5.6.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@babel/runtime': 7.27.0
       classnames: 2.5.1
@@ -8185,7 +8185,7 @@ snapshots:
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
-  rc-tabs@15.5.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  rc-tabs@15.6.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@babel/runtime': 7.27.0
       classnames: 2.5.1
