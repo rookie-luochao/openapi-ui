@@ -30,8 +30,8 @@ importers:
         specifier: ^1.11.13
         version: 1.11.13
       i18next:
-        specifier: ^25.0.1
-        version: 25.0.1(typescript@5.8.3)
+        specifier: ^25.1.1
+        version: 25.1.1(typescript@5.8.3)
       i18next-browser-languagedetector:
         specifier: ^8.0.5
         version: 8.0.5
@@ -61,7 +61,7 @@ importers:
         version: 5.0.0(react@18.3.0)
       react-i18next:
         specifier: ^15.4.1
-        version: 15.4.1(i18next@25.0.1(typescript@5.8.3))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
+        version: 15.4.1(i18next@25.1.1(typescript@5.8.3))(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@18.3.0)(react@18.3.0)
@@ -362,6 +362,10 @@ packages:
 
   '@babel/runtime@7.27.0':
     resolution: {integrity: sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.27.1':
+    resolution: {integrity: sha512-1x3D2xEk2fRo3PAhwQwu5UubzgiVWSXTBfWpVd2Mx2AzRqJuDJCsgaDVZ7HB5iGzDW1Hl1sWN2mFyKjmR9uAog==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.25.9':
@@ -2330,8 +2334,8 @@ packages:
   i18next-browser-languagedetector@8.0.5:
     resolution: {integrity: sha512-OstebRKqKiQw8xEvQF5aRyUujsCatanj7Q9eo5iiH2gJpoXGZ7483ol3sVBwfqbobTQPNH1J+NAyJ1aCQoEC+w==}
 
-  i18next@25.0.1:
-    resolution: {integrity: sha512-8S8PyZbrymJZn3DaN70/34JYWNhsqrU6yA4MuzcygJBv+41dgNMocEA8h+kV1P7MCc1ll03lOTOIXE7mpNCicw==}
+  i18next@25.1.1:
+    resolution: {integrity: sha512-FZcp3vk3PXc8onasbsWYahfeDIWX4LkKr4vd01xeXrmqyNXlVNtVecEIw2K1o8z3xYrHMcd1bwYQub+3g7zqCw==}
     peerDependencies:
       typescript: ^5
     peerDependenciesMeta:
@@ -4490,6 +4494,8 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
+  '@babel/runtime@7.27.1': {}
+
   '@babel/template@7.25.9':
     dependencies:
       '@babel/code-frame': 7.26.2
@@ -5025,7 +5031,7 @@ snapshots:
 
   '@rc-component/async-validator@5.0.4':
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
 
   '@rc-component/color-picker@2.0.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
@@ -5038,14 +5044,14 @@ snapshots:
 
   '@rc-component/context@1.4.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
       rc-util: 5.44.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       react: 18.3.0
       react-dom: 18.3.0(react@18.3.0)
 
   '@rc-component/mini-decimal@1.1.0':
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
 
   '@rc-component/mutate-observer@1.1.0(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
@@ -5057,7 +5063,7 @@ snapshots:
 
   '@rc-component/portal@1.1.2(react-dom@18.3.0(react@18.3.0))(react@18.3.0)':
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
       classnames: 2.5.1
       rc-util: 5.44.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       react: 18.3.0
@@ -6854,9 +6860,9 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.27.0
 
-  i18next@25.0.1(typescript@5.8.3):
+  i18next@25.1.1(typescript@5.8.3):
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
     optionalDependencies:
       typescript: 5.8.3
 
@@ -8076,7 +8082,7 @@ snapshots:
 
   rc-overflow@1.4.1(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
       classnames: 2.5.1
       rc-resize-observer: 1.4.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-util: 5.44.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -8253,7 +8259,7 @@ snapshots:
 
   rc-virtual-list@3.18.5(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
-      '@babel/runtime': 7.27.0
+      '@babel/runtime': 7.27.1
       classnames: 2.5.1
       rc-resize-observer: 1.4.3(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
       rc-util: 5.44.4(react-dom@18.3.0(react@18.3.0))(react@18.3.0)
@@ -8277,11 +8283,11 @@ snapshots:
       '@babel/runtime': 7.26.0
       react: 18.3.0
 
-  react-i18next@15.4.1(i18next@25.0.1(typescript@5.8.3))(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
+  react-i18next@15.4.1(i18next@25.1.1(typescript@5.8.3))(react-dom@18.3.0(react@18.3.0))(react@18.3.0):
     dependencies:
       '@babel/runtime': 7.26.9
       html-parse-stringify: 3.0.1
-      i18next: 25.0.1(typescript@5.8.3)
+      i18next: 25.1.1(typescript@5.8.3)
       react: 18.3.0
     optionalDependencies:
       react-dom: 18.3.0(react@18.3.0)
