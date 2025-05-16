@@ -70,7 +70,7 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
-    "openapi-ts-request": "^1.3.4",
+    "openapi-ts-request": "^1.5.0",
     "openapi-types": "^12.1.3",
     "prettier": "^3.5.3",
     "rollup-plugin-visualizer": "^5.14.0",
