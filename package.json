@@ -22,7 +22,7 @@
     "@faker-js/faker": "^10.0.0",
     "@monaco-editor/react": "^4.7.0",
     "antd": "^5.27.1",
-    "axios": "^1.11.0",
+    "axios": "^1.12.2",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.18",
     "i18next": "^25.4.2",
