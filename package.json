@@ -42,7 +42,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "regenerator-runtime": "^0.14.1",
     "swagger2openapi": "^7.0.8",
-    "zustand": "^5.0.6"
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.27.1",
