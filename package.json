@@ -35,7 +35,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^6.0.0",
-    "react-i18next": "^15.7.3",
+    "react-i18next": "^16.2.3",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.9.4",
     "react-router-toolkit": "^1.2.0",
