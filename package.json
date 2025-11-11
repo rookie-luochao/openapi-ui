@@ -30,7 +30,7 @@
     "js-yaml": "^4.1.0",
     "json-schema-enhanced-editor-react": "^0.1.0",
     "lodash-es": "^4.17.21",
-    "monaco-editor": "^0.53.0",
+    "monaco-editor": "^0.54.0",
     "openapi-sampler": "^1.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
