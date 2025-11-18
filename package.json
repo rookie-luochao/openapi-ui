@@ -37,7 +37,7 @@
     "react-error-boundary": "^6.0.0",
     "react-i18next": "^16.2.4",
     "react-markdown": "^10.1.0",
-    "react-router-dom": "^7.9.5",
+    "react-router-dom": "^7.9.6",
     "react-router-toolkit": "^1.2.0",
     "react-syntax-highlighter": "^15.5.0",
     "regenerator-runtime": "^0.14.1",
