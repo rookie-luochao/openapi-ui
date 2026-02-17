@@ -21,7 +21,7 @@ jobs:
       # 依赖缓存策略
       - name: Cache
         id: cache-dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             **/node_modules
