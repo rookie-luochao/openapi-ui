@@ -31,7 +31,7 @@
     "json-schema-enhanced-editor-react": "^0.1.0",
     "lodash-es": "^4.17.23",
     "monaco-editor": "^0.55.1",
-    "openapi-sampler": "^1.6.2",
+    "openapi-sampler": "^1.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^6.1.1",
